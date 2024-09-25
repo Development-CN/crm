@@ -1,0 +1,320 @@
+body {
+  background-color: #F5F5F5 !important;
+}
+
+.navbar {
+  background-color: #101010 !important;
+}
+
+.card {
+  border-radius: 10px;
+}
+
+textarea {
+  resize: none;
+}
+
+.card-blueberry {
+  background-color: #5AA8DD !important;
+}
+
+.card-blueberry-grape {
+  background-color: #5AA8DD !important;
+}
+
+.card-blueberry-bubblegum {
+  background-color: #de3e80 !important;
+}
+
+.card-header {
+  border-radius: 10px;
+}
+
+.btn {
+  border-radius: 3px;
+}
+
+/* Boton Primario Mazda */
+.btn-primary {
+  background-color: #000000 !important;
+  border-color: #000000 !important;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #8E1C2E !important;
+  color: white;
+}
+
+
+.btn-danger {
+  background-color: #8E1C2E !important;
+  border-color: #8E1C2E !important;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #8E1C2E !important;
+  color: white;
+}
+
+/* Botón de éxito Mazda */
+.btn-success {
+  background-color: #000000 !important;
+  border-color: #7AB957 !important;
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #8E1C2E !important;
+  color: white;
+}
+
+.btn-warning {
+  background-color: #B59530 !important;
+  border-color: #B59530 !important;
+  color: white;
+}
+
+.btn-warning:hover {
+  background-color: #B59530 !important;
+  color: white;
+}
+
+.btn-blueberry {
+  background-color: #5AA8DD !important;
+  border-color: #5AA8DD !important;
+  color: white;
+}
+
+.btn-blueberry:hover {
+  background-color: #5AA8DD !important;
+  color: white;
+}
+
+.btn-grape {
+  background-color: #5AA8DD !important;
+  border-color: #5AA8DD !important;
+  color: white;
+}
+
+.btn-grape:hover {
+  background-color: #5AA8DD !important;
+  border-color: #5AA8DD !important;
+  color: white;
+}
+
+.btn-bubblegum {
+  background-color: #de3e80 !important;
+  border-color: #bc245d !important;
+  color: white;
+}
+
+.btn-bubblegum:hover {
+  background-color: #bc245d !important;
+  border-color: #bc245d !important;
+  color: white;
+}
+
+.btn-mint {
+  background-color: #28bca3 !important;
+  border-color: #0e9a83 !important;
+  color: white;
+}
+
+.btn-mint:hover {
+  background-color: #0e9a83 !important;
+  border-color: #0e9a83 !important;
+  color: white;
+}
+
+.btn-ui {
+  background-color: transparent;
+  color: black;
+}
+
+.btn-ui:hover {
+  background-color: #f7f7f7;
+}
+
+.btn-file {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.btn-file+label {
+  cursor: pointer;
+}
+
+.text-blueberry {
+  color: #5AA8DD !important;
+}
+
+.text-bubblegum {
+  color: #de3e80 !important;
+}
+
+.text-grape {
+  color: #5AA8DD !important;
+}
+
+.text-mint {
+  color: #28bca3 !important;
+}
+
+.paginate_button.page-item.active {
+  background-color: #8E1C2E !important;
+}
+
+.bg-blueberry {
+  background-color: #5AA8DD !important;
+}
+
+.bg-bubblegum {
+  background-color: #de3e80 !important;
+}
+
+.bg-grape {
+  background-color: #5AA8DD !important;
+}
+
+.bg-mint {
+  background-color: #28bca3 !important;
+}
+
+.bg-dark {
+  background-color: #BFBFBF !important;
+}
+
+.bi {
+  height: 1em;
+  text-align: inherit;
+}
+
+.rounded {
+  border-radius: 10px !important;
+}
+
+.modal {
+  border-radius: 10px;
+}
+
+.modal-content {
+  border-radius: 10px;
+}
+
+.sticky-offset {
+  top: 69px;
+}
+
+.signature {
+  background-color: white !important;
+  border-radius: 10px !important;
+}
+
+img.logo-navbar {
+  height: 2rem !important;
+}
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputfile+label {
+  cursor: pointer;
+}
+
+.receiver-bubble {
+  background-color: #5AA8DD !important;
+}
+
+.ui-widget-header {
+  background-color: white;
+}
+
+td.av-high>a {
+  background: #64baff !important;
+  color: white !important;
+}
+
+td.av-mid>a {
+  background: #ffe16b !important;
+  color: #000000 !important;
+}
+
+td.av-low>a {
+  background: #ed5353 !important;
+  color: white !important;
+}
+
+.ui-widget.ui-widget-content {
+  border-radius: 8px;
+}
+
+.ui-datepicker-calendar a.ui-state-default {
+  border-width: 3px;
+  border-radius: 10px;
+  border-color: white;
+  color: white;
+  background-color: #64baff;
+}
+
+.ui-datepicker-calendar a.ui-state-active {
+  border-color: #5AA8DD;
+  color: white;
+}
+
+.ui-datepicker {
+  left: 50% !important;
+}
+
+a.list-group-item.bg-dark.text-dark:hover {
+  background-color: #BFBFBF !important;
+}
+
+#datepicker-container {
+  text-align: center;
+}
+
+#datepicker-center {
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.ui-widget-header {
+  border: hidden;
+}
+
+.ui-widget {
+  font-family: inherit;
+}
+
+.ui-datepicker td span,
+.ui-datepicker td a {
+  text-align: center;
+  border: hidden;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.form-control:focus {
+  border-color: #8E1C2E !important;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(142, 28, 46, 0.6) !important;
+}
+
+.btn.btn-link.btn-block {
+  box-shadow: none !important;
+}

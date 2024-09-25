@@ -1,0 +1,1803 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lead - Prospectos Madiautos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet"/>
+
+    <script src="/bundles/modernizr?v=wBEWDufH_8Md-Pbioxomt90vm6tJN2Pyy9u9zHtWsPo1"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="/bundles/bootstrap?v=QtxRrbVxHAK-b5ZowWqv6Wt7oUOJAggG80vl1X-EGBM1"></script>
+
+    <script src="/bundles/timepicker?v=SNA17wI1rMl4CP8ayG1ydmEu0eLQfZiFCqPl0hXZpd01"></script>
+
+    <script src="/bundles/sweet?v=ZMOC4FpxSbszBSzdHGvkc9O_scCReJoQ_PgxKeHWirk1"></script>
+
+    <script src="https://use.fontawesome.com/877bbc2081.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+
+    <link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/export/bootstrap-table-export.min.js"></script>
+
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.20.2/dist/extensions/defer-url/bootstrap-table-defer-url.min.js"></script>
+
+    
+
+</head>
+<body style="overflow-x: hidden;">
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+        <a class="navbar-brand">Lead</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navbarSupportedContent" class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Captura prospectos</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'dashboards:captura' %}">Venta</a>
+                        <a class="dropdown-item" href="/Compras/CompraCaptura">Compra</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Operativo Anfitrion</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'dashboards:operativo_anfitrion' %}">Venta</a>
+                        <a class="dropdown-item" href="/Compras/OperativoAnfitrionCompras">Compra</a>
+                        <a class="dropdown-item" href="/SolicitudPeritaje/SeguimientoAnfitrion">Solicitudes de Peritaje</a>
+                    </div>
+                </li>
+
+                    <li><a class="nav-link" href="{% url 'dashboards:operativo_asesor' %}">Operativo Asesor</a></li>
+
+                    <li><a class="nav-link" href="/Compras/OperativoComprador">Operativo Comprador</a></li>
+                                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reportes</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{% url 'dashboards:reportes' %}">Venta</a>
+                            <a class="dropdown-item" href="/Compras/ReportesCompras">Compra</a>
+                            <a class="dropdown-item" href="/SolicitudPeritaje/ReportesSolicitudesPeritaje">Solicitudes Peritaje</a>
+                        </div>
+                    </li>
+                    <li><a class="nav-link" href="{% if calendario_general %}{% url 'dashboards:calendar' %}{% else %}{% url 'dashboards:calendar_detail' asesor_actual.pk %}{% endif %}">Calendario</a></li>
+                    <li><a class="nav-link" href="/Compras/OperativoPerito">Operativo Perito</a></li>
+                    <li><a class="nav-link" href="/Compras/OperativoTaller">Operativo Taller</a></li>
+                                    <li><a class="nav-link" href="http://capnet2.ddns.net:5007/" target="_blank">KPI's</a></li>
+            </ul>
+            <div class="form-inline">
+                <button type="button" style="margin-right: 30px; border: none transparent; background-color:transparent; color:white;" onClick="history.back();"><i class="material-icons">reply</i>Atras</button>
+            <form action="{% url 'dashboards:logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" value="CerrarSesion" style="border: none transparent; background-color:transparent; color:white;"><i class="material-icons">exit_to_app</i>Salir</button>
+            </form>    
+            </div>
+            
+        </div>
+    </nav>
+    
+    <div class="container body-content">
+        
+
+<form action="/Leads/Lead/33376" method="post"><input name="__RequestVerificationToken" type="hidden" value="ADMS7qLKCcxwC8sDOiFl1q_Jj2JOwVhVMsSMrLnSNwNAPZCCXxQhBZ10dFVc_mNrxpO7axpVAWavALALdTpO9G3QOPRxE4Vyy_TsYi7bPXo1" />    <!--container principal-->
+    <div class="container-fluid">
+        <div class="row mt-4">
+            <div class="col-md-8">
+                <div class="card h-100" style="margin:0;">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 bloque">
+                                <h1>Detalle del Cliente</h1>
+                                <input data-val="true" data-val-number="The field IdLead must be a number." data-val-required="El campo IdLead es obligatorio." id="Lead_IdLead" name="Lead.IdLead" type="hidden" value="33376" />
+                                <input id="Lead_Comentario" name="Lead.Comentario" type="hidden" value="Tucson 4x4 manual gasolina 2012 2015 / Bogotá" />
+                                <input id="Lead_NombreAsesor" name="Lead.NombreAsesor" type="hidden" value="Jaime Murcia" />
+                                <input id="Prospecto_NombreProspecto" name="Prospecto.NombreProspecto" type="hidden" value="William" />
+                                <div class="form-group">
+                                    <fieldset style="padding: revert; margin: 0; border: ridge;">
+                                        <legend style="font-size:12px; width: auto;">Contacto (opcional):</legend>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <h2>Nombre</h2>
+                                                <input class="p text-box single-line" id="Prospecto_ContactoNombre" name="Prospecto.ContactoNombre" placeholder="Nombre de Contacto" type="text" value="" />
+                                                <span class="field-validation-valid text-danger" data-valmsg-for="Prospecto.ContactoNombre" data-valmsg-replace="true"></span>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <h2>Telefono</h2>
+                                                <input class="p text-box single-line" id="Prospecto_ContactoTelefono" name="Prospecto.ContactoTelefono" placeholder="Telefono de Contacto" type="text" value="" />
+                                                <span class="field-validation-valid text-danger" data-valmsg-for="Prospecto.ContactoTelefono" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <h2>Ciudad</h2>
+                                        <select class="p" id="Prospecto_Ciudad" name="Prospecto.Ciudad"><option disabled="disabled" selected="selected" value="0">-- Ciudad --</option>
+<option value="Barranquilla">Barranquilla</option>
+<option value="Bogotá">Bogot&#225;</option>
+<option value="Medellín">Medell&#237;n</option>
+<option value="Cali">Cali</option>
+</select>
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="Prospecto.Ciudad" data-valmsg-replace="true"></span>
+                                    </div>
+                                    
+                                    <div class="form-group col-md-6">
+                                        <h2>Localidades Bogotá</h2>
+                                        <select class="p" id="Prospecto_Localidad" name="Prospecto.Localidad"><option disabled="disabled" selected="selected" value="0">-- Localidades Bogot&#225; --</option>
+<option value="Antonio Nariño">Antonio Nari&#241;o</option>
+<option value="Barrios Unidos">Barrios Unidos</option>
+<option value="Bosa">Bosa</option>
+<option value="Chapinero">Chapinero</option>
+<option value="Ciudad Bolívar">Ciudad Bol&#237;var</option>
+<option value="Engativá">Engativ&#225;</option>
+<option value="Fontibón">Fontib&#243;n</option>
+<option value="Kennedy">Kennedy</option>
+<option value="Candelaria">Candelaria</option>
+<option value="Los Mártires">Los M&#225;rtires</option>
+<option value="Puente Aranda">Puente Aranda</option>
+<option value="Rafael Uribe Uribe">Rafael Uribe Uribe</option>
+<option value="San Cristóbal">San Crist&#243;bal</option>
+<option value="Santa Fe">Santa Fe</option>
+<option value="Suba">Suba</option>
+<option value="Sumapaz">Sumapaz</option>
+<option value="Teusaquillo">Teusaquillo</option>
+<option value="Tunjuelito">Tunjuelito</option>
+<option value="Usaquén">Usaqu&#233;n</option>
+<option value="Usme">Usme</option>
+<option value="Nariño">Nari&#241;o</option>
+<option value="Norte de Santander">Norte de Santander</option>
+<option value="Putumayo">Putumayo</option>
+<option value="Quindío">Quind&#237;o</option>
+<option value="Risaralda">Risaralda</option>
+<option value="San Andrés y Providencia">San Andr&#233;s y Providencia</option>
+<option value="Santander">Santander</option>
+<option value="Sucre">Sucre</option>
+<option value="Tolima">Tolima</option>
+<option value="Valle de Cauca">Valle de Cauca</option>
+<option value="Vaupés">Vaup&#233;s</option>
+<option value="Vichada">Vichada</option>
+</select>
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="Prospecto.Localidad" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <h2>Fecha Nacimiento</h2>
+                                        <input type="text" class="p" id="Prospecto_FechaNacimiento" name="Prospecto.FechaNacimiento" autocomplete="off" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <h2>Profesión</h2>
+                                        <input class="p text-box single-line" id="Prospecto_Profesion" name="Prospecto.Profesion" placeholder="Profesión" type="text" value="" />
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="Prospecto.Profesion" data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <h2>Ingresos</h2>
+                                        <select class="p" id="Prospecto_Ingresos" name="Prospecto.Ingresos"><option disabled="disabled" selected="selected" value="0">-- Ingresos --</option>
+<option value="0 a 1 salarios minimos">0 a 1 salarios minimos</option>
+<option value="1 a 2 salarios minimos">1 a 2 salarios minimos</option>
+<option value="2 a 3 salarios minimos">2 a 3 salarios minimos</option>
+<option value="3 a 4 salarios minimos">3 a 4 salarios minimos</option>
+<option value="4 a 4 salarios minimos">4 a 4 salarios minimos</option>
+</select>
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="Prospecto.Ingresos" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <h2>Vehiculo</h2>
+                                        <input class="p text-box single-line" id="Prospecto_VehiculoActual" name="Prospecto.VehiculoActual" placeholder="Vehiculo actual" type="text" value="" />
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="Prospecto.VehiculoActual" data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <h2>Deporte de Interes</h2>
+                                        <select class="p" id="Prospecto_InteresDeporte" name="Prospecto.InteresDeporte"><option disabled="disabled" selected="selected" value="0">-- Deporte de Interes --</option>
+<option value="Futbol">Futbol</option>
+<option value="Baloncesto">Baloncesto</option>
+<option value="Tennis">Tennis</option>
+<option value="Voleibol">Voleibol</option>
+<option value="Ruta">Ruta</option>
+<option value="Otros...">Otros...</option>
+</select>
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="Prospecto.InteresDeporte" data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <h2>Mascota de Interes</h2>
+                                        <select class="p" id="Prospecto_InteresMascotas" name="Prospecto.InteresMascotas"><option disabled="disabled" selected="selected" value="0">-- Mascota de Interes --</option>
+<option value="Perro">Perro</option>
+<option value="Gato">Gato</option>
+<option value="Otros...">Otros...</option>
+</select>
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="Prospecto.InteresMascotas" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <h2>Politica de Datos: </h2>
+                                        <div class="form-group form-check">
+<input checked="checked" class="form-check-input" data-val="true" data-val-required="El campo PoliticaPrivacidad es obligatorio." disabled="disabled" id="Prospecto_PoliticaPrivacidad" name="Prospecto.PoliticaPrivacidad" type="checkbox" value="true" /><input name="Prospecto.PoliticaPrivacidad" type="hidden" value="false" />                                            <label class="form-check-label" for="PoliticaPrivacidad">¿El cliente acepto el tratamiento de datos personales y política de datos de madiautos?</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-group form-check">
+                                        <input id="TestDrive" name="TestDrive" type="checkbox" class="form-check-input" checked=&#39;checked&#39; disabled="disabled">
+                                        <label class="form-check-label" for="TestDrive">¿Este prospecto quiere agendar Test Drive?</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <fieldset style="padding: revert; margin: 0; border: ridge;">
+                                        <legend style="font-size:12px; width: auto;">Detalle del estado</legend>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <h2>Etapa</h2>
+                                                <input class="p text-box single-line" id="Prospecto_ContactoNombre" name="Prospecto.ContactoNombre" placeholder="Etapa" type="text" value="" />
+                                                <span class="field-validation-valid text-danger" data-valmsg-for="Prospecto.ContactoNombre" data-valmsg-replace="true"></span>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <h2>Respuesta</h2>
+                                                <input class="p text-box single-line" id="Prospecto_ContactoTelefono" name="Prospecto.ContactoTelefono" placeholder="Respuesta" type="text" value="" />
+                                                <span class="field-validation-valid text-danger" data-valmsg-for="Prospecto.ContactoTelefono" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100" style="margin:0;">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col bloque">
+                                <div class="input-group">
+                                    <h1>Datos Generales</h1>
+                                        <span class="input-group-append">
+                                            <!-- Button trigger modal -->
+                                            <button id="modalContacto" type="button" class="btn btn-danger" style="padding: 0;margin-bottom: 100%;border-radius: 5px;" data-toggle="modal" data-target="#exampleModalInformacionGral">
+                                                <i class="large material-icons r">edit</i>
+                                            </button>
+                                            <!-- Modal -->
+                                            <div class="modal fade bd-example-modal-lg" id="exampleModalInformacionGral" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalPreviewLabel">Editar Informacion General de Prospecto</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="form-row">
+                                                                
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="ProspectoNombre" class="col-form-label">Nombre:</label>
+                                                                    <input type="text" class="form-control" id="ProspectoNombre" value="William">
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="ProspectoApPaterno" class="col-form-label">Primer Apellido:</label>
+                                                                    <input type="text" class="form-control" id="ProspectoApPaterno" value="Fernando">
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="ProspectoApMaterno" class="col-form-label">Segundo Apellido:</label>
+                                                                    <input type="text" class="form-control" id="ProspectoApMaterno" value="">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-2">
+                                                                    <label for="ProspectoCelular" class="col-form-label">Celular:</label>
+                                                                    <input type="text" class="form-control" id="ProspectoCelular" value="3004727793">
+                                                                </div>
+                                                                <div class="form-group col-md-5">
+                                                                    <label for="ProspectoCorreo" class="col-form-label">Correo:</label>
+                                                                    <input type="text" class="form-control" id="ProspectoCorreo" value="Paola8170@hotmail.com">
+                                                                </div>
+                                                                <div class="form-group col-md-5">
+                                                                    <label for="Lead_NombreAnfitrion" class="col-form-label">Anfitrion:</label>
+<select class="form-control" id="Lead_NombreAnfitrion" name="Lead.NombreAnfitrion"><option disabled="disabled" value="0">-- Anfitrion --</option>
+<option value="Daniela Quijano">Daniela Quijano</option>
+<option value="Sharon Diaz">Sharon Diaz</option>
+<option value="Cristian Guzman">Cristian Guzman</option>
+<option value="Brenda Milena Martinez Martinez">Brenda Milena Martinez Martinez</option>
+<option selected="selected" value="Mayerly Andrea Gutierrez Garcia">Mayerly Andrea Gutierrez Garcia</option>
+<option value="Jonathan Vargas">Jonathan Vargas</option>
+</select>                                                                </div>
+                                                            </div>
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-2">
+                                                                    <label for="ProspectoSala" class="col-form-label">Sala:</label>
+                                                                    <select class="form-control" id="Lead_Sala" name="Lead.Sala"><option disabled="disabled" value="0">-- Sala --</option>
+<option value="127">127</option>
+<option selected="selected" value="Morato">Morato</option>
+</select>
+                                                                </div>
+                                                                <div class="form-group col-md-5">
+                                                                    <label for="ProspectoAsesor" class="col-form-label">Asesor:</label>
+<select class="form-control" id="ProspectoAsesor" name="ProspectoAsesor"><option disabled="disabled" selected="selected" value="0">-- Asesor --</option>
+<option value="Garcia Acero Diego Alejandro">Garcia Acero Diego Alejandro</option>
+<option value="Gonzalez Fuentes Cediel">Gonzalez Fuentes Cediel</option>
+<option value="Alexander Hernandez">Alexander Hernandez</option>
+<option value="Jorge Ramirez">Jorge Ramirez</option>
+<option value="Freddy Cardenas">Freddy Cardenas</option>
+<option value="Diego Urbano">Diego Urbano</option>
+<option value="Consuelo Izquierdo">Consuelo Izquierdo</option>
+<option value="Villada Yeison">Villada Yeison</option>
+<option value="Diego Forero">Diego Forero</option>
+<option value="Gustavo Parraga">Gustavo Parraga</option>
+<option value="Kevin Bernal">Kevin Bernal</option>
+<option value="Juan Polania">Juan Polania</option>
+<option value="Brandon Ovalle">Brandon Ovalle</option>
+<option value="Melina Alba Villarreal">Melina Alba Villarreal</option>
+<option value="Fredy Parra Neuta">Fredy Parra Neuta</option>
+<option value="Alejandro Urdaneta">Alejandro Urdaneta</option>
+<option value="Jaime Murcia">Jaime Murcia</option>
+<option value="Diana Pinzon">Diana Pinzon</option>
+<option value="Ana Milena Carranza">Ana Milena Carranza</option>
+<option value="Andres Arias">Andres Arias</option>
+<option value="Sandra Isabel Pulido">Sandra Isabel Pulido</option>
+<option value="Alvaro Vanegas">Alvaro Vanegas</option>
+<option value="Alexandra Rodriguez">Alexandra Rodriguez</option>
+<option value="Ximena Bayona">Ximena Bayona</option>
+<option value="Camilo Andres Salazar Campos">Camilo Andres Salazar Campos</option>
+<option value="Jose Antonio Gallo">Jose Antonio Gallo</option>
+</select>                                                                </div>
+                                                                <div class="form-group col-md-5">
+                                                                    <label for="LeadCampania" class="col-form-label">Campaña:</label>
+                                                                    <input type="text" class="form-control" id="LeadCampania" value="">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="LeadTipoDocumento" class="col-form-label">Tipo de Documento:</label>
+                                                                    <select class="form-control" id="Lead_TipoDocumento" name="Lead.TipoDocumento"><option selected="selected" value="0">-- Tipo Documento --</option>
+<option value="Cédula ciudadanía">C&#233;dula ciudadan&#237;a</option>
+<option value="Cédula de extranjería">C&#233;dula de extranjer&#237;a</option>
+<option value="PASAPORTE">PASAPORTE</option>
+<option value="NIT">NIT</option>
+</select>
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="LeadDocumento" class="col-form-label">Documento:</label>
+                                                                    <input type="text" class="form-control" id="LeadDocumento" value="">
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="Lead_OrigenLead" class="col-form-label">Origen Ingreso:</label>
+                                                                    <select class="form-control" id="Lead_OrigenLead" name="Lead.OrigenLead"><option disabled="disabled" value="">-- Origen Lead --</option>
+<option value="LLAMADA CONMUTADOR">LLAMADA CONMUTADOR</option>
+<option value="LLAMADA CELULAR">LLAMADA CELULAR</option>
+<option value="LLAMADA/CARROYA">LLAMADA/CARROYA</option>
+<option value="LLAMADA/TUCARRO">LLAMADA/TUCARRO</option>
+<option value="LLAMADA/OLX">LLAMADA/OLX</option>
+<option value="CARROYA">CARROYA</option>
+<option value="TUCARRO">TUCARRO</option>
+<option value="ESTRENAR CARRO">ESTRENAR CARRO</option>
+<option value="OLX">OLX</option>
+<option value="PÁGINA WEB">P&#193;GINA WEB</option>
+<option value="CAMPAÑA PAGA FACEBOOK">CAMPA&#209;A PAGA FACEBOOK</option>
+<option value="CAMPAÑA ORGÁNICA FACEBOOK">CAMPA&#209;A ORG&#193;NICA FACEBOOK</option>
+<option value="INSTAGRAM">INSTAGRAM</option>
+<option value="CAMPAÑA FINANCIERA">CAMPA&#209;A FINANCIERA</option>
+<option value="CONVENIO">CONVENIO</option>
+<option value="WHATSAPP MAZDA">WHATSAPP MAZDA</option>
+<option value="WHATSAPP DIRECTO USADOS">WHATSAPP DIRECTO USADOS</option>
+<option selected="selected" value="WHATSAPP HYUNDAI">WHATSAPP HYUNDAI</option>
+<option value="Google Search">Google Search</option>
+<option value="WHATSAPP COMPRAS USADO">WHATSAPP COMPRAS USADO</option>
+<option value="TU USADO FINANDINA">TU USADO FINANDINA</option>
+<option value="CORREO">CORREO</option>
+<option value="Retoma mazda">Retoma mazda</option>
+<option value="Retoma hyundai">Retoma hyundai</option>
+<option value="Olx">Olx</option>
+<option value="Retoma usados">Retoma usados</option>
+<option value="Compra Morato">Compra Morato</option>
+<option value="Usados 127">Usados 127</option>
+<option value="Compra 127">Compra 127</option>
+<option value="Renting Colombia">Renting Colombia</option>
+<option value="Consignado">Consignado</option>
+<option value="Referido">Referido</option>
+<option value="Rebold">Rebold</option>
+<option value="PÁGINA WEB FORMULARIO">P&#193;GINA WEB FORMULARIO</option>
+<option value="Finanzauto">Finanzauto</option>
+<option value="Pagina Web Formulario">Pagina Web Formulario</option>
+</select>
+                                                                    <span class="field-validation-valid text-danger" data-valmsg-for="Lead.OrigenLead" data-valmsg-replace="true"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-primary" onclick="ModCliente();">Confirmar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Modal -->
+                                        </span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h6 class="mb-0">Nombre</h6>
+                                    </div>
+                                    <div class="col-sm-8 text-secondary">
+                                        William Fernando 
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h6 class="mb-0">Email</h6>
+                                    </div>
+                                    <div class="col-sm-8 text-secondary">
+                                        <a href="mailto:Paola8170@hotmail.com">Paola8170@hotmail.com</a>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h6 class="mb-0">Celular</h6>
+                                    </div>
+                                    <div class="col-sm-8 text-secondary">
+                                        <a href="tel:3004727793">3004727793</a>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h6 class="mb-0">Anfitrión</h6>
+                                    </div>
+                                    <div class="col-sm-8 text-secondary">
+                                        Mayerly Andrea Gutierrez Garcia
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h6 class="mb-0">Sala</h6>
+                                    </div>
+                                    <div class="col-sm-8 text-secondary">
+                                        Morato
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h6 class="mb-0">Asesor</h6>
+                                    </div>
+                                    <div class="col-sm-8 text-secondary">
+                                        Jaime Murcia
+                                    </div>
+                                </div>
+                                <hr>
+                                {% if user.username == "admin" %}
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h6 class="mb-0">Origen Ingreso</h6>
+                                    </div>
+                                    <div class="col-sm-8 text-secondary">
+                                        WHATSAPP HYUNDAI
+                                    </div>
+                                </div>
+                                
+                                {% endif %}
+
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h6 class="mb-0">Campaña</h6>
+                                    </div>
+                                    <div class="col-sm-8 text-secondary">
+                                        
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h6 class="mb-0">Tipo de Documento</h6>
+                                    </div>
+                                    <div class="col-sm-8 text-secondary">
+                                        0
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h6 class="mb-0">Documento</h6>
+                                    </div>
+                                    <div class="col-sm-8 text-secondary">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="row mt-4">
+            <div class="col-md-8">
+                <div class="card h-100" style="margin:0;">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col bloque">
+                                <div class="input-group">
+                                    <h1>Lead</h1>
+                                    <span class="input-group-append">
+                                        <h2 id="Status">FRIO</h2>
+                                    </span>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <h2>Etapa: </h2>
+                                        <select class="p" id="Lead_Etapa" name="Lead.Etapa"><option disabled="disabled" value="0">-- Etapa --</option>
+<option selected="selected" value="Contacto Asesor">Contacto Asesor</option>
+<option value="Seguimiento">Seguimiento</option>
+<option value="Venta y Entrega">Venta y Entrega</option>
+<option value="Peritaje Desistido">Peritaje Desistido</option>
+</select>
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="Lead.Etapa" data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <h2>Respuesta: </h2>
+                                        <select name="Lead.Respuesta" id="Lead_Respuesta" class="p" value="N/A" required>
+                                            <optgroup label="Contacto Asesor">
+                                                
+                                                    <option value="">-- Respuesta --</option>
+                                                    <option value="Agenda cita">Agenda cita</option>
+                                                    <option value="Enviar catalogo / Informacion">Enviar catalogo / Informacion</option>
+                                                    <option value="Hacer una nueva llamada_ Cita // fecha">Hacer una nueva llamada_ Cita // fecha</option>
+                                                    <option value="Interes mediano plazo / Fecha">Interes mediano plazo / Fecha</option>
+                                                    <option value="Interes largo plazo / Fecha">Interes largo plazo / Fecha</option>
+                                                    <option value="En otra ciudad posibilidad traslado">En otra ciudad posibilidad traslado</option>
+                                                    <option value="Vh excede su presupuesto">Vh excede su presupuesto</option>
+                                                    <option value="No contesta / volver a llamar">No contesta / volver a llamar</option>
+                                                    <option value="No esta el vh de su interes">No esta el vh de su interes</option>
+                                                    <option value="Llamada Realizada">Llamada Realizada</option>
+                                                    <option value="Mensaje enviado a whatsapp">Mensaje enviado a whatsapp</option>
+                                                    <option value="Se deja mensaje de voz">Se deja mensaje de voz</option>
+                                            </optgroup>
+                                            <optgroup label="Seguimiento">
+                                                    <option value="">-- Respuesta --</option>
+                                                    <option value="Interes mediano plazo / Fecha">Interes mediano plazo / Fecha</option>
+                                                    <option value="Interes largo plazo / Fecha">Interes largo plazo / Fecha</option>
+                                                    <option value="Esta interesado en otro vehiculo">Esta interesado en otro vehiculo</option>
+                                                    <option value="En el momento no hay vh de interes">En el momento no hay vh de interes</option>
+                                                    <option value="Espera de aprobacion de Credito">Espera de aprobacion de Credito</option>
+                                                    <option value="Aceptacion de documentos">Aceptacion de documentos</option>
+                                                    <option value="Test drive">Test drive</option>
+                                                    <option value="Negociacion">Negociacion</option>
+                                                    <option value="Marca/ Modelo no se encuntra disponible">Marca/ Modelo no se encuntra disponible</option>
+                                            </optgroup>
+                                            <optgroup label="Venta y Entrega">
+                                                    <option value="">-- Respuesta --</option>
+                                                    <option value="Alistamiento mecanico basico ">Alistamiento mecanico basico </option>
+                                                    <option value="Entrega del vehiculo">Entrega del vehiculo</option>
+                                                    <option value="Entregado">Entregado</option>
+                                                    <option value="Separaci&#243;n">Separaci&#243;n</option>
+                                            </optgroup>
+                                            <optgroup label="Desistido">
+                                                    <option value="">-- Respuesta --</option>
+                                                    <option value="Cliente no acepta oferta de retoma">Cliente no acepta oferta de retoma</option>
+                                                    <option value="Poca Capacidad de endeudamiento">Poca Capacidad de endeudamiento</option>
+                                                    <option value="Reportado">Reportado</option>
+                                                    <option value="En otra ciudad inviable">En otra ciudad inviable</option>
+                                                    <option value="En el momento no hay vh de interes">En el momento no hay vh de interes</option>
+                                                    <option value="Ya compro">Ya compro</option>
+                                                    <option value="Niega solicitud">Niega solicitud</option>
+                                                    <option value="Interes en vehiculo de bajo presupuesto">Interes en vehiculo de bajo presupuesto</option>
+                                                    <option value="Datos de contacto incorrectos">Datos de contacto incorrectos</option>
+                                                    <option value="Informacion de vehiculos nuevos">Informacion de vehiculos nuevos</option>
+                                                    <option value="Interesado mas adelante">Interesado mas adelante</option>
+                                                    <option value="No interesado">No interesado</option>
+                                                    <option value="No contesta/Fuera de Servicio">No contesta/Fuera de Servicio</option>
+                                                    <option value="Cliente contactado por otro asesor">Cliente contactado por otro asesor</option>
+                                                    <option value="Cliente duplicado">Cliente duplicado</option>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <h2>Fecha y Hora de acción:</h2>
+                                        <input type="text" class="p" id="Lead_FH_AccionSiguiente" name="Lead.FH_AccionSiguiente" autocomplete="off"/>
+                                    </div>
+                                    <div class="form-group col-md-1">
+                                        <a class="button calendario" style="font-size: 40px;" id="calendario" onclick="modEtapa();" href="#" target="_blank" hidden>
+                                            <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <h2>Comentario: </h2>
+                                        <textarea class="p" cols="20" id="ComentarioEtapa" name="ComentarioEtapa" placeholder="Escribe aqui tu comentario de la etapa..." rows="2">
+</textarea>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <h2>Forma de Pago </h2>
+                                        <select class="p" id="Lead_FormaPago" name="Lead.FormaPago"><option disabled="disabled" selected="selected" value="0">-- Forma de Pago --</option>
+<option value="Contado">Contado</option>
+<option value="Crédito">Cr&#233;dito</option>
+<option value="Retoma y Cédito">Retoma y C&#233;dito</option>
+<option value="Retoma y Contado">Retoma y Contado</option>
+</select>
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="Lead.FormaPago" data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <h2>Plazo de Pago: </h2>
+<select class="p" id="Lead_PlazoPago" name="Lead.PlazoPago"><option disabled="disabled" selected="selected" value="0">-- Plazo de Pago --</option>
+<option value="1 año">1 a&#241;o</option>
+<option value="2 años">2 a&#241;os</option>
+<option value="3 años">3 a&#241;os</option>
+<option value="4 años">4 a&#241;os</option>
+<option value="5 años">5 a&#241;os</option>
+</select>                                        <span class="field-validation-valid text-danger" data-valmsg-for="Lead.PlazoPago" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <hr />
+
+                                
+
+<input id="NumProductoLinea0" name="NumProductoLinea0" type="hidden" value="0" /><input id="NumProductoLineaNew0" name="NumProductoLineaNew0" type="hidden" value="0" /><input id="Programa0" name="Programa0" type="hidden" value="HYUNDAI" />                                        <div id="toolbar">
+                                            <button id="modalActivate" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalAddModelo" data-whatever="HYUNDAI">
+                                                <i class="material-icons r">add</i> Nuevo Modelo
+                                            </button>
+                                        </div>
+                                        <table id="table0"
+                                               data-toggle="table"
+                                               data-detail-view="true"
+                                               data-detail-formatter="detailFormatter">
+                                            <thead>
+                                                <tr class="tr-class-1">
+                                                    <th colspan="8">MARCA HYUNDAI</th>
+                                                </tr>
+                                                <tr class="tr-class-2">
+                                                    
+                                                    <th data-field="cotizar">Cotizar</th>
+                                                    <th data-field="codigo">Codigo de Vehiculo</th>
+                                                    <th data-field="modelo">Modelo</th>
+                                                    <th data-field="color">Color</th>
+                                                    <th data-field="precio">Precio del Vehiculo</th>
+                                                    <th data-field="separado">Separado</th>
+                                                    <th data-field="facturado">Facturado</th>
+                                                    <th data-field="Comentario" data-visible="false"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                                        <hr id="Division" />
+                                <!-- Modal -->
+                                    <div class="modal fade bd-example-modal-lg" id="ModalAddModelo" tabindex="-1" role="dialog" aria-labelledby="ModalAddModelo" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalPreviewLabel">Nuevo Modelo</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-row">
+
+                                                        <input id="NewMarca" name="NewMarca" type="hidden" value="" />
+                                                        <div class="form-group col-md-6">
+                                                            <label for="Linea" class="col-form-label">Modelo:</label>
+                                                            <input class="form-control" id="Modelo" name="Modelo" type="text" />
+                                                            
+                                                            
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="Linea" class="col-form-label">Color:</label>
+                                                            
+                                                            <input class="form-control" id="Color" name="Color" type="text" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-12">
+                                                            <label for="Linea" class="col-form-label">Comentario:</label>
+                                                            <textarea style="width: 100%;" rows="2" id="Comentario" name="Comentario" class="form-control"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    
+                                                    <button type="button" value="NuevaLinea" name="action" id="NuevaLinea" onclick="NewModelo();" class="btn btn-primary">Confirmar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <!-- Modal -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100" style="margin:0;">
+                    <div class="card-body months">
+                        <!-- Modal -->
+                        <div class="modal fade bd-example-modal-lg" id="ModalPlantillas" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5>Verificación</h5>
+                                        <button class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body small">
+                                        <div class="form-group col-md-12">
+                                            <div class="alert alert-warning" role="alert">
+                                                Al ingresar una nueva verificación, esta sera visible en la pestaña de Verificaciones, dentro de Operativo Anfitriones.
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-4">
+                                                        <label for="Linea" class="col-form-label">Estado de Llamada:</label>
+                                                        <select class="form-control form-control-sm" id="EstadoLlamada" name="EstadoLlamada">
+                                                                <option value="0">-- Estado de Llamada --</option>
+                                                                <option value="Error al asignar asesor por anfitriona">Error al asignar asesor por anfitriona</option>
+                                                                <option value="No recuerda">No recuerda</option>
+                                                                <option value="No contactado/interesado">No contactado/interesado</option>
+                                                                <option value="No contactado/No interesado">No contactado/No interesado</option>
+                                                                <option value="Contactado/Compro otro lado">Contactado/Compro otro lado</option>
+                                                                <option value="En seguimiento">En seguimiento</option>
+                                                                <option value="Proceso compra Madiautos">Proceso compra Madiautos</option>
+                                                                <option value="Contactado/Interesado">Contactado/Interesado</option>
+                                                                <option value="Contactado/No interesado">Contactado/No interesado</option>
+                                                                <option value="No contesta">No contesta</option>
+                                                                <option value="Fuera de servicio/errado">Fuera de servicio/errado</option>
+                                                                <option value="Registro repetido">Registro repetido</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label for="Linea" class="col-form-label">Tipo de Solicitud:</label>
+                                                        <select class="form-control form-control-sm" id="TipoSolicitud" name="TipoSolicitud">
+                                                                <option value="0">-- Tipo de Solicitud --</option>
+                                                                <option value="Cliente Verificado">Cliente Verificado</option>
+                                                                <option value="Volver a llamar/apagado">Volver a llamar/apagado</option>
+                                                                <option value="Cliente pide volver a llamar">Cliente pide volver a llamar</option>
+                                                                <option value="Error al asignar Comprador por Anfitriona">Error al asignar Comprador por Anfitriona</option>
+                                                                <option value="Recordatorio">Recordatorio</option>
+                                                                <option value="Reasignado">Reasignado</option>
+                                                                <option value="Error al asignar Asesor por Anfitriona">Error al asignar Asesor por Anfitriona</option>
+                                                                <option value="Error al asignar Perito por Anfitriona">Error al asignar Perito por Anfitriona</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label for="Linea" class="col-form-label">Reasignar a:</label>
+                                                        <select class="form-control form-control-sm" id="AsesorReasignado" name="AsesorReasignado" disabled>
+                                                                <option value="0">-- Asesor --</option>
+                                                                <option value="Garcia Acero Diego Alejandro">Garcia Acero Diego Alejandro</option>
+                                                                <option value="Gonzalez Fuentes Cediel">Gonzalez Fuentes Cediel</option>
+                                                                <option value="Alexander Hernandez">Alexander Hernandez</option>
+                                                                <option value="Jorge Ramirez">Jorge Ramirez</option>
+                                                                <option value="Freddy Cardenas">Freddy Cardenas</option>
+                                                                <option value="Diego Urbano">Diego Urbano</option>
+                                                                <option value="Consuelo Izquierdo">Consuelo Izquierdo</option>
+                                                                <option value="Villada Yeison">Villada Yeison</option>
+                                                                <option value="Diego Forero">Diego Forero</option>
+                                                                <option value="Gustavo Parraga">Gustavo Parraga</option>
+                                                                <option value="Kevin Bernal">Kevin Bernal</option>
+                                                                <option value="Juan Polania">Juan Polania</option>
+                                                                <option value="Brandon Ovalle">Brandon Ovalle</option>
+                                                                <option value="Melina Alba Villarreal">Melina Alba Villarreal</option>
+                                                                <option value="Fredy Parra Neuta">Fredy Parra Neuta</option>
+                                                                <option value="Alejandro Urdaneta">Alejandro Urdaneta</option>
+                                                                <option value="Jaime Murcia">Jaime Murcia</option>
+                                                                <option value="Diana Pinzon">Diana Pinzon</option>
+                                                                <option value="Ana Milena Carranza">Ana Milena Carranza</option>
+                                                                <option value="Andres Arias">Andres Arias</option>
+                                                                <option value="Sandra Isabel Pulido">Sandra Isabel Pulido</option>
+                                                                <option value="Alvaro Vanegas">Alvaro Vanegas</option>
+                                                                <option value="Alexandra Rodriguez">Alexandra Rodriguez</option>
+                                                                <option value="Ximena Bayona">Ximena Bayona</option>
+                                                                <option value="Camilo Andres Salazar Campos">Camilo Andres Salazar Campos</option>
+                                                                <option value="Jose Antonio Gallo">Jose Antonio Gallo</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-12">
+                                                        <label for="Linea" class="col-form-label">Observaciones:</label>
+                                                        <div class="control">
+                                                            <textarea class="form-control textarea has-fixed-size" placeholder="Escribe tu comentario..." id="Observaciones"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <div class="text-center mb-2">
+                                                    <div class="btn-group btn-group-sm mb-2">
+                                                        <button class="btn btn-primary" type="button" id="addVerificacion">Guardar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal -->
+                        <!-- Modal -->
+                        <div class="modal fade bd-example-modal-lg" id="exampleModalPreview" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5>Peritaje</h5>
+                                        <button class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body small">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-4">
+                                                        <label for="Linea" class="col-form-label">Descripcion del Vehiculo:</label>
+                                                        <input class="form-control form-control-sm" type="text" id="DescripcionVehiculo" name="DescripcionVehiculo" />
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label for="Linea" class="col-form-label">Valor del Vehiculo:</label>
+                                                        <input class="form-control form-control-sm" type="text" id="ValorVehiculo" name="ValorVehiculo" onkeyup="resta(this);" />
+                                                    </div>
+                                                    <div class="form-group col-md-2">
+                                                        <label for="Linea" class="col-form-label">Total:</label>
+                                                        <input class="form-control form-control-sm" type="text" id="Total" name="Total" readonly />
+                                                    </div>
+                                                    <div class="form-group col-md-2">
+                                                        <label for="Linea" class="col-form-label">Total Restante:</label>
+                                                        <input class="form-control form-control-sm" type="text" id="TotalRestante" name="TotalRestante" readonly />
+                                                        <input class="form-control form-control-sm" type="text" id="TotalConstante" name="TotalConstante" hidden />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <div class="text-center mb-2">
+                                                    <div class="btn-group btn-group-sm mb-2">
+                                                        <button class="btn btn-primary" type="button"  id="save">Guardar Retoma</button><a class="btn btn-sm btn-secondary" href="#operativoEstrategiaCollapseEstrategias" data-toggle="collapse">Ver Retomas</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <div class="collapse" data-toggle="false" id="operativoEstrategiaCollapseEstrategias">
+                                                    <div class="card card-body p-2">
+                                                        
+                                                        <table id="TableLstRetomas"
+                                                               data-toggle="table"
+                                                               data-height="200"
+                                                               data-pagination="true">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th data-field="Descripcion">Descripcion</th>
+                                                                    <th data-field="Valor">Valor</th>
+                                                                </tr>
+                                                            </thead>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal -->
+                        <!-- Modal -->
+                        <div class="modal fade bd-example-modal-sm" id="ModalNewMarca" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-sm" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5>Agregar Marca</h5>
+                                        <button class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body small">
+                                        <div class="form-group col-md-12">
+                                            <label for="Linea" class="col-form-label">Marca(s):</label>
+                                            
+                                            
+                                            <select class="col-12 form-control form-control-sm selectpicker"  title="Marca(s) de Interes" id="NewMarcasInteres" name="NewMarcasInteres">
+                                                    <option value="AUDI">AUDI</option>
+                                                    <option value="BMW">BMW</option>
+                                                    <option value="CHEVROLET">CHEVROLET</option>
+                                                    <option value="CITROEN">CITROEN</option>
+                                                    <option value="DAIHATSU">DAIHATSU</option>
+                                                    <option value="FIAT">FIAT</option>
+                                                    <option value="FORD">FORD</option>
+                                                    <option value="HONDA">HONDA</option>
+                                                    <option value="HYUNDAI">HYUNDAI</option>
+                                                    <option value="JEEP">JEEP</option>
+                                                    <option value="KIA">KIA</option>
+                                                    <option value="MAZDA">MAZDA</option>
+                                                    <option value="MERCEDES BENZ">MERCEDES BENZ</option>
+                                                    <option value="MINI">MINI</option>
+                                                    <option value="MITSUBISHI">MITSUBISHI</option>
+                                                    <option value="NISSAN">NISSAN</option>
+                                                    <option value="PEUGEOT">PEUGEOT</option>
+                                                    <option value="PORSCHE">PORSCHE</option>
+                                                    <option value="RENAULT">RENAULT</option>
+                                                    <option value="SEAT">SEAT</option>
+                                                    <option value="SSANG YONG">SSANG YONG</option>
+                                                    <option value="SUBARU">SUBARU</option>
+                                                    <option value="TOYOTA">TOYOTA</option>
+                                                    <option value="VOLKSWAGEN">VOLKSWAGEN</option>
+                                                    <option value="Suzuki">Suzuki</option>
+                                                    <option value="RAM">RAM</option>
+                                                    <option value="VOLVO">VOLVO</option>
+                                                    <option value="JAGUAR">JAGUAR</option>
+                                                    <option value="BAIC">BAIC</option>
+                                                    <option value="BYD">BYD</option>
+                                                    <option value="Brilliance">Brilliance</option>
+                                                    <option value="Chana">Chana</option>
+                                                    <option value="Changan">Changan</option>
+                                                    <option value="CHANGHE">CHANGHE</option>
+                                                    <option value="CHERY">CHERY</option>
+                                                    <option value="Chrysler">Chrysler</option>
+                                                    <option value="Dodge">Dodge</option>
+                                                    <option value="DS">DS</option>
+                                                    <option value="DFSK">DFSK</option>
+                                                    <option value="FAW">FAW</option>
+                                                    <option value="FOTON">FOTON</option>
+                                                    <option value="GEELY">GEELY</option>
+                                                    <option value="Great Wall">Great Wall</option>
+                                                    <option value="Hafei">Hafei</option>
+                                                    <option value="HAVAL">HAVAL</option>
+                                                    <option value="JAC">JAC</option>
+                                                    <option value="Otro">Otro</option>
+                                                    <option value="JMC">JMC</option>
+                                                    <option value="Hyundai Nuevos">Hyundai Nuevos</option>
+                                                    <option value="Mazda Nuevos">Mazda Nuevos</option>
+                                                    <option value="Karry">Karry</option>
+                                                    <option value="KENBO">KENBO</option>
+                                                    <option value="MAHINDRA">MAHINDRA</option>
+                                                    <option value="MG">MG</option>
+                                                    <option value="OPEL">OPEL</option>
+                                                    <option value="SOUEATS">SOUEATS</option>
+                                                    <option value="Skoda">Skoda</option>
+                                                    <option value="SsangYong">SsangYong</option>
+                                                    <option value="TESLA">TESLA</option>
+                                                    <option value="Zotye">Zotye</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <div class="text-center mb-2">
+                                                    <div class="btn-group btn-group-sm mb-2">
+                                                        <button class="btn btn-primary" type="button" id="addMarca">Guardar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal -->
+                        <!-- Modal -->
+                        <div class="modal fade bd-example-modal-lg" id="ModalHistorialVenta" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5>Historial de Venta</h5>
+                                        <button class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body small">
+                                        <div class="form-group col-md-12">
+                                            <table id="TableHistorialVenta"
+                                                   data-show-export="true"
+                                                   data-toggle="table"
+                                                   data-height-max="300"
+                                                   data-sort-class="table-active"
+                                                   data-sortable="true"
+                                                   data-show-columns="true"
+                                                   data-pagination="true">
+                                                <thead>
+                                                    <tr>
+                                                        <th data-field="Fecha">Fecha</th>
+                                                        <th data-field="Hora">Hora</th>
+                                                        <th data-field="Responsable">Responsable</th>
+                                                        <th data-field="Operacion">Operacion</th>
+                                                        <th data-field="Comentarios">Comentarios</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal -->
+                        <div>
+                            <p></p>
+                            <div>
+                                    <button class="btn btn-block btn-outline-success btn-rounded" data-mdb-ripple-color="dark" type="button" id="modalPlantillas" data-toggle="modal" data-target="#ModalPlantillas">Verificar</button>
+                            </div>
+                        </div>
+                        <div>
+                            <p></p>
+                            <div>
+                                    <button class="btn btn-block btn-outline-danger btn-rounded" data-mdb-ripple-color="dark" type="button" id="modalActivate" data-toggle="modal" data-target="#exampleModalPreview">Retoma</button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <p></p>
+                            <div>
+                                    <button class="btn btn-block btn-outline-secondary btn-rounded" data-mdb-ripple-color="dark" type="button" id="modalActivate" data-toggle="modal" data-target="#exampleModalPreview">Agendar evento</button>
+                            </div>
+                        </div>              
+                        <div>
+                            <p></p>
+                                <button class="btn btn-block btn-outline-primary btn-rounded" data-mdb-ripple-color="dark" type="button" id="modalNewMarca" data-toggle="modal" data-target="#ModalNewMarca">Nuevas Marcas</button>
+                        </div>
+                        <div>
+                            <p></p>
+                            <button class="btn btn-block btn-outline-warning btn-rounded" data-mdb-ripple-color="dark" type="button" id="modalHistorialVenta" data-toggle="modal" data-target="#ModalHistorialVenta">Historial de Venta</button>
+                        </div>
+                        <div>
+                            <p></p>
+                            <textarea class="nota textarea has-fixed-size" readonly>Tucson 4x4 manual gasolina 2012 2015 / Bogot&#225;</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        
+        <div class="form-row mt-4">
+            <div class="form-group col-md-12">
+                    <button type="submit" value="Guardar" name="action" id="Guardar" class="btn btn-primary btn-lg btn-block">Guardar</button>
+            </div>
+        </div>
+    </div>
+</form><script>
+    $(document).ready(function () {
+        $.datetimepicker.setLocale('es');
+        $("#TableLstRetomas").bootstrapTable('load', []);
+        $("#TableHistorialVenta").bootstrapTable('load', [{"Fecha":"28/August/2022","Hora":"13:24:30","Responsable":"Mayerly Andrea Gutierrez Garcia","Operacion":"Apertura de Lead","Comentarios":"Tucson 4x4 manual gasolina 2012 2015 / Bogotá"}]);
+        
+        
+        var getJSON = {
+            "IdLead": $("#Lead_IdLead").val()
+        };
+        var baseUrl = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+
+        var clientes = $.ajax({
+            type: "POST",
+            dataType: "json",
+            traditional: true,
+            async: false,
+            cache: false,
+            context: document.body,
+            url: baseUrl + "/Leads/GetTotales",
+            data: getJSON,
+            success: function (response) {
+                $('#Total').val(response.Total);
+                $('#TotalRestante').val(response.TotalRestante);
+                $('#TotalConstante').val(response.TotalRestante);
+
+            },
+            error: function (response) {
+                swal("Oh no!", "Se ha generado un error al intentar cargar el total, por favor refresque la pagina.", "warning");
+            }
+        });
+
+        //Asignamos el calendaria al input de fecha
+        $("#Prospecto_FechaNacimiento").datetimepicker({
+            format: 'd/m/Y',
+            minDate: new Date()
+        });
+
+        $("#Lead_FH_AccionSiguiente").datetimepicker({
+            format: 'd/m/Y H:i',
+            minDate: new Date()
+        });
+
+        $("#ProspectoAsesor").val( $("#Lead_NombreAsesor").val());
+
+        $("#Lead_Respuesta").children("optgroup").hide();
+        $("#Lead_Respuesta").children("optgroup[label='" + "Contacto Asesor" + "']").show();
+        $("#Lead_Respuesta").val("N/A");
+        $("#Lead_Etapa").change(function () {
+            var val = $(this).val();
+            $("#Lead_Respuesta").children("optgroup").hide();
+            $("#Lead_Respuesta").children("optgroup[label='" + val + "']").show();
+            $("#Lead_Respuesta").val('');
+        });
+
+        $("#TipoSolicitud").change(function () {
+            var solicitud = $("#TipoSolicitud").val();
+            if(solicitud=="Recordatorio")
+            {
+                document.getElementById("AsesorReasignado").value = '0';
+                $("#AsesorReasignado").prop("disabled", true);
+            }
+            else if(solicitud=="Reasignado" || solicitud=="Error al asignar Asesor por Anfitriona")
+            {
+                $("#AsesorReasignado").prop("disabled", false);
+            }
+        });
+
+        $("#Lead_FH_AccionSiguiente").change(function () {
+            var cliente = $("#Prospecto_NombreProspecto").val();
+            var asesor = $("#Lead_NombreAsesor").val();
+            var respuesta=$("#Lead_Respuesta").val();
+            var fh=$("#Lead_FH_AccionSiguiente").val();
+
+            if(respuesta=="" || respuesta==null){
+                $("#calendario").hide();
+                $("#calendario").attr("hidden");
+            }
+            else {
+                var Cliente = cliente.replace(/ /g, "+")
+                var Asesor = asesor.replace(/ /g, "+")
+                var Respuesta= respuesta.replace(/ /g, "+")
+                var FechaHora = fh.replace(/[\. ,:-]+/g, "");
+
+                var date = new Date();
+                var año = date.getFullYear();
+                var mes = date.getMonth()+1;
+                var dia = date.getDate();
+                var hora = date.getHours();
+                var min = date.getMinutes();
+                var sec = date.getSeconds();
+
+                if(mes<10)
+                {
+                    if (dia < 10)
+                    {
+                        var f = año + "-0" + mes + "-0" + dia;
+                    }
+                    else {
+                        var f = año + "-0" + mes + "-" + dia;
+                    }
+                }
+                else {
+                    if (dia < 10) {
+                        var f = año + "-" + mes + "-0" + dia;
+                    }
+                    else {
+                        var f = año + "-" + mes + "-" + dia;
+                    }
+                }
+
+                if(hora<10){
+                    hora = "0" + hora;
+                }
+                if(min<10){
+                    min = "0" + min;
+                }
+                if(sec<10){
+                    sec = "0" + sec;
+                }
+                var h = "T" + hora + ":" + min + ":" + sec;
+                var fecha = f;
+                var time = f + h;
+                document.getElementById("calendario").href = "https://calendar.google.com/calendar/u/0/r/eventedit?text=Accion+siguiente+("+Respuesta+")+para+el+asesor+" + Asesor + "&dates=" + fecha + "Z/" + h + "00Z&ctz=UTC";
+                //document.getElementById("calendario").href = "https://calendar.google.com/calendar/u/0/r/eventedit?text=Enviar+Cotizacion+a+" + Empresa + "&dates=" + time + "Z/" + FechaHora + "00Z&ctz=UTC";
+                //document.getElementById("calendario").href = "https://outlook.live.com/calendar/0/deeplink/compose?startdt=" + fh + ":00\&enddt=" + time + "\&subject=Accion%20siguiente%20para%20el%20asesor%20"+Asesor+"\&body=El%20cliente%20"+Cliente+"%20respondio:%20"+Respuesta+"\&allday=true";
+                //https://outlook.live.com/calendar/0/deeplink/compose?startdt=2020-08-12T00:00:00&enddt=2020-08-13T12:00:00&subject=Hello%20World&body=Hello%20World
+                $("#calendario").show();
+                $("#calendario").removeAttr("hidden");
+            }
+        });
+
+        $('#ModalAddModelo').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var recipient = button.data('whatever') // Extract info from data-* attributes
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            //modal.find('.modal-title').text('New message to ' + recipient)
+            $("#Modelo").children("optgroup").hide();
+            $("#Modelo").children("optgroup").hide();
+            $("#Modelo").children("optgroup[label='" + recipient + "']").show();
+            modal.find('#NewMarca').val(recipient)
+        })
+
+        $('#save').on('click', function () {
+            saveEstrategia()
+        });
+        $('#Guardar').on('click', function (event) {
+            var resp=$("#Lead_Respuesta").val();
+            if(resp=="" || resp=="N/A" || resp==null || resp==0 || resp=="0")
+            {
+                swal("Atención!", "Por favor indica una respuesta.", "warning")
+                event.preventDefault()
+            }
+        });
+
+        $("#addMarca").click(function (event) {
+            var IdLead= $("#Lead_IdLead").val()
+            var MarcasInteres= $("#NewMarcasInteres").val()
+
+            if(MarcasInteres!=null && MarcasInteres!="")
+            {
+                var data = {
+                    "IdLead": IdLead,
+                    "Marca": MarcasInteres
+                };
+                var baseUrl = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+                $.ajax({
+                    type: "POST",
+                    url: baseUrl +"/Leads/NewMarca",
+                    data: data,
+                    cache: false,
+                    success: function (response) {
+
+                        if (response == "error") {
+                            swal("Oh no!", "Se ha generado un error al intentar almacenar su peticion, por favor intente de nuevo.", "warning");
+                        }
+                        else if (response == "success") {
+                            swal({
+                                title: "OK!",
+                                text: "Se han registrado nuevas marcas.",
+                                type: "success",
+                                showCancelButton: false,
+                                confirmButtonClass: "btn-info",
+                                confirmButtonText: "Ok!",
+                                closeOnConfirm: false
+                            },
+                            function () {
+                                location.reload();
+                            });
+                        }
+                    },
+                    error: function (response) {
+                        swal("Oh no!", "Se ha generado un error al intentar almacenar su peticion, por favor intente de nuevo.", "warning");
+                    }
+                });
+            }
+            else
+            {
+                swal("Datos insuficientes", "Por favor, indique al menos una marca.", "warning");
+            }
+        });
+
+        $("#addVerificacion").click(function (event) {
+            var IdLead= $("#Lead_IdLead").val()
+            var EstadoLlamada=$("#EstadoLlamada").val();
+            var TipoSolicitud=$("#TipoSolicitud").val();
+            var AsesorReasignado=$("#AsesorReasignado").val()
+            var Observaciones=$("#Observaciones").val()
+
+            if(EstadoLlamada!=null && EstadoLlamada!="" && EstadoLlamada!=0 && TipoSolicitud!=null && TipoSolicitud!="" && TipoSolicitud!=0)
+            {
+                if(EstadoLlamada=="Error al asignar asesor por anfitriona" || TipoSolicitud=="Reasignado" || TipoSolicitud=="Error al asignar Asesor por Anfitriona")
+                {
+                    if(AsesorReasignado== null || AsesorReasignado==0 || AsesorReasignado=="0")
+                    {
+                        swal("Datos insuficientes", "Por favor, indique el asesor a reasignar.", "warning");
+                    }
+                    else
+                    {
+                        var data = {
+                            "IdLead": IdLead,
+                            "EstadoLlamada": EstadoLlamada,
+                            "TipoSolicitud": TipoSolicitud,
+                            "AsesorReasignado": AsesorReasignado,
+                            "Observaciones": Observaciones
+                        };
+                        var baseUrl = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+                        $.ajax({
+                            type: "POST",
+                            url: baseUrl +"/Leads/NewVerificacion",
+                            data: data,
+                            cache: false,
+                            success: function (response) {
+
+                                if (response == "error") {
+                                    swal("Oh no!", "Se ha generado un error al intentar almacenar su peticion, por favor intente de nuevo.", "warning");
+                                }
+                                else if (response == "success") {
+                                    swal({
+                                        title: "OK!",
+                                        text: "Se ha registrado una validación.",
+                                        type: "success",
+                                        showCancelButton: false,
+                                        confirmButtonClass: "btn-info",
+                                        confirmButtonText: "Ok!",
+                                        closeOnConfirm: false
+                                    },
+                                    function () {
+                                        location.reload();
+                                    });
+                                }
+                            },
+                            error: function (response) {
+                                swal("Oh no!", "Se ha generado un error al intentar almacenar su peticion, por favor intente de nuevo.", "warning");
+                            }
+                        });
+                    }
+                }
+                else
+                {
+                    var data = {
+                        "IdLead": IdLead,
+                        "EstadoLlamada": EstadoLlamada,
+                        "TipoSolicitud": TipoSolicitud,
+                        "AsesorReasignado": AsesorReasignado,
+                        "Observaciones": Observaciones
+                    };
+                    var baseUrl = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+                    $.ajax({
+                        type: "POST",
+                        url: baseUrl +"/Leads/NewVerificacion",
+                        data: data,
+                        cache: false,
+                        success: function (response) {
+
+                            if (response == "error") {
+                                swal("Oh no!", "Se ha generado un error al intentar almacenar su peticion, por favor intente de nuevo.", "warning");
+                            }
+                            else if (response == "success") {
+                                swal({
+                                    title: "OK!",
+                                    text: "Se ha registrado una validación.",
+                                    type: "success",
+                                    showCancelButton: false,
+                                    confirmButtonClass: "btn-info",
+                                    confirmButtonText: "Ok!",
+                                    closeOnConfirm: false
+                                },
+                                function () {
+                                    location.reload();
+                                });
+                            }
+                        },
+                        error: function (response) {
+                            swal("Oh no!", "Se ha generado un error al intentar almacenar su peticion, por favor intente de nuevo.", "warning");
+                        }
+                    });
+                }
+            }
+            else
+            {
+                swal("Datos insuficientes", "Por favor, indique al menos una marca.", "warning");
+            }
+        });
+        //$('#MarcasInteres').selectpicker();
+        //$("#OrigenLead").val('0');
+        //$("#Sala").val('0');
+        //$("#Anfitrion").val('0');
+        //$("#Interes").val('0');
+        //$("#Asesor").children("optgroup").hide();
+        //$("#Sala").change(function () {
+        //    var val = $(this).val();
+        //    $("#Asesor").children("optgroup").hide();
+        //    $("#Asesor").children("optgroup[label='" + val + "']").show();
+        //});
+
+        $("#Asesor").change(function () {
+            var cliente = $("#NombreProspecto").val();
+            var asesor = $("#Asesor").val();
+
+            if(asesor=="" || asesor==null){
+                $("#calendario").hide();
+                $("#calendario").attr("hidden");
+            }
+            else {
+                var Cliente = cliente.replace(/ /g, "+")
+                var Asesor = asesor.replace(/ /g, "+")
+
+                var date = new Date();
+                var año = date.getFullYear();
+                var mes = date.getMonth()+1;
+                var dia = date.getDate();
+                var hora = date.getHours();
+                var min = date.getMinutes();
+                var sec = date.getSeconds();
+
+                if(mes<10)
+                {
+                    if (dia < 10)
+                    {
+                        var f = año + "-0" + mes + "-0" + dia;
+                    }
+                    else {
+                        var f = año + "-0" + mes + "-" + dia;
+                    }
+                }
+                else {
+                    if (dia < 10) {
+                        var f = año + "-" + mes + "-0" + dia;
+                    }
+                    else {
+                        var f = año + "-" + mes + "-" + dia;
+                    }
+                }
+
+                if(hora<10){
+                    hora = "0" + hora;
+                }
+                if(min<10){
+                    min = "0" + min;
+                }
+                if(sec<10){
+                    sec = "0" + sec;
+                }
+                var h = "T" + hora + ":" + min + ":" + sec;
+                var fecha = f;
+                var time = f + h;
+                document.getElementById("calendario").href = "https://calendar.google.com/calendar/u/0/r/eventedit?text=Asignacion+de+asesor+a+cliente+" + Cliente + "&dates=" + fecha + "Z/" + h + "00Z&ctz=UTC";
+                //document.getElementById("calendario").href = "https://calendar.google.com/calendar/u/0/r/eventedit?text=Enviar+Cotizacion+a+" + Empresa + "&dates=" + time + "Z/" + FechaHora + "00Z&ctz=UTC";
+                //document.getElementById("calendario").href = "https://outlook.live.com/calendar/0/deeplink/compose?startdt=" + time + "\&enddt=" + time + "\&subject=Asignacion%20de%20Asesor\&body=El%20cliente%20"+Cliente+"%20se%20le%20ha%20asignado%20al%20asesor%20"+Asesor+"\&allday=true";
+                //https://outlook.live.com/calendar/0/deeplink/compose?startdt=2020-08-12T00:00:00&enddt=2020-08-13T12:00:00&subject=Hello%20World&body=Hello%20World
+                $("#calendario").show();
+                $("#calendario").removeAttr("hidden");
+            }
+        });
+
+        $("#agregar").click(function () {
+            var tam = $('#CantMarcasGestion').val()
+            while ($("#Marca").length) {
+                $("#Marca").remove();
+            }
+            for (var cont = 0; cont < tam; cont++) {
+                var item = '<div class="form-group col-md-6" id="Marca"><input id="NuevaEmpresa_Marca' + cont + '" name="NuevaEmpresa.Marca' + cont + '" type="text" class="p" placeholder="Nombre de Marca" required></div>'
+                $("#Marcas").append(item);
+            }
+            $("#NumMarca").val(tam);
+        })
+
+    });
+
+    function detailFormatter(index, row) {
+        var html = []
+        $.each(row, function (key, value) {
+            if (key == "Comentario") {
+                html.push('<p><b>' + key + ':</b> ' + value + '</p>')
+                //html.push('<label for="Producto.img'+index+'"><img id="Imagen'+index+'" name="Imagen'+index+'" class="imagePreview" src="/Lead/GetImg/'+item+'" style="width:160px; height:auto;"/></label>')
+            }
+        })
+        return html.join('')
+    }
+
+    function valideAlfaNumerico(evt) {
+
+        // code is the decimal ASCII representation of the pressed key.
+        var code = (evt.which) ? evt.which : evt.keyCode;
+
+        if (code == 8) { // backspace.
+            return true;
+        } else if ((code >= 48 && code <= 57) ||(code>=65 && code<=90) ||(code>=97 && code<=122)) { // is a number o letter
+
+            return true;
+        } else { // other keys.
+            return false;
+        }
+    };
+
+    function mayus(e) {
+        e.value = e.value.toUpperCase();
+    }
+
+    function resta(e) {
+        var restante=$('#TotalConstante').val();
+        var Valor=$('#ValorVehiculo').val();
+        var rest=restante-Valor;
+        $('#TotalRestante').val(rest);
+
+    }
+
+    function CerrarInteres(IdProducto){
+        swal({
+            title: "Cancelacion de Vehiculo de Interes",
+            text: "Comentarios de Cancelacion",
+            type: "input",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            inputPlaceholder: "Comentarios"
+        }, function (inputValue) {
+            if (inputValue === false) return false;
+            if (inputValue === "") {
+                swal.showInputError("Por favor, indica el motivo de cancelación del Vehiculo de Interes.");
+                return false
+            }
+            var data = {
+                "IdVehiculoInteres": IdProducto,
+                "Motivo":inputValue
+            };
+            var baseUrl = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+            var respuesta = $.ajax({
+                type: "POST",
+                url: baseUrl +"/Leads/CerrarInteres",
+                data: data,
+                cache: false,
+                success: function (response) {
+                    swal({
+                        title: "OK!",
+                        text: "Se ha eliminado el vehiculo de Interes de Marca "+response.Marca+" y Modelo "+response.Modelo+".",
+                        type: "success",
+                        showCancelButton: false,
+                        confirmButtonClass: "btn-success",
+                        confirmButtonText: "OK",
+                        closeOnConfirm: false
+                    },
+                        function(){
+                            location.reload();
+                        });
+                },
+                error: function (response) {
+                    swal("Oh no!", "Se ha generado un error al intentar almacenar su peticion, por favor intente de nuevo.", "warning");
+                }
+            });
+        });
+    };
+
+    function saveEstrategia() {
+        var Descripcion=$('#DescripcionVehiculo').val();
+        var Valor=$('#ValorVehiculo').val();
+        var IdLead=$('#Lead_IdLead').val();
+        var Total=$('#Total').val();
+
+        var restante=$('#TotalRestante').val();
+        if(restante<0)
+        {
+            swal("Atención!", "Lo sentimos, el valor del vehiculo supera lo cotizado", "warning");
+        }
+        else{
+            if(Descripcion!="" && Descripcion!=null && Valor!="" && Valor!=null)
+            {
+                var getJSON = {
+                    "IdLead": IdLead,
+                    "Descripcion":Descripcion,
+                    "Valor":Valor
+                };
+                var baseUrl = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    traditional: true,
+                    async: false,
+                    cache: false,
+                    context: document.body,
+                    url: baseUrl +"/Leads/NewRetoma",
+                    data: getJSON,
+                    success: function (response) {
+                        //$('#table').bootstrapTable('load', response);
+                        if (response==1)
+                        {
+                            swal({
+                                title: "OK!",
+                                text: "Se ha registrado un nuevo vehiculo de retoma.",
+                                type: "success",
+                                showCancelButton: false,
+                                confirmButtonClass: "btn-info",
+                                confirmButtonText: "Ok!",
+                                closeOnConfirm: false
+                            },
+                            function () {
+                                location.reload();
+                            });
+                        }
+                        else
+                        {
+                            swal("Oh no!", "Ocurrio un error al almacenar los datos del vehiculo de retoma, por favor intente de nuevo.", "warning");
+                        }
+                    },
+                    error: function (response) {
+                        swal("Oh no!", "Se ha generado un error al intentar almacenar su peticion, por favor intente de nuevo.", "warning");
+                    }
+                });
+            }
+            else{
+                swal("Datos insuficientes", "Por favor, de una descripción del vehiculo y su valor", "warning");
+            }
+        }
+    };
+
+    function NewModelo()
+    {
+        var Marca=$('#NewMarca').val();
+        var Color=$('#Color').val();
+        var Modelo=$('#Modelo').val();
+        var Comentario=$('#Comentario').val();
+        var IdLead=$('#Lead_IdLead').val();
+
+        if(Color!="" && Color!=null && Modelo!="" && Modelo!=null)
+        {
+            var getJSON = {
+                "IdLead": IdLead,
+                "Marca": Marca,
+                "Modelo": Modelo,
+                "Color":Color,
+                "Comentario":Comentario
+            };
+            var baseUrl = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                traditional: true,
+                async: false,
+                cache: false,
+                context: document.body,
+                url: baseUrl +"/Leads/NewModelo",
+                data: getJSON,
+                success: function (response) {
+                    //$('#table').bootstrapTable('load', response);
+                    if (response==1)
+                    {
+                        swal({
+                            title: "OK!",
+                            text: "Se ha registrado un nuevo modelo de interes.",
+                            type: "success",
+                            showCancelButton: false,
+                            confirmButtonClass: "btn-info",
+                            confirmButtonText: "Ok!",
+                            closeOnConfirm: false
+                        },
+                        function () {
+                            location.reload();
+                        });
+                    }
+                    else
+                    {
+                        swal("Oh no!", "Ocurrio un error al almacenar el nuevo vehiculo de interes, por favor intente de nuevo.", "warning");
+                    }
+                },
+                error: function (response) {
+                    swal("Oh no!", "Se ha generado un error al intentar almacenar su peticion, por favor intente de nuevo.", "warning");
+                }
+            });
+        }
+        else{
+            swal("Datos insuficientes", "Por favor, indique al menos el modelo y color de vehiculo", "warning");
+        }
+
+    }
+
+    function SelectChanged() {
+        var temp = $("#MarcasInteres").val();
+        $('#Marcas').empty();
+        $.each(temp, function (ind, elem) {
+
+            var item = '<div id="toolbar" id="Coleccion" name="Coleccion"><input hidden type="text" id="Marca'+ind+'" name="Marca'+ind+'" value="'+elem+'"><input id="NumLineaPrograma' + ind + '" name="NumLineaPrograma' + ind + '" value="0" hidden type="number" /><button type="button" id="add' + ind + '" class="btn btn-primary btn-sm" onclick="add(' + ind + ');"><i class="material-icons r">add</i> Modelo de Vehiculo</button></div><table id="table' + ind + '" data-toggle="table" data-detail-view="true" data-detail-formatter="detailFormatter"><thead><tr class="tr-class-1"><th colspan="3">Marca ' + elem + '</th></tr><tr class="tr-class-2"><th data-field="Modelo">Modelo</th><th data-field="Color">Color</th><th data-field="Comentario">Comentario</th></tr></thead><tbody></tbody></table><hr id="Division" />';
+            $("#Marcas").append(item);
+
+        });
+        $("#NumMarcas").val(temp.length);
+    }
+
+    function ModCliente() {
+
+        var IdLead=$("#Lead_IdLead").val();
+        var Celular = $("#ProspectoCelular").val();
+        var Correo = $("#ProspectoCorreo").val();
+        var Asesor = $("#ProspectoAsesor").val();
+        var Sala = $("#Lead_Sala").val();
+
+        var Nombre=$("#ProspectoNombre").val();
+        var ApPaterno=$("#ProspectoApPaterno").val();
+        var ApMaterno=$("#ProspectoApMaterno").val();
+
+        var Campania=$("#LeadCampania").val();
+        var TipoDocumento=$("#LeadTipoDocumento").val();
+        var Documento = $("#LeadDocumento").val();
+
+        var OrigenLead = $("#Lead_OrigenLead").val();
+        var Anfitrion = $("#Lead_NombreAnfitrion").val();
+
+        var getJSON = {
+            "IdLead": IdLead,
+            "Celular": Celular,
+            "Correo": Correo,
+            "Asesor": Asesor,
+            "Sala": Sala,
+            "Nombre": Nombre,
+            "ApPaterno":ApPaterno,
+            "ApMaterno":ApMaterno,
+            "Campania":Campania,
+            "TipoDocumento":TipoDocumento,
+            "Documento": Documento,
+            "OrigenLead": OrigenLead,
+            "Anfitrion": Anfitrion,
+        };
+        var baseUrl = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            traditional: true,
+            async: false,
+            cache: false,
+            context: document.body,
+            url: baseUrl + "/Leads/ModCliente",
+            data: getJSON,
+            success: function (response) {
+                //$('#table').bootstrapTable('load', response);
+                if (response !=0) {
+                    swal({
+                        title: "OK!",
+                        text: "Se ha modificado la información de Cliente.",
+                        type: "success",
+                        showCancelButton: false,
+                        confirmButtonClass: "btn-info",
+                        confirmButtonText: "Ok!",
+                        closeOnConfirm: false
+                    },
+                    function () {
+                        location.reload();
+                    });
+                }
+                else {
+                    swal("Oh no!", "Se ha generado un error al intentar almacenar su peticion, por favor intente de nuevo.", "warning");
+                }
+            },
+            error: function (response) {
+                swal("Oh no!", "Se ha generado un error al intentar almacenar su peticion, por favor intente de nuevo.", "warning");
+            }
+        });
+    }
+
+    function add(cont) {
+        var marca= $("#Marca" + cont).val();
+        var model = [{"IdVehiculo":1,"Modelo":"Tucson","Marca":"Hyundai Nuevos"},{"IdVehiculo":2,"Modelo":"Elantra","Marca":"Hyundai Nuevos"},{"IdVehiculo":3,"Modelo":"Accent","Marca":"Hyundai Nuevos"},{"IdVehiculo":4,"Modelo":"Creta","Marca":"Hyundai Nuevos"},{"IdVehiculo":5,"Modelo":"Starex","Marca":"Hyundai Nuevos"},{"IdVehiculo":6,"Modelo":"IONIQ","Marca":"Hyundai Nuevos"},{"IdVehiculo":7,"Modelo":"SantaFe","Marca":"Hyundai Nuevos"},{"IdVehiculo":8,"Modelo":"Mazda 3","Marca":"Mazda Nuevos"},{"IdVehiculo":9,"Modelo":"Mazda CX-5","Marca":"Mazda Nuevos"},{"IdVehiculo":10,"Modelo":"Mazda 6","Marca":"Mazda Nuevos"},{"IdVehiculo":11,"Modelo":"Mazda MX-5","Marca":"Mazda Nuevos"},{"IdVehiculo":12,"Modelo":"Mazda CX-30","Marca":"Mazda Nuevos"},{"IdVehiculo":13,"Modelo":"Mazda CX-3","Marca":"Mazda Nuevos"},{"IdVehiculo":14,"Modelo":"Mazda CX-9","Marca":"Mazda Nuevos"},{"IdVehiculo":15,"Modelo":"Mazda 2","Marca":"Mazda Nuevos"}];
+        var color = [{"Descripcion":"Verde","Clasificacion":"Color"},{"Descripcion":"Amarillo","Clasificacion":"Color"},{"Descripcion":"Azul","Clasificacion":"Color"},{"Descripcion":"Negro","Clasificacion":"Color"},{"Descripcion":"Gris","Clasificacion":"Color"},{"Descripcion":"Café","Clasificacion":"Color"},{"Descripcion":"Rosado","Clasificacion":"Color"},{"Descripcion":"Otros...","Clasificacion":"Color"}];
+
+        console.log(model);
+        var json = JSON.stringify(model);
+        console.log(json);
+
+        var options="";
+        $.each(model, function (ind, elem) {
+            if(elem.Marca==marca)
+            {
+                console.log({ Marca: elem.Marca, Modelo: elem.Modelo });
+                options=options+"<option>"+elem.Modelo+"</option>"
+            }
+        });
+
+        var colores="";
+        $.each(color, function (ind, elem) {
+            colores=colores+"<option>"+elem.Descripcion+"</option>"
+        });
+
+        var temp = $("#NumLineaPrograma" + cont).val();
+        //var newInput1 = '<div class="form-group col-md-6" id="' + elem + contador + '"><input id="Producto_' + contador + 'linea' + ind + '" name="Producto.' + contador + 'linea' + ind + '" type="text" class="p border-0" value="' + elem + '"></div><div class="form-group col-md-6" id="' + elem + contador + '"><h2>Volumen Potencial</h2><input id="Producto_' + contador + 'cant' + ind + '" name="Producto.' + contador + 'cant' + ind + '" type="text" class="p nodec" placeholder="Cantidad"></div>'
+        var newInput = '<tr><td><select class="p" id="Marca_' + cont + 'Modelo' + temp + '" name="Marca.' + cont + 'Modelo' + temp + '"><option disabled selected>-- Modelo --</option>'+options+'</select></td><td><select id="Marca_' + cont + 'Color' + temp + '" name="Marca.' + cont + 'Color' + temp + '" class="p">'+colores+'</select></td><td><textarea style="width: 100%;" rows="2" id="Marca_' + cont + 'Comentario' + temp + '" name="Marca.' + cont + 'Comentario' + temp + '"></textarea></td></tr>';
+        $("#table" + cont + " tbody").append(newInput);
+        temp++;
+        $("#NumLineaPrograma" + cont).val(temp);
+    };
+</script>
+
+        <hr />
+        <footer>
+            <p>&copy; 2023 - Capital Network</p>
+        </footer>
+    </div>
+
+    
+    
+    <script src="/bundles/jqueryval?v=hEGG8cMxk9p0ncdRUOJ-CnKN7NezhnPnWIvn6REucZo1"></script>
+
+
+</body>
+</html>

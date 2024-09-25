@@ -1,0 +1,289 @@
+{% extends 'tracker_pro_mazda_col/base.html' %} {% block content %} {% load static %}
+
+<div class="row">
+  <div class="col-lg-6 col-md-8 col-sm mx-auto">
+    <!--PREINVENTARIO-->
+    <div class="card bg-white my-4 my-lg-5 mx-auto shadow">
+      <div id="0" class="card-body text-center">
+        <h5><i class="fas fa-user-edit fa-lg"></i></h5>
+        <h5>Llenado de Pre-Inventario</h5>
+        <p class="lead">Necesitamos conocer el estado de su vehiculo antes de su cita.</p>
+      </div>
+
+      <!--ITEMS CONFIGURABLES-->
+      {% for familia in items_familias_preinventario %}
+      <div id="{{ forloop.counter }}" class="card-body text-center" style="display: none">
+        <h5><i class="fas fa-clipboard-list fa-lg"></i></h5>
+        <h5>{{familia.nombre}}</h5>
+        <p class="lead">{{familia.descripcion}}</p>
+
+        {% for item in items_preinventario %} {% if item.familia == familia.id %}
+        <div class="my-4 round item-preinventario bg-white" data-familia="{{item.familia}}"
+          data-nombre="{{item.nombre}}">
+          <div class="px-5">
+            <div class="custom-control custom-switch d-inline text-center">
+              <input type="checkbox" class="custom-control-input existencia-preinventario"
+                id="{{familia.nombre|slugify}}-{{item.nombre|slugify}}-switch" />
+              <label class="custom-control-label"
+                for="{{familia.nombre|slugify}}-{{item.nombre|slugify}}-switch">{{item.nombre}}</label>
+            </div>
+          </div>
+          {% if item.evidencia %}
+          <div class="my-3">
+            <input type="file" class="fp-instance evidencia-preinventario" />
+          </div>
+          {% endif %}
+          {% if item.comentarios %}
+          <div>
+            <textarea class="form-control comentario-preinventario" rows="3"
+              placeholder="Agrege un comentario"></textarea>
+          </div>
+          {% endif %}
+        </div>
+        {% endif %} {% endfor %}
+      </div>
+      {% endfor %}
+
+      <!--RESPONSIVA-->
+      <div id="{{items_familias_preinventario.count|add:1}}" class="card-body text-center" style="display: none">
+        <h5><i class="fas fa-signature fa-lg"></i></h5>
+        <h5>Firma de Conformidad</h5>
+        <p class="lead">Manifiesto no dejar objetos de valor dentro del vehículo.</p>
+        <div class="form-group custom-control custom-checkbox text-center my-3">
+          <input name="manifiesto" type="checkbox" class="custom-control-input" id="manifiesto" required />
+          <label class="custom-control-label" for="manifiesto">De Acuerdo</label>
+        </div>
+      </div>
+
+      <!--FIRMA-->
+      <div id="{{items_familias_preinventario.count|add:2}}" class="card-body text-center" style="display: none">
+        <h5><i class="fas fa-signature fa-lg"></i></h5>
+        <h5>Firma de Conformidad</h5>
+        <canvas id="firma_conformidad" name="firma_conformidad" class="signature shadow my-3 mx-auto d-block"></canvas>
+        <button class="btn btn-bubblegum shadow borrar-firma">Reintentar</button>
+      </div>
+
+      <!-- SUBMIT -->
+      <div class="card-footer">
+        <button id="back" type="button" class="btn btn-light border float-left shadow"
+          style="display: none">Atrás</button>
+        <button id="finish" type="button" class="btn btn-primary border float-right shadow confirm"
+          style="display: none">Terminar</button>
+        <button id="next" type="button" class="btn btn-primary border float-right shadow">Continuar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--MODAL-->
+<div class="modal fade" id="modal_review" data-backdrop="static" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body bg-light">
+        <h4 class="text-center"></h4>
+        <p class="lead"></p>
+
+        <div class="ready text-center my-auto">
+          <h4 class="text-center my-2">
+            <i class="fas fa-check-circle fa-lg"></i>
+          </h4>
+          <h4 class="text-center my-2">Todo Listo!</h4>
+          <a href="{% url 'tracker_pro' %}" class="btn text-info border shadow-sm my-2">
+            <i class="fas fa-poll-h fa-lg"></i>
+            Regresar a {{ marca }} Tracker
+          </a>
+        </div>
+
+        <div class="error-post text-center my-auto" style="display: none">
+          <h4 class="text-center my-2">
+            <i class="fas fa-check-circle fa-lg"></i>
+          </h4>
+          <h4 class="text-center my-2">Oh No!</h4>
+          <p class="lead text-center my-2">Estamos teniendo problemas para agendar su cita, por favor vuelva a
+            intertarlo más tarde</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
+  NAVEGATION
+-->
+<script>
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+
+  var current_form = 0;
+  var last_form = $(".card-body").length - 1;
+
+  $("#next").click(function () {
+    if (current_form < last_form) {
+      // VALIDAR DATA DE LA TARJETA ACTUAL
+      data_is_valid = current_card_data($("#" + current_form));
+      if (data_is_valid) {
+        // DESVANECER TARJETA ACTUAL Y  MOSTRAR EL PASO SIGUIENTE SI NO SE ENCUENTRA EN LA ULTIMA
+        $("#" + current_form).fadeOut("fast", function () {
+          current_form = current_form + 1;
+          $("#" + current_form).fadeIn("fast");
+
+          // SI LA TARJETA ACTUAL NO ES LA PRIMERA MOSTRAR EL BOTON "REGRESAR"
+          if (current_form > 0) {
+            $("#back").fadeIn("fast");
+          }
+
+          // SI LA TARJETA ACTUAL ES LA ULTIMA OCULTAR EL BOTON "SIGUIENTE" MOSTRAR EL BOTON DE CONFIRMACION
+          if (current_form == last_form) {
+            $("#next").fadeOut("fast", function () {
+              $("#finish").fadeIn("fast");
+            });
+          }
+        });
+      }
+    }
+  });
+
+  $("#back").click(function () {
+    if (current_form > 0) {
+      $("#" + current_form).fadeOut("fast", function () {
+        current_form = current_form - 1;
+        $("#" + current_form).fadeIn("fast");
+        if (current_form <= 0) {
+          $("#back").fadeOut("fast");
+        }
+        if (current_form != last_form) {
+          $("#finish").fadeOut("fast", function () {
+            $("#next").fadeIn("fast");
+          });
+        }
+      });
+    }
+  });
+</script>
+
+<!--
+  VERIFICATIONS
+-->
+<script>
+  function current_card_data(current_card_body) {
+    let inputs = $(current_card_body).find(".btn-file");
+    let checks = $(current_card_body).find(".custom-control-input:required");
+    let valid = true;
+
+    $(inputs).each(function () {
+      if (!$(this).val()) {
+        $(this).invalid = true;
+        let item_nombre = $(this).data("nombre");
+        // valid = false;
+        //alert(`El campo "${item_nombre}" es obligatorio`);
+      }
+    });
+
+    $(checks).each(function () {
+      if (!this.checked) {
+        $(this).invalid = true;
+        valid = false;
+      }
+    });
+
+    return valid;
+  }
+</script>
+
+<!--FIRMA-->
+<script>
+  $(function () {
+    var canvas = document.querySelector("#firma_conformidad");
+    var signaturePad = new SignaturePad(canvas);
+
+    $(".borrar-firma").click(function () {
+      signaturePad.clear();
+    });
+
+    $(".confirm").click(function () {
+      let data = {};
+      if (!signaturePad.isEmpty()) {
+        // ITEMS CONFIGURABLES
+        $(".item-preinventario")
+          .each(function () {
+            let item = this;
+            let formData = new FormData();
+
+            formData.append("csrfmiddlewaretoken", Cookies.get("csrftoken"));
+            formData.append("guardado_preinventario", true);
+            formData.append("nombre", $(item).data("nombre"));
+            formData.append("familia", $(item).data("familia"));
+
+            try {
+              // OBTENCION DE EVIDENCIA DEL ITEM Y CODIGOS DE FILEPOND
+              let files = $(item).find(".fp-instance").first().filepond("getFiles")
+              let lista_fp = new Array;
+              let lista_ev = new Array;
+              $(files).each(function () {
+                lista_fp.push(String(this.serverId));
+              });
+              $(files).each(function () {
+                lista_ev.push(String(this.filename));
+              });
+
+              formData.append("fp_id", lista_fp)
+              formData.append("evidencia", lista_ev)
+            } catch (error) {
+            }
+
+            try {
+              formData.append("comentarios", $(item).find(".comentario-preinventario").first().val());
+            } catch (error) {
+            }
+
+            if ($(item).find(".existencia-preinventario").first().is(":checked")) {
+              formData.append("existencia", true);
+            } else {
+              formData.append("existencia", false);
+            }
+            $.ajax({
+              type: "post",
+              data: formData,
+              cache: false,
+              headers: {
+                "X-CSRFToken": Cookies.get("csrftoken"),
+              },
+              processData: false,
+              contentType: false,
+            });
+          })
+          .promise()
+          .done(function () {
+            let data = {};
+            data.guardado_firma = true;
+            data.firma = signaturePad.toDataURL();
+
+            $.ajax({
+              type: "post", // "post" "get" "delete" "put"
+              data: data, // PREFERIBLEMENTE JSON
+              cache: false,
+              headers: {
+                "X-CSRFToken": Cookies.get("csrftoken"),
+              },
+              success: function () {
+                $("#modal_review").modal("toggle");
+              }
+            });
+          });
+      } else {
+        alert("Debe aceptar mediante su firma para poder continuar.")
+      }
+    });
+  });
+</script>
+
+<!-- FILEPOND INIT -->
+<script>
+  const inputElements = document.querySelectorAll("input.fp-instance");
+  Array.from(inputElements).forEach((inputElement) => {
+    FilePond.create(inputElement);
+  });
+</script>
+{% endblock %}

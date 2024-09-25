@@ -1,0 +1,93 @@
+{% extends 'citas_mazda_col/base.html' %} {% block content %}
+<div class="text-center">
+  <h4 class="">Citas de Servicio</h4>
+</div>
+
+<div class="row">
+  <div class="col-lg-7 col-md-6 col-sm mx-auto">
+    <div class="card bg-white mt-1 mx-auto shadow">
+      <!--HOME-->
+      <div id="0" class="card-body mt-3 px-lg-5 text-center">
+        <h4 class="text-center mb-3"><i class="fas fa-times fa-lg"></i></h4>
+        <h4 class="text-center mb-3">Cancelacion de Cita</h4>
+        <p class="lead text-center">
+          Está seguro que desea cancelar su cita?
+        </p>
+
+        <h6 class="mt-3">Cita actual:</h6>
+        <button id="cita-actual" type="button" class="btn btn-link border shadow">
+          <i class="far fa-calendar-alt fa-lg"></i>
+          {{fecha_hora_cita}}
+        </button>
+
+        <h6 class="mt-3">Desea cambiar la fecha de su cita?</h6>
+        <a href="{% url 'client_reschedule' %}" type="button" class="btn btn-primary border shadow">
+          <i class="fas fa-calendar-day fa-lg"></i>
+          Reagendar cita
+        </a>
+
+      </div>
+      <!--EXIT-->
+      <div id="1" class="card-body mt-4 px-sm-3 px-lg-5" style="display: none;">
+        <h4 class="text-center mb-2"><i class="fas fa-check-square fa-lg"></i></h4>
+        <h4 class="text-center mb-2">Todo listo</h4>
+        <p class="lead text-center">
+          Deseas agendar una nueva cita?
+        </p>
+        <div class="text-center">
+          <a href="{% url 'client_new' %}" class="btn btn-primary mt-1 shadow" for="photo_id">
+            <i class="fas fa-receipt fa-lg"></i>
+            Agendar Nueva Cita
+          </a>
+        </div>
+      </div>
+      <!--FOOTER-->
+      <div class="card-footer">
+        <a href="{% url 'tracker_pro' %}" id="return" type="button" class="btn btn-light border float-left shadow">
+          Regresar a Tracker
+        </a>
+        <button id="cancel" type="button" class="btn btn-bubblegum border float-right shadow">
+          Cancelar Cita
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
+  AJAX
+-->
+<script></script>
+
+<!--
+  NAVEGATION
+-->
+<script>
+  var current_form = 0;
+  var last_form = $(".card-body").length - 1;
+
+  $("#cancel").click(function () {
+    if (current_form < last_form) {
+      $("#" + current_form).fadeOut("fast", function () {
+        current_form = current_form + 1;
+        $("#" + current_form).fadeIn("fast");
+
+        let data = {};
+        data.cancelar_cita = true;
+
+        $.ajax({
+          type: "post", // "post" "get" "delete" "put"
+          data: data, // PREFERIBLEMENTE JSON
+          cache: false,
+          headers: {
+            "X-CSRFToken": Cookies.get('csrftoken')
+          }
+        });
+      });
+
+      $("#return").fadeOut("fast");
+      $("#cancel").fadeOut("fast");
+    }
+  });
+</script>
+{% endblock %}

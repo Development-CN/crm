@@ -1,0 +1,1150 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes - Prospectos Madiautos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link href="{% static 'css/style.css' %}" rel="stylesheet"/>
+
+    <script src="/bundles/modernizr?v=wBEWDufH_8Md-Pbioxomt90vm6tJN2Pyy9u9zHtWsPo1"></script>
+    <script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="/bundles/bootstrap?v=QtxRrbVxHAK-b5ZowWqv6Wt7oUOJAggG80vl1X-EGBM1"></script>
+
+    <script src="/bundles/timepicker?v=SNA17wI1rMl4CP8ayG1ydmEu0eLQfZiFCqPl0hXZpd01"></script>
+
+    <script src="/bundles/sweet?v=ZMOC4FpxSbszBSzdHGvkc9O_scCReJoQ_PgxKeHWirk1"></script>
+
+    <script src="https://use.fontawesome.com/877bbc2081.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+
+    <link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/export/bootstrap-table-export.min.js"></script>
+
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.20.2/dist/extensions/defer-url/bootstrap-table-defer-url.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+      integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+
+</head>
+<body style="overflow-x: hidden;">
+    {% include 'nav.html' %}
+    
+    <div class="body-content">
+        
+
+
+<form action="/Leads/WriteDataToExcel" method="post"><input name="__RequestVerificationToken" type="hidden" value="-TXw1Sm9EDQ9Fj4mDz8T0eL2-9_WTwsBvIBAQJxt0e9vFQAh6miYMkjMMBPVURSleZDlE-1daEOhBRL6lCXfK58RbnCwIZVK84Tt-uqd00w1" />    <!--container principal-->
+    <div class="main-panel">
+        <div class="main-content">
+            <div class="content-wrapper">
+                <div class="container-fluid">
+                    <form>
+                        <h4 style="margin:20px;">Eventos - Reportes</h4>
+                        <div style="box-shadow:none;">
+                            <div class="card-header border-0" style="background-color: #eee;">
+                                <!--<p class="card-category">Recientes</p>-->
+                                <div class="row">
+                                    <div class="col" style="padding: 1px;">
+                                        <div class="card-counter blue">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <i class="material-icons">announcement</i>
+                                                    <span class="count-numbers">
+                                                        {{cantidad_activos}}                                                        
+                                                    </span>
+                                                    <a href="#Capturados" style="color: #ffffff;" onclick="actualizar_capturados();"><span class="count-name">Leads activos</span></a>
+                                                    <button type="submit" name="tabla" id="exportCapturados" class="btn btn-link" style="margin-bottom: 50px;"><i class="material-icons" style="font-size: 20px;">description</i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col" style="padding: 1px;">
+                                        <div class="card-counter danger">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <i class="material-icons">announcement</i>
+                                                    <span class="count-numbers">
+                                                        
+                                                        {{cantidad_hoy}}
+                                                    </span>
+                                                    <a href="#SF" style="color: #ffffff;" onclick="actualizar_hoy();"><span class="count-name">Eventos del día</span></a>
+                                                    <button type="submit" name="tabla" id="exportCapturados" class="btn btn-link" style="margin-bottom: 50px;"><i class="material-icons" style="font-size: 20px;">description</i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col" style="padding: 1px;">
+                                        <div class="card-counter morado">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <i class="material-icons">announcement</i>
+                                                    <span class="count-numbers">
+                                                        
+                                                        {{cantidad_vencidos}}
+                                                    </span>
+                                                    <a href="#Desistidas" style="color: #ffffff;" onclick="actualizar_vencidos();"><span class="count-name">Eventos vencidos</span></a>
+                                                    <button type="submit" name="tabla" id="exportCapturados" class="btn btn-link" style="margin-bottom: 50px;"><i class="material-icons" style="font-size: 20px;">description</i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col" style="padding: 1px;">
+                                        <div class="card-counter bg-warning">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <i class="material-icons">announcement</i>
+                                                    <span class="count-numbers">
+                                                        
+                                                        {{cantidad_sin_eventos}}
+                                                    </span>
+                                                    <a href="#Concretadas" style="color: #ffffff;" onclick="actualizar_sin_eventos();"><span class="count-name">Leads sin eventos</span></a>
+                                                    <button type="submit" name="tabla" id="exportCapturados" class="btn btn-link" style="margin-bottom: 50px;"><i class="material-icons" style="font-size: 20px;">description</i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col" style="padding: 1px;">
+                                        <div class="card-counter aqua">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <i class="material-icons">announcement</i>
+                                                    <span class="count-numbers">
+                                                        
+                                                        {{cantidad_pendientes}}
+                                                    </span>
+                                                    <a href="#Concretadas" style="color: #ffffff;" onclick="actualizar_pendientes();"><span class="count-name">Eventos pendientes</span></a>
+                                                    <button type="submit" name="tabla" id="exportCapturados" class="btn btn-link" style="margin-bottom: 50px;"><i class="material-icons" style="font-size: 20px;">description</i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col" style="padding: 1px;">
+                                        <div class="card-counter success">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <i class="material-icons">announcement</i>
+                                                    <span class="count-numbers">
+                                                        
+                                                        {{cantidad_cumplidos}}
+                                                    </span>
+                                                    <a href="#Concretadas" style="color: #ffffff;" onclick="actualizar_cumplidos();"><span class="count-name">Eventos cumplidos</span></a>
+                                                    <button type="submit" name="tabla" id="exportCapturados" class="btn btn-link" style="margin-bottom: 50px;"><i class="material-icons" style="font-size: 20px;">description</i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body border-0" style="background-color: #eee;">
+                                        <div class="form-group col-md-1">
+                                            <select id="sala" name="sala" class="form-control form-control-sm">
+                                                <option value="" selected>--Sala--</option>
+                                                <option value="127">127</option>
+                                                <option value="Morato">Morato</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-2" style="float: right; margin-right: 600px; " >
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon1">a:</span>
+                                                </div>
+                                                <input name="hasta" id="hasta" class="form-control" type="date" autocomplete="off">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-2" style="float: right;" >
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon1">De:</span>
+                                                </div>
+                                                <input name="desde" id="desde" class="form-control" type="date" autocomplete="off">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <button id="ok" type="button" class="btn btn-primary" onclick="filtrar_informacion();">Buscar</button>
+                                            <button id="rCaptura" type="button" class="btn btn-secondary" onclick="location.reload();">Recargar página</button>
+                                        </div>
+                                    
+                                        <table id="tableCapturados"
+                                                {% if user.username == "admin" %}
+                                                data-show-export="true"
+                                                {% endif %}
+                                                data-toolbar="#toolbar"
+                                                data-pagination="true"
+                                                data-toggle="table"
+                                                data-height="1200"
+                                                data-sort-class="table-active"
+                                                data-sortable="true"
+                                                data-paging="true"
+                                                data-show-columns="true"
+                                                data-show-columns-search="true"
+                                                data-filter-control="true">
+                                           <thead id="thead_color" class="table100-head table100 ver3 blue">
+                                                <tr>
+                                                    <th data-field="Borrar" data-sortable="false">
+                                                        Foto
+                                                    </th>
+                                                    <th data-field="FechaIngreso" data-sortable="false">
+                                                        Asesor
+                                                    </th>
+                                                    <th data-field="EventosHoy" data-sortable="false">
+                                                        Eventos hoy
+                                                    </th>
+                                                    <th data-field="LeadsSinEventos" data-sortable="false">Leads sin eventos</th>
+                                                    <th data-field="EventosVencidos" data-sortable="false">Eventos vencidos</th>
+                                                    <th data-field="EventosPendientes" data-sortable="false">Eventos pendientes</th>
+                                                    <th data-field="EventosCumplidos" data-sortable="false">Eventos cumplidos</th>
+                                                    <th data-field="Anfitrion" data-sortable="false">
+                                                        Ir al calendario
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody style="background-color:white;">
+                                                {% for asesor in asesores %}
+                                                    <tr>
+                                                        <td><button id="DeleteProspecto" type="button" onclick="BorrarLead(54928)"><span class="material-symbols-outlined">account_circle</span></button></td>
+                                                        <td id="nombre_asesor">{{asesor.nombre}}</td>
+                                                        <td id="evento_hoy{{asesor.id}}" data-field="EventosHoy">{% for evento in eventos_hoy %}{% if evento.asesor == asesor.pk %}{{evento.cantidad}}{% endif %}{% endfor %}</td>
+                                                        <td id="lead_sin_evento{{asesor.id}}" data-field="LeadsSinEventos">{% for lead in leads_sin_eventos %}{% if lead.nombre_asesor == asesor.nombre %}{{lead.cantidad}}{% endif %}{% endfor %}</td>
+                                                        <td id="evento_vencido{{asesor.id}}" data-field="EventosVencidos">{% for evento in eventos_vencidos %}{% if evento.asesor == asesor.pk %}{{evento.cantidad}}{% endif %}{% endfor %}</td>
+                                                        <td id="evento_pendiente{{asesor.id}}" data-field="EventosPendientes">{% for evento in eventos_pendientes %}{% if evento.asesor == asesor.pk %}{{evento.cantidad}}{% endif %}{% endfor %}</td>
+                                                        <td id="evento_cumplido{{asesor.id}}" data-field="EventosCumplidos">{% for evento in eventos_cumplidos %}{% if evento.asesor == asesor.pk %}{{evento.cantidad}}{% endif %}{% endfor %}</td>
+                                                        <td><a href="{% url 'dashboards:calendar_detail' asesor.id %}">Calendario</td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                            </div>
+                            
+                            <div class="modal fade bd-example-modal-lg" id="ModalEvento" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+                                        <div class="modal-body small">
+                                            <div class="form-row">
+                                                <div class="col-lg-6">
+                                                    <div class="mb-4">
+                                                        <label for="EventoNombre" class="col-form-label">Nombre:</label>
+                                                        <input type="text" class="form-control" id="EventoNombre">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="mb-4">
+                                                        <label for="EventoTipo" class="col-form-label">Tipo evento:</label>
+                                                        <select class="form-control" id="EventoTipo" name="EventoTipo"><option selected="selected" value="0">-- Tipo de evento --</option>
+                                                            <option value="Testdrive">Testdrive</option>
+                                                            <option value="Peritaje">Peritaje</option>
+                                                            <option value="Whatsapp">Whatsapp</option>
+                                                        </select>
+                                                    </div>
+                                                </div>                   
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-lg-6">
+                                                    <div class="mb-4">
+                                                        <label for="EventoTelefono" class="col-form-label">Telefono del Cliente:</label>
+                                                        <input type="number" class="form-control" id="EventoTelefono" onkeydown="return event.keyCode !== 69 && event.keyCode !== 190">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="mb-4">
+                                                        <label for="EventoObservaciones" class="col-form-label">Observaciones:</label>
+                                                        <input type="text" class="form-control" id="EventoObservaciones">
+                                                    </div>
+                                                </div>         
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-lg-6">
+                                                    <div class="mb-4">
+                                                        <label for="EventoAsesor" class="col-form-label">Asesor:</label>
+                                                        <select class="form-control" id="EventoAsesor" name="EventoAsesor"><option selected="selected" value="0">-- Asesor --</option>
+                                                            {% for asesor in asesores %}
+                                                            <option value="{{asesor.nombre}}">{{asesor.nombre}}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="mb-4">
+                                                        <label for="EventoFechaHora" class="col-form-label">Fecha y hora:</label>
+                                                        <input type="datetime-local" class="form-control" id="EventoFechaHora">
+                                                    </div>
+                                                </div>         
+                                                
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary" onclick="subir_formulario_evento();">Confirmar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</form><script>
+    {% for asesor in asesores %}
+      if ($('#evento_hoy{{asesor.id}}').html() == '') {
+        document.getElementById("evento_hoy{{asesor.id}}").innerHTML = 0;
+      }
+      if ($('#evento_vencido{{asesor.id}}').html() == '') {
+        document.getElementById("evento_vencido{{asesor.id}}").innerHTML = 0;
+      }
+      if ($('#lead_sin_evento{{asesor.id}}').html() == '') {
+        document.getElementById("lead_sin_evento{{asesor.id}}").innerHTML = 0;
+      }
+      if ($('#evento_pendiente{{asesor.id}}').html() == '') {
+        document.getElementById("evento_pendiente{{asesor.id}}").innerHTML = 0;
+      }
+      if ($('#evento_cumplido{{asesor.id}}').html() == '') {
+        document.getElementById("evento_cumplido{{asesor.id}}").innerHTML = 0;
+      }
+    {% endfor %}
+
+    var if_filtrar_capturados = false;
+
+    function filtrar_informacion(){
+
+        var sala = $("#sala").val();
+        var desde = $("#desde").val();
+        var hasta = $("#hasta").val();
+
+        data = {}
+        data.if_filtrar_capturados = if_filtrar_capturados
+        data.filtrar_capturados = true
+        data.sala = sala
+        data.desde = desde
+        data.hasta = hasta
+
+        console.log(data)
+
+        $.ajax({
+            type: "post", // "post" "get" "delete" "put"
+            data: data, // PREFERIBLEMENTE JSON
+            cache: false,
+            headers: {
+            "X-CSRFToken": Cookies.get("csrftoken")
+            },        
+            success: function (response) {
+
+                var list_asesores = []
+
+                $(response).each(function (index, lead) {
+                    var asesores = document.getElementsByClassName("class_asesor")
+                    for (var i = 0; i < asesores.length; i++) {
+                        var tr = asesores[i].getElementsByTagName("td")[1].innerHTML;
+                        if (lead.nombre == tr){
+                            asesores[i].hidden = false;
+                            list_asesores.push(asesores[i])
+                        }
+                        else if(!(list_asesores.includes(asesores[i]))){
+                            asesores[i].hidden = true;
+                        }
+                    }
+                })
+                if_filtrar_capturados = true;
+
+            }
+        })
+        }
+
+
+
+
+    function actualizar_capturados(){
+        color = document.getElementById("thead_color")
+        color.className = "table100-head table100 ver3 blue";
+        var asesores = document.getElementsByClassName("class_asesor")
+        for (asesor in asesores){
+            asesores[asesor].hidden = false;
+        }
+    }
+
+    function actualizar_hoy(){
+        color = document.getElementById("thead_color")
+        color.className = "table100-head table100 ver3 danger";
+        var asesores = document.getElementsByClassName("class_asesor")
+        for (asesor in asesores){
+            tr = asesores[asesor].getElementsByTagName("td")[2].innerHTML;
+            console.log(tr)
+            if (asesores[asesor].getElementsByTagName("td")[2].innerHTML == 0){
+            asesores[asesor].hidden = true;
+
+            }
+            else {
+            asesores[asesor].hidden = false;
+            }
+        }
+    }
+
+    function actualizar_vencidos(){
+        color = document.getElementById("thead_color")
+        color.className = "table100-head table100 ver3 morado";
+        var asesores = document.getElementsByClassName("class_asesor")
+        for (asesor in asesores){
+            tr = asesores[asesor].getElementsByTagName("td")[4].innerHTML;
+            console.log(tr)
+            if (asesores[asesor].getElementsByTagName("td")[4].innerHTML == 0){
+            asesores[asesor].hidden = true;
+
+            }
+            else {
+            asesores[asesor].hidden = false;
+            }
+        }
+    }
+
+    function actualizar_sin_eventos(){
+        color = document.getElementById("thead_color")
+        color.className = "table100-head table100 ver3 bg-warning";
+        var asesores = document.getElementsByClassName("class_asesor")
+        for (asesor in asesores){
+            tr = asesores[asesor].getElementsByTagName("td")[3].innerHTML;
+            console.log(tr)
+            if (asesores[asesor].getElementsByTagName("td")[3].innerHTML == 0){
+            asesores[asesor].hidden = true;
+
+            }
+            else {
+            asesores[asesor].hidden = false;
+            }
+        }
+    }
+
+    function actualizar_pendientes(){
+        color = document.getElementById("thead_color")
+        color.className = "table100-head table100 ver3 aqua";
+        var asesores = document.getElementsByClassName("class_asesor")
+        for (asesor in asesores){
+            tr = asesores[asesor].getElementsByTagName("td")[5].innerHTML;
+            console.log(tr)
+            if (asesores[asesor].getElementsByTagName("td")[5].innerHTML == 0){
+            asesores[asesor].hidden = true;
+
+            }
+            else {
+            asesores[asesor].hidden = false;
+            }
+        }
+
+    }
+
+    function actualizar_cumplidos(){
+        color = document.getElementById("thead_color")
+        color.className = "table100-head table100 ver3 success";
+        var asesores = document.getElementsByClassName("class_asesor")
+        for (asesor in asesores){
+            tr = asesores[asesor].getElementsByTagName("td")[6].innerHTML;
+            console.log(tr)
+            if (asesores[asesor].getElementsByTagName("td")[6].innerHTML == 0){
+            asesores[asesor].hidden = true;
+
+            }
+            else {
+            asesores[asesor].hidden = false;
+            }
+        }
+    }
+
+
+    function subir_formulario_evento(){
+        var EventoNombre=$("#EventoNombre").val();
+        var EventoTipo=$("#EventoTipo").val();
+        var EventoCliente=$("#EventoCliente").val();
+        var EventoObservaciones=$("#EventoObservaciones").val();
+        var EventoAsesor = $("#EventoAsesor").val();
+        var EventoFechaHora = $("#EventoFechaHora").val();
+
+        data = {}
+        data.EventoNombre = EventoNombre
+        data.EventoTipo = EventoTipo
+        data.EventoCliente = EventoCliente
+        data.EventoObservaciones = EventoObservaciones
+        data.EventoAsesor = EventoAsesor
+        data.EventoFechaHora = EventoFechaHora
+        
+        console.log("hola")
+        console.log(data)
+
+        $.ajax({
+              type: "post", // "post" "get" "delete" "put"
+              data: data, // PREFERIBLEMENTE JSON
+              cache: false,
+              headers: {
+                "X-CSRFToken": Cookies.get("csrftoken")
+              },
+              success: function (response) {
+                location.reload()
+                }
+            })
+    }
+
+    $(document).ready(function () {
+        $('#dtBasicExample').DataTable({
+            "scrollY": "300px",
+            "scrollCollapse": true,
+            "paging": false
+        });
+
+        $.datetimepicker.setLocale('es');
+
+        //$(".rangos").datetimepicker({
+        //    format: 'd/m/Y',
+        //    timepicker: false,
+        //});
+
+        $('#CapturaDesde').datetimepicker({
+            format: 'd/m/Y',
+            timepicker: false
+        });
+        $('#CapturaHasta').datetimepicker({
+            format: 'd/m/Y',
+            timepicker: false
+        });
+
+        $('#SFDesde').datetimepicker({
+            format: 'd/m/Y',
+            timepicker: false
+        });
+        $('#SFHasta').datetimepicker({
+            format: 'd/m/Y',
+            timepicker: false
+        });
+
+        $('#DesistidaDesde').datetimepicker({
+            format: 'd/m/Y',
+            timepicker: false
+        });
+        $('#DesistidaHasta').datetimepicker({
+            format: 'd/m/Y',
+            timepicker: false
+        });
+
+        $('#ConcretadaDesde').datetimepicker({
+            format: 'd/m/Y',
+            timepicker: false
+        });
+        $('#ConcretadaHasta').datetimepicker({
+            format: 'd/m/Y',
+            timepicker: false
+        });
+
+        $('#HistorialDesde').datetimepicker({
+            format: 'd/m/Y',
+            timepicker: false
+        });
+        $('#HistorialHasta').datetimepicker({
+            format: 'd/m/Y',
+            timepicker: false
+        });
+
+        $("#rCaptura").click(function (event) {
+            //$('#tableCapturados').bootstrapTable('refresh');
+            $('#CapturaDesde').val('');
+            $('#CapturaHasta').val('');
+            getData(1,10);
+        })
+
+        $("#rSF").click(function (event) {
+            $('#SFDesde').val('');
+            $('#SFHasta').val('');
+            getDataSF(1, 10);
+        })
+
+        $("#rDesistidas").click(function (event) {
+            $('#DesistidaDesde').val('');
+            $('#DesistidaHasta').val('');
+            getDataDes(1, 10);
+        })
+
+        $("#rConcretadas").click(function (event) {
+            $('#ConcretadaDesde').val('');
+            $('#ConcretadaHasta').val('');
+            getDataCon(1, 10);
+        })
+
+        $("#rHistorial").click(function (event) {
+            $('#HistorialDesde').val('');
+            $('#HistorialHasta').val('');
+            getDataHis(1, 10);
+        })
+    });
+</script>
+<script>
+    var baseUrl = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+    var $tableCap = $('#tableCapturados')
+    var $tableSF = $('#tableSF')
+    var $tableDes = $('#tableDesistidas')
+    var $tableCon = $('#tableConcretadas')
+    var $tableHis = $('#tableHistorial')
+
+
+    $("#Capturados_OrigenIngreso").change(function () {
+        getData(1, 10);
+    });
+
+    $("#Capturados_Respuesta").change(function () {
+        getData(1, 10);
+    });
+
+    $("#Capturados_Estado").change(function () {
+        getData(1, 10);
+    });
+
+    $("#Capturados_Anfitrion").change(function () {
+        getData(1, 10);
+    });
+
+    $("#Capturados_Asesor").change(function () {
+        getData(1, 10);
+    });
+
+    $("#Capturados_Verificado").change(function () {
+        getData(1, 10);
+    });
+
+    $("#Capturados_Sala").change(function () {
+        getData(1, 10);
+    });
+
+    $("#Capturados_Marca").change(function () {
+        getData(1, 10);
+    });
+
+    $("#Capturados_Modelo").change(function () {
+        getData(1, 10);
+    });
+
+    function getData(number, size) {
+        var fechaIni1 = $("#CapturaDesde").val();
+        var fechaIni = '';
+        if (fechaIni1 != '' && fechaIni1 != null) {
+            var fechaIniS = fechaIni1.split("/");
+            fechaIni = fechaIniS[2] + '-' + fechaIniS[1] + '-' + fechaIniS[0];
+        }
+
+        var fechaFin1 = $("#CapturaHasta").val();
+        var fechaFin = '';
+        if (fechaFin1 != '' && fechaFin1 != null) {
+            var fechaFinS = fechaFin1.split("/");
+            fechaFin = fechaFinS[2] + '-' + fechaFinS[1] + '-' + fechaFinS[0];
+        }
+
+        $.get(baseUrl + '/Leads/getCapturados2/?off=' + number + '&size=' + size
+            + '&Origen=' + $("#Capturados_OrigenIngreso").val()
+            + '&Respuesta=' + $("#Capturados_Respuesta").val()
+            + '&Estado=' + $("#Capturados_Estado").val()
+            + '&Anfitrion=' + $("#Capturados_Anfitrion").val()
+            + '&Asesor=' + $("#Capturados_Asesor").val()
+            + '&Verificado=' + $("#Capturados_Verificado").val()
+            + '&Sala=' + $("#Capturados_Sala").val()
+            + '&Marca=' + $("#Capturados_Marca").val()
+            + '&Modelo=' + $("#Capturados_Modelo").val()
+            + '&FechaIni=' + fechaIni
+            + '&FechaFin=' + fechaFin
+            + '&Cadena=' + $("#Capturados_Cadena").val()
+            , {
+                offset: (number - 1) * size,
+                limit: size
+            }, function (res) {
+                $tableCap.bootstrapTable('load', res)
+            })
+    }
+
+    $("#SF_Sala").change(function () {
+        getDataSF(1, 10);
+    });
+
+    $("#SF_Asesor").change(function () {
+        getDataSF(1, 10);
+    });
+
+    $("#SF_Estado").change(function () {
+        getDataSF(1, 10);
+    });
+
+    $("#SF_SF").change(function () {
+        getDataSF(1, 10);
+    });
+
+    $("#SF_Marca").change(function () {
+        getDataSF(1, 10);
+    });
+
+    $("#SF_Modelo").change(function () {
+        getDataSF(1, 10);
+    });
+
+    function getDataSF(number, size) {
+        var fechaIni1 = $("#SFDesde").val();
+        var fechaIni = '';
+        if (fechaIni1 != '' && fechaIni1 != null) {
+            var fechaIniS = fechaIni1.split("/");
+            fechaIni = fechaIniS[2] + '-' + fechaIniS[1] + '-' + fechaIniS[0];
+        }
+
+        var fechaFin1 = $("#SFHasta").val();
+        var fechaFin = '';
+        if (fechaFin1 != '' && fechaFin1 != null) {
+            var fechaFinS = fechaFin1.split("/");
+            fechaFin = fechaFinS[2] + '-' + fechaFinS[1] + '-' + fechaFinS[0];
+        }
+
+        $.get(baseUrl + '/Leads/getSF2/?off=' + number + '&size=' + size
+            + '&Sala=' + $("#SF_Sala").val()
+            + '&Asesor=' + $("#SF_Asesor").val()
+            + '&Estado=' + $("#SF_Estado").val()
+            + '&SF=' + $("#SF_SF").val()
+            + '&Marca=' + $("#SF_Marca").val()
+            + '&Modelo=' + $("#SF_Modelo").val()
+            + '&FechaIni=' + fechaIni
+            + '&FechaFin=' + fechaFin
+            + '&Cadena=' + $("#SF_Cadena").val()
+            , {
+                offset: (number - 1) * size,
+                limit: size
+            }, function (res) {
+                $tableSF.bootstrapTable('load', res)
+            })
+    }
+
+    $("#Desistida_Sala").change(function () {
+        getDataDes(1, 10);
+    });
+
+    $("#Desistida_Asesor").change(function () {
+        getDataDes(1, 10);
+    });
+
+    $("#Desistida_Estado").change(function () {
+        getDataDes(1, 10);
+    });
+
+    $("#Desistida_Respuesta").change(function () {
+        getDataDes(1, 10);
+    });
+
+    $("#Desistida_Marca").change(function () {
+        getDataDes(1, 10);
+    });
+
+    $("#Desistida_Modelo").change(function () {
+        getDataDes(1, 10);
+    });
+
+    function getDataDes(number, size) {
+        var fechaIni1 = $("#DesistidaDesde").val();
+        var fechaIni = '';
+        if (fechaIni1 != '' && fechaIni1 != null) {
+            var fechaIniS = fechaIni1.split("/");
+            fechaIni = fechaIniS[2] + '-' + fechaIniS[1] + '-' + fechaIniS[0];
+        }
+
+        var fechaFin1 = $("#DesistidaHasta").val();
+        var fechaFin = '';
+        if (fechaFin1 != '' && fechaFin1 != null) {
+            var fechaFinS = fechaFin1.split("/");
+            fechaFin = fechaFinS[2] + '-' + fechaFinS[1] + '-' + fechaFinS[0];
+        }
+
+        $.get(baseUrl + '/Leads/getDesistidas2/?off=' + number + '&size=' + size
+            + '&Sala=' + $("#Desistida_Sala").val()
+            + '&Asesor=' + $("#Desistida_Asesor").val()
+            + '&Estado=' + $("#Desistida_Estado").val()
+            + '&Respuesta=' + $("#Desistida_Respuesta").val()
+            + '&Marca=' + $("#Desistida_Marca").val()
+            + '&Modelo=' + $("#Desistida_Modelo").val()
+            + '&FechaIni=' + fechaIni
+            + '&FechaFin=' + fechaFin
+            + '&Cadena=' + $("#Desistida_Cadena").val()
+            , {
+                offset: (number - 1) * size,
+                limit: size
+            }, function (res) {
+                $tableDes.bootstrapTable('load', res)
+            })
+    }
+
+    $("#Concretada_Sala").change(function () {
+        getDataCon(1, 10);
+    });
+
+    $("#Concretada_Asesor").change(function () {
+        getDataCon(1, 10);
+    });
+
+    $("#Concretada_Estado").change(function () {
+        getDataCon(1, 10);
+    });
+
+    $("#Concretada_Respuesta").change(function () {
+        getDataCon(1, 10);
+    });
+
+    function getDataCon(number, size) {
+        var fechaIni1 = $("#ConcretadaDesde").val();
+        var fechaIni = '';
+        if (fechaIni1 != '' && fechaIni1 != null) {
+            var fechaIniS = fechaIni1.split("/");
+            fechaIni = fechaIniS[2] + '-' + fechaIniS[1] + '-' + fechaIniS[0];
+        }
+
+        var fechaFin1 = $("#ConcretadaHasta").val();
+        var fechaFin = '';
+        if (fechaFin1 != '' && fechaFin1 != null) {
+            var fechaFinS = fechaFin1.split("/");
+            fechaFin = fechaFinS[2] + '-' + fechaFinS[1] + '-' + fechaFinS[0];
+        }
+
+        $.get(baseUrl + '/Leads/getConcretadas2/?off=' + number + '&size=' + size
+            + '&Sala=' + $("#Concretada_Sala").val()
+            + '&Asesor=' + $("#Concretada_Asesor").val()
+            + '&Estado=' + $("#Concretada_Estado").val()
+            + '&Respuesta=' + $("#Concretada_Respuesta").val()
+            + '&FechaIni=' + fechaIni
+            + '&FechaFin=' + fechaFin
+            + '&Cadena=' + $("#Concretada_Cadena").val()
+            , {
+                offset: (number - 1) * size,
+                limit: size
+            }, function (res) {
+                $tableCon.bootstrapTable('load', res)
+            })
+    }
+
+    $("#Historial_Sala").change(function () {
+        getDataHis(1, 10);
+    });
+
+    $("#Historial_Asesor").change(function () {
+        getDataHis(1, 10);
+    });
+
+    $("#Historial_Estado").change(function () {
+        getDataHis(1, 10);
+    });
+
+    $("#Historial_Respuesta").change(function () {
+        getDataHis(1, 10);
+    });
+
+    function getDataHis(number, size) {
+        var fechaIni1 = $("#HistorialDesde").val();
+        var fechaIni = '';
+        if (fechaIni1 != '' && fechaIni1 != null) {
+            var fechaIniS = fechaIni1.split("/");
+            fechaIni = fechaIniS[2] + '-' + fechaIniS[1] + '-' + fechaIniS[0];
+        }
+
+        var fechaFin1 = $("#HistorialHasta").val();
+        var fechaFin = '';
+        if (fechaFin1 != '' && fechaFin1 != null) {
+            var fechaFinS = fechaFin1.split("/");
+            fechaFin = fechaFinS[2] + '-' + fechaFinS[1] + '-' + fechaFinS[0];
+        }
+
+        $.get(baseUrl + '/Leads/getHistorialAsesor2/?off=' + number + '&size=' + size
+            + '&Sala=' + $("#Historial_Sala").val()
+            + '&Asesor=' + $("#Historial_Asesor").val()
+            + '&Estado=' + $("#Historial_Estado").val()
+            + '&Respuesta=' + $("#Historial_Respuesta").val()
+            + '&FechaIni=' + fechaIni
+            + '&FechaFin=' + fechaFin
+            + '&Cadena=' + $("#Historial_Cadena").val()
+            , {
+                offset: (number - 1) * size,
+                limit: size
+            }, function (res) {
+                $tableHis.bootstrapTable('load', res)
+            })
+    }
+
+
+    $(function () {
+        $tableCap.on('page-change.bs.table', function (e, number, size) {
+            getData(number, size)
+        })
+        var options = $tableCap.bootstrapTable('getOptions')
+        getData(options.pageNumber, options.pageSize)
+    })
+
+    $(function () {
+        $tableSF.on('page-change.bs.table', function (e, number, size) {
+            getDataSF(number, size)
+        })
+        var options = $tableSF.bootstrapTable('getOptions')
+        getDataSF(options.pageNumber, options.pageSize)
+    })
+
+    $(function () {
+        $tableDes.on('page-change.bs.table', function (e, number, size) {
+            getDataDes(number, size)
+        })
+        var options = $tableDes.bootstrapTable('getOptions')
+        getDataDes(options.pageNumber, options.pageSize)
+    })
+
+    $(function () {
+        $tableCon.on('page-change.bs.table', function (e, number, size) {
+            getDataCon(number, size)
+        })
+        var options = $tableCon.bootstrapTable('getOptions')
+        getDataCon(options.pageNumber, options.pageSize)
+    })
+
+    $(function () {
+        $tableHis.on('page-change.bs.table', function (e, number, size) {
+            getDataHis(number, size)
+        })
+        var options = $tableHis.bootstrapTable('getOptions')
+        getDataHis(options.pageNumber, options.pageSize)
+    })
+</script>
+<script>
+
+    function BorrarLead(idLead) {
+        var data = {
+            "IdLead": idLead,
+        };
+        var baseUrl = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+        swal({
+            title: "¡Atención! Esta información no podra ser recuperada.",
+            text: "Esta información no podra ser recuperada.",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "¡Eliminar!",
+            closeOnConfirm: false
+        },
+            function () {
+                $.ajax({
+                    type: "POST",
+                    url: baseUrl + "/Leads/EliminarLead",
+                    data: data,
+                    cache: false,
+                    success: function (response) {
+                        swal({
+                            title: "OK!",
+                            text: "Toda la información del prospecto ha sido eliminada.",
+                            type: "success",
+                            showCancelButton: true,
+                            confirmButtonClass: "btn-success",
+                            confirmButtonText: "OK!",
+                            closeOnConfirm: false
+                        },
+                            function () {
+                                //swal("OK!", "Toda la información del prospecto ha sido eliminada.", "success");
+                                location.reload();
+                            });
+                    },
+                    error: function (response) {
+                        swal("Oh no!", "Tuvimos un problema, por favor intente de nuevo.", "warning");
+                    }
+                });
+            });
+    }
+
+    function exportCapturados(params) {
+        var options = $('#tableCapturados').bootstrapTable('getOptions')
+        if (!options.pagination) {
+            params.limit = options.totalRows
+        }
+        return params
+    }
+
+    function exportSF(params) {
+        var options = $('#tableSF').bootstrapTable('getOptions')
+        if (!options.pagination) {
+            params.limit = options.totalRows
+        }
+        return params
+    }
+
+    function exportDesistidas(params) {
+        var options = $('#tableDesistidas').bootstrapTable('getOptions')
+        if (!options.pagination) {
+            params.limit = options.totalRows
+        }
+        return params
+    }
+
+    function exportConcretadas(params) {
+        var options = $('#tableConcretadas').bootstrapTable('getOptions')
+        if (!options.pagination) {
+            params.limit = options.totalRows
+        }
+        return params
+    }
+
+    function exportHistorial(params) {
+        var options = $('#tableHistorial').bootstrapTable('getOptions')
+        if (!options.pagination) {
+            params.limit = options.totalRows
+        }
+        return params
+    }
+
+    function FiltrarCapturados() {
+        var sala = document.getElementById("Capturados_Sala")
+        var asesores = document.getElementsByClassName("class_asesor")
+        for (asesor in asesores){
+            var break_for = false;
+            if (sala.value == "127"){
+                {% for asesor in asesores_127 %}
+                    if ("{{asesor.nombre}}" == asesores[asesor].getElementsByTagName("td")[1].innerHTML && break_for == false){
+                        asesores[asesor].style.display = "table-row";
+                        break_for = true
+                    }
+                    else if (break_for == false){
+                        asesores[asesor].style.display = "none";
+                    }
+                {% endfor %}
+            }
+            else if (sala.value == "Morato"){
+                {% for asesor in asesores_morato %}
+                    if ("{{asesor.nombre}}" == asesores[asesor].getElementsByTagName("td")[1].innerHTML && break_for == false){
+                        asesores[asesor].style.display = "table-row";
+                        break_for = true
+                    }
+                    else if (break_for == false){
+                        asesores[asesor].style.display = "none";
+                    }
+                {% endfor %}
+            }
+        }
+    }
+
+    function FiltrarSF() {
+        //var ini = $('#SFDesde').val();
+        //var fin = $('#SFHasta').val();
+
+        //var results = rango(ini, fin);
+        ////console.log("SF:");
+        ////console.log(results);
+        //var array = new Array(results);
+        //$('#tableSF').bootstrapTable('filterBy', {
+        //    FechaIngreso: results
+        //})
+        getDataSF(1, 10);
+    }
+
+    function FiltrarDesistidas() {
+        //var ini = $('#DesistidaDesde').val();
+        //var fin = $('#DesistidaHasta').val();
+
+        //var results = rango(ini, fin);
+        ////console.log("Desistidas:");
+        ////console.log(results);
+        //var array = new Array(results);
+        //$('#tableDesistidas').bootstrapTable('filterBy', {
+        //    FechaIngreso: results
+        //})
+        getDataDes(1, 10);
+    }
+
+    function FiltrarConcretadas() {
+        //var ini = $('#ConcretadaDesde').val();
+        //var fin = $('#ConcretadaHasta').val();
+
+        //var results = rango(ini, fin);
+        ////console.log("Concretadas:");
+        ////console.log(results);
+        //var array = new Array(results);
+
+        //$('#tableConcretadas').bootstrapTable('filterBy', {
+        //    FechaCierre: results
+        //})
+        getDataCon(1, 10);
+    }
+
+    function FiltrarHistorial() {
+        //var ini = $('#HistorialDesde').val();
+        //var fin = $('#HistorialHasta').val();
+
+        //var results = rango(ini, fin);
+        ////console.log("Historial:");
+        ////console.log(results);
+        //var array = new Array(results);
+        //$('#tableHistorial').bootstrapTable('filterBy', {
+        //    FechaIngreso: results
+        //})
+        getDataHis(1, 10);
+    }
+
+    function rango(ini, fin) {
+        var splitIni = ini.split('/');
+        var fInicio = splitIni[1] + '/' + splitIni[0] + '/' + splitIni[2];
+
+        var splitFin = fin.split('/');
+        var fFin = splitFin[1] + '/' + splitFin[0] + '/' + splitFin[2];
+
+        var fechaInicio = new Date(fInicio);
+        var fechaFin = new Date(fFin);
+        var fechas = [];
+
+        while (fechaFin.getTime() >= fechaInicio.getTime()) {
+            var dia = fechaInicio.getDate();
+            var mes = (fechaInicio.getMonth() + 1);
+
+            var d;
+            var m;
+            if (dia < 10) { d = "0" + dia; }
+            else { d = dia; }
+
+            if (mes < 10) { m = "0" + mes; }
+            else { m = mes; }
+            fechas.push(d + '/' + m + '/' + fechaInicio.getFullYear());
+            fechaInicio.setDate(fechaInicio.getDate() + 1);
+        }
+
+        console.log(fechas)
+        //var arreglo = fechas.join(',')
+        //arreglo = "[" + arreglo + "]"
+        //console.log(arreglo);
+        return fechas;
+    }
+</script>
+
+
+
+        <hr />
+        <footer>
+            <p>&copy; 2023 - Capital Network</p>
+        </footer>
+    </div>
+
+    
+    
+    <script src="/bundles/jqueryval?v=hEGG8cMxk9p0ncdRUOJ-CnKN7NezhnPnWIvn6REucZo1"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,2201 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lead - Prospectos Madiautos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet"/>
+    <link  id="themeColors"  rel="stylesheet" href="{% static 'css/style.min.css' %}" />
+
+    <script src="/bundles/modernizr?v=wBEWDufH_8Md-Pbioxomt90vm6tJN2Pyy9u9zHtWsPo1"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="/bundles/bootstrap?v=QtxRrbVxHAK-b5ZowWqv6Wt7oUOJAggG80vl1X-EGBM1"></script>
+
+    <script src="/bundles/timepicker?v=SNA17wI1rMl4CP8ayG1ydmEu0eLQfZiFCqPl0hXZpd01"></script>
+
+    <script src="/bundles/sweet?v=ZMOC4FpxSbszBSzdHGvkc9O_scCReJoQ_PgxKeHWirk1"></script>
+
+    <script src="https://use.fontawesome.com/877bbc2081.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+
+    <link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/export/bootstrap-table-export.min.js"></script>
+
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.20.2/dist/extensions/defer-url/bootstrap-table-defer-url.min.js"></script>
+
+</head>
+<body style="overflow-x: hidden;">
+    {% include 'nav.html' %}
+    
+    <div class="container body-content">
+        
+
+<form >    <!--container principal-->
+</form><div class="container-fluid">
+        <div class="row mt-4">
+            <div class="col-md-8">
+                <div class="card h-100">
+
+                    <div class="card h-100">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="tab-content" id="pills-tabContent">
+                                    <div class="tab-pane fade show active" id="pills-account" role="tabpanel" aria-labelledby="pills-account-tab" tabindex="0">
+                                        <div class="row">                    
+                                            <div class="col-12">
+                                                <div class="card w-100 position-relative overflow-hidden mb-0">
+                                                    <div class="card-body p-4">
+                                                        <button class="btn btn-warning" style="float: right; margin: 5px;">Días totales: {{dias_totales}}</button>
+                                                        <button class="btn btn-{% if lead.etapa == "No contactado" %}danger{% elif lead.etapa == "Interaccion" %}primary{% elif lead.etapa == "Oportunidad" %}warning{% elif lead.etapa == "Pedido" %}success{% elif lead.etapa == "Desistido" %}morado{% endif %}" style="float: right; margin: 5px;">Etapa: {{lead.etapa}} / Respuesta: {{lead.respuesta}}</button>
+                                                        <h5 class="card-title fw-semibold" style="margin: 15px;">Detalle del Estado</h5>
+                                                    </div>
+                                                    <div class="card-body p-4">
+                                                        <form>
+                                                            <div class="row">
+                                                                <div class="col-lg-3 col-md-3">
+                                                                    <div class="mb-4">
+                                                                        <label for="exampleInputPassword1" class="form-label fw-semibold">Fecha y hora de la captura</label>
+                                                                        <input type="date" class="form-control" id="exampleInputtext" style="background-color: white;" placeholder="" readonly value="{{lead.fecha_apertura.date|date:'Y-m-d'}}">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-3 col-md-3">
+                                                                    <div class="mb-4">
+                                                                        <label for="exampleInputPassword1" class="form-label fw-semibold">Fecha y hora de reasignación</label>
+                                                                        <input type="date" class="form-control" id="exampleInputtext" style="background-color: white;" placeholder="" readonly value="{{lead.fecha_hora_reasignacion.date|date:'Y-m-d'}}">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-3 col-md-3">
+                                                                    <div class="mb-4">
+                                                                        <label for="exampleInputPassword1" class="form-label fw-semibold">Fecha y hora de primer contacto</label>
+                                                                        <input type="date" class="form-control" id="exampleInputtext" style="background-color: white;" placeholder="" readonly value="{{lead.fecha_primer_contacto.date|date:'Y-m-d'}}">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-3 col-md-3">
+                                                                    <div class="mb-4">
+                                                                        <label for="exampleInputPassword1" class="form-label fw-semibold">Tiempo primer contacto (min)</label>
+                                                                        <input type="int" class="form-control" id="exampleInputtext" style="background-color: white;" placeholder="" readonly value="{% if lead.tiempo_primer_contacto %}{{lead.tiempo_primer_contacto}}{% else %}{{tiempo_diferencia}}{% endif %}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
+                    
+                    <div class="card">
+
+                        <div class="card-body">
+                            <div class="tab-content" id="pills-tabContent">
+                                <div class="tab-pane fade show active" id="pills-account" role="tabpanel" aria-labelledby="pills-account-tab" tabindex="0">
+                                    <div class="row">                    
+                                        <div class="col-12">
+                                            <div class="card w-100 position-relative overflow-hidden mb-0">
+                                                <div class="card-body p-4">
+                                                    <button class="btn btn-primary" style="float: right; margin: 5px; " data-mdb-ripple-color="dark" type="button" id="modalEvento" data-toggle="modal" data-target="#ModalEvento">Evento</button>
+                                                    <button class="btn btn-warning" style="float: right; margin: 5px; " data-mdb-ripple-color="dark" type="button" id="modalHistorialVenta" data-toggle="modal" data-target="#ModalHistorialVenta">Historial</button>
+                                                    {% if user.groups.get|stringformat:"s" != "Asesor" %}
+                                                    <button class="btn btn-success" style="float: right; margin: 5px; " data-mdb-ripple-color="dark" type="button" id="modalPlantillas" data-toggle="modal" data-target="#ModalPlantillas">Verificar</button>
+                                                    {% endif %}
+                                                    <h5 class="card-title fw-semibold" style="margin: 15px; ">Seguimiento</h5>
+                                                </div>
+                                                <div class="card-body p-4">
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <div class="mb-4">
+                                                                <label for="exampleInputPassword1" class="form-label fw-semibold">Etapa:</label>
+                                                                <select class="p" id="Lead_Etapa" name="Lead_Etapa" onchange="filtrar_respuestas();" {% if user.groups.get|stringformat:"s" == "Anfitrión" %}disabled{% endif %}>
+                                                                    <option selected disabled="disabled" value="0">-- Etapa --</option>
+                                                                    {% for etapa in etapas %}
+                                                                    <option value="{{etapa.etapa}}" {% if lead.etapa == etapa.etapa %}selected{% endif %}>{{etapa.etapa}}</option>
+                                                                    {% endfor %}
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="mb-4">
+                                                                <label for="exampleInputPassword1" class="form-label fw-semibold">Respuesta:</label>
+                                                                <select name="Lead_Respuesta" id="Lead_Respuesta" class="p" value="N/A" required {% if user.groups.get|stringformat:"s" == "Anfitrión" %}disabled{% endif %}>
+                                                                        
+                                                                    <option selected disabled="disabled" value="0">-- Respuesta --</option>
+                                                                    {% for respuesta in respuestas %}
+                                                                    <option value="{{respuesta.respuesta}}" {% if lead.respuesta == respuesta.respuesta %}selected{% endif %}>{{respuesta.respuesta}} </option>
+                                                                    {% endfor %}
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-4">
+                                                            <label for="exampleInputPassword1" class="form-label fw-semibold">Comentarios:</label>
+                                                            <input name="Lead_Comentario" type="text" class="form-control" id="Lead_Comentario" maxlength="1000" {% if lead.comentario %}value="{{lead.comentario}}"{% endif %} {% if user.groups.get|stringformat:"s" == "Anfitrión" %}readonly{% endif %}>
+                                                        </div>
+                    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+
+                        <div class="card-body">
+                            <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-account" role="tabpanel" aria-labelledby="pills-account-tab" tabindex="0">
+                                <div class="row">                    
+                                <div class="col-12">
+                                    <div class="card w-100 position-relative overflow-hidden mb-0">
+                                    <div class="card-body p-4">
+                                        <button class="btn btn-primary" style="float: right; margin: 5px; " data-mdb-ripple-color="dark" type="button" id="modalAcciones" data-toggle="modal" data-target="#ModalAcciones">Acciones</button>
+                                        <button class="btn btn-danger" style="float: right; margin: 5px; " data-mdb-ripple-color="dark" type="button" id="modalRetomas" data-toggle="modal" data-target="#ModalRetomas">Retoma</button>
+                                        
+                                        <h5 class="card-title fw-semibold" style="margin: 15px;">Vehículos y marcas de interés</h5>
+                                    </div>
+                                    <div class="card-body p-4">
+                                        <div class="row">
+                                            {% for carro in marcas_interes.marcas %}
+                                            {% if carro.modelo  %}
+                                            <p class="form-label fw-semibold" colspan="3">Marca {{carro.marca}}</p>
+                                            <input type="hidden" id="ListMarcasInteres" name="ListMarcasInteres" value="{{carro.marca}}">
+
+                                            <div class="col-lg-3 col-md-3">
+                                                <label for="exampleInputPassword1" class="form-label fw-semibold">Modelo Vehículo:</label>
+                                                <input type="email" class="form-control" id="Marca_{{forloop.counter0}}Modelo0" name="ListModelo" placeholder="" value="{{carro.modelo}}" readonly>
+                                            </div>
+
+                                            <div class="col-lg-3 col-md-3">
+                                                <label for="exampleInputPassword1" class="form-label fw-semibold">Color Vehículo:</label>
+                                                <input type="text" class="form-control" id="ListColor" name="ListColor" placeholder="" value="{{carro.color}}">
+                                            </div>
+            
+                                            <div class="col-lg-3 col-md-3">
+                                                <label for="exampleInputPassword1" class="form-label fw-semibold">Código Vehículo:</label>
+                                                <input type="text" class="form-control" id="ListCodigo" name="ListCodigo" placeholder="" value="{{carro.codigo}}" {% if user.groups.get|stringformat:"s" == "Anfitrión" %}readonly{% endif %}>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3">
+                                                <label for="exampleInputPassword1" class="form-label fw-semibold">Precio Vehículo:</label>
+                                                <input type="number" class="form-control" id="ListPrecio" name="ListPrecio" placeholder="" value="{{carro.precio}}" {% if user.groups.get|stringformat:"s" == "Anfitrión" %}readonly{% endif %}>
+                                            </div>
+                                            {% endif %}
+                                            {% endfor %}
+                                            <div class="col-lg-6">
+                                                <div class="mb-4" style="margin-top: 15px;">
+                                                    <label for="exampleInputPassword1" class="form-label fw-semibold">Seleccione las marcas de interés del cliente:</label>
+                                                    <input id="NumMarcas" name="NumMarcas" type="hidden" value="0" />
+                                                    <select class="col-12 selectpicker p" multiple title="Marcas de Interes" id="MarcasInteres" name="MarcasInteres" onchange="SelectChanged();" {% if user.groups.get|stringformat:"s" == "Anfitrión" %}disabled{% endif %}>
+                                                        {% for marca in marcas %}
+                                                        <option value="{{marca.marca.upper}}">{{marca.marca.upper}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <div id="Marcas"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" style="margin-top: 25px;">
+
+            
+                                            <!--<div class="col-lg-3 col-md-3">
+                                                <label for="exampleInputPassword1" class="form-label fw-semibold">Modelo Vehículo:</label>
+                                                <input type="email" class="form-control" id="exampleInputtext" placeholder="">
+                                            </div>
+                                            <div class="col-lg-3 col-md-3">
+                                                <label for="exampleInputPassword1" class="form-label fw-semibold">Color Vehículo:</label>
+                                                <input type="email" class="form-control" id="exampleInputtext" placeholder="">
+                                            </div>
+            
+                                            <div class="col-lg-3 col-md-3">
+                                                <label for="exampleInputPassword1" class="form-label fw-semibold">Código Vehículo:</label>
+                                                <input type="email" class="form-control" id="exampleInputtext" placeholder="">
+                                            </div>
+                                            <div class="col-lg-3 col-md-3">
+                                                <label for="exampleInputPassword1" class="form-label fw-semibold">Precio Vehículo:</label>
+                                                <input type="email" class="form-control" id="exampleInputtext" placeholder="">
+                                            </div>-->
+            
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            
+                            
+                            
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row mt-4">
+                        <div class="form-group col-md-12">
+                            <button type="submit" value="Guardar" name="action" id="Guardar" class="btn btn-primary btn-lg btn-block" onclick="subir_formulario_general();">Guardar</button>
+                        </div>
+                    </div>
+
+                    <div class="modal fade bd-example-modal-lg" id="ModalRetomas" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5>Retoma y Cotización de vehículos</h5>
+                                    <button class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body small">
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="Linea" class="col-form-label">Seleccione la acción a realizar:</label>
+                                                    <select class="form-control form-control-sm" id="Cotizar" name="Cotizar">
+                                                            <option value="">Seleccione la acción a realizar</option>
+                                                            <option value="Cotizar">Cotizar</option>
+                                                    </select>
+                                                </div>
+                                                <table class="table align-middle text-nowrap mb-0">
+                                                    <tbody class="border-top">
+                                                        {% for carro in marcas_interes.marcas %}
+                                                        <tr>
+                                                        <td class="ps-0">
+                                                          <div class="d-flex align-items-center">
+                                                            <div>
+                                                              <h6 class="fw-semibold mb-1">{{carro.marca}} {{carro.modelo}}</h6>
+                                                            </div>
+                                                          </div>
+                                                        </td>
+                                                        <td>
+                                                            <label class="mb-0 fs-3">Seleccionar</label>
+                                                            <input type="checkbox" id="retoma_vehiculo" name="retoma_vehiculo" value="{{carro.marca}} {{carro.modelo}}" onchange="actualizar_modelo_retoma(this);">
+                                                        </td>
+                                                      </tr>
+                                                        {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                                <div class="col-lg-3 col-md-3">
+                                                    <div class="mb-4">
+                                                        <label for="exampleInputPassword1" class="form-label fw-semibold">Modelo Vehículo:</label>
+                                                        <input type="text" class="form-control" id="modelo_retoma" name="modelo_retoma" placeholder="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-3">
+                                                    <div class="mb-4">
+                                                        <label for="exampleInputPassword1" class="form-label fw-semibold">Valor Vehículo:</label>
+                                                        <input type="number" class="form-control" id="valor_retoma" name="valor_retoma" placeholder="" onchange="actualizar_modelo_retoma2();">
+                                                    </div>
+                                                </div>
+                
+                                                <div class="col-lg-3 col-md-3">
+                                                    <div class="mb-4">
+                                                        <label for="exampleInputPassword1" class="form-label fw-semibold">Total:</label>
+                                                        <input type="int" class="form-control" id="total_retoma" name="total_retoma" placeholder="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-3">
+                                                    <div class="mb-4">
+                                                        <label for="exampleInputPassword1" class="form-label fw-semibold">Total restante:</label>
+                                                        <input type="int" class="form-control" id="total_restante" name="total_restante" placeholder="">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <div class="text-center mb-2">
+                                                <div class="btn-group btn-group-sm mb-2">
+                                                    <button class="btn btn-primary" type="button" id="addVerificacion" onclick="subir_formulario_retoma();">Guardar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade bd-example-modal-lg" id="ModalAcciones" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5>Separados y Facturados</h5>
+                                    <button class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body small">
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="Linea" class="col-form-label">Seleccione la acción a realizar:</label>
+                                                    <select class="form-control form-control-sm" id="accion" name="accion" onchange="actualizar_accion(this);">
+                                                            <option value="">Seleccione la acción a realizar</option>
+                                                            <option value="Separar">Separar</option>
+                                                            <option value="Facturar">Facturar</option>
+                                                            <option value="Mostrar">Mostrar</option>
+                                                    </select>
+                                                </div>
+                                                <table class="table align-middle text-nowrap mb-0">
+                                                    <tbody class="border-top">
+                                                        {% for carro in marcas_interes.marcas %}
+                                                        <tr>
+                                                        <td class="ps-0">
+                                                          <div class="d-flex align-items-center">
+                                                            <div>
+                                                              <h6 class="fw-semibold mb-1">{{carro.marca}} {{carro.modelo}}</h6>
+                                                            </div>
+                                                          </div>
+                                                        </td>
+                                                        <td>
+                                                            <label class="mb-0 fs-3">Seleccionar</label>
+                                                            <input type="checkbox" id="vehiculo_acciones" name="vehiculo_acciones" value="{{carro.marca}}/{{carro.modelo}}/{{carro.color}}/{{carro.codigo}}/{{carro.precio}}" onchange="actualizar_modelo_acciones(this);">
+                                                        </td>
+                                                      </tr>
+                                                      {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                                
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <div class="text-center mb-2">
+                                                <div class="btn-group btn-group-sm mb-2">
+                                                    <button class="btn btn-primary" type="button" id="addVerificacion" onclick="subir_formulario_acciones();">Guardar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade bd-example-modal-lg" id="ModalPlantillas" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5>Verificación</h5>
+                                    <button class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body small">
+                                    <div class="form-group col-md-12">
+                                        <div class="alert alert-warning" role="alert">
+                                            Al ingresar una nueva verificación, esta sera visible en la pestaña de Verificaciones, dentro de Operativo Anfitriones.
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="Linea" class="col-form-label">Estado de Llamada:</label>
+                                                    <select class="form-control form-control-sm" id="EstadoLlamada" name="EstadoLlamada">
+                                                            <option value="0">-- Estado de Llamada --</option>
+                                                            <option value="Error al asignar asesor por anfitriona">Error al asignar asesor por anfitriona</option>
+                                                            <option value="No recuerda">No recuerda</option>
+                                                            <option value="No contactado/interesado">No contactado/interesado</option>
+                                                            <option value="No contactado/No interesado">No contactado/No interesado</option>
+                                                            <option value="Contactado/Compro otro lado">Contactado/Compro otro lado</option>
+                                                            <option value="En seguimiento">En seguimiento</option>
+                                                            <option value="Proceso compra Madiautos">Proceso compra Madiautos</option>
+                                                            <option value="Contactado/Interesado">Contactado/Interesado</option>
+                                                            <option value="Contactado/No interesado">Contactado/No interesado</option>
+                                                            <option value="No contesta">No contesta</option>
+                                                            <option value="Fuera de servicio/errado">Fuera de servicio/errado</option>
+                                                            <option value="Registro repetido">Registro repetido</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="Linea" class="col-form-label">Tipo de Solicitud:</label>
+                                                    <select class="form-control form-control-sm" id="TipoSolicitud" name="TipoSolicitud" onchange="getval(this);">
+                                                            <option value="0">-- Tipo de Solicitud --</option>
+                                                            <option value="Cliente Verificado">Cliente Verificado</option>
+                                                            <option value="Volver a llamar/apagado">Volver a llamar/apagado</option>
+                                                            <option value="Cliente pide volver a llamar">Cliente pide volver a llamar</option>
+                                                            <option value="Error al asignar Comprador por Anfitriona">Error al asignar Comprador por Anfitriona</option>
+                                                            <option value="Recordatorio">Recordatorio</option>
+                                                            <option value="Reasignado">Reasignado</option>
+                                                            <option value="Error al asignar Asesor por Anfitriona">Error al asignar Asesor por Anfitriona</option>
+                                                            <option value="Error al asignar Perito por Anfitriona">Error al asignar Perito por Anfitriona</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="Linea" class="col-form-label">Reasignar a:</label>
+                                                    <select class="form-control form-control-sm" id="AsesorReasignado" name="AsesorReasignado" disabled>
+                                                            <option value="0" disabled selected>-- Asesor --</option>
+                                                            {% for asesor in asesores %}
+                                                                <option value="{{asesor.nombre}}">{{asesor.nombre}}</option>
+                                                            {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <label for="Linea" class="col-form-label">Observaciones:</label>
+                                                    <div class="control">
+                                                        <textarea class="form-control textarea has-fixed-size" placeholder="Escribe tu comentario..." id="Observaciones" name="Observaciones"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <div class="text-center mb-2">
+                                                <div class="btn-group btn-group-sm mb-2">
+                                                    <button class="btn btn-primary" type="button" id="addVerificacion" onclick="subir_formulario_verificacion();">Guardar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade bd-example-modal-lg" id="ModalHistorialVenta" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5>Historial de Venta</h5>
+                                    <button class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body small">
+                                    <div class="form-group col-md-12">
+                                        <table id="TableHistorialVenta"
+                                               {% if user.groups.get|stringformat:"s" != "Asesor" and user.groups.get|stringformat:"s" !=  "Anfitrión" %}
+                                               data-show-export="true"
+                                               {% endif %}
+                                               data-toggle="table"
+                                               data-height-max="300"
+                                               data-sort-class="table-active"
+                                               data-sortable="true"
+                                               data-show-columns="true"
+                                               data-pagination="true">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="Fecha">Fecha</th>
+                                                    <th data-field="Hora">Hora</th>
+                                                    <th data-field="Responsable">Responsable</th>
+                                                    <th data-field="Operacion">Operacion</th>
+                                                    <th data-field="Comentarios">Comentarios</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for accion in historial %}
+                                                <tr>
+                                                  <td data-field="Fecha">{{accion.fecha|date:'Y-m-d'}}</td>
+                                                  <td data-field="Hora">{{accion.hora|time:'H:i'}}</td>
+                                                  <td data-field="Responsable">{{accion.responsable}}</td>
+                                                  <td data-field="Operacion">{{accion.operacion}}</td>
+                                                  <td data-field="Comentarios">{{accion.comentarios}}</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade bd-example-modal-lg" id="ModalEvento" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5>Crear Evento</h5>
+                                    <button class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body small">
+                                    <div class="form-row">
+                                        <div class="col-lg-6">
+                                            <div class="mb-4">
+                                                <label for="EventoNombre" class="col-form-label">Nombre evento:</label>
+                                                <input type="text" class="form-control" id="EventoNombre">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-4">
+                                                <label for="EventoTipo" class="col-form-label">Tipo evento:</label>
+                                                <select class="form-control" id="EventoTipo" name="EventoTipo">
+                                                    <option selected="selected" value="">-- Tipo de evento --</option>
+                                                    <option value="Testdrive">Testdrive</option>
+                                                    <option value="Peritaje">Peritaje</option>
+                                                    <option value="Whatsapp">Whatsapp</option>
+                                                    <option value="Llamada">Llamada</option>
+                                                    <option value="Cita Vitrina">Cita Vitrina</option>
+                                                </select>
+                                            </div>
+                                        </div>                   
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-lg-6">
+                                            <div class="mb-4">
+                                                <label for="EventoCliente" class="col-form-label">Nombre del Cliente:</label>
+                                                <input type="text" class="form-control" id="EventoCliente" value="{{prospecto.nombre}} {{prospecto.apellido_paterno}} {{prospecto.apellido_materno}}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-4">
+                                                <label for="EventoTelefono" class="col-form-label">Telefono del Cliente:</label>
+                                                <input type="number" class="form-control" id="EventoTelefono" value="{{prospecto.celular}}" readonly onkeydown="return event.keyCode !== 69 && event.keyCode !== 190">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-4">
+                                                <label for="EventoObservaciones" class="col-form-label">Observaciones:</label>
+                                                <input type="text" class="form-control" id="EventoObservaciones">
+                                            </div>
+                                        </div>         
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-lg-6">
+                                            <div class="mb-4">
+                                                <label for="EventoAsesor" class="col-form-label">Asesor:</label>
+                                                <select class="form-control" id="EventoAsesor" name="EventoAsesor"><option selected="selected" value="0">-- Asesor --</option>
+                                                    {% for asesor in asesores %}
+                                                        {% if asesor.nombre == lead.nombre_asesor %}
+                                                        <option value="{{asesor.nombre}}" selected>{{asesor.nombre}}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-4">
+                                                <label for="EventoFechaHora" class="col-form-label">Fecha y hora:</label>
+                                                <input type="datetime-local" class="form-control" id="EventoFechaHora">
+                                            </div>
+                                        </div>         
+                                        <div class="col-lg-6">
+                                            <div class="mb-4">
+                                                <label for="EventoTiempo" class="col-form-label">Tiempo evento:</label>
+                                                <select class="form-control" id="EventoTiempo" name="EventoTiempo"><option selected="selected" value="0">-- Tiempo --</option>
+                                                    <option value="00:15">00:15</option>
+                                                    <option value="00:30">00:30</option>
+                                                    <option value="00:45">00:45</option>
+                                                    <option value="01:00">01:00</option>
+                                                    <option value="01:15">01:15</option>
+                                                    <option value="01:30">01:30</option>
+                                                    <option value="01:45">01:45</option>
+                                                    <option value="02:00">02:00</option>
+                                                    <option value="02:15">02:15</option>
+                                                    <option value="02:30">02:30</option>
+                                                    <option value="02:45">02:45</option>
+                                                    <option value="03:00">03:00</option>
+                                                </select>
+                                            </div>
+                                        </div>         
+                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        {% if mostrar_evento %}
+                                            <button type="button" class="btn btn-primary" onclick="subir_formulario_evento();">Confirmar</button>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </div>
+            <div class="col-md-4">
+                <div class="card h-100" style="margin:0;">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col bloque">
+                                <div class="input-group">
+                                    <h1>Datos Generales</h1>
+                                        <span class="input-group-append">
+                                            <!-- Button trigger modal -->
+                                            <button id="modalContacto" type="button" class="btn btn-danger" style="padding: 0;margin-bottom: 100%; margin-top: 5px; margin-left: 15px; border-radius: 5px;" data-toggle="modal" {% if user.groups.get|stringformat:"s" != "Anfitrión" %}data-target="#exampleModalInformacionGral"{% endif %}>
+                                                <i class="large material-icons r">edit</i>
+                                            </button>
+                                            <!-- Modal -->
+                                            <form>
+                                            {% csrf_token %}
+                                            <div class="modal fade bd-example-modal-lg" id="exampleModalInformacionGral" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalPreviewLabel">Editar Informacion General de Prospecto</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="form-row">
+                                                                
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="ProspectoNombre" class="col-form-label">Nombre:</label>
+                                                                    <input type="text" class="form-control" id="ProspectoNombre" value="{{prospecto.nombre}}">
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="ProspectoApPaterno" class="col-form-label">Primer Apellido:</label>
+                                                                    <input type="text" class="form-control" id="ProspectoApPaterno" value="{{prospecto.apellido_paterno}}">
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="ProspectoApMaterno" class="col-form-label">Segundo Apellido:</label>
+                                                                    <input type="text" class="form-control" id="ProspectoApMaterno" value="{{prospecto.apellido_materno}}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-row">
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-4">
+                                                                        <label for="ProspectoCelular" class="col-form-label">Celular:</label>
+                                                                        <input type="text" class="form-control" id="ProspectoCelular" value="{{prospecto.celular}}" readonly>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-4">
+                                                                        <label for="ProspectoCorreo" class="col-form-label">Correo:</label>
+                                                                        <input type="text" class="form-control" id="ProspectoCorreo" value="{{prospecto.correo}}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-row">
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-4">
+                                                                        <label for="Lead_NombreAnfitrion" class="col-form-label">Anfitrion:</label>
+<select class="form-control" id="Lead_NombreAnfitrion" name="Lead_NombreAnfitrion"><option disabled="disabled" value="0">-- Anfitrion --</option>
+<option value="Daniela Quijano" {% if prospecto.anfitrion == "Daniela Quijano" %}selected{% endif %}>Daniela Quijano</option>
+<option value="Sharon Diaz" {% if prospecto.anfitrion == "Sharon Diaz" %}selected{% endif %}>Sharon Diaz</option>
+<option value="Cristian Guzman" {% if prospecto.anfitrion == "Cristian Guzman" %}selected{% endif %}>Cristian Guzman</option>
+<option value="Brenda Milena Martinez Martinez" {% if prospecto.anfitrion == "Brenda Milena Martinez Martinez" %}selected{% endif %}>Brenda Milena Martinez Martinez</option>
+<option value="Mayerly Andrea Gutierrez Garcia" {% if prospecto.anfitrion == "Mayerly Andrea Gutierrez Garcia" %}selected{% endif %}>Mayerly Andrea Gutierrez Garcia</option>
+<option value="Jonathan Vargas" {% if prospecto.anfitrion == "Jonathan Vargas" %}selected{% endif %}>Jonathan Vargas</option>
+</select>                                                           </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-4">
+                                                                        <label for="LeadCampania" class="col-form-label">Campaña:</label>
+                                                                        <input type="text" class="form-control" id="LeadCampania" value="{{lead.campania}}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-row">
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-4">
+                                                                        <label for="LeadTipoDocumento" class="col-form-label">Tipo de Documento:</label>
+                                                                            <select class="form-control" id="LeadTipoDocumento" name="LeadTipoDocumento"><option selected="selected" value="0">-- Tipo Documento --</option>
+                                                                                <option value="Cédula ciudadanía" {% if lead.tipo_documento == "Cédula ciudadanía" %}selected{% endif %}>C&#233;dula ciudadan&#237;a</option>
+                                                                                <option value="Cédula de extranjería" {% if lead.tipo_documento == "Cédula de extranjería" %}selected{% endif %}>C&#233;dula de extranjer&#237;a</option>
+                                                                                <option value="PASAPORTE" {% if lead.tipo_documento == "PASAPORTE" %}selected{% endif %}>PASAPORTE</option>
+                                                                                <option value="NIT" {% if lead.tipo_documento == "NIT" %}selected{% endif %}>NIT</option>
+                                                                            </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-4">
+                                                                        <label for="LeadDocumento" class="col-form-label">Documento:</label>
+                                                                        <input type="text" class="form-control" id="LeadDocumento" value="{{lead.documento}}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="mb-4">
+                                                                    <label for="NombreContacto" class="col-form-label">Nombre contacto (opcional):</label>
+                                                                    <input type="text" class="form-control" id="NombreContacto" name="NombreContacto" value="{{prospecto.contacto_nombre}}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="mb-4">
+                                                                    <label for="CelularContacto" class="col-form-label">Celular contacto (opcional):</label>
+                                                                    <input type="text" class="form-control" id="CelularContacto" name="CelularContacto" value="{{prospecto.contacto_telefono}}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="mb-4">
+                                                                    <label class="col-form-label">Política de datos:</label>
+                                                                    <input type="checkbox"id="PoliticaDatos" name="PoliticaDatos" {% if prospecto.politica_privacidad %}checked="checked"{% endif %}>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="mb-4">
+                                                                    <label class="col-form-label">TestDrive:</label>
+                                                                    <input type="checkbox" id="TestDrive" name="TestDrive" {% if lead.test_drive %}checked="checked"{% endif %}>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-primary" onclick="subir_formulario();">Confirmar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </form>
+                                            <!-- Modal -->
+                                        </span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h6 class="mb-0">Nombre</h6>
+                                    </div>
+                                    <div class="col-sm-8 text-default">
+                                        {{prospecto.nombre}} {{prospecto.apellido_paterno}} {{prospecto.apellido_materno}} 
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h6 class="mb-0">Email</h6>
+                                    </div>
+                                    <div class="col-sm-8 text-primary">
+                                        <a href="{{prospecto.correo}}">{% if prospecto.correo %}{{prospecto.correo}}{% endif %}</a>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h6 class="mb-0">Celular</h6>
+                                    </div>
+                                    <div class="col-sm-8 text-primary">
+                                        <a href="tel:3004727793">{% if prospecto.celular %}{{prospecto.celular}}{% endif %}</a>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h6 class="mb-0">Anfitrión</h6>
+                                    </div>
+                                    <div class="col-sm-8 text-default">
+                                        {% if prospecto.anfitrion %}{{prospecto.anfitrion}}{% endif %}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h6 class="mb-0">Sala</h6>
+                                    </div>
+                                    <div class="col-sm-8 text-default">
+                                        {% if lead.sala %}{{lead.sala}}{% endif %}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h6 class="mb-0">Asesor</h6>
+                                    </div>
+                                    <div class="col-sm-8 text-default">
+                                        {% if lead.nombre_asesor %}{{lead.nombre_asesor}}{% endif %}
+                                    </div>
+                                </div>
+                                <hr>
+                                {% if user.username == "admin" %}
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h6 class="mb-0">Origen Ingreso</h6>
+                                    </div>
+                                    <div class="col-sm-8 text-default">
+                                        {% if lead.origen_lead %}{{lead.origen_lead}}{% endif %}
+                                    </div>
+                                </div>
+                                
+                                {% endif %}
+
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h6 class="mb-0">Campaña</h6>
+                                    </div>
+                                    <div class="col-sm-8 text-default">
+                                        {% if lead.campania %}{{lead.campania}}{% endif %}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h6 class="mb-0">Tipo de Documento</h6>
+                                    </div>
+                                    <div class="col-sm-8 text-default">
+                                        {% if lead.tipo_documento %}{{lead.tipo_documento}}{% endif %}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h6 class="mb-0">Documento</h6>
+                                    </div>
+                                    <div class="col-sm-8 text-default">
+                                        {% if lead.documento %}{{lead.documento}}{% endif %}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h6 class="mb-0">Nombre contacto opcional</h6>
+                                    </div>
+                                    <div class="col-sm-8 text-default">
+                                        {% if prospecto.contacto_nombre %}{{prospecto.contacto_nombre}}{% endif %}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h6 class="mb-0">Celular contacto opcional</h6>
+                                    </div>
+                                    <div class="col-sm-8 text-default">
+                                        {% if prospecto.contacto_telefono %}{{prospecto.contacto_telefono}}{% endif %}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h6 class="mb-0">¿El cliente aceptó el tratamiento de datos personales y política de datos  de Madiautos?</h6>
+                                    </div>
+                                    <div class="col-sm-8 text-default">
+                                        <input type="checkbox" style="margin: 30px;" {% if prospecto.politica_privacidad %}checked{% endif %}>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h6 class="mb-0">¿Este prospecto quiere agendar Test Drive? </h6>
+                                    </div>
+                                    <div class="col-sm-8 text-secondary">
+                                        <input type="checkbox" style="margin: 30px;" {% if lead.test_drive %}checked{% endif %}>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p></p>
+                                    <textarea class="nota textarea has-fixed-size" readonly>{{lead.comentario}}</textarea>
+                                </div>
+                            
+                            </div>
+                            <hr />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="container-fluid">
+
+
+          </div>  
+
+          <div class="container-fluid">
+
+
+          </div>  
+
+
+        
+        
+
+    </div>
+    <button class="btn btn-primary p-3 rounded-circle d-flex align-items-center justify-content-center customizer-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+        <i class="ti ti-settings fs-7" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Settings"></i>
+    </button>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+      integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
+<script>
+
+    $(document).ready(function () {
+        {% for carro in marcas_interes.marcas %}
+            {% if not carro.modelo  %}
+            $("#MarcasInteres").val("{{carro.marca}}")
+            $("#MarcasInteres").change()
+            {% endif %}
+        {% endfor %}
+    })
+
+    var temp = 0;
+
+    function actualizar_modelo_retoma(modelo)
+        {
+        checkboxes = document.getElementsByName('retoma_vehiculo');
+        for(var i=0, n=checkboxes.length;i<n;i++) {
+            checkboxes[i].checked = false;
+          }
+        modelo.checked = true;
+        console.log(modelo)
+        {% for carro in marcas_interes.marcas %}
+        vehiculo = "{{carro.marca}} {{carro.modelo}}"
+        if(vehiculo == modelo.value){
+            $("#total_retoma").attr("value", "{{carro.precio}}");
+            var precio = "{{carro.precio}}"
+        }
+        {% endfor %}
+        if($('#valor_retoma').val()) {
+            $("#total_restante").attr("value",  parseInt($("#total_retoma").val()) - parseInt($("#valor_retoma").val()));
+        }
+    }
+
+    function actualizar_modelo_retoma2()
+    {
+    checkboxes = document.getElementsByName('retoma_vehiculo');
+        for(var i=0, n=checkboxes.length;i<n;i++) {
+            if(checkboxes[i].checked){
+                modelo = checkboxes[i].value;
+            }
+          }
+    console.log("modelito")
+    console.log(modelo)
+    {% for carro in marcas_interes.marcas %}
+    vehiculo = "{{carro.marca}} {{carro.modelo}}"
+    if(vehiculo == modelo.value){
+        $("#total_retoma").attr("value", "{{carro.precio}}");
+        var precio = "{{carro.precio}}"
+    }
+    {% endfor %}
+    if($('#valor_retoma').val()) {
+        $("#total_restante").attr("value",  parseInt($("#total_retoma").val()) - parseInt($("#valor_retoma").val()));
+    }
+}
+    
+    function actualizar_modelo_acciones(modelo)
+        {
+        checkboxes = document.getElementsByName('vehiculo_acciones');
+        for(var i=0, n=checkboxes.length;i<n;i++) {
+            checkboxes[i].checked = false;
+          }
+        modelo.checked = true;
+        console.log(modelo)
+    }
+
+    function actualizar_accion(accion)
+    {
+    console.log(accion.value);
+    data = {}
+    data.select_accion = accion.value;
+    $.ajax({
+        type: "post", // "post" "get" "delete" "put"
+        data: data, // PREFERIBLEMENTE JSON
+        cache: false,
+        headers: {
+          "X-CSRFToken": Cookies.get("csrftoken")
+        },
+        success: function (response) {
+          console.log(response)
+          inputs = document.getElementsByName("vehiculo_acciones")
+          for (input in inputs){
+            inputs[input].checked = false;
+            vehiculo = inputs[input].value.split("/")[0] + " " + inputs[input].value.split("/")[1]
+            if (vehiculo == response){
+                inputs[input].checked = true;
+            }
+          }
+          }
+      })
+}
+
+    
+    function BorrarModelo(cont, temp) {
+
+        str = 'tr_' + cont.toString() + "_" + temp.toString();
+
+        tr = document.getElementById(str);
+        tr.remove();
+    }
+
+    function getval(sel)
+    {
+        if(sel.value == 'Reasignado'){
+            $("#AsesorReasignado").removeAttr('disabled');
+        }
+        else{
+            $("#AsesorReasignado").attr('disabled', 'disabled');
+        }
+    }
+
+    function filtrar_asesores(){
+        sala = document.getElementById("Lead_Sala").value;
+        data = {}
+        data.sala = sala
+        console.log("hola")
+        console.log(data)
+        console.log(data.sala)
+
+        $.ajax({
+              type: "post", // "post" "get" "delete" "put"
+              url: "{% url 'dashboards:captura' %}",
+              data: data, // PREFERIBLEMENTE JSON
+              cache: false,
+              headers: {
+                "X-CSRFToken": Cookies.get("csrftoken")
+              },
+              success: function (response) {
+                $("#ProspectoAsesor").empty()
+                $(response).each(function (index, asesor) {
+                    console.log(asesor)
+                    console.log(asesor.nombre)
+                    $("#ProspectoAsesor").append(`
+                    <option value="${asesor.nombre}">${asesor.nombre} </option>
+                    `)
+                })
+                },
+              })
+    }
+
+    function filtrar_respuestas(){
+        etapa = document.getElementById("Lead_Etapa").value;
+        data = {}
+        data.etapa = etapa
+        console.log("hola")
+        console.log(data)
+        console.log(data.etapa)
+
+        $.ajax({
+              type: "post", // "post" "get" "delete" "put"
+              url: "{% url 'dashboards:captura' %}",
+              data: data, // PREFERIBLEMENTE JSON
+              cache: false,
+              headers: {
+                "X-CSRFToken": Cookies.get("csrftoken")
+              },
+              success: function (response) {
+                $("#Lead_Respuesta").empty()
+                $(response).each(function (index, respuesta) {
+                    console.log(respuesta)
+                    console.log(respuesta)
+                    $("#Lead_Respuesta").append(`
+                    <option value="${respuesta.respuesta}" {% if lead.respuesta == respuesta.respuesta %}selected{% endif %}>${respuesta.respuesta} </option>
+                    `)
+                })
+                },
+              })
+    }
+
+
+    function subir_formulario_evento(){
+        var EventoNombre=$("#EventoNombre").val();
+        var EventoTipo=$("#EventoTipo").val();
+        var EventoTelefono=$("#EventoTelefono").val();
+        var EventoObservaciones=$("#EventoObservaciones").val();
+        var EventoAsesor = $("#EventoAsesor").val();
+        var EventoFechaHora = $("#EventoFechaHora").val();
+        var EventoTiempo = $("#EventoTiempo").val();
+
+        data = {}
+        data.EventoNombre = EventoNombre
+        data.EventoTipo = EventoTipo
+        data.EventoTelefono = EventoTelefono
+        data.EventoObservaciones = EventoObservaciones
+        data.EventoAsesor = EventoAsesor
+        data.EventoFechaHora = EventoFechaHora
+        data.EventoTiempo = EventoTiempo
+        
+        console.log("hola")
+        console.log(data)
+
+        console.log("EventoTipo")
+        console.log(EventoTipo)
+
+        $.ajax({
+              type: "post", // "post" "get" "delete" "put"
+              data: data, // PREFERIBLEMENTE JSON
+              cache: false,
+              headers: {
+                "X-CSRFToken": Cookies.get("csrftoken")
+              },
+              success: function (response) {
+                location.reload()
+                }
+            })
+    }
+
+    function subir_formulario(){
+        var ProspectoNombre=$("#ProspectoNombre").val();
+        var ProspectoApPaterno=$("#ProspectoApPaterno").val();
+        var ProspectoApMaterno=$("#ProspectoApMaterno").val();
+        var ProspectoCelular = $("#ProspectoCelular").val();
+        var ProspectoCorreo = $("#ProspectoCorreo").val();
+
+        var ProspectoAsesor = $("#ProspectoAsesor").val();
+        var Lead_Sala = $("#Lead_Sala").val();
+
+        var LeadCampania=$("#LeadCampania").val();
+        var LeadTipoDocumento=$("#LeadTipoDocumento").val();
+        var LeadDocumento = $("#LeadDocumento").val();
+
+        var Lead_OrigenLead = $("#Lead_OrigenLead").val();
+        var Lead_NombreAnfitrion = $("#Lead_NombreAnfitrion").val();
+        var NombreContacto = $("#NombreContacto").val();
+        var CelularContacto = $("#CelularContacto").val();
+        var PoliticaDatos = document.getElementById('PoliticaDatos').checked;
+        var TestDrive = document.getElementById('TestDrive').checked;
+
+        data = {}
+        data.ProspectoNombre = ProspectoNombre
+        data.ProspectoApPaterno = ProspectoApPaterno
+        data.ProspectoApMaterno = ProspectoApMaterno
+        data.ProspectoCelular = ProspectoCelular
+        data.ProspectoCorreo = ProspectoCorreo
+        data.ProspectoAsesor = ProspectoAsesor
+        data.Lead_Sala = Lead_Sala
+        data.LeadCampania = LeadCampania
+        data.LeadTipoDocumento = LeadTipoDocumento
+        data.LeadDocumento = LeadDocumento
+        data.Lead_OrigenLead = Lead_OrigenLead
+        data.Lead_NombreAnfitrion = Lead_NombreAnfitrion
+        data.NombreContacto = NombreContacto
+        data.CelularContacto = CelularContacto
+        data.PoliticaDatos = PoliticaDatos
+        data.TestDrive = TestDrive
+        console.log("hola")
+        console.log(data)
+
+        $.ajax({
+              type: "post", // "post" "get" "delete" "put"
+              data: data, // PREFERIBLEMENTE JSON
+              cache: false,
+              headers: {
+                "X-CSRFToken": Cookies.get("csrftoken")
+              },
+              success: function (response) {
+                location.reload()
+                }
+            })
+    }
+
+    function subir_formulario_general(){
+        var Lead_Etapa=$("#Lead_Etapa").val();
+        var Lead_Respuesta=$("#Lead_Respuesta").val();
+        var Lead_Comentario=$("#Lead_Comentario").val();
+
+        var MarcasInteres = $("#MarcasInteres").val();
+        var Modelo = document.getElementsByName("Modelo[]")
+        var Color = document.getElementsByName("Color[]")
+        var Codigo = document.getElementsByName("Codigo[]")
+        var Precio = document.getElementsByName("Precio[]")
+
+        var ListMarcasInteres = document.getElementsByName("ListMarcasInteres")
+        var ListModelo = document.getElementsByName("ListModelo")
+        var ListColor = document.getElementsByName("ListColor")
+        var ListCodigo = document.getElementsByName("ListCodigo")
+        var ListPrecio = document.getElementsByName("ListPrecio")
+
+        var ListaMarcasInteres = []
+        var ListaModelos = []
+        var ListaColores = []
+        var ListaCodigos = []
+        var ListaPrecios = []
+
+        for (var cont=0; cont<ListMarcasInteres.length; cont++){
+            ListaMarcasInteres.push(ListMarcasInteres[cont].value)
+        }
+        for (var cont=0; cont<ListModelo.length; cont++){
+            ListaModelos.push(ListModelo[cont].value)
+        }
+        for (var cont=0; cont<ListColor.length; cont++){
+            ListaColores.push(ListColor[cont].value)
+        }
+        for (var cont=0; cont<ListCodigo.length; cont++){
+            ListaCodigos.push(ListCodigo[cont].value)
+        }
+        for (var cont=0; cont<ListPrecio.length; cont++){
+            ListaPrecios.push(ListPrecio[cont].value)
+        }
+
+        console.log(ListaMarcasInteres)
+        console.log("Modelo")
+        console.log(Modelo)
+
+        var listaModelos = []
+        var num_marca = 0
+        var listaModelosPorMarca = []
+
+        for (Mod in Modelo) {
+            if (Modelo[Mod].value) {
+                if (parseInt(Modelo[Mod].id.charAt(6)) == num_marca) {
+                    listaModelosPorMarca.push(Modelo[Mod].value);
+                } else {
+                    if (listaModelosPorMarca.length > 0){
+                        listaModelos.push(listaModelosPorMarca); // Agrega la lista actual a la lista de listas
+                    }
+                    num_marca = num_marca + 1
+                    console.log("Modelo[Mod].value")
+                    console.log(Modelo[Mod].value)
+                    listaModelosPorMarca = []; // Reinicia la lista para la nueva marca
+                    listaModelosPorMarca.push(Modelo[Mod].value); // Agrega el valor actual a la nueva lista
+                }
+                console.log("listaModelos")
+                console.log(listaModelos)
+            }
+        }
+
+        console.log("listaModelos")
+        console.log(listaModelos)
+
+        if (listaModelosPorMarca.length > 0) {
+            listaModelos.push(listaModelosPorMarca);
+        }
+
+        console.log("listaModelos")
+        console.log(listaModelos)
+
+        var listaColores = []
+        var num_marca = 0
+        var listaColoresPorMarca = []
+
+        for (Mod in Color){
+            if (Color[Mod].value){
+                if (parseInt(Color[Mod].id.charAt(6)) == num_marca){
+                    listaColoresPorMarca.push(Color[Mod].value)
+                }
+                else {
+                    if (listaColoresPorMarca.length > 0){
+                        listaColores.push(listaColoresPorMarca); // Agrega la lista actual a la lista de listas
+                    }
+                    num_marca = num_marca + 1
+                    var listaColoresPorMarca = []
+                    listaColoresPorMarca.push(Color[Mod].value)
+                }
+            }
+        }
+
+        if (listaColoresPorMarca.length > 0) {
+            listaColores.push(listaColoresPorMarca);
+        }
+
+        var listaCodigos = []
+        var num_marca = 0
+        var listaCodigosPorMarca = []
+
+        for (Mod in Codigo){
+            if (Codigo[Mod].value){
+                if (parseInt(Codigo[Mod].id.charAt(6)) == num_marca){
+                    listaCodigosPorMarca.push(Codigo[Mod].value)
+                }
+                else {
+                    if (listaCodigosPorMarca.length > 0){
+                        listaCodigos.push(listaCodigosPorMarca)
+                    }
+                    num_marca = num_marca + 1
+                    var listaCodigosPorMarca = []
+                    listaCodigosPorMarca.push(Codigo[Mod].value)
+                }
+            }
+        }
+
+        if (listaCodigosPorMarca.length > 0) {
+            listaCodigos.push(listaCodigosPorMarca);
+        }
+
+        var listaPrecios = []
+        var num_marca = 0
+        var listaPreciosPorMarca = []
+
+        for (Mod in Precio){
+            if (Precio[Mod].value){
+                if (parseInt(Precio[Mod].id.charAt(6)) == num_marca){
+                    listaPreciosPorMarca.push(Precio[Mod].value)
+                }
+                else {
+                    if (listaPreciosPorMarca.length > 0){
+                        listaPrecios.push(listaPreciosPorMarca)
+                    }
+                    num_marca = num_marca + 1
+                    var listaPreciosPorMarca = []
+                    listaPreciosPorMarca.push(Precio[Mod].value)
+                }
+            }
+        }
+
+        if (listaPreciosPorMarca.length > 0) {
+            listaPrecios.push(listaPreciosPorMarca);
+        }
+
+
+        data = {}
+        data.Lead_Etapa = Lead_Etapa
+        data.Lead_Respuesta = Lead_Respuesta
+        data.Lead_Comentario = Lead_Comentario
+        data.MarcasInteres = MarcasInteres
+        data.Modelo = JSON.stringify(listaModelos);
+        data.Color = JSON.stringify(listaColores);
+        data.Codigo = JSON.stringify(listaCodigos);
+        data.Precio = JSON.stringify(listaPrecios);
+        data.ListaMarcasInteres = ListaMarcasInteres;
+        data.ListaModelos = ListaModelos;
+        data.ListaColores = ListaColores;
+        data.ListaCodigos = ListaCodigos;
+        data.ListaPrecios = ListaPrecios;
+        console.log("hola")
+        console.log(data)
+
+        $.ajax({
+            type: "post", // "post" "get" "delete" "put"
+            data: data, // PREFERIBLEMENTE JSON
+            cache: false,
+            headers: {
+              "X-CSRFToken": Cookies.get("csrftoken")
+            },
+            success: function (response) {
+              location.reload()
+              }
+          })
+        
+    }
+
+
+    function subir_formulario_verificacion(){
+        var EstadoLlamada=$("#EstadoLlamada").val();
+        var TipoSolicitud=$("#TipoSolicitud").val();
+        var AsesorReasignado=$("#AsesorReasignado").val();
+        var Observaciones = $("#Observaciones").val();
+        var Observaciones = $("#Observaciones").val();
+
+        data = {}
+        data.EstadoLlamada = EstadoLlamada
+        data.TipoSolicitud = TipoSolicitud
+        data.AsesorReasignado = AsesorReasignado
+        data.Observaciones = Observaciones
+        console.log("hola")
+        console.log(data)
+
+        $.ajax({
+              type: "post", // "post" "get" "delete" "put"
+              data: data, // PREFERIBLEMENTE JSON
+              cache: false,
+              headers: {
+                "X-CSRFToken": Cookies.get("csrftoken")
+              },
+              success: function (response) {
+                location.reload()
+                }
+            })
+    }
+
+    function subir_formulario_retoma(){
+        var modelo_retoma=$("#modelo_retoma").val();
+        var valor_retoma=$("#valor_retoma").val();
+        var total_retoma=$("#total_retoma").val();
+        var total_restante = $("#total_restante").val();
+
+        data = {}
+        data.modelo_retoma = modelo_retoma
+        data.valor_retoma = valor_retoma
+        data.total_retoma = total_retoma
+        data.total_restante = total_restante
+        console.log("hola")
+        console.log(data)
+
+        $.ajax({
+              type: "post", // "post" "get" "delete" "put"
+              data: data, // PREFERIBLEMENTE JSON
+              cache: false,
+              headers: {
+                "X-CSRFToken": Cookies.get("csrftoken")
+              },
+              success: function (response) {
+                location.reload()
+                }
+            })
+    }
+    
+    function subir_formulario_acciones(){
+        var accion=$("#accion").val();
+        var vehiculo_acciones=$("#vehiculo_acciones:checked").val();
+
+        data = {}
+        data.accion = accion
+        data.vehiculo_acciones = vehiculo_acciones
+        console.log("hola")
+        console.log(data)
+
+        $.ajax({
+              type: "post", // "post" "get" "delete" "put"
+              data: data, // PREFERIBLEMENTE JSON
+              cache: false,
+              headers: {
+                "X-CSRFToken": Cookies.get("csrftoken")
+              },
+              success: function (response) {
+                location.reload()
+                }
+            })
+    }
+
+
+    const btnAbrirModal = document.getElementById("btn-retoma");
+    const modal = document.querySelector('.modal-retoma');
+    btnAbrirModal.addEventListener('click', (e)=>{
+        e.preventDefault();
+        modal.classList.add('modal--show');
+    });
+    $(document).ready(function () {
+        $.datetimepicker.setLocale('es');
+        $("#TableLstRetomas").bootstrapTable('load', []);
+        $("#TableHistorialVenta").bootstrapTable('load', [{"Fecha":"28/August/2022","Hora":"13:24:30","Responsable":"Mayerly Andrea Gutierrez Garcia","Operacion":"Apertura de Lead","Comentarios":"Tucson 4x4 manual gasolina 2012 2015 / Bogotá"}]);
+        
+        
+        var getJSON = {
+            "IdLead": $("#Lead_IdLead").val()
+        };
+        var baseUrl = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+
+        var clientes = $.ajax({
+            type: "POST",
+            dataType: "json",
+            traditional: true,
+            async: false,
+            cache: false,
+            context: document.body,
+            url: baseUrl + "/Leads/GetTotales",
+            data: getJSON,
+            success: function (response) {
+                $('#Total').val(response.Total);
+                $('#TotalRestante').val(response.TotalRestante);
+                $('#TotalConstante').val(response.TotalRestante);
+
+            },
+            error: function (response) {
+                swal("Oh no!", "Se ha generado un error al intentar cargar el total, por favor refresque la pagina.", "warning");
+            }
+        });
+
+        //Asignamos el calendaria al input de fecha
+        $("#Prospecto_FechaNacimiento").datetimepicker({
+            format: 'd/m/Y',
+            minDate: new Date()
+        });
+
+        $("#Lead_FH_AccionSiguiente").datetimepicker({
+            format: 'd/m/Y H:i',
+            minDate: new Date()
+        });
+
+        $("#ProspectoAsesor").val( $("#Lead_NombreAsesor").val());
+
+        $("#Lead_Respuesta").children("optgroup").hide();
+        $("#Lead_Respuesta").children("optgroup[label='" + "Contacto Asesor" + "']").show();
+        $("#Lead_Respuesta").val("N/A");
+        $("#Lead_Etapa").change(function () {
+            var val = $(this).val();
+            $("#Lead_Respuesta").children("optgroup").hide();
+            $("#Lead_Respuesta").children("optgroup[label='" + val + "']").show();
+            $("#Lead_Respuesta").val('');
+        });
+
+        $("#TipoSolicitud").change(function () {
+            var solicitud = $("#TipoSolicitud").val();
+            if(solicitud=="Recordatorio")
+            {
+                document.getElementById("AsesorReasignado").value = '0';
+                $("#AsesorReasignado").prop("disabled", true);
+            }
+            else if(solicitud=="Reasignado" || solicitud=="Error al asignar Asesor por Anfitriona")
+            {
+                $("#AsesorReasignado").prop("disabled", false);
+            }
+        });
+
+        $("#Lead_FH_AccionSiguiente").change(function () {
+            var cliente = $("#Prospecto_NombreProspecto").val();
+            var asesor = $("#Lead_NombreAsesor").val();
+            var respuesta=$("#Lead_Respuesta").val();
+            var fh=$("#Lead_FH_AccionSiguiente").val();
+
+            if(respuesta=="" || respuesta==null){
+                $("#calendario").hide();
+                $("#calendario").attr("hidden");
+            }
+            else {
+                var Cliente = cliente.replace(/ /g, "+")
+                var Asesor = asesor.replace(/ /g, "+")
+                var Respuesta= respuesta.replace(/ /g, "+")
+                var FechaHora = fh.replace(/[\. ,:-]+/g, "");
+
+                var date = new Date();
+                var año = date.getFullYear();
+                var mes = date.getMonth()+1;
+                var dia = date.getDate();
+                var hora = date.getHours();
+                var min = date.getMinutes();
+                var sec = date.getSeconds();
+
+                if(mes<10)
+                {
+                    if (dia < 10)
+                    {
+                        var f = año + "-0" + mes + "-0" + dia;
+                    }
+                    else {
+                        var f = año + "-0" + mes + "-" + dia;
+                    }
+                }
+                else {
+                    if (dia < 10) {
+                        var f = año + "-" + mes + "-0" + dia;
+                    }
+                    else {
+                        var f = año + "-" + mes + "-" + dia;
+                    }
+                }
+
+                if(hora<10){
+                    hora = "0" + hora;
+                }
+                if(min<10){
+                    min = "0" + min;
+                }
+                if(sec<10){
+                    sec = "0" + sec;
+                }
+                var h = "T" + hora + ":" + min + ":" + sec;
+                var fecha = f;
+                var time = f + h;
+                document.getElementById("calendario").href = "https://calendar.google.com/calendar/u/0/r/eventedit?text=Accion+siguiente+("+Respuesta+")+para+el+asesor+" + Asesor + "&dates=" + fecha + "Z/" + h + "00Z&ctz=UTC";
+                //document.getElementById("calendario").href = "https://calendar.google.com/calendar/u/0/r/eventedit?text=Enviar+Cotizacion+a+" + Empresa + "&dates=" + time + "Z/" + FechaHora + "00Z&ctz=UTC";
+                //document.getElementById("calendario").href = "https://outlook.live.com/calendar/0/deeplink/compose?startdt=" + fh + ":00\&enddt=" + time + "\&subject=Accion%20siguiente%20para%20el%20asesor%20"+Asesor+"\&body=El%20cliente%20"+Cliente+"%20respondio:%20"+Respuesta+"\&allday=true";
+                //https://outlook.live.com/calendar/0/deeplink/compose?startdt=2020-08-12T00:00:00&enddt=2020-08-13T12:00:00&subject=Hello%20World&body=Hello%20World
+                $("#calendario").show();
+                $("#calendario").removeAttr("hidden");
+            }
+        });
+
+        $('#ModalAddModelo').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var recipient = button.data('whatever') // Extract info from data-* attributes
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            //modal.find('.modal-title').text('New message to ' + recipient)
+            $("#Modelo").children("optgroup").hide();
+            $("#Modelo").children("optgroup").hide();
+            $("#Modelo").children("optgroup[label='" + recipient + "']").show();
+            modal.find('#NewMarca').val(recipient)
+        })
+
+        $('#save').on('click', function () {
+            saveEstrategia()
+        });
+        $('#Guardar').on('click', function (event) {
+            var resp=$("#Lead_Respuesta").val();
+            if(resp=="" || resp=="N/A" || resp==null || resp==0 || resp=="0")
+            {
+                swal("Atención!", "Por favor indica una respuesta.", "warning")
+                event.preventDefault()
+            }
+        });
+
+        $("#addMarca").click(function (event) {
+            var IdLead= $("#Lead_IdLead").val()
+            var MarcasInteres= $("#NewMarcasInteres").val()
+
+            if(MarcasInteres!=null && MarcasInteres!="")
+            {
+                var data = {
+                    "IdLead": IdLead,
+                    "Marca": MarcasInteres
+                };
+                var baseUrl = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+                $.ajax({
+                    type: "POST",
+                    url: baseUrl +"/Leads/NewMarca",
+                    data: data,
+                    cache: false,
+                    success: function (response) {
+
+                        if (response == "error") {
+                            swal("Oh no!", "Se ha generado un error al intentar almacenar su peticion, por favor intente de nuevo.", "warning");
+                        }
+                        else if (response == "success") {
+                            swal({
+                                title: "OK!",
+                                text: "Se han registrado nuevas marcas.",
+                                type: "success",
+                                showCancelButton: false,
+                                confirmButtonClass: "btn-info",
+                                confirmButtonText: "Ok!",
+                                closeOnConfirm: false
+                            },
+                            function () {
+                                location.reload();
+                            });
+                        }
+                    },
+                    error: function (response) {
+                        swal("Oh no!", "Se ha generado un error al intentar almacenar su peticion, por favor intente de nuevo.", "warning");
+                    }
+                });
+            }
+            else
+            {
+                swal("Datos insuficientes", "Por favor, indique al menos una marca.", "warning");
+            }
+        });
+
+        $("#addVerificacion").click(function (event) {
+            var IdLead= $("#Lead_IdLead").val()
+            var EstadoLlamada=$("#EstadoLlamada").val();
+            var TipoSolicitud=$("#TipoSolicitud").val();
+            var AsesorReasignado=$("#AsesorReasignado").val()
+            var Observaciones=$("#Observaciones").val()
+
+            if(EstadoLlamada!=null && EstadoLlamada!="" && EstadoLlamada!=0 && TipoSolicitud!=null && TipoSolicitud!="" && TipoSolicitud!=0)
+            {
+                if(EstadoLlamada=="Error al asignar asesor por anfitriona" || TipoSolicitud=="Reasignado" || TipoSolicitud=="Error al asignar Asesor por Anfitriona")
+                {
+                    if(AsesorReasignado== null || AsesorReasignado==0 || AsesorReasignado=="0")
+                    {
+                        swal("Datos insuficientes", "Por favor, indique el asesor a reasignar.", "warning");
+                    }
+                    else
+                    {
+                        var data = {
+                            "IdLead": IdLead,
+                            "EstadoLlamada": EstadoLlamada,
+                            "TipoSolicitud": TipoSolicitud,
+                            "AsesorReasignado": AsesorReasignado,
+                            "Observaciones": Observaciones
+                        };
+                        var baseUrl = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+                        $.ajax({
+                            type: "POST",
+                            url: baseUrl +"/Leads/NewVerificacion",
+                            data: data,
+                            cache: false,
+                            success: function (response) {
+
+                                if (response == "error") {
+                                    swal("Oh no!", "Se ha generado un error al intentar almacenar su peticion, por favor intente de nuevo.", "warning");
+                                }
+                                else if (response == "success") {
+                                    swal({
+                                        title: "OK!",
+                                        text: "Se ha registrado una validación.",
+                                        type: "success",
+                                        showCancelButton: false,
+                                        confirmButtonClass: "btn-info",
+                                        confirmButtonText: "Ok!",
+                                        closeOnConfirm: false
+                                    },
+                                    function () {
+                                        location.reload();
+                                    });
+                                }
+                            },
+                            error: function (response) {
+                                swal("Oh no!", "Se ha generado un error al intentar almacenar su peticion, por favor intente de nuevo.", "warning");
+                            }
+                        });
+                    }
+                }
+                else
+                {
+                    var data = {
+                        "IdLead": IdLead,
+                        "EstadoLlamada": EstadoLlamada,
+                        "TipoSolicitud": TipoSolicitud,
+                        "AsesorReasignado": AsesorReasignado,
+                        "Observaciones": Observaciones
+                    };
+                    var baseUrl = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+                    $.ajax({
+                        type: "POST",
+                        url: baseUrl +"/Leads/NewVerificacion",
+                        data: data,
+                        cache: false,
+                        success: function (response) {
+
+                            if (response == "error") {
+                                swal("Oh no!", "Se ha generado un error al intentar almacenar su peticion, por favor intente de nuevo.", "warning");
+                            }
+                            else if (response == "success") {
+                                swal({
+                                    title: "OK!",
+                                    text: "Se ha registrado una validación.",
+                                    type: "success",
+                                    showCancelButton: false,
+                                    confirmButtonClass: "btn-info",
+                                    confirmButtonText: "Ok!",
+                                    closeOnConfirm: false
+                                },
+                                function () {
+                                    location.reload();
+                                });
+                            }
+                        },
+                        error: function (response) {
+                            swal("Oh no!", "Se ha generado un error al intentar almacenar su peticion, por favor intente de nuevo.", "warning");
+                        }
+                    });
+                }
+            }
+            else
+            {
+                swal("Datos insuficientes", "Por favor, indique al menos una marca.", "warning");
+            }
+        });
+        //$('#MarcasInteres').selectpicker();
+        //$("#OrigenLead").val('0');
+        //$("#Sala").val('0');
+        //$("#Anfitrion").val('0');
+        //$("#Interes").val('0');
+        //$("#Asesor").children("optgroup").hide();
+        //$("#Sala").change(function () {
+        //    var val = $(this).val();
+        //    $("#Asesor").children("optgroup").hide();
+        //    $("#Asesor").children("optgroup[label='" + val + "']").show();
+        //});
+
+        $("#Asesor").change(function () {
+            var cliente = $("#NombreProspecto").val();
+            var asesor = $("#Asesor").val();
+
+            if(asesor=="" || asesor==null){
+                $("#calendario").hide();
+                $("#calendario").attr("hidden");
+            }
+            else {
+                var Cliente = cliente.replace(/ /g, "+")
+                var Asesor = asesor.replace(/ /g, "+")
+
+                var date = new Date();
+                var año = date.getFullYear();
+                var mes = date.getMonth()+1;
+                var dia = date.getDate();
+                var hora = date.getHours();
+                var min = date.getMinutes();
+                var sec = date.getSeconds();
+
+                if(mes<10)
+                {
+                    if (dia < 10)
+                    {
+                        var f = año + "-0" + mes + "-0" + dia;
+                    }
+                    else {
+                        var f = año + "-0" + mes + "-" + dia;
+                    }
+                }
+                else {
+                    if (dia < 10) {
+                        var f = año + "-" + mes + "-0" + dia;
+                    }
+                    else {
+                        var f = año + "-" + mes + "-" + dia;
+                    }
+                }
+
+                if(hora<10){
+                    hora = "0" + hora;
+                }
+                if(min<10){
+                    min = "0" + min;
+                }
+                if(sec<10){
+                    sec = "0" + sec;
+                }
+                var h = "T" + hora + ":" + min + ":" + sec;
+                var fecha = f;
+                var time = f + h;
+                document.getElementById("calendario").href = "https://calendar.google.com/calendar/u/0/r/eventedit?text=Asignacion+de+asesor+a+cliente+" + Cliente + "&dates=" + fecha + "Z/" + h + "00Z&ctz=UTC";
+                //document.getElementById("calendario").href = "https://calendar.google.com/calendar/u/0/r/eventedit?text=Enviar+Cotizacion+a+" + Empresa + "&dates=" + time + "Z/" + FechaHora + "00Z&ctz=UTC";
+                //document.getElementById("calendario").href = "https://outlook.live.com/calendar/0/deeplink/compose?startdt=" + time + "\&enddt=" + time + "\&subject=Asignacion%20de%20Asesor\&body=El%20cliente%20"+Cliente+"%20se%20le%20ha%20asignado%20al%20asesor%20"+Asesor+"\&allday=true";
+                //https://outlook.live.com/calendar/0/deeplink/compose?startdt=2020-08-12T00:00:00&enddt=2020-08-13T12:00:00&subject=Hello%20World&body=Hello%20World
+                $("#calendario").show();
+                $("#calendario").removeAttr("hidden");
+            }
+        });
+
+        $("#agregar").click(function () {
+            var tam = $('#CantMarcasGestion').val()
+            while ($("#Marca").length) {
+                $("#Marca").remove();
+            }
+            for (var cont = 0; cont < tam; cont++) {
+                var item = '<div class="form-group col-md-6" id="Marca"><input id="NuevaEmpresa_Marca' + cont + '" name="NuevaEmpresa.Marca' + cont + '" type="text" class="p" placeholder="Nombre de Marca" required></div>'
+                $("#Marcas").append(item);
+            }
+            $("#NumMarca").val(tam);
+        })
+
+    });
+
+    function detailFormatter(index, row) {
+        var html = []
+        $.each(row, function (key, value) {
+            if (key == "Comentario") {
+                html.push('<p><b>' + key + ':</b> ' + value + '</p>')
+                //html.push('<label for="Producto.img'+index+'"><img id="Imagen'+index+'" name="Imagen'+index+'" class="imagePreview" src="/Lead/GetImg/'+item+'" style="width:160px; height:auto;"/></label>')
+            }
+        })
+        return html.join('')
+    }
+
+    function valideAlfaNumerico(evt) {
+
+        // code is the decimal ASCII representation of the pressed key.
+        var code = (evt.which) ? evt.which : evt.keyCode;
+
+        if (code == 8) { // backspace.
+            return true;
+        } else if ((code >= 48 && code <= 57) ||(code>=65 && code<=90) ||(code>=97 && code<=122)) { // is a number o letter
+
+            return true;
+        } else { // other keys.
+            return false;
+        }
+    };
+
+    function mayus(e) {
+        e.value = e.value.toUpperCase();
+    }
+
+    function resta(e) {
+        var restante=$('#TotalConstante').val();
+        var Valor=$('#ValorVehiculo').val();
+        var rest=restante-Valor;
+        $('#TotalRestante').val(rest);
+
+    }
+
+    function CerrarInteres(IdProducto){
+        swal({
+            title: "Cancelacion de Vehiculo de Interes",
+            text: "Comentarios de Cancelacion",
+            type: "input",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            inputPlaceholder: "Comentarios"
+        }, function (inputValue) {
+            if (inputValue === false) return false;
+            if (inputValue === "") {
+                swal.showInputError("Por favor, indica el motivo de cancelación del Vehiculo de Interes.");
+                return false
+            }
+            var data = {
+                "IdVehiculoInteres": IdProducto,
+                "Motivo":inputValue
+            };
+            var baseUrl = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+            var respuesta = $.ajax({
+                type: "POST",
+                url: baseUrl +"/Leads/CerrarInteres",
+                data: data,
+                cache: false,
+                success: function (response) {
+                    swal({
+                        title: "OK!",
+                        text: "Se ha eliminado el vehiculo de Interes de Marca "+response.Marca+" y Modelo "+response.Modelo+".",
+                        type: "success",
+                        showCancelButton: false,
+                        confirmButtonClass: "btn-success",
+                        confirmButtonText: "OK",
+                        closeOnConfirm: false
+                    },
+                        function(){
+                            location.reload();
+                        });
+                },
+                error: function (response) {
+                    swal("Oh no!", "Se ha generado un error al intentar almacenar su peticion, por favor intente de nuevo.", "warning");
+                }
+            });
+        });
+    };
+
+    function saveEstrategia() {
+        var Descripcion=$('#DescripcionVehiculo').val();
+        var Valor=$('#ValorVehiculo').val();
+        var IdLead=$('#Lead_IdLead').val();
+        var Total=$('#Total').val();
+
+        var restante=$('#TotalRestante').val();
+        if(restante<0)
+        {
+            swal("Atención!", "Lo sentimos, el valor del vehiculo supera lo cotizado", "warning");
+        }
+        else{
+            if(Descripcion!="" && Descripcion!=null && Valor!="" && Valor!=null)
+            {
+                var getJSON = {
+                    "IdLead": IdLead,
+                    "Descripcion":Descripcion,
+                    "Valor":Valor
+                };
+                var baseUrl = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    traditional: true,
+                    async: false,
+                    cache: false,
+                    context: document.body,
+                    url: baseUrl +"/Leads/NewRetoma",
+                    data: getJSON,
+                    success: function (response) {
+                        //$('#table').bootstrapTable('load', response);
+                        if (response==1)
+                        {
+                            swal({
+                                title: "OK!",
+                                text: "Se ha registrado un nuevo vehiculo de retoma.",
+                                type: "success",
+                                showCancelButton: false,
+                                confirmButtonClass: "btn-info",
+                                confirmButtonText: "Ok!",
+                                closeOnConfirm: false
+                            },
+                            function () {
+                                location.reload();
+                            });
+                        }
+                        else
+                        {
+                            swal("Oh no!", "Ocurrio un error al almacenar los datos del vehiculo de retoma, por favor intente de nuevo.", "warning");
+                        }
+                    },
+                    error: function (response) {
+                        swal("Oh no!", "Se ha generado un error al intentar almacenar su peticion, por favor intente de nuevo.", "warning");
+                    }
+                });
+            }
+            else{
+                swal("Datos insuficientes", "Por favor, de una descripción del vehiculo y su valor", "warning");
+            }
+        }
+    };
+
+    function NewModelo()
+    {
+        var Marca=$('#NewMarca').val();
+        var Color=$('#Color').val();
+        var Modelo=$('#Modelo').val();
+        var Comentario=$('#Comentario').val();
+        var IdLead=$('#Lead_IdLead').val();
+
+        if(Color!="" && Color!=null && Modelo!="" && Modelo!=null)
+        {
+            var getJSON = {
+                "IdLead": IdLead,
+                "Marca": Marca,
+                "Modelo": Modelo,
+                "Color":Color,
+                "Comentario":Comentario
+            };
+            var baseUrl = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                traditional: true,
+                async: false,
+                cache: false,
+                context: document.body,
+                url: baseUrl +"/Leads/NewModelo",
+                data: getJSON,
+                success: function (response) {
+                    //$('#table').bootstrapTable('load', response);
+                    if (response==1)
+                    {
+                        swal({
+                            title: "OK!",
+                            text: "Se ha registrado un nuevo modelo de interes.",
+                            type: "success",
+                            showCancelButton: false,
+                            confirmButtonClass: "btn-info",
+                            confirmButtonText: "Ok!",
+                            closeOnConfirm: false
+                        },
+                        function () {
+                            location.reload();
+                        });
+                    }
+                    else
+                    {
+                        swal("Oh no!", "Ocurrio un error al almacenar el nuevo vehiculo de interes, por favor intente de nuevo.", "warning");
+                    }
+                },
+                error: function (response) {
+                    swal("Oh no!", "Se ha generado un error al intentar almacenar su peticion, por favor intente de nuevo.", "warning");
+                }
+            });
+        }
+        else{
+            swal("Datos insuficientes", "Por favor, indique al menos el modelo y color de vehiculo", "warning");
+        }
+
+    }
+
+    function SelectChanged() {
+        var temp = $("#MarcasInteres").val();
+        $.each(temp, function (ind, elem) {
+            marcas = $("[name='Coleccion'] input").get()
+            marcas_array = []
+            for (marca in marcas){
+                marcas_array.push(marcas[marca].value)
+            }
+            console.log($("[name='Coleccion']").get().length)
+            indice = $("[name='Coleccion']").get().length
+            indice += {{marcas_interes.marcas|length}}
+            if (!(marcas_array.includes(elem))){
+                var item = '<div id="Coleccion" name="Coleccion"><input hidden type="text" id="Marca'+indice+'" name="Marca'+indice+'" value="'+elem+'"><input id="NumLineaPrograma' + indice + '" name="NumLineaPrograma' + indice + '" value="0" hidden type="number" /><button type="button" id="add' + indice + '" class="btn btn-primary btn-sm" onclick="add(' + indice + ');"><i class="material-icons r">add</i> Modelo de Vehiculo</button></div><table id="table' + indice + '" data-toggle="table" data-detail-view="true" data-detail-formatter="detailFormatter"><thead><tr class="tr-class-1"><th class="form-label fw-semibold" colspan="3">Marca ' + elem + '</th></tr><tr class="tr-class-2"><div class="col-lg-3 col-md-3"><th class="form-label fw-semibold" data-field="Modelo">Modelo Vehículo</th></div><div class="col-lg-3 col-md-3"><th class="form-label fw-semibold" data-field="Color">Color Vehículo</th></div><div class="col-lg-3 col-md-3"><th class="form-label fw-semibold" data-field="Código">Código Vehículo</th></div><div class="col-lg-3 col-md-3"><th class="form-label fw-semibold" data-field="Precio">Precio Vehículo</th></div></tr></thead><tbody></tbody></table><hr id="Division" />';
+                $("#Marcas").append(item);
+            }
+        });
+        $("#NumMarcas").val(temp.length);
+    }
+
+    function ModCliente() {
+
+        var IdLead=$("#Lead_IdLead").val();
+        var Celular = $("#ProspectoCelular").val();
+        var Correo = $("#ProspectoCorreo").val();
+        var Asesor = $("#ProspectoAsesor").val();
+        var Sala = $("#Lead_Sala").val();
+
+        var Nombre=$("#ProspectoNombre").val();
+        var ApPaterno=$("#ProspectoApPaterno").val();
+        var ApMaterno=$("#ProspectoApMaterno").val();
+
+        var Campania=$("#LeadCampania").val();
+        var TipoDocumento=$("#LeadTipoDocumento").val();
+        var Documento = $("#LeadDocumento").val();
+
+        var OrigenLead = $("#Lead_OrigenLead").val();
+        var Anfitrion = $("#Lead_NombreAnfitrion").val();
+
+        var getJSON = {
+            "IdLead": IdLead,
+            "Celular": Celular,
+            "Correo": Correo,
+            "Asesor": Asesor,
+            "Sala": Sala,
+            "Nombre": Nombre,
+            "ApPaterno":ApPaterno,
+            "ApMaterno":ApMaterno,
+            "Campania":Campania,
+            "TipoDocumento":TipoDocumento,
+            "Documento": Documento,
+            "OrigenLead": OrigenLead,
+            "Anfitrion": Anfitrion,
+        };
+        var baseUrl = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            traditional: true,
+            async: false,
+            cache: false,
+            context: document.body,
+            url: baseUrl + "/Leads/ModCliente",
+            data: getJSON,
+            success: function (response) {
+                //$('#table').bootstrapTable('load', response);
+                if (response !=0) {
+                    swal({
+                        title: "OK!",
+                        text: "Se ha modificado la información de Cliente.",
+                        type: "success",
+                        showCancelButton: false,
+                        confirmButtonClass: "btn-info",
+                        confirmButtonText: "Ok!",
+                        closeOnConfirm: false
+                    },
+                    function () {
+                        location.reload();
+                    });
+                }
+                else {
+                    swal("Oh no!", "Se ha generado un error al intentar almacenar su peticion, por favor intente de nuevo.", "warning");
+                }
+            },
+            error: function (response) {
+                swal("Oh no!", "Se ha generado un error al intentar almacenar su peticion, por favor intente de nuevo.", "warning");
+            }
+        });
+    }
+
+    
+
+    function add(cont) {
+        var marca= $("#Marca" + cont).val();
+        
+        //var newInput = '<tr><td><select class="p" id="Marca_' + cont + 'Modelo' + temp + '" name="Marca.' + cont + 'Modelo' + temp + '"><option disabled selected>-- Modelo --</option>'+options+'</select></td><td><select id="Marca_' + cont + 'Color' + temp + '" name="Marca.' + cont + 'Color' + temp + '" class="p">'+colores+'</select></td><td><textarea style="width: 100%;" rows="2" id="Marca_' + cont + 'Comentario' + temp + '" name="Marca.' + cont + 'Comentario' + temp + '"></textarea></td></tr>';
+        var string='<select class="p" id="Marca_' + cont + 'Modelo' + temp + '" name="Marca.' + cont + 'Modelo' + temp + '"><option disabled="disabled" value="0" selected>-- Modelo --</option></select>';
+        var newInput = '<tr id="tr_' + cont + '_' + temp + '"><td><select class="p" id="Marca_' + cont + 'Modelo' + temp + '" name="Modelo[]"><option disabled="disabled" value="0" selected>-- Modelo --</option></select></td><td><input type="text" class="p" id="Marca_' + cont + 'Color' + temp + '" name="Color[]"></td><td><input type="text" class="p" id="Marca_' + cont + 'Codigo' + temp + '" name="Codigo[]"></td><td><input type="number" class="p" id="Marca_' + cont + 'Precio' + temp + '" name="Precio[]"></td><td><button id="DeleteProspecto" type="button" class="btn btn-danger" onclick="BorrarModelo(' + cont + ',' + temp + ')"><i class="large material-icons r"> cancel</i></button></td></tr>';
+      
+        $("#table" + cont + " tbody").append(newInput);
+        $("#NumLineaPrograma" + cont).val(temp);
+        marca = document.getElementById("MarcasInteres").value;
+
+        marca_select = document.getElementById("MarcasInteres");
+        boton_modelo = document.getElementById("add" + cont);
+    
+        const selectedOptions = [];
+    
+            for (const option of marca_select.options) {
+                if (option.selected) {
+                selectedOptions.push(option.value);
+                }
+            }
+        data = {}
+        data.marca = $("#Marca" + cont).val();
+        console.log("hola")
+        console.log(data)
+        console.log(data.marca)
+
+        $.ajax({
+              type: "post", // "post" "get" "delete" "put"
+              url: "{% url 'dashboards:captura' %}",
+              data: data, // PREFERIBLEMENTE JSON
+              cache: false,
+              headers: {
+                "X-CSRFToken": Cookies.get("csrftoken")
+              },
+              success: function (response) {
+                console.log($('#Marca_' + cont + 'Modelo' + temp))
+                $('#Marca_' + cont + 'Modelo' + temp).empty()
+                $(response).each(function (index, modelo) {
+                    console.log(modelo)
+                    console.log(modelo.nombre)
+                    console.log('#Marca_' + cont + 'Modelo' + temp)
+                    $('#Marca_' + cont + 'Modelo' + temp).append(`
+                    <option value="${modelo.nombre}">${modelo.nombre} </option>
+                    `)
+                })
+                temp++;
+            },
+            })
+    };
+</script>
+
+        <hr />
+        <footer>
+            <p>&copy; 2023 - Capital Network</p>
+        </footer>
+    </div>
+
+    
+    
+    <script src="/bundles/jqueryval?v=hEGG8cMxk9p0ncdRUOJ-CnKN7NezhnPnWIvn6REucZo1"></script>
+
+
+</body>
+</html>

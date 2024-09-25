@@ -1,0 +1,36 @@
+{% extends "citas_mazda_col_pro/carousel/slide.html" %}
+
+{% block slide_title %}
+INFORMACIÓN DEL VEHÍCULO
+{% endblock %}
+
+{% block slide_subtitle %}
+NECESITAMOS IDENTIFICAR SU VEHÍCULO PARA BRINDARLE ATENCIÓN PERSONALIZADA.
+{% endblock %}
+
+{% block slide_content %}
+<div class="mb-4">
+  <label for="car_model" class="form-label">Modelo:</label>
+  <select name="car_model" id="car_model" class="form-control" required data-name="modelo">
+    <option value="" disabled selected hidden>Modelo</option>
+    {% for model in car_models %}
+    <option class="car-model-option" value="{{ model.id }}" data-year_start="{{ model.year_start }}" data-year_end="{{ model.year_end }}">
+      {{ model.name }}
+    </option>
+    {% endfor %}
+  </select>
+</div>
+
+<div class="mb-4">
+  <label for="car_model_year" class="form-label">Año:</label>
+  <select name="car_model_year" id="car_model_year" class="form-control" required data-name="año">
+    <option value="" disabled selected hidden>Año</option>
+  </select>
+</div>
+
+<div class="mb-4">
+  <label for="car_mileage" class="form-label">Kilometraje:</label>
+  <input name="car_mileage" id="car_mileage" type="number" required inputMode="numeric" pattern="[0-9]{4,}$" class="form-control"
+    placeholder="Kilometraje" data-name="kilometraje">
+</div>
+{% endblock %}

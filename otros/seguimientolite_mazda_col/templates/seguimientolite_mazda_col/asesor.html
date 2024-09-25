@@ -1,0 +1,359 @@
+{% extends 'seguimientolite_mazda_col/base.html' %}
+
+{% block content %}
+
+{% load i18n %}
+
+<div class="container-fluid mx-auto">
+  <div class="row mb-3">
+    <div class="col-md-5">
+      <div class="input-group mb-3 shadow">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Buscar:</span>
+        </div>
+        <input type="text" placeholder="Buscar por Placas, Orden o Asesor" id="buscadorAsesor"
+          class="form-control buscador" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+    </div>
+  </div>
+
+  <div class="card mb-3 shadow">
+    <h5 class="card-header">
+      Listado de Ordenes
+    </h5>
+    <table id="tablaOrdenes" class="mt-0 table table-hover mx-auto">
+      <thead class="bg-dark">
+        <tr>
+          <th scope="col" class="all">Placas</th>
+          <th scope="col" class="all">Orden</th>
+          <th scope="col" class="all">Nombre cliente</th>
+          <th scope="col" class="all">Teléfono</th>
+          <th scope="col" class="all">Vehículo</th>
+          <th scope="col" class="desktop">Asesor</th>
+          <th scope="col" class="desktop">Técnico</th>
+          <th scope="col" class="desktop">Elaboración Cotización</th>
+          <th scope="col" class="desktop">Medio de contacto</th>
+          <th scope="col" class="desktop">Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for fila in filas %}
+        <tr>
+          <td><a role="button" href="{% url 'detalle_ordenes' fila.no_orden %}"
+              class="btn btn-link">{{fila.no_placas}}</a></td>
+          <td>{{ fila.no_orden }}</td>
+          <td>{{ fila.cliente }}</td>
+          <td>{{ fila.telefono }}</td>
+          <td>{{ fila.vehiculo }}</td>
+          <td>{{ fila.asesor }}</td>
+          <td>{{ fila.tecnico }}</td>
+          {% language 'es-CO' %}
+          <td>
+            {% if fila.revision_limpia %}
+            Sin Novedades
+            {% else %}
+            {{ fila.fecha_hora_cotizacion|date }} {{ fila.fecha_hora_cotizacion|time }}
+            {% endif %}
+          </td>
+          {% endlanguage %}
+          <td class="text-center">
+            <button type="button" class="btn btn-light" data-toggle="modal"
+              data-target="#mensaje_whatsapp_orden_{{ fila.no_orden }}">
+              <i class="fab fa-whatsapp fa-lg"></i>
+            </button>
+            <button type="button" class="btn btn-light" data-toggle="modal"
+              data-target="#correo_orden_{{ fila.no_orden }}">
+              <i class="far fa-envelope fa-lg"></i>
+            </button>
+          </td>
+          <td>
+            <h5>
+              {% if fila.estado.log.fin_asesor %}
+              {% if fila.estado.aceptados %}
+              <span class="badge badge-dark">
+                Autorizados: {{ fila.estado.aceptados }} de {{ fila.estado.items.count }}
+              </span>
+              {% else %}
+              <span class="badge badge-dark">
+                Sin Respuesta
+              </span>
+              {% endif %}
+              {% else %}
+              <span class="badge badge-dark">
+                Esperando Envío
+              </span>
+              {% endif %}
+            </h5>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Whatsapp -->
+{% for fila in filas %}
+<div class="modal fade" id="mensaje_whatsapp_orden_{{ fila.no_orden }}" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Mensaje de WhatsApp</h5>
+      </div>
+      <div class="modal-body">
+        <div class="container mb-4">
+          <h6>Teléfono de Cliente:</h6>
+          <div class="row">
+            <div class="col">
+              <select class="form-control cliente-prefijo">
+                <option value="57">🇨🇴 Colombia (+57)</option>
+                <option value="52">🇲🇽 México (+52)</option>
+                <option value="593">🇪🇨 Ecuador (+593)</option>
+                <option value="51">🇵🇪 Perú (+51)</option>
+                <option value="54">🇦🇷 Argentina (+54)</option>
+                <option value="33">🇫🇷 Francia (+33)</option>
+                <option value="1">🇺🇸 Estados Unidos (+1)</option>
+                <option value="55">🇧🇷 Brasil (+55)</option>
+                <option value="506">🇨🇷 Costa Rica (+506)</option>
+                <option value="507">🇵🇦 Panamá (+507)</option>
+              </select>
+            </div>
+            <div class="col-7">
+              <input class="form-control cliente-tel" type="tel" placeholder="Ingrese el numero telefónico"
+                value="{{ fila.telefono }}" />
+            </div>
+          </div>
+        </div>
+        <div class="card-deck">
+          <div class="card text-center shadow">
+            <div class="card-body">
+              <h5 class="card-title">Mensaje Automático</h5>
+              <p class="card-text">Se le recordará al cliente que tiene una cotización pendiente.</p>
+            </div>
+            <div class="card-footer">
+              {% if settings.COREAPI %}
+              <button type="button" onclick="mensaje(true, '{{ fila.no_orden }}', this);"
+                class="btn btn-success whatsapp shadow">
+                <i class="fab fa-whatsapp fa-lg"></i>
+                Enviar
+              </button>
+              {% else %}
+              <button type="button" class="btn btn-success shadow whatsapp-automatico-web"
+                data-no_orden="{{ fila.no_orden }}">
+                <i class="fab fa-whatsapp fa-lg"></i>
+                Abrir WhatsApp Web
+              </button>
+              {% endif %}
+            </div>
+          </div>
+          <div class="card text-center shadow">
+            <div class="card-body">
+              <h5 class="card-title">Mensaje Personalizado</h5>
+              <p class="card-text">Se enviará un mensaje de WhatsApp con el texto que desee.</p>
+              <textarea class="form-control wa-mensaje" rows="3" placeholder="Mensaje Personalizado"></textarea>
+            </div>
+            <div class="card-footer">
+              {% if settings.COREAPI %}
+              <button type="button" onclick="mensaje(false, '{{ fila.no_orden }}', this);"
+                class="btn btn-success shadow">
+                <i class="fab fa-whatsapp fa-lg"></i>
+                Enviar
+              </button>
+              {% else %}
+              <button type="button" class="btn btn-success shadow whatsapp-manual-web"
+                data-no_orden="{{ fila.no_orden }}">
+                <i class="fab fa-whatsapp fa-lg"></i>
+                Abrir WhatsApp Web
+              </button>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+<!-- Correo -->
+{% for fila in filas %}
+<div class="modal fade" id="correo_orden_{{ fila.no_orden }}" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">E-Mail</h5>
+      </div>
+      <div class="modal-body">
+        <div class="container mb-4">
+          <div class="row">
+            <div class="col">
+              <h6>Dirección de correo electrónico:</h6>
+              <input class="form-control correo-cliente-correo" type="text" placeholder="Ingrese el correo electrónico"
+                value="{{ fila.email }}" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-success email" data-no_orden="{{ fila.no_orden }}">
+          <i class="fas fa-envelope fa-lg"></i>
+          Enviar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+<!--Envío por WhatsApp y correo electrónico-->
+<script>
+  function mensaje(automatico, no_orden, button) {
+    let agencia = "{{ settings.AGENCIA }}";
+    let orden = no_orden;
+    let direccion_publica = "https://{{settings.DOMINIO}}:{{settings.PUERTO}}/seguimiento/cliente/" + orden;
+
+    let data = {};
+    data.whatsapp = true;
+    data.telefono = $(button).closest(".modal").find(".cliente-tel").val();
+    data.prefijo = $(button).closest(".modal").find(".cliente-prefijo").val();
+    data.no_orden = orden;
+
+    if (data.telefono) {
+      if (automatico) {
+        data.mensaje = "Notificaciones Mazda Pruebas\nEstimado cliente, necesitamos de su atención para revisar la cotización de su vehículo disponible en el siguiente enlace: \n" + direccion_publica;
+      } else {
+        data.mensaje = $(button).closest(".modal").find(".wa-mensaje").val();
+      }
+
+      if (data.mensaje) {
+        $.ajax({
+          type: "post",
+          data: data,
+          cache: false,
+          headers: {
+            "X-CSRFToken": Cookies.get("csrftoken"),
+          },
+          success: function () {
+            alert("Mensaje enviado");
+          },
+          error: function () {
+            alert("Ha ocurrido un error");
+          },
+        });
+      } else {
+        alert("Escriba un mensaje");
+      }
+    } else {
+      alert("Introduzca un numero celular valido");
+    }
+  }
+
+  $(".email").click(function () {
+    let button = this;
+    if ($(button).closest(".modal").find(".correo-cliente-correo").val()) {
+      let data = {};
+
+      data.email = true;
+      data.no_orden = $(button).data("no_orden");
+      data.email_cliente = $(button).closest(".modal").find(".correo-cliente-correo").val();
+
+      $.ajax({
+        type: "post",
+        data: data,
+        cache: false,
+        headers: {
+          "X-CSRFToken": Cookies.get("csrftoken"),
+        },
+        success: function () {
+          alert("Correo Enviado");
+          location.reload();
+        },
+      });
+    }
+  });
+</script>
+
+<!--Whatsapp manual-->
+<script>
+  function abrir_whatsapp_web(mensaje, telefono, prefijo, no_orden) {
+    let whatsapp_url = ("https://api.whatsapp.com://send?phone=" + prefijo + telefono + "&text=" + mensaje);
+    window.open(whatsapp_url, '_blank');
+    let data = {};
+    data.whatsapp_manual = true;
+    data.telefono = telefono;
+    data.no_orden = no_orden;
+    $.ajax({
+      type: "post",
+      data: data,
+      cache: false,
+      headers: {
+        "X-CSRFToken": Cookies.get("csrftoken"),
+      }
+    });
+  }
+
+  $(".whatsapp-automatico-web").click(function () {
+    let button = this;
+    let no_orden = $(button).data("no_orden");
+    let modal = $(button).closest(".modal");
+
+    let link = "http://{{ settings.DOMINIO }}:{{ settings.PUERTO }}" + `/seguimiento/cotizacion/${no_orden}`;
+    let agencia = "{{ settings.AGENCIA }}";
+
+    let telefono = $(modal).find(".cliente-tel").val();
+    let prefijo = $(modal).find(".cliente-prefijo").val();
+    let mensaje = (agencia + " Estimado cliente, necesitamos de su atención para revisar la cotización y/o estatus de su vehiculo Ingresa al enlace desde aquí: " + link);
+
+    abrir_whatsapp_web(mensaje, telefono, prefijo, no_orden);
+  });
+
+  $(".whatsapp-manual-web").click(function () {
+    let button = this;
+    let no_orden = $(button).data("no_orden");
+    let modal = $(button).closest(".modal");
+
+    let telefono = $(modal).find(".cliente-tel").val();
+    let prefijo = $(modal).find(".cliente-prefijo").val();
+    let mensaje = $(modal).find(".wa-mensaje").val();
+
+    abrir_whatsapp_web(mensaje, telefono, prefijo, no_orden);
+  });
+</script>
+
+<script>
+  $(".buscador").keyup(function () {
+    let filtro = $(this).val().toUpperCase();
+    let columnas = $("#tablaOrdenes").find("tr,.list-group-item");
+
+    console.log(filtro);
+
+    $(columnas).each(function (index, columna) {
+      let value = $(columna).text();
+      console.log(value);
+      if (value.toUpperCase().indexOf(filtro) > -1) {
+        $(columna).fadeIn(200);
+      } else {
+        $(columna).fadeOut(200);
+      }
+    })
+  })
+  $('#tablaOrdenes').DataTable({
+    "order": [[0, "desc"]],
+    responsive: true,
+    "searching": false,
+    "lengthChange": false,
+    "info": false,
+    language: {
+      paginate: {
+        previous: 'Anterior',
+        next: 'Siguiente'
+      },
+    }
+  });
+</script>
+{% endblock %}

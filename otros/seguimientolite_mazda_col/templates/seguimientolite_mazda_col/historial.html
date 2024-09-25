@@ -1,0 +1,92 @@
+{% extends 'seguimientolite_mazda_col/base.html' %}
+{% block content %}
+{% load static %}
+<div class="container-fluid mx-auto">
+  <div class="row mb-3">
+    <div class="col-md-5">
+      <div class="input-group mb-3 shadow">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Buscar:</span>
+        </div>
+        <input type="text" placeholder="Buscar por Orden, VIN o Placas" id="buscadorHistorial"
+          class="form-control buscador" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+    </div>
+  </div>
+  <div class="card mb-3 mx-auto shadow">
+    <h5 class="card-header">
+      Listado de Ordenes
+    </h5>
+    <table id="tablaOrdenes" class="mt-0 table table-sm table-hover mx-auto">
+      <thead class="bg-dark text-center">
+        <tr>
+          <th scope="col" class="all">Orden</th>
+          <th scope="col" class="all">VIN</th>
+          <th scope="col" class="all">Placas</th>
+          <th scope="col" class="desktop">Vehículo</th>
+          <th scope="col" class="desktop">Asesor</th>
+          <th scope="col" class="desktop">Tecnico</th>
+          <th scope="col" class="desktop">Fecha Ingreso</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for fila in filas %}
+        <tr>
+          <td>
+            {% if fila.no_orden %}
+            <a role="button" href="{% url 'historial_detalle' fila.no_orden %}"
+              class="btn btn-link">{{fila.no_orden}}</a>
+            {% endif %}
+          </td>
+          <td>{{fila.vin}}</td>
+          <td>{{fila.placas}}</td>
+          <td>{{fila.vehiculo}}</td>
+          <td>{{fila.asesor}}</td>
+          {% for tecnico in tecnicos %}
+          {% if tecnico.id_empleado == fila.tecnico %}
+          <td>{{tecnico.nombre_empleado|lower|title}}</td>
+          {% endif %}
+          {% endfor %}
+          <td>{{fila.fecha_hora_ingreso}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<script>
+  $(".buscador").keyup(function () {
+    let filtro = $(this).val().toUpperCase();
+    let columnas = $("#tablaOrdenes").find("tr,.list-group-item");
+
+    console.log(filtro);
+
+    $(columnas).each(function (index, columna) {
+      let value = $(columna).text();
+      console.log(value);
+      if (value.toUpperCase().indexOf(filtro) > -1) {
+        $(columna).fadeIn(200);
+      } else {
+        $(columna).fadeOut(200);
+      }
+    })
+  })
+
+  $('#tablaOrdenes').DataTable({
+    "order": [[0, "desc"]],
+    responsive: true,
+    "pageLength": 300
+    "searching": false,
+    "lengthChange": false,
+    "info": false,
+    language: {
+      paginate: {
+        previous: 'Anterior',
+        next: 'Siguiente'
+      },
+    }
+  });
+</script>
+{% endblock %}

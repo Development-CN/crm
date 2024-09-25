@@ -1,0 +1,25 @@
+{% extends "citas_mazda_col_pro/carousel/slide.html" %}
+
+{% block slide_title %}
+INFORMACIÓN DEL VEHÍCULO
+{% endblock %}
+
+{% block slide_subtitle %}
+NECESITAMOS IDENTIFICAR SU VEHÍCULO PARA BRINDARLE ATENCIÓN PERSONALIZADA
+{% endblock %}
+
+{% block slide_message %}
+INGRESE LA PLACA DEL VEHÍCULO SIN ESPACIO NI GUIONES
+{% endblock %}
+
+{% block slide_content %}
+<div class="mb-4 row">
+  <div class="col-4 col-lg-5 text-end">
+    <label for="license_plate" class="col-form-label">Placa:</label>
+  </div>
+  <div class="col-6 col-lg-4">
+    <input name="license_plate" id="license_plate" type="text" minlength="6" maxlength="7" required autocomplete="off" class="form-control"
+      data-name="placa">
+  </div>
+</div>
+{% endblock %}

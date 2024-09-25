@@ -1,0 +1,721 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operativo Asesor - Prospectos Madiautos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet"/>
+
+    <script src="/bundles/modernizr?v=wBEWDufH_8Md-Pbioxomt90vm6tJN2Pyy9u9zHtWsPo1"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="/bundles/bootstrap?v=QtxRrbVxHAK-b5ZowWqv6Wt7oUOJAggG80vl1X-EGBM1"></script>
+
+    <script src="/bundles/timepicker?v=SNA17wI1rMl4CP8ayG1ydmEu0eLQfZiFCqPl0hXZpd01"></script>
+
+    <script src="/bundles/sweet?v=ZMOC4FpxSbszBSzdHGvkc9O_scCReJoQ_PgxKeHWirk1"></script>
+
+    <script src="https://use.fontawesome.com/877bbc2081.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+
+    <link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/export/bootstrap-table-export.min.js"></script>
+
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.20.2/dist/extensions/defer-url/bootstrap-table-defer-url.min.js"></script>
+
+    
+
+</head>
+<body style="overflow-x: hidden;">
+    {% include 'nav.html' %}
+    
+    <div class="body-content">
+        
+
+    <div class="main-panel">
+        <div class="main-content">
+            <div class="content-wrapper">
+                <div class="container-fluid">
+                        <div id="tabs" style="box-shadow:none;">
+                            <div class="card-header border-0" style="background-color: #eee;">
+                                <!--<p class="card-category">Recientes</p>-->
+                                <div class="row justify-content-md-center" >
+                                    <div class="col col-lg-2" >
+                                        <div class="card-counter danger" >
+                                            <div class="form-row" >
+                                                <div class="form-group">
+                                                    <i class="material-icons">announcement</i>
+                                                    <span class="count-numbers">
+                                                        
+                                                        {{cantidad_anulados}}
+                                                    </span>
+                                                    <a href="#ContactoAsesor" style="color: #ffffff;"><span class="count-name" style="left: 70%; position: absolute; top: 70%; transform: translate(-50%, -50%);">Anulados</span></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="card-body border-0" style="background-color: #eee;">
+                                <div class="widget-list" id="ContactoAsesor">
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <div id="toolbar1">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-3">
+                                                    <select class="form-control form-control-sm" id="origen_lead_anulados" name="origen_lead_anulados"><option selected="selected" value="">-- Origen Lead --</option>
+                                                        {% for origen_lead in origenes_lead_anulados %}
+                                                        <option value="{{origen_lead.origen_lead}}" {% if origen_lead.origen_lead == origen_lead_anulados %}selected{% endif %}>{{origen_lead.origen_lead}}</option>
+                                                        {% endfor %}
+    </select>
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <select class="form-control form-control-sm" id="respuesta_anulados" name="respuesta_anulados"><option selected="selected" value="">-- Respuesta --</option>
+                                                        {% for respuesta in respuestas_anulados %}
+                                                        <option value="{{respuesta.respuesta}}" {% if respuesta.respuesta == respuesta_anulados %}selected{% endif %}>{{respuesta.respuesta}}</option>
+                                                        {% endfor %}
+    </select>
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <select class="form-control form-control-sm" id="estado_anulados" name="estado_anulados"><option selected="selected" value="">-- Estado --</option>
+                                                        {% for estado in estados_anulados %}
+                                                        <option value="{{estado.estado}}" {% if estado.estado == estado_anulados %}selected{% endif %}>{{estado.estado}}</option>
+                                                        {% endfor %}
+    </select>
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <select class="form-control form-control-sm" id="asesor_anulados" name="asesor_anulados"><option selected="selected" value="">-- Asesor --</option>
+                                                        {% for nombre_asesor in asesores_anulados %}
+                                                        <option value="{{nombre_asesor.nombre_asesor}}" {% if nombre_asesor.nombre_asesor == asesor_anulados and nombre_asesor.nombre_asesor %}selected{% endif %}>{{nombre_asesor.nombre_asesor}}</option>
+                                                        {% endfor %}
+    </select>
+                                                </div>
+                                                <div class="form-group col-md-1">
+                                                    <select id="sala_anulados" name="sala_anulados" class="form-control form-control-sm">
+                                                        <option value="" selected>--Sala--</option>
+                                                        <option value="127" {% if "127" == sala_anulados %}selected{% endif %}>127</option>
+                                                        <option value="Morato" {% if "Morato" == sala_anulados %}selected{% endif %}>Morato</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-2">
+                                                    <select class="form-control form-control-sm" id="marca_anulados" name="marca_anulados"><option selected="selected" value="">-- Marca --</option>
+                                                        {% for marca in marcas_anulados %}
+                                                        <option value="{{marca.marca}}">{{marca.marca}}</option>
+                                                        {% endfor %}
+    </select>
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <select class="form-control form-control-sm" id="modelo_anulados" name="modelo_anulados"><option selected="selected" value="">-- Modelo --</option>
+                                                        {% for modelo in modelos_anulados %}
+                                                        <option value="{{modelo.modelo}}">{{modelo.modelo}}</option>
+                                                        {% endfor %}
+    </select>
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="basic-addon1">De:</span>
+                                                        </div>
+                                                        <input name="desde_anulados" id="desde_anulados" class="form-control rangos" type="date" autocomplete="off" value="{{desde_anulados|date:'Y-m-d'}}">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="basic-addon1">a:</span>
+                                                        </div>
+                                                        <input name="hasta_anulados" id="hasta_anulados" class="form-control rangos" type="date" autocomplete="off" value="{{hasta_anulados|date:'Y-m-d'}}">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <button id="ok" type="button" class="btn btn-primary" onclick="filtrar_informacion_anulados(1);">Buscar</button>
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <div class="input-group mb-3">
+                                                        <input type="text" class="form-control" placeholder="Search" id="search_anulados" name="search_anulados">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="columns columns-right btn-group float-right" style="margin-top: 10px;">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Export data">
+                                                <i class="fa fa-arrow-circle-down"></i>
+                                                <span class="caret"></span>
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <button class="dropdown-item" name="content_type" value="csv">CSV</button>
+                                                <button class="dropdown-item" name="content_type" value="excel">Excel</button>
+                                        </div>
+                                        </div>
+                                    </form>
+                                    
+                                    <table id="tableF"
+                                           data-toolbar="#toolbar1"
+                                           {% if group|stringformat:"s" == "Admin" %}
+                                           data-show-export="true"
+                                           {% else %}
+                                           data-show-export="false"
+                                           {% endif %}
+                                           data-toggle="table"
+                                           data-height="1200"
+                                           data-pagination="true"
+                                           data-side-pagination="server"
+                                           data-sort-class="table-active"
+                                           data-sortable="true"
+                                           data-show-columns="true"
+                                           data-show-columns-search="true"
+                                           data-filter-control="true">
+                                        <thead class="table100-head table100 ver3 danger">
+                                            <tr>
+                                                <th data-field="Detalle"> Detalle </th>
+                                                <th data-field="FechaIngreso">Fecha de Ingreso</th>
+                                                <th data-field="Cliente">Cliente</th>
+                                                <th data-field="Telefono">Telefono</th>
+                                                <th data-field="Marca">Marca</th>
+                                                <th data-field="Modelo">Modelo</th>
+                                                <th data-field="OrigenIngreso">Origen de Ingreso</th>
+                                                <th data-field="Respuesta">Respuesta Cliente</th>
+                                                <th data-field="Estado">Estado</th>
+                                                <th data-field="Sala">Sala</th>
+                                                <th data-field="Asesor">Asesor</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="background-color:white;">
+                                            {% for lead in leads_anulados %}
+                                            <tr>
+                                                <td><a href="{% url 'dashboards:detallenuevo' lead.pk %}">Detalle</td>
+                                                <td>{{lead.fecha_apertura.date|date:'Y-m-d'}}</td>
+                                                <td>{{lead.prospecto.nombre}}</td>
+                                                <td>{{lead.prospecto.celular}}</td>
+                                                <td>{% for mostrado in mostrado_marcas %}{% if mostrado.lead == lead.pk %}{{mostrado.marca}}{% endif %}{% endfor %}</td>
+                                                <td>{% for mostrado in mostrado_marcas %}{% if mostrado.lead == lead.pk %}{{mostrado.modelo}}{% endif %}{% endfor %}</td>
+                                                <td>{{lead.origen_lead}}</td>
+                                                <td>{{lead.respuesta}}</td>
+                                                <td>{{lead.estado}}</td>
+                                                <td>{{lead.sala}}</td>
+                                                <td>{{lead.nombre_asesor}}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="widget-list" id="tibias">
+                                    <div id="toolbar2">
+                                        <div class="form-inline" role="form">
+                                            <div class="form-group">
+                                                <span>De: </span>
+                                                <input name="TDesde" id="TDesde" class="form-control w70 rangos" type="text" autocomplete="off">
+                                            </div>
+                                            <div class="form-group">
+                                                <span>a: </span>
+                                                <input name="THasta" id="THasta" class="form-control w70 rangos" type="text" autocomplete="off">
+                                            </div>
+                                            <button id="ok" type="button" class="btn btn-primary" onclick="filtrar_informacion_anulados(1);">Buscar</button>
+                                            <button id="rT" class="btn btn-secondary"><i class="material-icons">cached</i></button>
+                                        </div>
+                                    </div>
+                                        <table id="tableT"
+                                               data-toolbar="#toolbar2"
+                                               {% if group|stringformat:"s" == "Admin" %}
+                                               data-show-export="true"
+                                               {% else %}
+                                               data-show-export="false"
+                                               {% endif %}
+                                               data-toggle="table"
+                                               data-height="800"
+                                               data-pagination="true"
+                                               data-search="true"
+                                               data-sort-class="table-active"
+                                               data-sortable="true"
+                                               data-show-columns="true"
+                                               data-show-columns-search="true"
+                                               data-filter-control="true"
+                                               data-export-data-type="all"
+                                               data-query-params="exportT"
+                                               data-url="/Leads/getTibios">
+                                            <thead class="table100-head table100 ver3 warning" style="color:white">
+                                                <tr>
+                                                    <th data-field="Detalle" data-sortable="true"> Detalle </th>
+                                                    <th data-field="FechaIngreso" data-sortable="true">
+                                                        Fecha de Ingreso
+                                                    </th>
+                                                    <th data-field="Cliente" data-sortable="true">
+                                                        Cliente
+                                                    </th>
+                                                    <th data-field="Telefono">Telefono</th>
+                                                    <th data-field="Marca">Marca</th>
+                                                    <th data-field="Modelo">Modelo</th>
+                                                    <th data-field="OrigenIngreso" data-sortable="true" data-filter-control="select">
+                                                        Origen de Ingreso
+                                                    </th>
+                                                    <th data-field="Respuesta" data-sortable="true" data-filter-control="select">
+                                                        Respuesta Cliente
+                                                    </th>
+                                                    <th data-field="Estado" data-sortable="true" data-filter-control="select">
+                                                        Estado
+                                                    </th>
+                                                    <th data-field="Sala" data-sortable="true" data-filter-control="select">
+                                                        Sala
+                                                    </th>
+                                                    <th data-field="Asesor" data-sortable="true" data-filter-control="select">
+                                                        Asesor
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody style="background-color:white;">
+                                                {% for lead in leads_anulados %}
+                                                <tr>
+                                                    <td><a href="{% url 'dashboards:detallenuevo' lead.pk %}">Detalle</td>
+                                                    <td>{{lead.fecha_apertura.date|date:'Y-m-d'}}</td>
+                                                    <td>{{lead.prospecto.nombre}}</td>
+                                                    <td>{{lead.prospecto.celular}}</td>
+                                                    <td>{% for mostrado in mostrado_marcas %}{% if mostrado.lead == lead.pk %}{{mostrado.marca}}{% endif %}{% endfor %}</td>
+                                                    <td>{% for mostrado in mostrado_marcas %}{% if mostrado.lead == lead.pk %}{{mostrado.modelo}}{% endif %}{% endfor %}</td>
+                                                    <td>{{lead.origen_lead}}</td>
+                                                    <td>{{lead.respuesta}}</td>
+                                                    <td>{{lead.estado}}</td>
+                                                    <td>{{lead.sala}}</td>
+                                                    <td>{{lead.nombre_asesor}}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                            
+                                        </table>
+                                </div>
+
+                                <div class="widget-list" id="calientes">
+                                    <div id="toolbar3">
+                                        <div class="form-inline" role="form">
+                                            <div class="form-group">
+                                                <span>De: </span>
+                                                <input name="CDesde" id="CDesde" class="form-control w70 rangos" type="text" autocomplete="off">
+                                            </div>
+                                            <div class="form-group">
+                                                <span>a: </span>
+                                                <input name="CHasta" id="CHasta" class="form-control w70 rangos" type="text" autocomplete="off">
+                                            </div>
+                                            <button id="ok" type="button" class="btn btn-primary" onclick="filtrar_informacion_anulados(1);">Buscar</button>
+                                            <button id="rC" class="btn btn-secondary"><i class="material-icons">cached</i></button>
+                                        </div>
+                                    </div>
+                                        <table id="tableC"
+                                               data-toolbar="#toolbar3"
+                                               {% if group|stringformat:"s" == "Admin" %}
+                                               data-show-export="true"
+                                               {% else %}
+                                               data-show-export="false"
+                                               {% endif %}
+                                               data-toggle="table"
+                                               data-height="800"
+                                               data-pagination="true"
+                                               data-search="true"
+                                               data-sort-class="table-active"
+                                               data-sortable="true"
+                                               data-show-columns="true"
+                                               data-show-columns-search="true"
+                                               data-filter-control="true"
+                                               data-export-data-type="all"
+                                               data-query-params="exportC"
+                                               data-url="/Leads/getCalientes">
+                                            <thead class="table100-head table100 ver3 success" style="color:white">
+                                                <tr>
+                                                    <th data-field="Detalle" data-sortable="true"> Detalle </th>
+                                                    <th data-field="FechaIngreso" data-sortable="true">
+                                                        Fecha de Ingreso
+                                                    </th>
+                                                    <th data-field="Cliente" data-sortable="true">
+                                                        Cliente
+                                                    </th>
+                                                    <th data-field="Telefono">
+                                                        Telefono
+                                                    </th>
+                                                    <th data-field="Marca">Marca</th>
+                                                    <th data-field="Modelo">Modelo</th>
+                                                    <th data-field="OrigenIngreso" data-sortable="true" data-filter-control="select">
+                                                        Origen de Ingreso
+                                                    </th>
+                                                    <th data-field="Respuesta" data-sortable="true" data-filter-control="select">
+                                                        Respuesta Cliente
+                                                    </th>
+                                                    <th data-field="Estado" data-sortable="true" data-filter-control="select">
+                                                        Estado
+                                                    </th>
+                                                    <th data-field="Sala" data-sortable="true" data-filter-control="select">
+                                                        Sala
+                                                    </th>
+                                                    <th data-field="Asesor" data-sortable="true" data-filter-control="select">
+                                                        Asesor
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody style="background-color:white;">
+                                                {% for lead in leads_anulados %}
+                                                <tr>
+                                                    <td><a href="{% url 'dashboards:detallenuevo' lead.pk %}">Detalle</td>
+                                                    <td>{{lead.fecha_apertura.date|date:'Y-m-d'}}</td>
+                                                    <td>{{lead.prospecto.nombre}}</td>
+                                                    <td>{{lead.prospecto.celular}}</td>
+                                                    <td>{% for mostrado in mostrado_marcas %}{% if mostrado.lead == lead.pk %}{{mostrado.marca}}{% endif %}{% endfor %}</td>
+                                                    <td>{% for mostrado in mostrado_marcas %}{% if mostrado.lead == lead.pk %}{{mostrado.modelo}}{% endif %}{% endfor %}</td>
+                                                    <td>{{lead.origen_lead}}</td>
+                                                    <td>{{lead.respuesta}}</td>
+                                                    <td>{{lead.estado}}</td>
+                                                    <td>{{lead.sala}}</td>
+                                                    <td>{{lead.nombre_asesor}}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                            
+                                        </table>
+                                </div>
+                            </div>
+                            <div class="float-right pagination" style="margin-top: 20px; vertical-align: top;
+                            display: inline-block;" id="page_div">
+        
+                                {% if has_other_pages %}
+                                <ul class="pagination">
+                                    {% if has_previous %}
+                                    <li id="page1_capturados" class="page-item">
+                                    <input type="hidden" name="page" id="page">
+                                        <button type="button" class="page-link" onclick="filtrar_informacion_anulados(1);">‹‹</button>
+                                    </li>
+                                    <li id="page{{previous_page_number}}_capturados" class="page-item">
+                                        <button type="button" class="page-link" onclick="filtrar_informacion_anulados({{previous_page_number}});">‹</button>
+                                    </li>
+                                    {% endif %}
+                                    {% for page in paginator.page_range %}
+        
+                                        {% if page_number == page %}
+                                        <li class="page-item active">
+                                            <span class="page-link">{{ page }}</span>
+                                        </li>
+                                        {% elif page > page_number|add:'-3' and page < page_number|add:'3' %}
+                        
+                                        <li id="page{{page}}_capturados" class="page-item">
+                                            <button type="button" class="page-link" onclick="filtrar_informacion_anulados({{page}});">{{page}}</button>
+                                        </li>
+                                        {% endif %}
+                        
+                                    {% endfor %}
+
+                                    {% if has_next %}
+                                    <li id="page{{next_page_number}}_capturados" class="page-item">
+                                        <button type="button" class="page-link" onclick="filtrar_informacion_anulados({{next_page_number}});">›</button>
+                                    </li>
+                                    <li id="page{{page_max}}_capturados" class="page-item">
+                                        <button type="button" class="page-link" onclick="filtrar_informacion_anulados({{page_max}});">››</button>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    $(document).ready(function () {
+
+        document.location.hash = "#ContactoAsesor";
+
+      $('#dtBasicExample').DataTable( {
+          "scrollY":        "300px",
+          "scrollCollapse": true,
+          "paging":         false
+      });
+
+      $.datetimepicker.setLocale('es');
+
+      $('.rangos').datetimepicker({
+          format: 'd/m/Y',
+          timepicker: false
+      });
+
+      
+
+      $("#rContAsesor").click(function (event) {
+          $('#ContAsesor_Desde').val('');
+          $('#ContAsesor_Hasta').val('');
+          getDataCA(1, 10);
+      })
+
+      $("#rT").click(function (event) {
+          $('#tableT').bootstrapTable('refresh');
+      })
+
+      $("#rC").click(function (event) {
+          $('#tableC').bootstrapTable('refresh');
+      })
+  } );
+</script>
+<script>
+    var baseUrl = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+    var $tableCA = $('#tableF')
+
+    $("#ContAsesor_OrigenIngreso").change(function () {
+        getDataCA(1, 10);
+    });
+
+    $("#ContAsesor_Respuesta").change(function () {
+        getDataCA(1, 10);
+    });
+
+    $("#ContAsesor_Estado").change(function () {
+        getDataCA(1, 10);
+    });
+
+    $("#ContAsesor_Sala").change(function () {
+        getDataCA(1, 10);
+    });
+
+    $("#ContAsesor_Asesor").change(function () {
+        getDataCA(1, 10);
+    });
+
+    $("#ContAsesor_Marca").change(function () {
+        getDataCA(1, 10);
+    });
+
+    $("#ContAsesor_Modelo").change(function () {
+        getDataCA(1, 10);
+    });
+
+    function getDataCA(number, size) {
+        var fechaIni1 = $("#ContAsesor_Desde").val();
+        var fechaIni = '';
+        if (fechaIni1 != '' && fechaIni1 != null) {
+            var fechaIniS = fechaIni1.split("/");
+            fechaIni = fechaIniS[2] + '-' + fechaIniS[1] + '-' + fechaIniS[0];
+        }
+
+        var fechaFin1 = $("#ContAsesor_Hasta").val();
+        var fechaFin = '';
+        if (fechaFin1 != '' && fechaFin1 != null) {
+            var fechaFinS = fechaFin1.split("/");
+            fechaFin = fechaFinS[2] + '-' + fechaFinS[1] + '-' + fechaFinS[0];
+        }
+
+        $.get(baseUrl + '/Leads/getContAsesor2/?off=' + number + '&size=' + size
+            + '&Origen=' + $("#ContAsesor_OrigenIngreso").val()
+            + '&Respuesta=' + $("#ContAsesor_Respuesta").val()
+            + '&Estado=' + $("#ContAsesor_Estado").val()
+            + '&Sala=' + $("#ContAsesor_Sala").val()
+            + '&Asesor=' + $("#ContAsesor_Asesor").val()
+            + '&Marca=' + $("#ContAsesor_Marca").val()
+            + '&Modelo=' + $("#ContAsesor_Modelo").val()
+            + '&FechaIni=' + fechaIni
+            + '&FechaFin=' + fechaFin
+            + '&Cadena=' + $("#ContAsesor_Cadena").val()
+            , {
+                offset: (number - 1) * size,
+                limit: size
+            }, function (res) {
+                $tableCA.bootstrapTable('load', res)
+            })
+    }
+
+    $(function () {
+        $tableCA.on('page-change.bs.table', function (e, number, size) {
+            getDataCA(number, size)
+        })
+        var options = $tableCA.bootstrapTable('getOptions')
+        getDataCA(options.pageNumber, options.pageSize)
+    })
+
+    function exportContAsesor(params) {
+        var options = $('#tableF').bootstrapTable('getOptions')
+        if (!options.pagination) {
+            params.limit = options.totalRows
+        }
+        return params
+    }
+
+    function FiltrarContAsesor() {
+        getDataCA(1, 10);
+    }
+    //function exportF(params) {
+    //    var options = $('#tableF').bootstrapTable('getOptions')
+    //    if (!options.pagination) {
+    //        params.limit = options.totalRows
+    //    }
+    //    return params
+    //}
+
+    function exportT(params) {
+        var options = $('#tableT').bootstrapTable('getOptions')
+        if (!options.pagination) {
+            params.limit = options.totalRows
+        }
+        return params
+    }
+
+    function exportC(params) {
+        var options = $('#tableC').bootstrapTable('getOptions')
+        if (!options.pagination) {
+            params.limit = options.totalRows
+        }
+        return params
+    }
+
+    function FiltrarF() {
+        var ini = $('#FDesde').val();
+        var fin = $('#FHasta').val();
+
+        var results = rango(ini, fin);
+        //console.log("Desistidas:");
+        //console.log(results);
+        var array = new Array(results);
+        $('#tableF').bootstrapTable('filterBy', {
+            FechaIngreso: results
+        })
+    }
+
+    function FiltrarT() {
+        var ini = $('#TDesde').val();
+        var fin = $('#THasta').val();
+
+        var results = rango(ini, fin);
+        //console.log("Concretadas:");
+        //console.log(results);
+        var array = new Array(results);
+
+        $('#tableT').bootstrapTable('filterBy', {
+            FechaIngreso: results
+        })
+    }
+
+    function FiltrarC() {
+        var ini = $('#CDesde').val();
+        var fin = $('#CHasta').val();
+
+        var results = rango(ini, fin);
+        //console.log("Historial:");
+        //console.log(results);
+        var array = new Array(results);
+        $('#tableC').bootstrapTable('filterBy', {
+            FechaIngreso: results
+        })
+    }
+
+    function rango(ini, fin) {
+        var splitIni = ini.split('/');
+        var fInicio = splitIni[1] + '/' + splitIni[0] + '/' + splitIni[2];
+
+        var splitFin = fin.split('/');
+        var fFin = splitFin[1] + '/' + splitFin[0] + '/' + splitFin[2];
+
+        var fechaInicio = new Date(fInicio);
+        var fechaFin = new Date(fFin);
+        var fechas = [];
+
+        while (fechaFin.getTime() >= fechaInicio.getTime()) {
+            var dia = fechaInicio.getDate();
+            var mes = (fechaInicio.getMonth() + 1);
+
+            var d;
+            var m;
+            if (dia < 10)
+            { d = "0" + dia; }
+            else { d = dia; }
+
+            if (mes < 10)
+            { m = "0" + mes; }
+            else { m = mes; }
+            fechas.push(d + '/' + m + '/' + fechaInicio.getFullYear());
+            fechaInicio.setDate(fechaInicio.getDate() + 1);
+        }
+
+        console.log(fechas)
+        //var arreglo = fechas.join(',')
+        //arreglo = "[" + arreglo + "]"
+        //console.log(arreglo);
+        return fechas;
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script>
+
+    function filtrar_informacion_anulados(page){
+        var origen_lead_anulados = $("#origen_lead_anulados").val();
+        var respuesta_anulados = $("#respuesta_anulados").val();
+        var estado_anulados = $("#estado_anulados").val();
+        var asesor_anulados = $("#asesor_anulados").val();
+        var sala_anulados = $("#sala_anulados").val();
+        var marca_anulados = $("#marca_anulados").val();
+        var modelo_anulados = $("#modelo_anulados").val();
+        var desde_anulados = $("#desde_anulados").val();
+        var hasta_anulados = $("#hasta_anulados").val();
+        var search_anulados = $("#search_anulados").val();
+
+        data = {}
+        data.filtrar_anulados = true
+        data.origen_lead_anulados = origen_lead_anulados
+        data.respuesta_anulados = respuesta_anulados
+        data.estado_anulados = estado_anulados
+        data.asesor_anulados = asesor_anulados
+        data.sala_anulados = sala_anulados
+        data.marca_anulados = marca_anulados
+        data.modelo_anulados = modelo_anulados
+        data.desde_anulados = desde_anulados
+        data.hasta_anulados = hasta_anulados
+        data.search_anulados = search_anulados
+        data.page = page
+
+        console.log(data)
+
+        $.ajax({
+            type: "get", // "post" "get" "delete" "put"
+            data: data, // PREFERIBLEMENTE JSON
+            cache: false,
+            headers: {
+              "X-CSRFToken": Cookies.get("csrftoken")
+            },
+            success: function (response) {
+
+                $('#ContactoAsesor').html($(response).find('#ContactoAsesor').html());
+                $('#page_div').html($(response).find('#page_div').html());
+            }
+        })
+    }
+
+</script>
+
+
+
+        <hr />
+        <footer>
+            <p>&copy; 2023 - Capital Network</p>
+        </footer>
+    </div>
+
+    
+    
+    <script src="/bundles/jqueryval?v=hEGG8cMxk9p0ncdRUOJ-CnKN7NezhnPnWIvn6REucZo1"></script>
+
+
+</body>
+</html>

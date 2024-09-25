@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operativo Anfitrion Peritaje - Prospectos Madiautos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet"/>
+
+    <script src="/bundles/modernizr?v=wBEWDufH_8Md-Pbioxomt90vm6tJN2Pyy9u9zHtWsPo1"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="/bundles/bootstrap?v=QtxRrbVxHAK-b5ZowWqv6Wt7oUOJAggG80vl1X-EGBM1"></script>
+
+    <script src="/bundles/timepicker?v=SNA17wI1rMl4CP8ayG1ydmEu0eLQfZiFCqPl0hXZpd01"></script>
+
+    <script src="/bundles/sweet?v=ZMOC4FpxSbszBSzdHGvkc9O_scCReJoQ_PgxKeHWirk1"></script>
+
+    <script src="https://use.fontawesome.com/877bbc2081.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+
+    <link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/export/bootstrap-table-export.min.js"></script>
+
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.20.2/dist/extensions/defer-url/bootstrap-table-defer-url.min.js"></script>
+
+    
+
+</head>
+<body style="overflow-x: hidden;">
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+        <a class="navbar-brand">Operativo Anfitrion Peritaje</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navbarSupportedContent" class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Captura prospectos</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/Leads/Captura">Venta</a>
+                        <a class="dropdown-item" href="/Compras/CompraCaptura">Compra</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Operativo Anfitrion</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/Leads/OperativoAnfitrion">Venta</a>
+                        <a class="dropdown-item" href="/Compras/OperativoAnfitrionCompras">Compra</a>
+                        <a class="dropdown-item" href="/SolicitudPeritaje/SeguimientoAnfitrion">Solicitudes de Peritaje</a>
+                    </div>
+                </li>
+
+                    <li><a class="nav-link" href="/Leads/OperativoAsesor">Operativo Asesor</a></li>
+
+                    <li><a class="nav-link" href="/Compras/OperativoComprador">Operativo Comprador</a></li>
+                                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reportes</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/Leads/Reports">Venta</a>
+                            <a class="dropdown-item" href="/Compras/ReportesCompras">Compra</a>
+                            <a class="dropdown-item" href="/SolicitudPeritaje/ReportesSolicitudesPeritaje">Solicitudes Peritaje</a>
+                        </div>
+                    </li>
+                                    <li><a class="nav-link" href="/Compras/OperativoPerito">Operativo Perito</a></li>
+                    <li><a class="nav-link" href="/Compras/OperativoTaller">Operativo Taller</a></li>
+                                    <li><a class="nav-link" href="http://capnet3.ddns.net:5007/" target="_blank">KPI's</a></li>
+            </ul>
+            <div class="form-inline">
+                <button type="button" style="margin-right: 30px; border: none transparent; background-color:transparent; color:white;" onClick="history.back();"><i class="material-icons">reply</i>Atras</button>
+<form action="/Account/CerrarSesion" method="post">                    <button type="submit" value="CerrarSesion" style="border: none transparent; background-color:transparent; color:white;"><i class="material-icons">exit_to_app</i>Salir</button>
+</form>            </div>
+            
+        </div>
+    </nav>
+    
+    <div class="body-content">
+        
+
+<form action="/SolicitudPeritaje/WriteDataToExcel" method="post"><input name="__RequestVerificationToken" type="hidden" value="dI1O6fUuKY5NyKG6_NSjTBwnd5r36JbTPcpZSANLFPfmRs8sq4dyptVCxkehIkxVCaKOBxOqxGYLHoVuaMX_iWS1hQC2owvCc0nI1rONUoU1" />    <!--container principal-->
+    <div class="main-panel">
+        <div class="main-content">
+            <div class="content-wrapper">
+                <div class="container-fluid">
+                    <form>
+                        <h4 style="margin:20px;">Peritaje - Operativo Anfitrion</h4>
+                        <div style="box-shadow:none;">                            
+                            <div class="card-header border-0" style="background-color: #eee;">
+                                <!--<p class="card-category">Recientes</p>-->
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="card-counter danger">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <i class="material-icons">announcement</i>
+                                                    <span class="count-numbers">
+                                                        1
+                                                    </span>
+                                                    <a href="#tibias" style="color: #ffffff;"><span class="count-name">Primer Contacto</span></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-counter morado">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <i class="material-icons">announcement</i>
+                                                    <span class="count-numbers">
+                                                        0
+                                                    </span>
+                                                    <a href="#calientes" style="color: #ffffff;"><span class="count-name">Verificacion</span></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-counter orange">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <i class="material-icons">announcement</i>
+                                                    <span class="count-numbers">
+                                                        1
+                                                    </span>
+                                                    <a href="#historial" style="color: #ffffff;"><span class="count-name">Solicitudes Asignadas</span></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body border-0" style="background-color: #eee;">
+                                <div class="widget-list" id="tibias">
+                                    <div id="toolbar1">
+                                        <div class="form-row">
+                                            <div class="form-group col">
+                                                <select class="form-control form-control-sm" id="PC_OrigenIngreso" name="PC_OrigenIngreso"><option selected="selected" value="0">-- Origen Lead --</option>
+<option value="LLAMADA CONMUTADOR">LLAMADA CONMUTADOR</option>
+<option value="LLAMADA CELULAR">LLAMADA CELULAR</option>
+<option value="LLAMADA/CARROYA">LLAMADA/CARROYA</option>
+<option value="LLAMADA/TUCARRO">LLAMADA/TUCARRO</option>
+<option value="LLAMADA/OLX">LLAMADA/OLX</option>
+<option value="CARROYA">CARROYA</option>
+<option value="TUCARRO">TUCARRO</option>
+<option value="ESTRENAR CARRO">ESTRENAR CARRO</option>
+<option value="OLX">OLX</option>
+<option value="PÁGINA WEB">P&#193;GINA WEB</option>
+<option value="CAMPAÑA PAGA FACEBOOK">CAMPA&#209;A PAGA FACEBOOK</option>
+<option value="CAMPAÑA ORGÁNICA FACEBOOK">CAMPA&#209;A ORG&#193;NICA FACEBOOK</option>
+<option value="INSTAGRAM">INSTAGRAM</option>
+<option value="CAMPAÑA FINANCIERA">CAMPA&#209;A FINANCIERA</option>
+<option value="CONVENIO">CONVENIO</option>
+<option value="WHATSAPP MAZDA">WHATSAPP MAZDA</option>
+<option value="WHATSAPP DIRECTO USADOS">WHATSAPP DIRECTO USADOS</option>
+<option value="WHATSAPP HYUNDAI">WHATSAPP HYUNDAI</option>
+<option value="Google Search">Google Search</option>
+<option value="WHATSAPP COMPRAS USADO">WHATSAPP COMPRAS USADO</option>
+<option value="TU USADO FINANDINA">TU USADO FINANDINA</option>
+<option value="CORREO">CORREO</option>
+<option value="Retoma mazda">Retoma mazda</option>
+<option value="Retoma hyundai">Retoma hyundai</option>
+<option value="Olx">Olx</option>
+<option value="Retoma usados">Retoma usados</option>
+<option value="Compra Morato">Compra Morato</option>
+<option value="Usados 127">Usados 127</option>
+<option value="Compra 127">Compra 127</option>
+<option value="Renting Colombia">Renting Colombia</option>
+<option value="Consignado">Consignado</option>
+<option value="Referido">Referido</option>
+<option value="Rebold">Rebold</option>
+<option value="PÁGINA WEB FORMULARIO">P&#193;GINA WEB FORMULARIO</option>
+<option value="Finanzauto">Finanzauto</option>
+</select>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-3">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="basic-addon1">De:</span>
+                                                    </div>
+                                                    <input name="PC_Desde" id="PC_Desde" class="form-control" type="text" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="basic-addon1">a:</span>
+                                                    </div>
+                                                    <input name="PC_Hasta" id="PC_Hasta" class="form-control" type="text" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md3">
+                                                <button id="ok" type="button" class="btn btn-primary" onclick="FiltrarPC();">Buscar</button>
+                                                <button type="button" id="rPC" class="btn btn-secondary"><i class="material-icons">cached</i></button>
+                                                <button type="submit" value="PC" name="tabla" id="exportPC" class="btn btn-secondary"><i class="material-icons">description</i></button>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control" placeholder="Search" id="PC_Cadena" name="PC_Cadena">
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-outline-secondary" type="button" onclick="FiltrarPC();"><i class="tiny material-icons">search</i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table id="tablePrimerContacto"
+                                           data-toolbar="#toolbar1"
+                                           data-toggle="table"
+                                           data-height="800"
+                                           data-pagination="true"
+                                           data-side-pagination="server"
+                                           data-sort-class="table-active"
+                                           data-sortable="true"
+                                           data-show-columns="true"
+                                           data-show-columns-search="true">
+                                        <thead class="table100-head table100 ver3 danger">
+                                            <tr>
+                                                <th data-field="FechaSolicitud">Fecha de Solicitud</th>
+                                                <th data-field="Cliente">Cliente</th>
+                                                <th data-field="Telefono">Telefono</th>
+                                                <th data-field="Placa">Placa</th>
+                                                <th data-field="OrigenIngreso">Origen de Ingreso</th>
+                                                <th data-field="Detalle"> Detalle </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="background-color:white;"></tbody>
+                                    </table>
+                                </div>
+
+                                <div class="widget-list" id="calientes">
+                                    <div id="toolbar2" class="toolbar2">
+                                        
+                                        <div class="form-row">
+                                            <div class="form-group col-md-2">
+                                                <select class="form-control form-control-sm" id="VP_EstadoLlamada" name="VP_EstadoLlamada"><option value="0">-- Estado Llamada --</option>
+<option value="Error al asignar asesor por anfitriona">Error al asignar asesor por anfitriona</option>
+<option value="No recuerda">No recuerda</option>
+<option value="No contactado/interesado">No contactado/interesado</option>
+<option value="No contactado/No interesado">No contactado/No interesado</option>
+<option value="Contactado/Compro otro lado">Contactado/Compro otro lado</option>
+<option value="En seguimiento">En seguimiento</option>
+<option value="Proceso compra Madiautos">Proceso compra Madiautos</option>
+<option value="Contactado/Interesado">Contactado/Interesado</option>
+<option value="Contactado/No interesado">Contactado/No interesado</option>
+<option value="No contesta">No contesta</option>
+<option value="Fuera de servicio/errado">Fuera de servicio/errado</option>
+<option value="Registro repetido">Registro repetido</option>
+</select>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <select class="form-control form-control-sm" id="VP_Responsable" name="VP_Responsable"><option value="0">-- Responsable --</option>
+<option value="Daniela Quijano">Daniela Quijano</option>
+<option value="Sharon Diaz">Sharon Diaz</option>
+<option value="Cristian Guzman">Cristian Guzman</option>
+<option value="Brenda Milena Martinez Martinez">Brenda Milena Martinez Martinez</option>
+<option value="Mayerly Andrea Gutierrez Garcia">Mayerly Andrea Gutierrez Garcia</option>
+<option value="Camilo Andres Salazar Campos">Camilo Andres Salazar Campos</option>
+<option value="Auditoria">Auditoria</option>
+</select>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <select class="form-control form-control-sm" id="VP_TipoSolicitud" name="VP_TipoSolicitud"><option value="0">-- Tipo de Solicitud --</option>
+<option value="Cliente Verificado">Cliente Verificado</option>
+<option value="Volver a llamar/apagado">Volver a llamar/apagado</option>
+<option value="Cliente pide volver a llamar">Cliente pide volver a llamar</option>
+<option value="Error al asignar Comprador por Anfitriona">Error al asignar Comprador por Anfitriona</option>
+<option value="Error al asignar Perito por Anfitriona">Error al asignar Perito por Anfitriona</option>
+<option value="Recordatorio">Recordatorio</option>
+<option value="Reasignado">Reasignado</option>
+<option value="Error al asignar Asesor por Anfitriona">Error al asignar Asesor por Anfitriona</option>
+</select>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <select class="form-control form-control-sm" id="VP_Sala" name="VP_Sala"><option value="0">-- Sala --</option>
+<option value="DOMICILIO">DOMICILIO</option>
+<option value="HYUNDAI">HYUNDAI</option>
+<option value="MAZDA">MAZDA</option>
+<option value="USADOS 127">USADOS 127</option>
+<option value="USADOS MORATO">USADOS MORATO</option>
+</select>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <select class="form-control form-control-sm" id="VP_PeritoOriginal" name="VP_PeritoOriginal"><option value="0">-- Perito Original --</option>
+<option value="JORGE FARFAN">JORGE FARFAN</option>
+<option value="ANDRES SEPULVEDA">ANDRES SEPULVEDA</option>
+<option value="JUAN MANUEL GUAUQUE">JUAN MANUEL GUAUQUE</option>
+<option value="Cesar Guzman">Cesar Guzman</option>
+</select>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <select class="form-control form-control-sm" id="VP_Reasignado" name="VP_Reasignado"><option value="0">-- Reasignado --</option>
+<option value="JORGE FARFAN">JORGE FARFAN</option>
+<option value="ANDRES SEPULVEDA">ANDRES SEPULVEDA</option>
+<option value="JUAN MANUEL GUAUQUE">JUAN MANUEL GUAUQUE</option>
+<option value="Cesar Guzman">Cesar Guzman</option>
+</select>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-3">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="basic-addon1">De:</span>
+                                                    </div>
+                                                    <input name="VP_Desde" id="VP_Desde" class="form-control" type="text" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="basic-addon1">a:</span>
+                                                    </div>
+                                                    <input name="VP_Hasta" id="VP_Hasta" class="form-control" type="text" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md3">
+                                                <button id="ok" type="button" class="btn btn-primary" onclick="FiltrarVP();">Buscar</button>
+                                                <button type="button" id="rVP" class="btn btn-secondary"><i class="material-icons">cached</i></button>
+                                                <button type="submit" value="VP" name="tabla" id="exportVerificaciones" class="btn btn-secondary"><i class="material-icons">description</i></button>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control" placeholder="Search" id="VP_Cadena" name="VP_Cadena">
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-outline-secondary" type="button" onclick="FiltrarVP();"><i class="tiny material-icons">search</i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table id="tableVerificaciones"
+                                           data-toolbar=".toolbar2"
+                                           data-toggle="table"
+                                           data-height="800"
+                                           data-pagination="true"
+                                           data-side-pagination="server"
+                                           data-sort-class="table-active"
+                                           data-sortable="true"
+                                           data-show-columns="true"
+                                           data-show-columns-search="true"
+                                           data-virtual-scroll="true">
+                                        <thead class="table100-head table100 ver3 morado">
+                                            <tr>
+                                                <th data-field="FechaVerificacion">Fecha Verificacion</th>
+                                                <th data-field="HoraVerificacion">Hora Verificacion</th>
+                                                <th data-field="Cliente">Cliente</th>
+                                                <th data-field="Telefono">Telefono</th>
+                                                <th data-field="OrigenIngreso">Origen Ingreso</th>
+                                                <th data-field="EstadoLlamada">Estado de Llamada</th>
+                                                <th data-field="Responsable">Responsable</th>
+                                                <th data-field="TipoSolicitud">Tipo Solicitud</th>
+                                                <th data-field="Sala">Sala</th>
+                                                <th data-field="PeritoOriginal">Perito Original</th>
+                                                <th data-field="Reasignado">Perito Reasignado</th>
+                                                <th data-field="Observaciones">Observaciones</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+
+                                <div class="widget-list" id="historial">
+                                    <div id="toolbar3" class="toolbar3">
+                                        
+                                        <div class="form-row">
+                                            <div class="form-group col-md-2">
+                                                <select class="form-control form-control-sm" id="SA_OrigenIngreso" name="SA_OrigenIngreso"><option selected="selected" value="0">-- Origen Lead --</option>
+<option value="LLAMADA CONMUTADOR">LLAMADA CONMUTADOR</option>
+<option value="LLAMADA CELULAR">LLAMADA CELULAR</option>
+<option value="LLAMADA/CARROYA">LLAMADA/CARROYA</option>
+<option value="LLAMADA/TUCARRO">LLAMADA/TUCARRO</option>
+<option value="LLAMADA/OLX">LLAMADA/OLX</option>
+<option value="CARROYA">CARROYA</option>
+<option value="TUCARRO">TUCARRO</option>
+<option value="ESTRENAR CARRO">ESTRENAR CARRO</option>
+<option value="OLX">OLX</option>
+<option value="PÁGINA WEB">P&#193;GINA WEB</option>
+<option value="CAMPAÑA PAGA FACEBOOK">CAMPA&#209;A PAGA FACEBOOK</option>
+<option value="CAMPAÑA ORGÁNICA FACEBOOK">CAMPA&#209;A ORG&#193;NICA FACEBOOK</option>
+<option value="INSTAGRAM">INSTAGRAM</option>
+<option value="CAMPAÑA FINANCIERA">CAMPA&#209;A FINANCIERA</option>
+<option value="CONVENIO">CONVENIO</option>
+<option value="WHATSAPP MAZDA">WHATSAPP MAZDA</option>
+<option value="WHATSAPP DIRECTO USADOS">WHATSAPP DIRECTO USADOS</option>
+<option value="WHATSAPP HYUNDAI">WHATSAPP HYUNDAI</option>
+<option value="Google Search">Google Search</option>
+<option value="WHATSAPP COMPRAS USADO">WHATSAPP COMPRAS USADO</option>
+<option value="TU USADO FINANDINA">TU USADO FINANDINA</option>
+<option value="CORREO">CORREO</option>
+<option value="Retoma mazda">Retoma mazda</option>
+<option value="Retoma hyundai">Retoma hyundai</option>
+<option value="Olx">Olx</option>
+<option value="Retoma usados">Retoma usados</option>
+<option value="Compra Morato">Compra Morato</option>
+<option value="Usados 127">Usados 127</option>
+<option value="Compra 127">Compra 127</option>
+<option value="Renting Colombia">Renting Colombia</option>
+<option value="Consignado">Consignado</option>
+<option value="Referido">Referido</option>
+<option value="Rebold">Rebold</option>
+<option value="PÁGINA WEB FORMULARIO">P&#193;GINA WEB FORMULARIO</option>
+<option value="Finanzauto">Finanzauto</option>
+</select>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <select class="form-control form-control-sm" id="SA_Responsable" name="SA_Responsable"><option value="0">-- Responsable --</option>
+<option value="JUAN POLAINAS">JUAN POLAINAS</option>
+</select>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <select class="form-control form-control-sm" id="SA_Perito" name="SA_Perito"><option value="0">-- Perito --</option>
+<option value=""></option>
+<option value="JORGE FARFAN">JORGE FARFAN</option>
+</select>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-3">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="basic-addon1">De:</span>
+                                                    </div>
+                                                    <input name="SA_Desde" id="SA_Desde" class="form-control" type="text" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="basic-addon1">a:</span>
+                                                    </div>
+                                                    <input name="SA_Hasta" id="SA_Hasta" class="form-control" type="text" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md3">
+                                                <button id="ok" type="button" class="btn btn-primary" onclick="FiltrarSA();">Buscar</button>
+                                                <button type="button" id="rSA" class="btn btn-secondary"><i class="material-icons">cached</i></button>
+                                                <button type="submit" value="SA" name="tabla" id="exportSA" class="btn btn-secondary"><i class="material-icons">description</i></button>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control" placeholder="Search" id="SA_Cadena" name="SA_Cadena">
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-outline-secondary" type="button" onclick="FiltrarSA();"><i class="tiny material-icons">search</i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table id="tableSolicitudesAsignadas"
+                                           data-toolbar=".toolbar3"
+                                           data-toggle="table"
+                                           data-height="800"
+                                           data-pagination="true"
+                                           data-side-pagination="server"
+                                           data-sort-class="table-active"
+                                           data-sortable="true"
+                                           data-show-columns="true"
+                                           data-show-columns-search="true"
+                                           data-virtual-scroll="true">
+                                        <thead class="tableOrange">
+                                            <tr>
+                                                <th data-field="FechaSolicitud">Fecha de Ingreso</th>
+                                                <th data-field="OrigenIngreso">Origen de Ingreso</th>
+                                                <th data-field="Cliente">Cliente</th>
+                                                <th data-field="Telefono">Telefono</th>
+                                                <th data-field="Responsable">Responsable</th>
+                                                <th data-field="Perito">Perito</th>
+                                                <th data-field="Detalle">Detalle</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</form><script>
+    $(document).ready(function () {
+        $('#dtBasicExample').DataTable({
+            "scrollY": "300px",
+            "scrollCollapse": true,
+            "paging": false
+        });
+    $.datetimepicker.setLocale('es');
+
+    $('#PC_Desde').datetimepicker({
+        format: 'd/m/Y',
+        timepicker: false
+    });
+    $('#PC_Hasta').datetimepicker({
+        format: 'd/m/Y',
+        timepicker: false
+    });
+
+    $('#VP_Desde').datetimepicker({
+        format: 'd/m/Y',
+        timepicker: false
+    });
+    $('#VP_Hasta').datetimepicker({
+        format: 'd/m/Y',
+        timepicker: false
+    });
+
+    $('#SA_Desde').datetimepicker({
+        format: 'd/m/Y',
+        timepicker: false
+    });
+    $('#SA_Hasta').datetimepicker({
+        format: 'd/m/Y',
+        timepicker: false
+    });
+
+    $("#rPC").click(function (event) {
+        //$('#tableCapturados').bootstrapTable('refresh');
+        $('#PC_Desde').val('');
+        $('#PC_Hasta').val('');
+    })
+
+    $("#rVP").click(function (event) {
+        //$('#tableCapturados').bootstrapTable('refresh');
+        $('#VP_Desde').val('');
+        $('#VP_Hasta').val('');
+    })
+
+    $("#rSA").click(function (event) {
+        //$('#tableCapturados').bootstrapTable('refresh');
+        $('#SA_Desde').val('');
+        $('#SA_Hasta').val('');
+    })
+
+    });
+</script>
+
+<script>
+    var baseUrl = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+    var $tablePC = $('#tablePrimerContacto')
+    var $tableVP = $('#tableVerificaciones')
+    var $tableSA = $('#tableSolicitudesAsignadas')
+
+    $("#PC_OrigenIngreso").change(function () {
+        getDataPC(1, 10);
+    });
+
+
+    $("#VP_EstadoLlamada").change(function () {
+        getDataVP(1, 10);
+    });
+
+    $("#VP_Responsable").change(function () {
+        getDataVP(1, 10);
+    });
+
+    $("#VP_TipoSolicitud").change(function () {
+        getDataVP(1, 10);
+    });
+
+    $("#VP_Sala").change(function () {
+        getDataVP(1, 10);
+    });
+
+    $("#VP_PeritoOriginal").change(function () {
+        getDataVP(1, 10);
+    });
+
+    $("#VP_Reasignado").change(function () {
+        getDataVP(1, 10);
+    });
+
+    $("#SA_OrigenIngreso").change(function () {
+        getDataSA(1, 10);
+    });
+
+    $("#SA_Responsable").change(function () {
+        getDataSA(1, 10);
+    });
+
+    $("#SA_Perito").change(function () {
+        getDataSA(1, 10);
+    });
+
+    function getDataPC(number, size) {
+        var fechaIni1 = $("#PC_Desde").val();
+        var fechaIni = '';
+        if (fechaIni1 != '' && fechaIni1 != null) {
+            var fechaIniS = fechaIni1.split("/");
+            fechaIni = fechaIniS[2] + '-' + fechaIniS[1] + '-' + fechaIniS[0];
+        }
+
+        var fechaFin1 = $("#PC_Hasta").val();
+        var fechaFin = '';
+        if (fechaFin1 != '' && fechaFin1 != null) {
+            var fechaFinS = fechaFin1.split("/");
+            fechaFin = fechaFinS[2] + '-' + fechaFinS[1] + '-' + fechaFinS[0];
+        }
+
+        $.get(baseUrl + '/SolicitudPeritaje/getPC2/?off=' + number + '&size=' + size + '&Origen=' + $("#PC_OrigenIngreso").val()
+            + '&FechaIni=' + fechaIni
+            + '&FechaFin=' + fechaFin
+            + '&Cadena=' + $("#PC_Cadena").val()
+            , {
+                offset: (number - 1) * size,
+                limit: size
+            }, function (res) {
+                $tablePC.bootstrapTable('load', res)
+            })
+    }
+
+    function getDataVP(number, size) {
+        var fechaIni1 = $("#VP_Desde").val();
+        var fechaIni = '';
+        if (fechaIni1 != '' && fechaIni1 != null) {
+            var fechaIniS = fechaIni1.split("/");
+            fechaIni = fechaIniS[2] + '-' + fechaIniS[1] + '-' + fechaIniS[0];
+        }
+
+        var fechaFin1 = $("#VP_Hasta").val();
+        var fechaFin = '';
+        if (fechaFin1 != '' && fechaFin1 != null) {
+            var fechaFinS = fechaFin1.split("/");
+            fechaFin = fechaFinS[2] + '-' + fechaFinS[1] + '-' + fechaFinS[0];
+        }
+
+        $.get(baseUrl + '/SolicitudPeritaje/getVP2/?off=' + number + '&size=' + size
+            + '&VP_EstadoLlamada=' + $("#VP_EstadoLlamada").val()
+            + '&VP_Responsable=' + $("#VP_Responsable").val()
+            + '&VP_TipoSolicitud=' + $("#VP_TipoSolicitud").val()
+            + '&VP_Sala=' + $("#VP_Sala").val()
+            + '&VP_PeritoOriginal=' + $("#VP_PeritoOriginal").val()
+            + '&VP_Reasignado=' + $("#VP_Reasignado").val()
+            + '&FechaIni=' + fechaIni
+            + '&FechaFin=' + fechaFin
+            + '&Cadena=' + $("#VP_Cadena").val()
+            , {
+                offset: (number - 1) * size,
+                limit: size
+            }, function (res) {
+                $tableVP.bootstrapTable('load', res)
+            })
+    }
+
+    function getDataSA(number, size) {
+        var fechaIni1 = $("#SA_Desde").val();
+        var fechaIni = '';
+        if (fechaIni1 != '' && fechaIni1 != null) {
+            var fechaIniS = fechaIni1.split("/");
+            fechaIni = fechaIniS[2] + '-' + fechaIniS[1] + '-' + fechaIniS[0];
+        }
+
+        var fechaFin1 = $("#SA_Hasta").val();
+        var fechaFin = '';
+        if (fechaFin1 != '' && fechaFin1 != null) {
+            var fechaFinS = fechaFin1.split("/");
+            fechaFin = fechaFinS[2] + '-' + fechaFinS[1] + '-' + fechaFinS[0];
+        }
+
+        $.get(baseUrl + '/SolicitudPeritaje/getSA2/?off=' + number + '&size=' + size + '&OrigenIngreso=' + $("#SA_OrigenIngreso").val()
+            + '&Responsable=' + $("#SA_Responsable").val()
+            + '&Perito=' + $("#SA_Perito").val()
+            + '&FechaIni=' + fechaIni
+            + '&FechaFin=' + fechaFin
+            + '&Cadena=' + $("#SA_Cadena").val()
+            , {
+                offset: (number - 1) * size,
+                limit: size
+            }, function (res) {
+                $tableSA.bootstrapTable('load', res)
+            })
+    }
+
+    $(function () {
+        $tablePC.on('page-change.bs.table', function (e, number, size) {
+            getDataPC(number, size)
+        })
+        var options = $tablePC.bootstrapTable('getOptions')
+        getDataPC(options.pageNumber, options.pageSize)
+    })
+
+    $(function () {
+        $tableVP.on('page-change.bs.table', function (e, number, size) {
+            getDataVP(number, size)
+        })
+        var options = $tableVP.bootstrapTable('getOptions')
+        getDataVP(options.pageNumber, options.pageSize)
+    })
+
+    $(function () {
+        $tableSA.on('page-change.bs.table', function (e, number, size) {
+            getDataSA(number, size)
+        })
+        var options = $tableSA.bootstrapTable('getOptions')
+        getDataSA(options.pageNumber, options.pageSize)
+    })
+</script>
+
+<script>
+
+    function FiltrarPC() {
+        getDataPC(1, 10);
+    }
+
+    function FiltrarVP() {
+        getDataVP(1, 10);
+    }
+
+    function FiltrarSA() {
+        getDataSA(1, 10);
+    }
+
+    var $table = $('#table')
+    var total = 0
+
+    function getData(number, isAppend) {
+        if (!isAppend) {
+            total = 0
+        }
+        var data = []
+        for (var i = total; i < total + number; i++) {
+            data.push({
+                'id': i,
+                'name': 'Item ' + i,
+                'price': '$' + i
+            })
+        }
+        if (isAppend) {
+            total += number
+        } else {
+            total = number
+        }
+        $('#total').text(total)
+        return data
+    }
+
+    $(function () {
+        $table.bootstrapTable({ data: getData(20) })
+
+        $('#load').click(function () {
+            $table.bootstrapTable('load', getData(10000))
+        })
+
+        $('#append').click(function () {
+            $table.bootstrapTable('append', getData(10000, true))
+        })
+    })
+</script>
+
+        <hr />
+        <footer>
+            <p>&copy; 2023 - Capital Network</p>
+        </footer>
+    </div>
+
+    
+    
+    <script src="/bundles/jqueryval?v=hEGG8cMxk9p0ncdRUOJ-CnKN7NezhnPnWIvn6REucZo1"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,806 @@
+{% extends 'citas_mazda_col/base.html' %} {% block content %}
+{% load static %}
+
+<style>
+  .custom-control-input:focus~.custom-control-label::before {
+    border-color: #912935 !important;
+    box-shadow: 0 0 0 0.2rem rgba(255, 47, 69, 0.25) !important;
+  }
+
+  .custom-control-input:checked~.custom-control-label::before {
+    border-color: #912935 !important;
+    background-color: #912935 !important;
+  }
+
+  .custom-control-input:active~.custom-control-label::before {
+    background-color: #912935 !important;
+    border-color: #912935 !important;
+  }
+
+  .custom-control-input:focus:not(:checked)~.custom-control-label::before {
+    border-color: #912935 !important;
+  }
+
+  .custom-control-input-green:not(:disabled):active~.custom-control-label::before {
+    background-color: #912935 !important;
+    border-color: #912935 !important;
+  }
+
+</style>
+
+<div class="text-center">
+  <h4 class="">Citas de Servicio</h4>
+</div>
+
+<div class="row">
+  <div class="col-lg-7 col-md-6 col-sm mx-auto">
+    <div class="card bg-white mt-1 mx-auto shadow">
+      <form id="form">
+        <!-- HOME -->
+        <div id="0" class="card-body mt-3 px-lg-5 text-center">
+          <img class="mb-4" height="65px" src="{% static 'citas_mazda_col/img/logos/mazda.png' %}">
+          <h4 class="text-center mb-3">Bienvenido</h4>
+          <p class="lead text-center">Continúe para agendar una cita de servicio en alguna de nuestras agencias.</p>
+
+          <a href="{{ politica_privacidad_link }}" class="btn btn-link border shadow-sm">
+            <i class="far fa-file-alt fa-lg"></i>
+            Política de protección de datos
+          </a>
+
+          <div class="custom-control custom-checkbox mt-3">
+            <input name="terminos-condiciones" type="checkbox" class="custom-control-input" id="customCheck1" required
+              data-nombre="Terminos y condiciones" />
+            <label class="custom-control-label" for="customCheck1">He leído y acepto los términos</label>
+          </div>
+        </div>
+
+        <!-- VEHICULO -->
+        <div id="1" class="card-body mt-4 px-sm-3 px-lg-5" style="display: none">
+          <h4 class="text-center mb-2"><i class="fas fa-car fa-lg"></i></h4>
+          <h4 class="text-center mb-2">Información del Vehículo</h4>
+          <p class="lead text-center">Necesitamos identificar su vehiculo para brindarle atencion personalizada.</p>
+          <p class="lead text-center">Ingrese las placas del vehículo sin espacios ni guiones</p>
+          <div class="form-group">
+            <label for="placas">Placa del vehículo:</label>
+            <input name="no_placas" type="text" class="form-control" autocapitalize="characters" maxlength="6"
+              placeholder="Ejemplo: XYZ123" id="placas" data-nombre="Placas del vehiculo"
+              onkeyup="this.value = this.value.toUpperCase().replace(/[^a-zA-Z0-9]/g, '');" />
+          </div>
+        </div>
+
+        <!-- VEHICULO 2 -->
+        <div id="2" class="card-body mt-4 px-sm-3 px-lg-5" style="display: none">
+          <h4 class="text-center mb-2"><i class="fas fa-car fa-lg"></i></h4>
+          <h4 class="text-center mb-2">Información del Vehículo</h4>
+          <p class="lead text-center">Necesitamos identificar su vehículo para brindarle atención personalizada.</p>
+
+          <div class="form-row">
+            <!-- MODELO -->
+            <div class="form-group col">
+              <label for="modelo">Modelo del vehiculo:</label>
+              <select id="modelo" name="modelo" class="form-control" data-nombre="Modelo del vehiculo">
+                {% if modelos %}
+                {% for modelo in modelos %}
+                <option value="{{modelo.id_modelo}}">{{modelo.nombre}}</option>
+                {% endfor %}
+                {% else %}
+                <option value="Modelo de Prueba">Modelo de Prueba</option>
+                {% endif %}
+              </select>
+            </div>
+
+            <!-- COLOR -->
+            {% comment %}
+            <div class="form-group col-sm-6">
+              <label for="color">Color del vehiculo:</label>
+              <input id="color" name="color" type="text" autocapitalize="characters" class="form-control"
+                data-nombre="Color del vehiculo"
+                onkeyup="this.value = this.value.toUpperCase().replace(/[^a-zA-Z ]/g, '');" />
+            </div>
+            {% endcomment %}
+          </div>
+
+          <div class="form-row">
+            <!-- VIN -->
+            {% comment %}
+            <div class="form-group col-sm-6">
+              <label for="vin">VIN:</label>
+              <input id="vin" name="vin" type="text" maxlength="17" autocapitalize="characters" class="form-control"
+                data-nombre="Numero de identificacion vehicular (NIV o VIN)"
+                onkeyup="this.value = this.value.toUpperCase().replace(/[^a-zA-Z0-9]/g, '');" />
+            </div>
+            {% endcomment %}
+
+            <!-- AÑO -->
+            <div class="form-group col">
+              <label for="año">Año:</label>
+              <select id="año" name="año" class="form-control" data-nombre="Año del vehiculo">
+                {% if años %}
+                {% for año in años %}
+                <option value="{{año}}">{{año}}</option>
+                {% endfor %}
+                {% else %}
+                <option value="2020">2020</option>
+                {% endif %}
+              </select>
+            </div>
+          </div>
+
+          <!--KILOMETRAJE-->
+          <div class="form-group">
+            <label for="kilometraje">Kilometraje actual:</label>
+            <input name="kilometraje" type="number" class="form-control" min="0" placeholder="" id="kilometraje"
+              data-nombre="Kilometraje" onkeyup="this.value = this.value.toUpperCase().replace(/[^0-9]/g, '');" />
+          </div>
+
+        </div>
+
+        <!-- CLIENTE -->
+        <div id="3" class="card-body mt-2 px-sm-3 px-lg-5" style="display: none">
+          <h4 class="text-center mb-2"><i class="fas fa-user-circle fa-lg"></i></h4>
+          <h4 class="text-center mb-2">Información usuario</h4>
+          <p class="lead text-center">Revise y de ser necesario complete su información.</p>
+
+          <div class="form-group">
+            <label for="nombre">Nombre y apellido completo:</label>
+            <input name="cliente" type="text" autocapitalize="words" autocomplete="off" class="form-control" id="nombre"
+              data-nombre="Nombre completo" onkeyup="this.value = this.value.replace(/[^a-zA-Z ]/g, ''); " />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-sm-6">
+              <label for="email">E-Mail Usuario</label>
+              <input name="correo" autocomplete="off" type="email" class="form-control" id="email"
+                data-nombre="Correo electronico" />
+            </div>
+            <div class="form-group col-sm-6">
+              <label for="phone">Celular</label>
+              <input name="telefono" autocomplete="off" type="number" class="form-control" id="phone"
+                data-nombre="Telefono" onkeyup="this.value = this.value.toUpperCase().replace(/[^a-zA-Z0-9]/g, '');" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-sm-6">
+              <label for="tipo_documento">Tipo de documento</label>
+              <select id="tipo_documento" name="tipo_documento" class="form-control" data-nombre="Tipo de documento">
+                {% for documento in tipos_documentos %}
+                <option value="{{ documento.nombre }}">{{ documento.nombre }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="form-group col-sm-6">
+              <label for="no_documento">Numero de documento</label>
+              <input id="no_documento" name="no_documento" autocomplete="off" type="text" class="form-control"
+                data-nombre="Numero de documento"
+                onkeyup="this.value = this.value.toUpperCase().replace(/[^a-zA-Z0-9]/g, '');" />
+            </div>
+          </div>
+        </div>
+
+        <!-- SERVICE -->
+        <div id="4" class="card-body text-center px-sm-3 px-lg-5" style="display: none">
+          <h4 class="text-center my-3"><i class="fas fa-tools fa-lg"></i></h4>
+          <h4 class="text-center mb-2">Servicio Requerido</h4>
+          <p class="lead text-center">Seleccione el servicio que necesite, le asignaremos el mejor experto técnico para
+            sus necesidades.</p>
+
+          {% if kilometrajes %}
+          <div class="my-3">
+            <h6>{{familia_kilometraje.nombre}}</h6>
+            <p>{{familia_kilometraje.descripcion}}</p>
+            <div id="container-kilometrajes" class="btn-group-toggle flex-wrap mr-2 mx-auto text-center" role="group"
+              data-toggle="buttons">
+            </div>
+          </div>
+          {% endif %}
+
+          {% for familia in familias_servicios %}
+          <div class="my-3">
+            <h6>{{familia.nombre}}</h6>
+            <p>{{familia.descripcion}}</p>
+            {% for servicio in servicios %}
+            {% if servicio.familia == familia.id %}
+            <button data-toggle="tooltip" data-placement="top"
+              title="{{servicio.descripcion}}. Costo: ${{servicio.costo|floatformat:2}}" type="button"
+              class="btn text-primary btn-block border shadow my-3 py-3">
+              <i class="fas fa-toolbox"></i>
+              {{servicio.nombre}}
+              <div class="custom-control custom-switch d-inline float-right">
+                <input name="servicio" type="checkbox" class="custom-control-input" id="{{servicio.id}}"
+                  value="{{servicio.id}}" data-express="{{servicio.express}}" />
+                <label class="custom-control-label" for="{{servicio.id}}"></label>
+              </div>
+            </button>
+            {% endif %}
+            {% endfor %}
+          </div>
+          {% endfor %}
+
+          <div class="my-3">
+            <div data-toggle="tooltip" class="text-center text-primary border shadow-sm my-3 py-3 px-3">
+              <div class="custom-control custom-switch d-inline float-center">
+                <input id="servicio_otros_check" type="checkbox" class="custom-control-input" />
+                <label class="custom-control-label" for="servicio_otros_check">Observaciones</label>
+              </div>
+              <textarea id="servicio_otros" name="servicio_otros" class="form-control" rows="3"
+                placeholder="¿Tiene algo mas que mencionar? Escribalo aqui..." style="display: none;"
+                data-nombre="Observaciones"></textarea>
+              <script>
+                $("#servicio_otros_check").click(function () {
+                  $("#servicio_otros").fadeToggle();
+                })
+              </script>
+            </div>
+          </div>
+        </div>
+
+        <!-- SQUEDULE -->
+        <div id="5" class="card-body mt-2 px-lg-5" style="display: none">
+          <h4 class="text-center mb-2"><i class="fas fa-calendar-alt fa-lg"></i></h4>
+          <h4 class="text-center mb-2">Programación de Cita</h4>
+          <p class="lead text-center">Seleccione la fecha y el horario de su cita.</p>
+          <div class="row">
+            <div class="col-lg text-center">
+              <p class="mt-3">1. Elegir Dia</p>
+              <div id="datepicker-container mx-auto">
+                <div id="datepicker-center">
+                  <div id="datepicker" class="text-center"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col text-center">
+              <p class="mt-3">2. Elija al asesor de servicio de su preferencia</p>
+              <div id="asesores_container" class="list-group">
+                {% for asesor in lista_asesores %}
+                <a data-id-asesor="{{asesor.cveasesor}}" type="button"
+                  class="list-group-item list-group-item-asesor list-group-item-action my-2 shadow {% if forloop.first %}active{% endif %}">
+                  <div class="row">
+                    <div class="col-2 text-left">
+                      <img src="{% static 'citas_mazda_col/img/asesores/'|add:asesor.cveasesor|add:'.jpg' %}"
+                        height="50px" class="rounded-circle shadow">
+                    </div>
+                    <div class="col text-center">
+                      <h6>{{asesor.nombre}}</h6>
+                    </div>
+                  </div>
+                </a>
+                {% endfor %}
+              </div>
+              <p class="mt-3">3. Horarios Disponibles</p>
+
+              <div id="toolbar" class="btn-group-toggle flex-wrap mt-3 px-3 py-3 mx-auto text-center" role="group"
+                data-toggle="buttons"></div>
+            </div>
+          </div>
+        </div>
+
+        <!--WHATSAPP-->
+        <div id="6" class="card-body text-center" style="display: none">
+
+          {% if core_api %}
+          <h4 class="text-center mb-2"><i class="fab fa-whatsapp fa-lg"></i></h4>
+          <h4 class="text-center mb-2">Notificaciones via WhatsApp</h4>
+          <p class="lead text-center">Pueden incluir alertas del cambio de estado de su vehículo.</p>
+          <div class="custom-control custom-checkbox my-3">
+            <input name="notificaciones-whatsapp" type="checkbox" class="custom-control-input" id="whatsapp" />
+            <label class="custom-control-label" for="whatsapp">Deseo recibir notificaciones</label>
+          </div>
+          {% else %}
+          <h4 class="text-center mb-2"><i class="far fa-envelope fa-lg"></i></h4>
+          <h4 class="text-center mb-2">Notificaciones por E-Mail</h4>
+          <p class="lead text-center">Recibirá los detalles de su cita vía e-mail</p>
+          {% endif %}
+        </div>
+      </form>
+
+      <!-- SUBMIT -->
+      <div class="card-footer">
+        <button id="back" type="button" class="btn btn-nav btn-light border float-left shadow"
+          style="display: none">Atrás</button>
+        <button id="finish" data-toggle="modal" data-target="#modal_review" type="button"
+          class="btn btn-nav btn-primary border float-right shadow confirm" style="display: none">Terminar</button>
+        <button id="next" type="button" class="btn btn-nav btn-primary border float-right shadow">Continuar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal_review" data-backdrop="static" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body bg-light">
+        <h4 class="text-center"></h4>
+        <p class="lead"></p>
+
+        <div class="spinner text-center my-auto">
+          <div class="spinner-border text-info" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+
+        <div class="ready text-center my-auto" style="display: none">
+          <h4 class="text-center my-2">
+            <i class="fas fa-check-circle fa-lg"></i>
+          </h4>
+          <h4 class="text-center my-2">¡Todo Listo!</h4>
+
+          <p class="lead text-center my-2">
+            Si quiere consultar el progreso de su vehículo ingresé al siguiente link:
+          </p>
+
+          <a href="{% url 'tracker_pro_login' %}" class="btn btn-primary border shadow-sm my-2">
+            <i class="fas fa-poll-h fa-lg"></i>
+            Ir a tracker
+          </a>
+
+          <div class="mt-5">
+            <a href="{% url 'client_new' %}" class="btn btn-light shadow">
+              Volver al inicio
+            </a>
+          </div>
+        </div>
+
+        <div class="error-post text-center my-auto" style="display: none">
+          <h5 class="text-center my-2">
+            <i class="fas fa-check-circle fa-lg"></i>
+          </h5>
+          <h5 class="text-center my-2">Estamos presentando inconvenientes técnicos</h5>
+          <p class="lead text-center my-2">Estamos teniendo problemas para agendar su cita, por favor vuelva a
+            intertarlo más tarde</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="cita_existente" data-backdrop="static" data-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div id="alerta_cita_actual" class="my-5 text-center">
+          <h5> Este numero de placas ya cuenta con una cita</h5>
+          <div id="reagendar_group" class="text-center">
+            <a href="{% url 'client_reschedule' %}" class="btn btn-primary my-3 shadow">
+              <i class="far fa-calendar-alt fa-lg"></i>
+              Reagendar Cita
+            </a>
+            <a href="{% url 'client_delete' %}" class="btn btn-bubblegum my-3 shadow">
+              <i class="fas fa-times fa-lg"></i>
+              Cancelar Cita
+            </a>
+          </div>
+          <div class="my-3">
+            <a href="{% url 'tracker_pro_login' %}" class="btn btn-primary shadow">
+              <i class="fas fa-poll-h fa-lg"></i>
+              Ir a Tracker
+            </a>
+          </div>
+          <div class="mt-5">
+            <a href="{% url 'client_new' %}" class="btn btn-light shadow">
+              Volver al inicio
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
+  NAVEGATION
+-->
+<script>
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+
+  function bloquear_botones() {
+    $(".btn-nav").each(function (index, boton) {
+      $(boton).prop('disabled', true);
+    })
+  }
+
+  function desbloquear_botones() {
+    $(".btn-nav").each(function (index, boton) {
+      $(boton).prop('disabled', false);
+    })
+  }
+
+  var current_form = 0;
+  var last_form = $(".card-body").length - 1;
+
+  $("#next").click(function () {
+    if (current_form < last_form) {
+      // VALIDAR DATA DE LA TARJETA ACTUAL
+      data_is_valid = current_card_data($("#" + current_form));
+      if (current_form == 2) {
+        services = get_services($("#" + current_form));
+      }
+      if (data_is_valid) {
+        // DESVANECER TARJETA ACTUAL Y  MOSTRAR EL PASO SIGUIENTE SI NO SE ENCUENTRA EN LA ULTIMA
+        $("#" + current_form).fadeOut("fast", function () {
+          bloquear_botones();
+          current_form = current_form + 1;
+          $("#" + current_form).fadeIn("fast", desbloquear_botones());
+
+          // SI LA TARJETA ACTUAL NO ES LA PRIMERA MOSTRAR EL BOTON "REGRESAR"
+          if (current_form > 0) {
+            $("#back").fadeIn("fast");
+          }
+
+          // SI LA TARJETA ACTUAL ES LA ULTIMA OCULTAR EL BOTON "SIGUIENTE" MOSTRAR EL BOTON DE CONFIRMACION
+          if (current_form == last_form) {
+            $("#next").fadeOut("fast", function () {
+              $("#finish").fadeIn("fast");
+            });
+          }
+        });
+      } else {
+        desbloquear_botones();
+      }
+    }
+  });
+
+  $("#back").click(function () {
+    if (current_form > 0) {
+      $("#" + current_form).fadeOut("fast", function () {
+        current_form = current_form - 1;
+
+        if (current_form <= 0) {
+          $("#back").fadeOut("fast");
+        }
+
+        bloquear_botones();
+        $("#" + current_form).fadeIn("fast", desbloquear_botones());
+
+        if (current_form != last_form) {
+          $("#finish").fadeOut("fast", function () {
+            $("#next").fadeIn("fast");
+          });
+        }
+      });
+    }
+  });
+</script>
+
+<!--
+  VERIFICATIONS
+-->
+<script>
+  function current_card_data(current_card_body) {
+    let inputs = $(current_card_body).find(".form-control");
+    let checks = $(current_card_body).find(".custom-control-input:required");
+    let horas = $(current_card_body).find("input:radio[name=hora]");
+    let servicios_op = $(current_card_body).find("input[name=servicio]");
+    let input_correo = $(current_card_body).find("input[name=correo]");
+    let placas = $(current_card_body).find("input[name=no_placas]");
+    var valid = true;
+
+    $(inputs).each(function (index, input) {
+      if (!($(this).data("nombre") == "Color del vehiculo" || $(this).data("nombre") == "Observaciones" || $(this).data("nombre") == "Numero de identificacion vehicular (NIV o VIN)")) {
+        if (!$(this).val()) {
+          $(this).invalid = true;
+          let item_nombre = $(this).data("nombre");
+          valid = false;
+          alert(`El campo "${item_nombre}" es obligatorio`);
+        }
+      }
+    });
+
+    $(checks).each(function () {
+      if (!this.checked) {
+        $(this).invalid = true;
+        valid = false;
+      }
+    });
+
+    if (horas.length > 0) {
+      let horas_de_citas = $(horas).filter(":checked");
+      if (horas_de_citas.length == 0) {
+        valid = false;
+        alert(`Por favor, seleccione una hora para su cita`);
+      }
+    }
+
+    if (servicios_op.length > 0) {
+      let servicios_select = $(servicios_op).filter(":checked");
+      if (servicios_select.length == 0) {
+        valid = false;
+        alert(`Por favor, seleccione un servicio para continuar`);
+      }
+    }
+
+    if (input_correo.length > 0) {
+      let usr_correo = $(input_correo).first().val();
+      if (!usr_correo.match(/[\w-\.]+@([\w-]+\.)+[\w-]{2,4}/g)) {
+        valid = false;
+        alert("Por favor, ingresa una dirección de correo valida");
+      }
+    }
+
+    if (placas.length > 0) {
+      data = {};
+      data.validacion_placas = true;
+      data.placas = $(placas).val();
+
+      $.ajax({
+        type: "post", // "post" "get" "delete" "put"
+        data: data, // PREFERIBLEMENTE JSON
+        cache: false,
+        headers: {
+          "X-CSRFToken": Cookies.get('csrftoken')
+        },
+        success: function () {
+          $("#alerta_cita_actual").fadeOut();
+        },
+        error: function () {
+          $(document).trigger("cita_existente");
+        }
+      });
+    }
+
+    // Checkbox de observaciones
+    let observaciones_checkbox = $(current_card_body).find("#servicio_otros_check");
+    if (observaciones_checkbox.length) {
+      if ($(observaciones_checkbox).is(":checked")) {
+        let observaciones = $("#servicio_otros").val();
+        if (!observaciones) {
+          valid = false;
+          alert("Por favor escriba sus observaciones");
+        }
+      }
+    }
+
+    return valid;
+  }
+
+  function get_services(current_card_body) {
+    let data = {};
+    data.servicios = true;
+    data.id_modelo = $("#modelo").val();
+    $.ajax({
+      type: "post",
+      data: data,
+      cache: false,
+      headers: {
+        "X-CSRFToken": Cookies.get('csrftoken')
+      },
+      success: function (response) {
+        console.log(response)
+        $("#container-kilometrajes").empty()
+        $(response).each(function (index, element) {
+          $("#container-kilometrajes").append(`
+            <label class="btn btn-outline-primary shadow-sm mt-2" data-toggle="tooltip" data-placement="top" title="${element.descripcion}. Costo: ${element.costo}" >
+              <input type="radio" name="servicio" value="${element.id}" data-express="${element.express}"/>
+              ${element.nombre}
+            </label>
+          `)
+        })
+      }
+    });
+  }
+</script>
+
+<script>
+  $(document).on("click", '.list-group-item', function () {
+    let target = this
+    let previous = $(target).closest(".list-group").children(".active");
+
+    previous.removeClass('active');
+    $(target).addClass('active');
+  });
+</script>
+
+<!--
+  GUARDAR
+-->
+<script>
+  $(".confirm").click(function name(params) {
+    $("#modal_review").modal("show");
+    let data = {};
+    let parsed_data = $("#form").serializeArray()
+    let consultant = $(".list-group-item-asesor.active").data("id-asesor");
+
+    parsed_data.push({ name: "fecha", value: $("#datepicker").val() });
+    parsed_data.push({ name: "id_asesor", value: consultant });
+    parsed_data.push({ name: "color", value: "" });
+    parsed_data.push({ name: "vin", value: "" });
+
+    console.log(data);
+
+    $.ajax({
+      url: "{% url 'api_agenda' %}",
+      type: "post", // "post" "get" "delete" "put"
+      data: parsed_data, // PREFERIBLEMENTE JSON
+      cache: false,
+      headers: {
+        "X-CSRFToken": Cookies.get("csrftoken"),
+      },
+      success: function () {
+        $(".spinner").fadeOut(function () {
+          $(".ready").fadeIn();
+        });
+      },
+      error: function () {
+        $(".spinner").fadeOut(function () {
+          $(".error-post").fadeIn();
+        });
+      },
+    });
+  });
+</script>
+
+<!--CRM-->
+<script>
+  $("#placas").change(function () {
+    let placas = $(this).val();
+    let data_crm = {};
+    data_crm.accion = "obtenerDetalleVehiculoPorMatricula";
+    data_crm.placa = placas;
+    console.log(data_crm)
+
+    $.ajax({
+      url: "http://capnet.ddns.net:3000/capnet_wapp/api/crm/index",
+      type: "post",
+      data: JSON.stringify(data_crm),
+      dataType: "json",
+      contentType: "application/json",
+      success: function (response) {
+        var crm_data = response;
+        console.log(crm_data);
+        console.log(response);
+        $("#vin").val(crm_data.datos.vehiculo.detalle.vin);
+        $("#modelo").val(crm_data.datos.vehiculo.detalle.modelo);
+        $("#año").val(crm_data.datos.vehiculo.detalle.anio);
+        $("#color").val(crm_data.datos.vehiculo.detalle.color);
+        $("#nombre").val(crm_data.datos.vehiculo.detalle.nombre_cliente);
+        $("#phone").val(crm_data.datos.vehiculo.detalle.celular);
+        $("#email").val(crm_data.datos.vehiculo.detalle.email);
+      }
+    });
+  });
+</script>
+
+<!--CITA EXISTENTE-->
+<script>
+  $(document).on("cita_existente", function () {
+    $('#cita_existente').modal('toggle');
+  })
+</script>
+
+<!-- Filtrar asesores express -->
+<script>
+  $(document).on("click", "input[name='servicio']", function () {
+    let input = this;
+    if ($(input).is(":checked")) {
+      let servicio_express = $(input).data("express");
+
+      if ($("#servicio_otros_check").is(":checked") && $("#servicio_otros").val()) {
+        servicio_express = "false";
+      }
+
+      let data = {};
+      data.asesor = true;
+      data.express = servicio_express;
+
+      $.ajax({
+        type: "post",
+        data: data,
+        cache: false,
+        headers: {
+          "X-CSRFToken": Cookies.get('csrftoken')
+        },
+        success: function (response) {
+          console.log(response)
+          $("#asesores_container").empty()
+          $(response).each(function (index, element) {
+            $("#asesores_container").append(`
+              <a data-id-asesor="${element.cveasesor}" type="button"
+                class="list-group-item list-group-item-asesor list-group-item-action my-2 shadow">
+                <div class="row">
+                  <div class="col-2 text-left">
+                    <img src="/static/citas_mazda_col/img/asesores/${element.cveasesor}.jpg"
+                      height="50px" class="rounded-circle shadow">
+                  </div>
+                  <div class="col text-center">
+                    <h6>${element.nombre}</h6>
+                  </div>
+                </div>
+              </a>
+            `)
+          })
+        }
+      });
+    }
+  });
+
+  $(document).on("click", "#servicio_otros_check", function () {
+    let servicio_express = $("input[name='servicio']:checked").data("express");
+
+    if ($("#servicio_otros_check").is(":checked") && $("#servicio_otros").val()) {
+      servicio_express = "false";
+    }
+
+    if (servicio_express) {
+      let data = {};
+      data.asesor = true;
+      data.express = servicio_express;
+
+      $.ajax({
+        type: "post",
+        data: data,
+        cache: false,
+        headers: {
+          "X-CSRFToken": Cookies.get('csrftoken')
+        },
+        success: function (response) {
+          console.log(response)
+          $("#asesores_container").empty()
+          $(response).each(function (index, element) {
+            $("#asesores_container").append(`
+              <a data-id-asesor="${element.cveasesor}" type="button"
+                class="list-group-item list-group-item-asesor list-group-item-action my-2 shadow">
+                <div class="row">
+                  <div class="col-2 text-left">
+                    <img src="/static/citas_mazda_col/img/asesores/${element.cveasesor}.jpg"
+                      height="50px" class="rounded-circle shadow">
+                  </div>
+                  <div class="col text-center">
+                    <h6>${element.nombre}</h6>
+                  </div>
+                </div>
+              </a>
+            `)
+          })
+        }
+      });
+    }
+  });
+
+  $(document).on("keyup", "#servicio_otros", function () {
+    let servicio_express = $("input[name='servicio']:checked").data("express");
+
+    if ($("#servicio_otros_check").is(":checked") && $("#servicio_otros").val()) {
+      servicio_express = "false";
+    }
+
+    if (servicio_express) {
+      let data = {};
+      data.asesor = true;
+      data.express = servicio_express;
+
+      $.ajax({
+        type: "post",
+        data: data,
+        cache: false,
+        headers: {
+          "X-CSRFToken": Cookies.get('csrftoken')
+        },
+        success: function (response) {
+          console.log(response)
+          $("#asesores_container").empty()
+          $(response).each(function (index, element) {
+            $("#asesores_container").append(`
+              <a data-id-asesor="${element.cveasesor}" type="button"
+                class="list-group-item list-group-item-asesor list-group-item-action my-2 shadow">
+                <div class="row">
+                  <div class="col-2 text-left">
+                    <img src="/static/citas_mazda_col/img/asesores/${element.cveasesor}.jpg"
+                      height="50px" class="rounded-circle shadow">
+                  </div>
+                  <div class="col text-center">
+                    <h6>${element.nombre}</h6>
+                  </div>
+                </div>
+              </a>
+            `)
+          })
+        }
+      });
+    }
+  });
+</script>
+{% endblock %}

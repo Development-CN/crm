@@ -1,0 +1,102 @@
+{% extends "citas_mazda_col_pro/carousel/slide.html" %}
+
+{% block slide_title %}
+SERVICIO REQUERIDO
+{% endblock %}
+
+{% block slide_subtitle %}
+SELECCIONE EL SERVICIO QUE NECESITE, LE ASIGNAREMOS EL MEJOR EXPERTO TÉCNICO PARA SUS NECESIDADES.
+{% endblock %}
+
+{% block slide_content %}
+<div class="mb-4">
+  <label for="service" class="form-label">Servicio requerido:</label>
+  <div class="dropdown">
+    <div class="d-grid gap-1">
+      <button type="button" class="btn btn-link text-decoration-none dropdown-toggle" data-bs-toggle="dropdown"
+        data-bs-auto-close="outside">
+        Servicio
+      </button>
+      <div class="dropdown-menu w-100 p-2">
+        <ul class="list-group list-group-flush">
+          {% for service in services %}
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col">
+                <label for="service_radio_{{ service.id }}" class="service-name">
+                  {{ service.name }}
+                </label>
+              </div>
+              <div class="col-3 d-none">${{ service.price }}</div>
+              <div class="col-1 text-end">
+                <input class="form-check-input" type="radio" name="service" id="service_radio_{{ service.id }}"
+                  value="{{ service.id }}">
+                <label class="form-check-label" for="service_radio_{{ service.id }}"></label>
+              </div>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mb-4">
+  <label for="service" class="form-label">Otros Servicios:</label>
+  <div class="dropdown">
+    <div class="d-grid gap-2">
+      <button type="button" class="btn btn-link text-decoration-none dropdown-toggle" data-bs-toggle="dropdown"
+        data-bs-auto-close="outside">
+        Otro servicio
+      </button>
+      <div class="dropdown-menu w-100 p-2">
+        <ul class="list-group list-group-flush">
+          {% for service in other_services %}
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col">
+                <label for="service_radio_{{ service.id }}" class="service-name">
+                  {{ service.name }}
+                </label>
+              </div>
+              <div class="col-3 d-none">${{ service.price }}</div>
+              <div class="col-1 text-end">
+                <div class="form-check">
+                  <input id="service_radio_{{ service.id }}" name="other_services" class="form-check-input"
+                    type="checkbox" value="{{ service.id }}">
+                  <label class="form-check-label" for="service_radio_{{ service.id }}"></label>
+                </div>
+              </div>
+            </div>
+          </li>
+          {% endfor %}
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col">
+                <label for="service_radio_other" class="service-name">
+                  Otro
+                </label>
+              </div>
+              <div class="col-3"></div>
+              <div class="col-1 text-end">
+                <div class="form-check">
+                  <input id="service_radio_other" class="form-check-input" type="checkbox" name="other_services"
+                    value="other">
+                  <label class="form-check-label" for="service_radio_other"></label>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="additional_service_container" class="mb-5 pb-4">
+  <label for="additional_service">¿Requieres otro servicio que no se encuentra en lista?</label>
+  <input id="additional_service" type="text" class="form-control text-start" placeholder="Describa aquí tu necesidad"
+    data-cancellation_reason="1">
+</div>
+{% endblock %}

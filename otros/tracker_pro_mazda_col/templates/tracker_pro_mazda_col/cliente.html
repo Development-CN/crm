@@ -1,0 +1,626 @@
+{% extends 'tracker_pro_mazda_col/base.html' %} {% block content %}
+{% load static %}
+
+<div class="row">
+  <div class="col-lg-7 col-md-8 col-sm mx-auto">
+
+    <!--BIENVENIDA-->
+    <div class="accordion" id="detalles-cliente">
+      <div class="card bg-white my-4 my-lg-5 mx-auto shadow">
+        <div class="card-header text-center" id="header-detalles-cliente">
+          <button class="btn btn-link text-center text-decoration-none" type="button" data-toggle="collapse"
+            data-target="#body-detalles-cliente">
+            <div class="row">
+              <div class="col-1 text-right">
+                <h5 class="my-auto"><i class="fas fa-user-circle fa-lg d-inline mr-4"></i></h5>
+              </div>
+              <div class="col">
+                <h5 class="my-auto">
+                  {% if cita %}
+                  {{cliente.first_name}}
+                  <h6>{{cliente.email}}</h6>
+                  {% else %}
+                  <h5>Bienvenido</h5>
+                  {% endif %}
+                </h5>
+              </div>
+            </div>
+          </button>
+        </div>
+
+        <div id="body-detalles-cliente" class="collapse" aria-labelledby="headingOne" data-parent="#detalles-cliente">
+          <div class="card-body">
+            <div class="container text-center">
+              <strong class="mb-1">Vehiculo: 
+              {% if cita %}
+                {{ cita.modelo_vehiculo }} {{cita.color_vehiculo}}
+              {% elif tracker %}
+                {{ tracker.details.vehiculo }}
+              {% endif %}
+              </strong>
+              {% if tracker %}
+              <h6><strong>Número de Orden: </strong> {{ tracker.details.no_orden }}</h6>
+              <h6><strong>Recepción: </strong> {{ tracker.details.fecha }} </li>
+              </h6>
+              <h6><strong>Asesor: </strong> {{ tracker.details.asesor }}</li>
+              </h6>
+              <h6><strong>Entrega: </strong> {{ tracker.details.hora_promesa|default:"" }}</li>
+              </h6>
+              {% else %}
+              <p class="lead my-3">A medida de que progrese su vehículo mostraremos más información de su orden</p>
+              {% endif %}
+
+              {% if cita %}
+              <a class="btn btn-bubblegum shadow my-3" href="{% url 'tracker_pro_logout' %}">
+                <i class="fas fa-sign-out-alt"></i>
+                Cerrar Sesion
+              </a>
+              {% endif %}
+
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-center">
+          <p class="text-muted">Detalles de la cuenta</p>
+        </div>
+      </div>
+    </div>
+
+    <!--TRACKER CLASICO-->
+    {% if fecha_hora_llegada %}
+    {% if tracker %}
+    <div class="card bg-white my-4 my-lg-5 mx-auto shadow">
+      <div class="card-body px-lg-5 px-2 text-center">
+        <h5 class="text-center mb-3">Progreso de Orden</h5>
+        <div class="row  text-center mx-auto no-gutters">
+          <div class="col {{tracker.e_recepcion}}">
+            <span style="font-size: 1.7em">
+              <i class="fas fa-car" id="{{tracker.e_recepcion}}"></i>
+            </span>
+          </div>
+          <div class="col {{tracker.e_asesor}}">
+            <span style="font-size: 1.7em">
+              <i class="fas fa-handshake" id="{{tracker.e_asesor}}"></i>
+            </span>
+          </div>
+          {% if tracker.chips > 1 %}
+          {% for n in tracker.range %}
+          <div
+            class="col {% if operacion.fin_tecnico %}completed{% elif operacion.inicio_tecnico %}active{% else %}inactive{% endif %}">
+            <span style="font-size: 1.7em">
+              <i class="fas fa-tools" id="completed"></i>
+            </span>
+          </div>
+          {% endfor %}
+          {% endif %}
+          <div class="col {{tracker.e_tecnico}}">
+            <span style="font-size: 1.7em">
+              <i class="fas fa-tools" id="{{tracker.e_tecnico}}"></i>
+            </span>
+          </div>
+          <div class="col {{tracker.e_lavado}}">
+            <span style="font-size: 1.7em">
+              <i class="fas fa-soap" id="{{tracker.e_lavado}}"></i>
+            </span>
+          </div>
+          <div class="col {{tracker.e_entrega}}">
+            <span style="font-size: 1.7em">
+              <i class="fas fa-check" id="{{tracker.e_entrega}}"></i>
+            </span>
+          </div>
+        </div>
+        <div class="mx-auto">
+          <ul class="progress-indicator custom-complex">
+            <li class="{{tracker.e_recepcion}}">
+              <!--<a href="#headingOne" >-->
+              <span class="bubble shadow-sm"></span>
+              Recepción
+              <!--</a>-->
+            </li>
+            <li class="{{tracker.e_asesor}}">
+              <!--<a href="#headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">-->
+              <span class="bubble shadow-sm"></span>
+              Asesor
+              <!--</a>-->
+            </li>
+            {% if tracker.chips > 1 %}
+            {% for operacion in tracker.operaciones %}
+            <li
+              class="{% if operacion.fin_tecnico %}completed{% elif operacion.inicio_tecnico %}active{% else %}inactive{% endif %}"
+              data-toggle="tooltip" data-placement="bottom" title="{{ tracker.operacion.servicio_capturado }}">
+              <span class="bubble shadow-sm"></span>
+              Servicio {{ forloop.counter }}
+            </li>
+            {% endfor %}
+            {% endif %}
+            <li class="{{tracker.e_tecnico}}" data-toggle="tooltip" data-placement="bottom"
+              title="{{ tracker.details.servicio_capturado }}">
+              <span class="bubble shadow-sm"></span>
+              Servicio {{tracker.chips}}
+            </li>
+            <li class="{{tracker.e_lavado}}">
+              <span class="bubble shadow-sm"></span>
+              Lavado
+            </li>
+            <li class="{{tracker.e_entrega}}">
+              <span class="bubble shadow-sm"></span>
+              Entrega
+            </li>
+          </ul>
+        </div>
+        <div class="my-3 mx-3">
+          <p class="lead">{{tracker.m_actual}}</p>
+        </div>
+
+        <!--DOCUMENTOS DIGITALES-->
+        <div class="my-4">
+          <h6>Documentos digitales</h6>
+          {% for nombre, url in documentos_digitales.items %}
+          <button type="button" class="btn btn-primary my-3 shadow" onclick="window.location.href='{{url}}' ">
+            {{nombre}}
+          </button>
+          {% endfor %}
+
+          {% if hoja_multipuntos %}
+          <div class="mt-3">
+            <a class="btn btn-primary shadow" href="/calidad_pdf/{{tracker.details.no_orden}}">
+              <i class="fas fa-file-pdf fa-lg"></i>
+              Hoja Multipuntos PDF
+            </a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <div class="card bg-white my-4 my-lg-5 mx-auto shadow">
+      <div class="card-body px-lg-5 text-center">
+        <h5 class="text-center mb-3">Progreso de Orden</h5>
+        <p class="lead text-center">
+          Su vehículo ha sido recibido y pronto podrá ver el progreso de su orden.
+        </p>
+      </div>
+    </div>
+    {% endif %}
+    {% endif %}
+
+    {% if log.fecha_hora_confirmacion_cita and not entrevista %}
+    <div class="card bg-white my-4 my-lg-5 mx-auto shadow">
+      <div class="card-body px-lg-5 text-center">
+        <h5 class="text-left">
+          <span class="badge badge-pill bg-bubblegum text-light shadow blink">
+            <i class="fas fa-exclamation-circle"></i>
+            Nuevo
+          </span>
+        </h5>
+        <h5 class="text-center mb-3">
+          Entrevista profesional
+        </h5>
+        <p class="lead">
+          Si presenta alguna novedad o ruido, diligencie entrevista profesional.
+        <p>
+        <div class="text-center">
+          <a href="{% url 'tracker_pro_entrevista' %}" class="btn btn-primary my-3 shadow">
+            Llenar entrevista profesional
+          </a>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- CONFIRMAR CITA -->
+    {% if cita %}
+    {% if not log.fecha_hora_confirmacion_cita %}
+    <div class="card bg-white my-4 my-lg-5 mx-auto shadow">
+      <div class="card-body px-lg-5 text-center">
+        <h5 class="text-left">
+          <span class="badge badge-pill bg-bubblegum text-light shadow blink">
+            <i class="fas fa-exclamation-circle"></i>
+            Nuevo
+          </span>
+        </h5>
+        <h5 class="text-center mb-3">Confirmación de Cita</h5>
+        <p class="lead text-center">
+          Por favor confirme los detalles de su cita.
+        </p>
+
+        <button type="button" class="btn btn-primary border shadow" data-toggle="modal"
+          data-target="#confirmacion_cita_modal">
+          <i class="fas fa-check fa-lg"></i>
+          Confirmar Cita
+        </button>
+      </div>
+    </div>
+    {% endif %}
+    {% endif %}
+
+    <!--DETALLES-->
+    <div class="card bg-white my-4 my-lg-5 mx-auto shadow">
+      <div class="card-body mt-3 px-lg-5 text-center">
+        <h5 class="text-center mb-3">
+          Detalles de la Cita
+        </h5>
+        <div class="row">
+          <div class="col-sm col-lg py-2 py-lg-3 px-3 text-left">
+
+            {% if cita %}
+            <h5>Agenda</h5>
+            <div class="card mx-auto my-3 bg-primary text-left text-light shadow">
+              <div class="card-body">
+                <h5>Fecha:</h5>
+                <h5 class="mb-3">{{cita.fecha_cita}}</h5>
+                <h5>Hora:</h5>
+                <h5 class="mb-3">{{cita.hora_cita}}</h5>
+
+                <h6 class="mb-1">Telefono:</h6>
+                <h6 class="mb-3">
+                  <a href="tel:{{agencia_telefono}}" style="color:white">{{agencia_telefono}}</a>
+                </h6>
+
+                <h6 class="mb-1">Correo:</h6>
+                <h6 class="mb-3">
+                  <a href="mailto:{{agencia_correo}}" style="color:white">{{agencia_correo}}</a>
+                </h6>
+
+              </div>
+            </div>
+            {% else %}
+            <div class="card mx-auto my-3 bg-primary text-left text-light shadow">
+              <div class="card-body">
+                <h5>Servicio:</h5>
+                <h5 class="mb-3">{{ tracker.details.servicio_capturado }}</h5>
+                
+                {% if tracker.detalle.asesor %}
+                <h5>Asesor:</h5>
+                <h5 class="mb-3">{{ tracker.details.asesor }}</h5>
+                {% endif %}
+
+                {% if tracker.detalle.tecnico %}
+                <h5>Tecnico:</h5>
+                <h5 class="mb-3">{{ tracker.details.tecnico }}</h5>
+                {% endif %}
+
+              </div>
+            </div>
+            {% endif %}
+
+          </div>
+          <div class="col-sm col-lg-8 py-3 text-left">
+            <h5>Mapa de la Agencia</h5>
+            <div class="embed-responsive embed-responsive-4by3 rounded shadow">
+              <iframe class="embed-responsive-item" frameborder="0"
+                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA4er_yBP21VSoLpO48pNxtmEqo1ZKaVuA&q={{agencia_nombre_maps}}"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--MODIFICAR CITA-->
+    {% if cita %}
+    <div class="card bg-white my-4 my-lg-5 mx-auto shadow">
+      <div class="card-body mt-3 px-lg-5 text-center">
+        <h5 class="text-center mb-3">
+          Modificacion de Cita
+        </h5>
+        <div class="text-center">
+          <a href="{% url 'client_reschedule' %}" class="btn btn-primary my-3 shadow">
+            <i class="far fa-calendar-alt fa-lg"></i>
+            Reagendar Cita
+          </a>
+          <a href="{% url 'client_delete' %}" class="btn btn-bubblegum my-3 shadow">
+            <i class="fas fa-times fa-lg"></i>
+            Cancelar Cita
+          </a>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+{% comment %}
+<div class="fixed-bottom text-right mb-3 mb-lg-5 mr-3 mr-lg-5">
+  <a href="{% url 'django_chatter:index' %}" class="btn btn-primary rounded-pill shadow text-center px-3 py-2">
+    <i class="fas fa-comments fa-lg"></i>
+    Iniciar Chat
+  </a>
+</div>
+{% endcomment %}
+
+<!--MODAL CONFIRMACION DE CITA-->
+<div class="modal fade" data-backdrop="static" tabindex="-1" id="confirmacion_cita_modal">
+  <div class="modal-dialog modal-dialog-centered modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="ready text-center my-auto">
+          <h4 class="text-center my-2">
+            <i class="fas fa-check-circle fa-lg"></i>
+          </h4>
+          <h4 class="text-center my-2">Todo Listo!</h4>
+          <button class="btn btn-primary shadow my-2 confirmar-cita">
+            <i class="fas fa-poll-h fa-lg"></i>
+            Regresar a {{ marca }} Tracker
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--LIGHTGALLERY POR EVIDENCIA-->
+<script type="text/javascript">
+  $(document).ready(function () {
+    $(".lightgallery").each(function () {
+      $(this).lightGallery();
+    });
+  });
+</script>
+
+<!--CONFIRMACION DE CITA-->
+<script>
+  $(".confirmar-cita").click(function () {
+    let data = {};
+    data.confirmar_cita = true;
+    $.ajax({
+      type: "post", // "post" "get" "delete" "put"
+      data: data, // PREFERIBLEMENTE JSON
+      cache: false,
+      headers: {
+        "X-CSRFToken": Cookies.get('csrftoken')
+      }
+    })
+      .promise()
+      .done(function () {
+        location.reload();
+      });
+  })
+</script>
+
+{% comment %}
+<section>
+  <div class="barra mx-auto mb-4 text-center">
+    <h5 style="color: #000000" class="card-title mb-3">Progreso de Orden</h5>
+    <div class=" container row  text-center mx-auto no-gutters">
+      <div class="col {{e_recepcion}}">
+        <span style="font-size: 1.7em">
+          <i class="fas fa-car" id="{{e_recepcion}}"></i>
+        </span>
+      </div>
+      <div class="col {{e_asesor}}">
+        <span style="font-size: 1.7em">
+          <i class="fas fa-handshake" id="{{e_asesor}}"></i>
+        </span>
+      </div>
+      {% if chips > 1 %}
+      {% for n in range %}
+      <div class="col completed">
+        <span style="font-size: 1.7em">
+          <i class="fas fa-tools" id="completed"></i>
+        </span>
+      </div>
+      {% endfor %}
+      {% endif %}
+      <div class="col {{e_tecnico}}">
+        <span style="font-size: 1.7em">
+          <i class="fas fa-tools" id="{{e_tecnico}}"></i>
+        </span>
+      </div>
+      <div class="col {{e_lavado}}">
+        <span style="font-size: 1.7em">
+          <i class="fas fa-shower" id="{{e_lavado}}"></i>
+        </span>
+      </div>
+      <div class="col {{e_entrega}}">
+        <span style="font-size: 1.7em">
+          <i class="fas fa-check" id="{{e_entrega}}"></i>
+        </span>
+      </div>
+    </div>
+    <div class="container mx-auto">
+      <ul class="progress-indicator custom-complex">
+        <li class="{{e_recepcion}}">
+          <!--<a href="#headingOne" >-->
+          <span class="bubble shadow-sm"></span>
+          Recepción
+          <!--</a>-->
+        </li>
+        <li class="{{e_asesor}}">
+          <!--<a href="#headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">-->
+          <span class="bubble shadow-sm"></span>
+          Asesor
+          <!--</a>-->
+        </li>
+        {% if chips > 1 %}
+        {% for operacion in operaciones %}
+        <li class="completed" data-toggle="tooltip" data-placement="bottom" title="{{ operacion.servicio_capturado }}">
+          <span class="bubble shadow-sm"></span>
+          Servicio {{ forloop.counter }}
+        </li>
+        {% endfor %}
+        {% endif %}
+        <li class="{{e_tecnico}}" data-toggle="tooltip" data-placement="bottom"
+          title="{{ details.servicio_capturado }}">
+          <!--<a href="#headingThree" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">-->
+          <span class="bubble shadow-sm"></span>
+          Servicio {{chips}}
+          <!--</a>-->
+        </li>
+        <li class="{{e_lavado}}">
+          <!--<a>-->
+          <span class="bubble shadow-sm"></span>
+          Lavado
+          <!--</a>-->
+        </li>
+        <li class="{{e_entrega}}">
+          <!--<a>-->
+          <span class="bubble shadow-sm"></span>
+          Entrega
+          <!--</a>-->
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container mb-2">
+    <div class="card-group mx-auto">
+      <div class="card card-round bg-light">
+        <div class="card-body">
+          <h5 class="card-title text-center">Número de Orden: {{ details.no_orden }}</h5>
+          <dl>
+            <li class="card-text mb-1"><b>Placa: </b> {{ details.placas }} </li>
+            <li class="card-text mb-1"><b>Vehículo: </b> {{ details.vehiculo }} </li>
+            <li class="card-text mb-1"><b>Recepción: </b> {{details.fecha}} </li>
+            <li class="card-text mb-1"><b>Asesor: </b> {{ details.asesor }}</li>
+            <li class="card-text mb-1"><b>Entrega: </b> {{ details.hora_promesa }}</li>
+          </dl>
+        </div>
+      </div>
+      <div class="card text-white card-round" style="background-color: #122260">
+        <div class="card-body">
+          <h5 class="card-title text-center">{{serv_actual}}</h5>
+          <p align="center">{{m_actual}}</p>
+          <p align="center">Si desea comunicarse con nosotros: </p>
+          <p align="center">
+            <a href="tel:{{details.telefono_agencia}}">Telefono: {{details.telefono_agencia}}</a>
+          </p>
+        </div>
+        <div class="card-footer">
+          <small>Datos Actualizados Hace {{u_actualizacion}}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container mb-4">
+    <div class="row">
+      <div class="col-sm">
+        <div class="accordion card-accordion mx-auto" id="accordionExample">
+          <div class="card rounded-top card-accordion">
+            <div class="card-header" id="headingOne">
+              <h2 class="mb-0">
+                <div class="row">
+                  <div class="col-sm">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                      data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                      Detalles de Recepción
+                    </button>
+              </h2>
+            </div>
+
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+              <a class="list-group-item">
+                <div class="d-flex w-100 justify-content-between">
+                  <h6 class="mb-1">Anfitrión</h6>
+                  <small class="text-muted"></small>
+                </div>
+                <p class="mb-1">Fecha De Llegada: {{ details.hora_llegada}}</p>
+              </a>
+            </div>
+          </div>
+          <div class="card card-accordion">
+            <div class="card-header" id="headingTwo">
+              <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo"
+                  aria-expanded="false" aria-controls="collapseTwo">
+                  <!-- <span class="badge badge-pill badge-success pull-right">Terminado</span> -->
+                  Detalles De Asesor
+                </button>
+              </h2>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+              <a class="list-group-item">
+                <div class="d-flex w-100 justify-content-between">
+                  <h6 class="mb-1"><b>Asesor de servicio:</b> {{ details.asesor }}</h6>
+                  <small class="text-muted"></small>
+                </div>
+                <p class="mb-3"><b>Servicio Capturado: </b>{{details.servicio_capturado}}</p>
+
+                <div class="container">
+                  <div class="row">
+                    <div class="mb-2 col-sm">
+                      <button type="button" class="btn btn-primary btn-block rounded-pill"
+                        onclick="window.location.href='http://cpnetwork.grupomavesa.com.ec:3010/api/ri/inventario/getDocumentoPdf/folio/{{details.id_hd}}/origen/2.pdf'">
+                        Ver Orden de Servicio
+                      </button>
+                    </div>
+
+                    <div class="mb-2 col-sm">
+                      <button type="button" class="btn btn-primary btn-block rounded-pill"
+                        onclick="window.location.href='http://cpnetwork.grupomavesa.com.ec:3010/api/ri/inventario/getDocumentoPdf/folio/{{details.id_hd}}/origen/3.pdf'">
+                        Ver Evidencia Fotográfica
+                      </button>
+                    </div>
+
+
+                    <div class="mb-2 col-sm">
+                      <button id="evidencias" type="button mx-auto" class="btn btn-primary btn-block rounded-pill">
+                        <i class="fas fa-images"></i>
+                        Ver Evidencias
+                      </button>
+                    </div>
+
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="card card-accordion">
+            <div class="card-header" id="headingThree">
+              <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree"
+                  aria-expanded="true" aria-controls="collapseThree">
+                  <!-- <span class="badge badge-pill badge-warning pull-right">En Curso</span> -->
+                  Detalles De Servicios
+                </button>
+              </h2>
+            </div>
+            <div id="collapseThree" class="collapse show" aria-labelledby="headingThree"
+              data-parent="#accordionExample">
+              <div class="list-group-item">
+                {% if chips > 1 %}
+                {% for operacion in operaciones %}
+                <div>
+                  <h5>Servicio {{ forloop.counter }}</h5>
+                  <p class="mb-0"><b>Servicio:</b> {{ operacion.servicio_capturado }}</p>
+                  <p class="mb-0"><b>Técnico:</b> {{operacion.tecnico}}</p>
+                  <p class="mb-0"><b>Inicio:</b> {{ operacion.inicio_tecnico }}</p>
+                  <p class="mb-3"><b>Fin:</b> {{ operacion.fin_tecnico }}</p>
+                </div>
+                {% endfor %}
+                {% endif %}
+                <div>
+                  <h5>Último Servicio</h5>
+                  <p class="mb-0"><b>Servicio:</b> {{details.servicio_capturado}}</p>
+                  <p class="mb-0"><b>Técnico:</b> {{details.tecnico}}</p>
+                  <p class="mb-0"><b>Inicio:</b> {{details.inicio_tecnico}}</p>
+                  <p class="mb-3"><b>Fin:</b> {{details.fin_tecnico}}</p>
+                </div>
+                <div class="container">
+                  <div class="row">
+                    <div class="mb-2 col-md-4 mx-auto">
+                      <a type="button" class="btn btn-primary btn-block rounded-pill"
+                        href="/calidad_pdf/{{details.no_orden}}" target="_blank">
+                        Revision de Calidad
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="bg-light">
+  <img src="{% static 'tracker_pro_mazda_col/img/logocn_r.png' %} " height="50" class=" align-center ml-3 mb-3 mt-3">
+</div>
+{% endcomment %}
+{% endblock %}

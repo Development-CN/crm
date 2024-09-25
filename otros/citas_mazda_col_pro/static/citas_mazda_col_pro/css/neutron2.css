@@ -1,0 +1,219 @@
+slide {
+  display: none;
+  opacity: 1;
+  -webkit-transition: opacity 0.35s ease-in-out;
+  -moz-transition: opacity 0.35s ease-in-out;
+  -ms-transition: opacity 0.35s ease-in-out;
+  -o-transition: opacity 0.35s ease-in-out;
+  transition: opacity 0.35s ease-in-out;
+}
+
+slide.fade {
+  opacity: 0;
+}
+
+.pika-lendar {
+  float: unset !important;
+  width: auto !important;
+  margin: 0px !important;
+}
+
+.pika-single {
+  border-radius: 10px !important;
+  background-color: #F1F1F3 !important;
+}
+
+.pika-label {
+  color: #A5002A !important;
+  background-color: #F1F1F3 !important;
+}
+
+.is-disabled {
+  background-color: #F1F1F3 !important;
+}
+
+.is-selected {
+  background-color: #F1F1F3 !important;
+  color: #A5002A !important;
+  font-weight: bolder !important;
+  box-shadow: none !important;
+}
+
+.pika-button.pika-day {
+  background-color: #F1F1F3 !important;
+  color: #848484 !important;
+}
+
+#col_button_back {
+  display: block;
+  opacity: 1;
+  -webkit-transition: opacity 0.35s ease-in-out;
+  -moz-transition: opacity 0.35s ease-in-out;
+  -ms-transition: opacity 0.35s ease-in-out;
+  -o-transition: opacity 0.35s ease-in-out;
+  transition: opacity 0.35s ease-in-out;
+}
+
+#col_button_back.fade {
+  display: none;
+  opacity: 0;
+}
+
+#col_button_continue {
+  display: block;
+  opacity: 1;
+  -webkit-transition: opacity 0.35s ease-in-out;
+  -moz-transition: opacity 0.35s ease-in-out;
+  -ms-transition: opacity 0.35s ease-in-out;
+  -o-transition: opacity 0.35s ease-in-out;
+  transition: opacity 0.35s ease-in-out;
+}
+
+#col_button_continue.fade {
+  display: none;
+  opacity: 0;
+}
+
+.form-check .form-check-input {
+  float: none;
+}
+
+.form-control {
+  border-top-width: 0px !important;
+  border-bottom-width: 3px !important;
+  border-left-width: 0px !important;
+  border-right-width: 0px !important;
+  border-color: lightgrey !important;
+  border-radius: 0px !important;
+  text-align: center !important;
+}
+
+.form-control:focus {
+  border-color: #A5002A !important;
+  box-shadow: none !important;
+}
+
+.btn-primary {
+  background-color: #A5002A !important;
+  border-color: #A5002A !important;
+}
+
+.btn-primary:hover {
+  background-color: #9B0020 !important;
+  border-color: #9B0020 !important;
+}
+
+.form-check .form-check-input:checked {
+  color: #A5002A !important;
+  background-color: #A5002A !important;
+  border-color: #A5002A !important;
+  box-shadow: none !important;
+}
+
+.slide-subtitle {
+  color: gray !important;
+  font-weight: 500 !important;
+}
+
+.slide-message {
+  font-weight: 500 !important;
+}
+
+.slide-content {
+  font-weight: 500 !important;
+}
+
+@font-face {
+  font-family: "MazdaType";
+  src: url(/static/citas_mazda_col_pro/fonts/MazdaType-Medium.otf);
+}
+
+* {
+  font-family: "MazdaType";
+  font-size: 0.99em;
+}
+
+.swal2-title,
+.swal2-cancel,
+.swal2-deny,
+.swal2-confirm {
+  font-family: "MazdaType" !important;
+  font-size: 1.1em !important;
+  font-weight: 500 !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+select.form-control:required:invalid {
+  color: gray !important;
+}
+
+.btn.btn-link.text-decoration-none.dropdown-toggle {
+  border-top-width: 0px !important;
+  border-bottom-width: 3px !important;
+  border-left-width: 0px !important;
+  border-right-width: 0px !important;
+  border-color: lightgrey !important;
+  border-radius: 0px !important;
+  color: gray !important;
+  text-align: center !important;
+}
+
+.btn.btn-link.text-decoration-none.dropdown-toggle:focus {
+  border-color: #A5002A !important;
+  box-shadow: none !important;
+}
+
+.form-check-input:checked {
+  color: #A5002A !important;
+  background-color: #A5002A !important;
+  border-color: #A5002A !important;
+  box-shadow: none !important;
+}
+
+.form-check-input.si {
+  width: 2em !important;
+  height: 2em !important;
+  background-image: url(/static/citas_mazda_col_pro/img/s.png) !important;
+  background-size: 1em !important;
+}
+
+.form-check-input.no {
+  width: 2em !important;
+  height: 2em !important;
+  background-image: url(/static/citas_mazda_col_pro/img/n.png) !important;
+  background-size: 1em !important;
+}
+
+.form-check-input.si:checked {
+  color: #912935 !important;
+  background-color: #912935 !important;
+  border-color: #912935 !important;
+  box-shadow: none !important;
+  background-blend-mode: difference !important;
+}
+
+.form-check-input.no:checked {
+  color: #8a8a8a !important;
+  background-color: #8a8a8a !important;
+  border-color: #8a8a8a !important;
+  box-shadow: none !important;
+  background-blend-mode: difference !important;
+}
+
+.dropdown-menu {
+  background-color: #F1F1F3 !important;
+  border-radius: 20px !important;
+}
+
+.list-group-item {
+  background-color: #F1F1F3 !important;
+}
+
+#additional_service_container {
+  display: none;
+}

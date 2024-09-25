@@ -1,0 +1,629 @@
+{% extends 'seguimientolite_mazda_col/base.html' %}
+
+{% load l10n %}
+{% load humanize %}
+{% load static %}
+{% load webpush_notifications %}
+{% webpush_header %}
+
+{% block tecnico-head %}
+{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-dark">
+  <span class="navbar-brand mb-0 h1" href="#">
+    <img src="{% static 'seguimientolite_mazda_col/img/logos/mazda.png' %} " height="40"
+      class="d-inline-block align-top" alt="">
+  </span>
+  <h5 class="d-inline mt-2" style="color: #F5F5F5 !important;">AUTORIZACIONES EN LÍNEA</h5>
+</nav>
+{% endblock %}
+
+{% block content %}
+{% load cliente_tools %}
+<style>
+  .custom-control-input:checked~.custom-control-label::before {
+    border-color: #8E1C2E !important;
+    background-color: #8E1C2E !important;
+  }
+
+  .custom-control-label::before,
+  .custom-control-label::after {
+    width: 1rem !important;
+    height: 1rem !important;
+  }
+
+</style>
+
+<div class="container">
+
+  <div class="card-deck">
+    <div class="card border-0 my-4" style="background-color: #F5F5F5 !important;">
+      <h5 id="info_orden" class="text-center my-3">INFORMACIÓN DE LA ORDEN</h5>
+      <div class="card-body">
+        <div class="row mb-2 mt-0">
+          <div class="col">
+            <h6 class="mb-0">Orden de Reparación:</h6>
+            {{orden.no_orden}}
+          </div>
+          <div class="col">
+            <h6 class="mb-0">Asesor:</h6>
+            {{orden.asesor}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <h6 class="mt-2 mb-0">Vehículo:</h6>
+            {{orden.vehiculo}}
+          </div>
+          <div class="col">
+            <h6 class="mt-2 mb-0">Placas:</h6>
+            {{orden.placas}}
+          </div>
+        </div>
+        <div class="text-center mt-3">
+          {% comment %}
+          {% if user.is_authenticated %}
+          <a class="btn btn-success align-baseline shadow" href="/chat" style="display: none;">
+            <i class="fas fa-comments fa-lg mr-1"></i>
+            Chat con tu asesor
+          </a>
+          {% endif %}
+          {% webpush_button with_class="btn btn-primary" %}
+          {% endcomment %}
+        </div>
+      </div>
+    </div>
+    <div class="card border-0 my-4" style="background-color: #F5F5F5 !important;">
+      <h5 class="text-center my-3">RESUMEN DE DIAGNÓSTICO</h5>
+      <div class="card-body">
+        <!-- Resumen de inspección -->
+        <div class="text-right px-3">Ítems</div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center"
+            style="background-color: #F5F5F5 !important;">
+            <button class="btn btn-link scroll-buen-estado" style="color: #A14742;">Buen estado</button>
+            <h5>
+              <span class="badge badge-pill" style="background-color: #E8D1C7;">
+                {{ items_buen_estado.count }}
+              </span>
+            </h5>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center"
+            style="background-color: #F5F5F5 !important;">
+            <button class="btn btn-link scroll-corregidos" style="color: #A14742;">Corregidos</button>
+            <h5>
+              <span class="badge badge-pill" style="background-color: #CEA094;">
+                {{ items_corregidos.count }}
+              </span>
+            </h5>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center"
+            style="background-color: #F5F5F5 !important;">
+            <button class="btn btn-link scroll-sugeridos" style="color: #A14742;">Reparación sugerida</button>
+            <h5>
+              <span class="badge badge-pill text-light" style="background-color: #B77468;">
+                {{ items_recomendados.count }}
+              </span>
+            </h5>
+          </li>
+          <li class=" list-group-item d-flex justify-content-between align-items-center"
+            style="background-color: #F5F5F5 !important;">
+            <button class="btn btn-link scroll-urgentes" style="color: #A14742;">Reparación urgente</button>
+            <h5>
+              <span class="badge badge-pill text-light" style="background-color: #A14742;">
+                {{ items_inmediatos.count }}
+              </span>
+            </h5>
+          </li>
+        </ul>
+
+        <!-- Formato 5-5 -->
+        <div class="text-center">
+          <a class="btn btn-primary shadow-sm my-4" href="{% url 'pdf_multipuntos' orden.no_orden %}">
+            <i class="fas fa-file-pdf fa-lg mr-2"></i>
+            Formato Inspección 5 - 5
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr style="height: 3px;">
+
+  <div class="my-4 mx-auto text-center">
+    <h5>DETALLES DE COTIZACIÓN</h5>
+
+    <div class="alert alert-primary mt-3 mb-3 border-0" role="alert"
+      style="background-color: #000000 !important; color: #F5F5F5 !important; border-radius: 3px;">
+      PARA AUTORIZAR SELECCIONE LA OPCIÓN DE "SI"
+    </div>
+    <div class="alert alert-success mt-3 mb-3 border-0" role="alert"
+      style="background-color: #F5F5F5 !important; color: #000000 !important; border-radius: 3px;">
+      TODOS LOS PRECIOS INCLUYEN IVA
+    </div>
+
+    <div class="accordion" id="accordion_items">
+      <!-- Items inmediatos -->
+      {% if items_inmediatos %}
+      <div class="card border-0"
+        style="background-color: #F5F5F5; border-radius: 3px !important; border-width: 2pt !important;">
+        <div class="card-header" id="headingOne">
+          <h2 class="mb-0">
+            <button class="btn btn-link btn-block text-left text-dark" type="button" data-toggle="collapse"
+              data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+              <div class="row">
+                <div class="col">
+                  <h5>Ítems Reparación Urgente</h5>
+                </div>
+                <div class="col-2 text-right">
+                  ({{ items_inmediatos.count }})
+                </div>
+              </div>
+            </button>
+          </h2>
+        </div>
+
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_items">
+          <div class="card-body">
+            {% for item in items_inmediatos %}
+            <div
+              class="card border-0 mb-4 px-3 py-3 {% if item.estado == 'Inmediato' %} item-inmediato {% elif item.estado == 'Recomendado' %} item-recomendado {% endif %}"
+              style="background-color: #F5F5F5; border-radius: 3px !important; border-width: 2pt !important;">
+              <table class="table table-sm table-borderless mb-0 item" data-item_id="{{item.id}}">
+                <thead>
+                  <tr>
+                    <th class="text-left align-middle px-2" style="width: 25%;">
+                    </th>
+                    <th class="text-center align-middle" colspan="2">
+                      <div class="text-center mt-2">
+                        <h6>{{ item.item.familia }} - {{ item.item.descripcion }}</h6>
+                      </div>
+                      <div class="text-center mb-2">
+                        {% if item.estado == 'Inmediato' %}
+                        <span class="badge badge-pill badge-danger">
+                          <i class="fas fa-exclamation-triangle fa-lg"></i>
+                          Urgente
+                        </span>
+                        {% endif %}
+                        {% if item.estado == 'Recomendado' %}
+                        <span class="badge badge-pill badge-warning">
+                          <i class="fas fa-exclamation-circle fa-lg"></i>
+                          {{item.estado}}
+                        </span>
+                        {% endif %}
+                      </div>
+                    </th>
+                    <th class="text-right align-middle px-2" style="width: 25%;">
+                    </th>
+                  </tr>
+                  <tr>
+                    <th class="text-center align-middle" colspan="2" style="width: 50%;">
+                      <b>Total: $ </b>
+                      <b class="total_item">
+                        {% for total in totales_items %}
+                        {% if total.item.id == item.id %}
+                        {{ total.total|intcomma|localize }}
+                        {% endif %}
+                        {% endfor %}
+                      </b>
+                    </th>
+                    <th class="text-center align-middle" colspan="2" style="width: 50%;">
+                      Autorizar
+                      <div class="text-center">
+                        <div class="custom-control custom-radio custom-control-inline mx-1">
+                          <input class="custom-control-input" name="item_radio_{{item.id}}" type="radio"
+                            id="{{item.id}}_inlineCheckbox1" {% if item.id in items_autorizados %} checked disabled
+                            {% endif %} value="true">
+                          <label class="custom-control-label" for="{{item.id}}_inlineCheckbox1">Si</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline mx-1">
+                          <input class="custom-control-input" name="item_radio_{{item.id}}" type="radio"
+                            id="{{item.id}}_inlineCheckbox2" {% if item.id in items_autorizados %} disabled {% endif %}
+                            value="false">
+                          <label class="custom-control-label" for="{{item.id}}_inlineCheckbox2">No</label>
+                        </div>
+                      </div>
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr class="text-center align-middle">
+                    <td colspan="4">
+                      {% for total in totales_items %}
+                      {% if total.item.id == item.id %}
+                      Repuestos: $ {{ total.total_ref|intcomma|localize }}
+                      {% endif %}
+                      {% endfor %}
+                    </td>
+                  </tr>
+                  <tr class="text-center align-middle">
+                    <td colspan="4">
+                      {% for total in totales_items %}
+                      {% if total.item.id == item.id %}
+                      Mano de obra: $ {{ total.total_mo|intcomma|localize }}
+                      {% endif %}
+                      {% endfor %}
+                    </td>
+                  </tr>
+                  <tr class="text-center">
+                    <td colspan="4">
+                      {% if item|tiene_evidencia:filas_video or item|tiene_evidencia:filas_media %}
+                      <button type="button" class="btn btn-primary btn-sm evidencias" id="evidencias_{{item.id}}">
+                        <i class="fas fa-camera mr-0 mr-lg-2"></i>
+                        <span>Evidencia Fotográfica</span>
+                      </button>
+                      {% endif %}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <hr>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- Items recomendados -->
+      {% if items_recomendados %}
+      <div class="card border-0"
+        style="background-color: #F5F5F5; border-radius: 3px !important; border-width: 2pt !important;">
+        <div class="card-header" id="headingTwo">
+          <h2 class="mb-0">
+            <button class="btn btn-link btn-block text-left text-dark collapsed" type="button" data-toggle="collapse"
+              data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              <div class="row">
+                <div class="col">
+                  <h5>Ítems Reparación Sugerida</h5>
+                </div>
+                <div class="col-2 text-right">
+                  ({{ items_recomendados.count }})
+                </div>
+              </div>
+            </button>
+          </h2>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion_items">
+          <div class="card-body">
+            {% for item in items_recomendados %}
+            <div
+              class="card border-0 mb-4 px-3 py-3 {% if item.estado == 'Inmediato' %} item-inmediato {% elif item.estado == 'Recomendado' %} item-recomendado {% endif %}"
+              style="background-color: #F5F5F5; border-radius: 3px !important; border-width: 2pt !important;">
+              <table class="table table-sm table-borderless mb-0 item" data-item_id="{{item.id}}">
+                <thead>
+                  <tr>
+                    <th class="text-left align-middle px-2" style="width: 25%;">
+                    </th>
+                    <th class="text-center align-middle" colspan="2">
+                      <div class="text-center mt-2">
+                        <h6>{{ item.item.familia }} - {{ item.item.descripcion }}</h6>
+                      </div>
+                      <div class="text-center mb-2">
+                        {% if item.estado == 'Inmediato' %}
+                        <span class="badge badge-pill badge-danger">
+                          <i class="fas fa-exclamation-triangle fa-lg"></i>
+                          Urgente
+                        </span>
+                        {% endif %}
+                        {% if item.estado == 'Recomendado' %}
+                        <span class="badge badge-pill badge-warning">
+                          <i class="fas fa-exclamation-circle fa-lg"></i>
+                          {{item.estado}}
+                        </span>
+                        {% endif %}
+                      </div>
+                    </th>
+                    <th class="text-right align-middle px-2" style="width: 25%;">
+                    </th>
+                  </tr>
+                  <tr>
+                    <th class="text-center align-middle" colspan="2" style="width: 50%;">
+                      <b>Total: $ </b>
+                      <b class="total_item">
+                        {% for total in totales_items %}
+                        {% if total.item.id == item.id %}
+                        {{ total.total|intcomma|localize }}
+                        {% endif %}
+                        {% endfor %}
+                      </b>
+                    </th>
+                    <th class="text-center align-middle" colspan="2" style="width: 50%;">
+                      Autorizar
+                      <div class="text-center">
+                        <div class="custom-control custom-radio custom-control-inline mx-1">
+                          <input class="custom-control-input" name="item_radio_{{item.id}}" type="radio"
+                            id="{{item.id}}_inlineCheckbox1" {% if item.id in items_autorizados %} checked disabled
+                            {% endif %} value="true">
+                          <label class="custom-control-label" for="{{item.id}}_inlineCheckbox1">Si</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline mx-1">
+                          <input class="custom-control-input" name="item_radio_{{item.id}}" type="radio"
+                            id="{{item.id}}_inlineCheckbox2" {% if item.id in items_autorizados %} disabled {% endif %}
+                            value="false">
+                          <label class="custom-control-label" for="{{item.id}}_inlineCheckbox2">No</label>
+                        </div>
+                      </div>
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr class="text-center align-middle">
+                    <td colspan="4">
+                      {% for total in totales_items %}
+                      {% if total.item.id == item.id %}
+                      Repuestos: $ {{ total.total_ref|intcomma|localize }}
+                      {% endif %}
+                      {% endfor %}
+                    </td>
+                  </tr>
+                  <tr class="text-center align-middle">
+                    <td colspan="4">
+                      {% for total in totales_items %}
+                      {% if total.item.id == item.id %}
+                      Mano de obra: $ {{ total.total_mo|intcomma|localize }}
+                      {% endif %}
+                      {% endfor %}
+                    </td>
+                  </tr>
+                  <tr class="text-center">
+                    <td colspan="4">
+                      {% if item|tiene_evidencia:filas_video or item|tiene_evidencia:filas_media %}
+                      <button type="button" class="btn btn-primary btn-sm evidencias" id="evidencias_{{item.id}}">
+                        <i class="fas fa-camera mr-0 mr-lg-2"></i>
+                        <span>Evidencia Fotográfica</span>
+                      </button>
+                      {% endif %}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <hr>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- Items Buen estado -->
+      {% if items_buen_estado %}
+      <div class="card border-0"
+        style="background-color: #F5F5F5; border-radius: 3px !important; border-width: 2pt !important;">
+        <div class="card-header" id="headingThree">
+          <h2 class="mb-0">
+            <button class="btn btn-link btn-block text-left text-dark collapsed" type="button" data-toggle="collapse"
+              data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              <div class="row">
+                <div class="col">
+                  <h5>Ítems en Buen Estado</h5>
+                </div>
+                <div class="col-2 text-right">
+                  ({{ items_buen_estado.count }})
+                </div>
+              </div>
+            </button>
+          </h2>
+        </div>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion_items">
+          <div class="card-body">
+            <div class="row">
+              {% for item in items_buen_estado %}
+              <div
+                class="col-12 col-lg-3 border-bottom my-1 text-left d-flex justify-content-between align-items-center">
+                {{ forloop.counter }}. {{ item.item.familia }} - {{ item.item.descripcion }}
+                {% if item|tiene_evidencia:filas_video or item|tiene_evidencia:filas_media %}
+                <button type="button" class="btn btn-primary btn-sm evidencias" id="evidencias_{{item.id}}">
+                  <i class="fas fa-camera mr-0 mr-lg-2"></i>
+                </button>
+                {% endif %}
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- Items Corregidos -->
+      {% if items_corregidos %}
+      <div class="card border-0"
+        style="background-color: #F5F5F5; border-radius: 3px !important; border-width: 2pt !important;">
+        <div class="card-header" id="headingFour">
+          <h2 class="mb-0">
+            <button class="btn btn-link btn-block text-left text-dark collapsed" type="button" data-toggle="collapse"
+              data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+              <div class="row">
+                <div class="col">
+                  <h5>Ítems Corregidos</h5>
+                </div>
+                <div class="col-2 text-right">
+                  ({{ items_corregidos.count }})
+                </div>
+              </div>
+            </button>
+          </h2>
+        </div>
+        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion_items">
+          <div class="card-body">
+            <div class="row">
+              {% for item in items_corregidos %}
+              <div
+                class="col-12 col-lg-3 border-bottom my-1 text-left d-flex justify-content-between align-items-center">
+                {{ forloop.counter }}. {{ item.item.familia }} - {{ item.item.descripcion }}
+                {% if item|tiene_evidencia:filas_video or item|tiene_evidencia:filas_media %}
+                <button type="button" class="btn btn-primary btn-sm evidencias" id="evidencias_{{item.id}}">
+                  <i class="fas fa-camera mr-0 mr-lg-2"></i>
+                </button>
+                {% endif %}
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Guardar autorizaciones -->
+    {% if items %}
+    <div class="text-center my-5">
+      <button type="button" class="btn btn-success shadow" onclick="guardar()">
+        <i class="fas fa-check mr-2"></i>
+        Confirmar Autorización
+      </button>
+    </div>
+    {% endif %}
+
+  </div>
+</div>
+
+<div class="fixed-bottom text-right float-right" style="pointer-events: none; ">
+  <button id="scroll_inicio" type="button" class="btn btn-primary mr-3 mb-3" style="pointer-events: auto; ">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+</div>
+
+<!-- Guardado de cotizacion -->
+<script>
+  function guardar() {
+    let total = 0;
+    let items = document.getElementsByClassName("item");
+
+    for (let e = 0; e < items.length; e++) {
+      if (items[e].getElementsByTagName("input")[0].checked == true) {
+        if (items[e].getElementsByTagName("input")[0].value == "true") {
+          let total_item = items[e].getElementsByClassName("total_item")[0].innerText.replaceAll(".", "").replaceAll(",", ".");
+          total = total + parseFloat(total_item);
+        }
+      }
+    }
+
+    let COPformat = Intl.NumberFormat("es-CO", {
+      style: "currency",
+      currency: "COP"
+    });
+
+    let total_format = COPformat.format(total);
+    Swal.fire({
+      title: `¿Desea confirmar su cotización por el monto total de: ${total_format} COP ?`,
+      showCancelButton: true,
+      cancelButtonText: "Cancelar",
+      confirmButtonText: "Confirmar",
+      reverseButtons: true,
+      buttonsStyling: false,
+      focusConfirm: false,
+      focusCancel: false,
+      customClass: {
+        popup: "card bg-light rounded",
+        confirmButton: "btn btn-success mx-3 shadow rounded",
+        closeButton: "btn btn-light mx-3 shadow rounded",
+        denyButton: "btn btn-light mx-3 shadow rounded",
+        cancelButton: "btn btn-light mx-3 shadow rounded",
+      }
+    }).then(result => {
+      if (result.value == true) {
+        let data = {};
+        let ids = [];
+        let tablas = document.getElementsByClassName("item");
+
+        for (let index = 0; index < tablas.length; index++) {
+          if (tablas[index].getElementsByTagName("input")[0].checked) {
+            ids.push(tablas[index].dataset.item_id)
+          }
+        }
+
+        data.items_autorizados = JSON.stringify(ids)
+        console.log(data);
+        $.ajax({
+          type: "post",
+          data: data,
+          cache: false,
+          headers: { "X-CSRFToken": Cookies.get("csrftoken") },
+          success: function () {
+            Swal.fire({
+              title: "Autorización guardada",
+              confirmButtonText: "Cerrar",
+              buttonsStyling: false,
+              customClass: {
+                popup: "card bg-light rounded",
+                confirmButton: "btn btn-light mx-3 shadow rounded",
+              },
+              didClose: function () {
+                location.reload();
+              }
+            })
+          },
+        });
+      }
+    })
+  }
+</script>
+
+<!-- Evidencias por item -->
+<script>
+  // ITEMS COMUNES
+  {% for item in items %}
+  $('#evidencias_{{item.id}}').on('click', function () {
+    $(this).lightGallery({
+      share: false,
+      dynamic: true,
+      dynamicEl: [
+        {% for ev in filas_video %}
+        {% if ev.item == item %}
+        {
+      'html': '<video class="lg-video-object lg-html5" controls preload="none"><source src="/media/{{ev.evidencia}}"></video>',
+      'thumb': '/media/{{ev.evidencia}}',
+      'subHtml': '<h4>{{ev.item.item.descripcion}}</h4>'
+    },
+    {% endif %}
+    {% endfor %}
+    {% for ev in filas_media %}
+  {% if ev.item == item %}
+  {
+    "src": '/media/{{ev.evidencia}}',
+      'thumb': '/media/{{ev.evidencia}}',
+        'subHtml': '<h4>{{ev.item.item.descripcion}}</h4>'
+  },
+  {% endif %}
+  {% endfor %}
+      ]
+    })
+  });
+  {% endfor %}
+</script>
+
+<!-- Scroll a items según su estado -->
+<script>
+  $(".scroll-buen-estado, .scroll-corregidos, .scroll-sugeridos, .scroll-urgentes").click(function () {
+    let button = this;
+
+    if ($(button).hasClass("scroll-buen-estado")) {
+      $('html, body').animate({
+        scrollTop: $("#headingThree").offset().top
+      }, 1000);
+    } else if ($(button).hasClass("scroll-corregidos")) {
+      $('html, body').animate({
+        scrollTop: $("#headingFour").offset().top
+      }, 1000);
+    } else if ($(button).hasClass("scroll-sugeridos")) {
+      $('html, body').animate({
+        scrollTop: $("#headingTwo").first().offset().top
+      }, 1000);
+    } else if ($(button).hasClass("scroll-urgentes")) {
+      $('html, body').animate({
+        scrollTop: $("#headingOne").first().offset().top
+      }, 1000);
+    }
+  });
+
+  $("#scroll_inicio").click(function () {
+    $('html, body').animate({
+      scrollTop: $(".navbar").offset().top
+    }, 1000);
+  });
+</script>
+{% endblock %}

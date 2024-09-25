@@ -1,0 +1,166 @@
+{% extends 'citas_mazda_col/base.html' %} {% block content %}
+<h4 class="card-title text-center mb-3">Citas en Linea</h4>
+
+<div class="row">
+  <div class="col-lg-7">
+    <div class="card shadow">
+      <div class="card-body">
+        <h4 class="card-title text-center">Creacion de Cita </h4>
+        <form>
+          <h5 class="text-center mt-4">1. Datos del Cliente</h5>
+          <div class="form-group row">
+            <div class="col-lg col-form d-flex flex-column">
+              <label for="cliente">Cliente</label>
+              <input name="cliente" type="text" class="form-control" id="cliente" />
+            </div>
+            <div class="col-lg col-form d-flex flex-column">
+              <label for="correo">Correo</label>
+              <input name="correo" type="text" class="form-control" id="correo" />
+            </div>
+            <div class="col-lg-2 col-form d-flex flex-column">
+              <label for="telefono">Telefono</label>
+              <input name="telefono" type="text" class="form-control" id="telefono" />
+            </div>
+          </div>
+
+          <h5 class="mt-4 text-center">2. Datos del Vehículo</h5>
+          <div class="form-group row mt-4 mb-3">
+            <div class="col-lg col-form d-flex flex-column">
+              <label for="plate">Placas</label>
+              <input name="placas" type="text" class="form-control" id="plate" />
+            </div>
+            <div class="col-lg col-form d-flex flex-column">
+              <label for="vin">VIN</label>
+              <input name="vin" type="text" class="form-control" id="vin" />
+            </div>
+            <div class="col-lg-2 col-form d-flex flex-column">
+              <button type="button" class="btn btn-primary mt-auto mb-0" data-toggle="tooltip" data-placement="top"
+                title="Buscar información del vehículo por placas o VIN">
+                <i class="fas fa-search"></i>
+                Buscar
+              </button>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-lg col-form d-flex flex-column">
+              <label for="marca">Marca</label>
+              <input name="marca" type="text" class="form-control" id="marca" />
+            </div>
+            <div class="col-lg col-form d-flex flex-column">
+              <label for="modelo">Modelo</label>
+              <input name="modelo" type="text" class="form-control" id="modelo" />
+            </div>
+            <div class="col-lg-2 col-form d-flex flex-column">
+              <label for="año">Año</label>
+              <input name="año" type="text" class="form-control" id="año" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-lg col-form d-flex flex-column">
+              <label for="color">Color</label>
+              <input name="color" type="text" class="form-control" id="color" />
+            </div>
+            <div class="col-lg col-form d-flex flex-column">
+              <label for="cilindros">Cilindros</label>
+              <input name="cilindros" type="text" class="form-control" id="cilindros" />
+            </div>
+            <div class="col-lg col-form d-flex flex-column">
+              <label for="campaña">Campaña</label>
+              <select name="campaña" id="campaña" class="form-control">
+                {% for campaña in campañas %}
+                <option>{{campaña}}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+
+          <h5 class="mt-4 text-center">3. Programación de Cita</h5>
+          <div class="row">
+            <div class="col-lg text-center">
+              <h6 class="mt-3">Elegir Dia</h6>
+              <div id="datepicker-container mx-auto">
+                <div id="datepicker-center">
+                  <div id="datepicker" class="text-center"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-8 text-center">
+              <h6 class="mt-3">Asesores</h6>
+              <select name="asesor" id="asesor" class="custom-select">
+                <option selected></option>
+                <option value="0001">Prueba</option>
+                {% for asesor in lista_asesores %}
+                <option value="{{asesor.id_asesor}}">{{asesor.asesor}}</option>
+                {% endfor %}
+              </select>
+              <h6 class="mt-3">Horarios Disponibles</h6>
+              <div id="toolbar" class="btn-toolbar mt-2 border" role="toolbar">
+
+              </div>
+            </div>
+          </div>
+          <h6 class="mt-3">Observaciones</h6>
+          <textarea name="observaciones" class="form-control" rows="4"></textarea>
+          <div class="form-group row mt-3">
+            <div class="col-lg col-form d-flex flex-column">
+              <label for="tipo_cita">Tipo de Cita</label>
+              <input name="tipo_cita" type="text" class="form-control" id="tipo_cita" />
+            </div>
+            <div class="col-lg col-form d-flex flex-column">
+              <label for="movilidad">Movilidad</label>
+              <input name="movilidad" type="text" class="form-control" id="movilidad" />
+            </div>
+            <div class="col-lg col-form d-flex flex-column">
+              <label for="medio">Medio</label>
+              <input name="medio" type="text" class="form-control" id="medio" />
+            </div>
+          </div>
+          <div class="form-group row mt-3">
+            <div class="col-lg col-form d-flex flex-column">
+              <label for="contacto">Contacto</label>
+              <input name="contacto" type="text" class="form-control" id="contacto" />
+            </div>
+            <div class="col-lg col-form d-flex flex-column">
+              <label for="service_inclusive">Service Inclusive</label>
+              <input name="service_inclusive" type="text" class="form-control" id="service_inclusive" />
+            </div>
+            <div class="col-lg col-form d-flex flex-column">
+              <label for="recepcion_activa">Recepcion Activa</label>
+              <input name="recepcion_activa" type="text" class="form-control" id="recepcion_activa" />
+            </div>
+          </div>
+
+          <div class="mt-3 text-center">
+            <button id="button-confirm" type="button" class="btn btn-primary">
+              <i class="fas fa-calendar-check"></i>
+              Agendar Cita
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="card sticky-top sticky-offset shadow">
+      <div class="card-body">
+        <h4 class="card-title text-center">Historial del Vehiculo</h4>
+        <p class="after-search lead">
+          Realice la busqueda del vehiculo en el panel de la izquierda para
+          ver su historial.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block button-confirm-js %}
+<script>
+  $("#button-save").click(function () {
+    let values = $('form').serializeArray()
+
+    console.log(JSON.stringify(values))
+  })
+</script>
+{% endblock %}

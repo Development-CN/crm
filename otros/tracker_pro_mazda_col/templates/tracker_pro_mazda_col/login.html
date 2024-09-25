@@ -1,0 +1,33 @@
+{% extends 'tracker_pro_mazda_col/base.html' %} {% block content %} {% load static %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-5 col-md-5 col-sm-10 mx-auto">
+      <!--CARD-->
+      <div class="card bg-white mt-1 mx-auto shadow">
+        <div class="card-body mt-3 text-center">
+          <img src="{% static 'tracker_pro_mazda_col/img/mazda.png' %}" class="mx-auto d-block mb-3"
+            style="max-height: 50px" alt="Responsive image" />
+          <p class="lead">Para iniciar sesión ingrese las placas del vehiculo sin espacios ni guiones</p>
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group text-left my-3">
+              <label for="placas">Placas del Vehiculo</label>
+              <input id="placas" type="text" name="placas" maxlength="7" class="form-control" autocomplete="off"
+                placeholder="Ejemplo: XYZ123" required
+                onkeyup="this.value = this.value.toUpperCase().replace(/[^a-zA-Z0-9]/g, '');" />
+              <p class="text-danger">{{error}}</p>
+            </div>
+            <div class="text-center my-3">
+              <button class="btn btn-primary shadow" type="submit" id="button-addon2">
+                <i class="fas fa-sign-in-alt fa-lg"></i>
+                Iniciar Sesión
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

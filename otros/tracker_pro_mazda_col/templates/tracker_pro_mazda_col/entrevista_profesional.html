@@ -1,0 +1,300 @@
+{% extends 'tracker_pro_mazda_col/base.html' %}
+{% block content %}
+{% load static %}
+<div class="container">
+  <div class="card bg-white my-4 my-lg-5 mx-auto shadow">
+    <div class="card-body text-center">
+      <h5>NOVEDADES</h5>
+      <form>
+        <div class="form-group my-3">
+          <label for="novedad">¿Que novedad ocurrió?</label>
+          <input id="novedad" name="novedad" class="form-control" type="text" placeholder="Novedad">
+        </div>
+
+        <div class="form-group my-3">
+          <label for="cuando">¿Cuando ocurre la novedad?</label>
+          <input id="cuando" name="cuando" type="text" class="form-control" placeholder="Cuando?">
+        </div>
+
+        <div class="row my-3">
+          <div class="col-sm-12 col-md-6 form-group">
+            <label for="veces">¿Cuantas veces ha ocurrido la novedad?</label>
+            <input id="veces" name="veces" type="text" class="form-control" placeholder="Cuantas veces?">
+          </div>
+          <div class="col-sm-12 col-md-6 form-group">
+            <label for="donde">¿Donde ocurre la novedad?</label>
+            <input id="donde" name="donde" type="text" class="form-control" placeholder="Donde?">
+          </div>
+        </div>
+
+        <div class="row my-3">
+          <div class="col-sm-6 col-md-4">
+            ¿Tiene accesorios no homologados?
+          </div>
+          <div class="col-sm-6 col-md-4 text-center mb-5 mb-md-2">
+            <div class="row">
+              <div class="col">
+                <div class="form-check form-check-inline custom-control custom-radio">
+                  <input id="no_homologados_si" name="no_homologados_check" class="custom-control-input mazda-radio" type="radio"
+                    value="si">
+                  <label class="custom-control-label mazda-radio red" for="no_homologados_si"></label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check form-check-inline custom-control custom-radio">
+                  <input id="no_homologados_no" name="no_homologados_check" class="custom-control-input mazda-radio" type="radio" value="no">
+                  <label class="custom-control-label mazda-radio gray" for="no_homologados_no"></label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <input name="accesorios_no_homologados" class="form-control" type="text" placeholder="¿Cuales?">
+          </div>
+        </div>
+
+        <h6 class="text-center mt-3">Seleccione testigos encendidos en la posicion ON</h6>
+        <h6 class="text-center">(motor encendido)</h6>
+
+        <!--Primera fila-->
+        <div class="row my-2 text-left ml-4 ml-lg-5">
+          <div class="col">
+
+            <div class="form-check">
+              <input name="testigos" class="form-check-input" type="checkbox" value="1. Check Engine" id="ep1">
+              <label class="form-check-label pull-right" for="ep1">
+                <img src="{% static 'tracker_pro_mazda_col/img/entrevista_profesional/1.svg' %}"  height="20"> </label>
+            </div>
+
+          </div>
+          <div class="col">
+
+            <div class="form-check">
+              <input name="testigos" class="form-check-input" type="checkbox" value="2. Advertencia de Transmisión automática" id="ep6">
+              <label class="form-check-label pull-right" for="ep6">
+                <img src="{% static 'tracker_pro_mazda_col/img/entrevista_profesional/6.svg' %}"  height="20"> </label>
+            </div>
+
+          </div>
+          <div class="col">
+
+            <div class="form-check">
+              <input name="testigos" class="form-check-input" type="checkbox" value="3. Advertencia de Sistema ABS" id="ep11">
+              <label class="form-check-label pull-right" for="ep11">
+                <img src="{% static 'tracker_pro_mazda_col/img/entrevista_profesional/11.svg' %}"  height="20"> </label>
+            </div>
+
+          </div>
+        </div>
+
+        <!--Segunda fila-->
+        <div class="row my-2 text-left ml-4 ml-lg-5">
+          <div class="col">
+
+            <div class="form-check">
+              <input name="testigos" class="form-check-input" type="checkbox" value="4. Advertencia de Aceite de Motor" id="ep2">
+              <label class="form-check-label pull-right" for="ep2">
+                <img src="{% static 'tracker_pro_mazda_col/img/entrevista_profesional/2.svg' %}"  height="20"> </label>
+            </div>
+
+          </div>
+          <div class="col">
+
+            <div class="form-check">
+              <input name="testigos" class="form-check-input" type="checkbox" value="5. Aviso del Sistema de Frenos" id="ep7">
+              <label class="form-check-label pull-right" for="ep7">
+                <img src="{% static 'tracker_pro_mazda_col/img/entrevista_profesional/7.svg' %}"  height="20"> </label>
+            </div>
+
+          </div>
+          <div class="col">
+
+            <div class="form-check">
+              <input name="testigos" class="form-check-input" type="checkbox" value="6. Aviso del Sistema de Control de Tracción" id="ep12">
+              <label class="form-check-label pull-right" for="ep12">
+                <img src="{% static 'tracker_pro_mazda_col/img/entrevista_profesional/12.svg' %}"  height="20"> </label>
+            </div>
+
+          </div>
+        </div>
+
+        <!--Tercera fila-->
+        <div class="row my-2 text-left ml-4 ml-lg-5">
+          <div class="col">
+
+            <div class="form-check">
+              <input name="testigos" class="form-check-input" type="checkbox" value="7. Aviso del Sistema de Carga" id="ep3">
+              <label class="form-check-label pull-right" for="ep3">
+                <img src="{% static 'tracker_pro_mazda_col/img/entrevista_profesional/3.svg' %}"  height="20"> </label>
+            </div>
+
+          </div>
+          <div class="col">
+
+            <div class="form-check">
+              <input name="testigos" class="form-check-input" type="checkbox" value="8. Advertencia del Sistema de Bolsas de Aire" id="ep9">
+              <label class="form-check-label pull-right" for="ep9">
+                <img src="{% static 'tracker_pro_mazda_col/img/entrevista_profesional/8.svg' %}"  height="20"> </label>
+            </div>
+
+          </div>
+          <div class="col">
+
+            <div class="form-check">
+              <input name="testigos" class="form-check-input" type="checkbox" value="9. Advertencia del Sistema de Dirección Asistida" id="ep13">
+              <label class="form-check-label pull-right" for="ep13">
+                <img src="{% static 'tracker_pro_mazda_col/img/entrevista_profesional/13.svg' %}"  height="20"> </label>
+            </div>
+
+          </div>
+        </div>
+
+        <!--Cuarta fila-->
+        <div class="row my-2 text-left ml-4 ml-lg-5">
+          <div class="col">
+
+            <div class="form-check">
+              <input name="testigos" class="form-check-input" type="checkbox" value="10. Aviso de Mantenimiento Requerido" id="ep4">
+              <label class="form-check-label pull-right" for="ep4">
+                <img src="{% static 'tracker_pro_mazda_col/img/entrevista_profesional/4.svg' %}"  height="20"> </label>
+            </div>
+
+          </div>
+          <div class="col">
+
+            <div class="form-check">
+              <input name="testigos" class="form-check-input" type="checkbox" value="11. Advertencia de Presión de Neumáticos" id="ep10">
+              <label class="form-check-label pull-right" for="ep10">
+                <img src="{% static 'tracker_pro_mazda_col/img/entrevista_profesional/9.svg' %}"  height="20"> </label>
+            </div>
+
+          </div>
+          <div class="col">
+
+            <div class="form-check">
+              <input name="testigos" class="form-check-input" type="checkbox" value="12. Advertencia de Seguridad" id="ep14">
+              <label class="form-check-label pull-right" for="ep14">
+                <img src="{% static 'tracker_pro_mazda_col/img/entrevista_profesional/14.svg' %}"  height="20"> </label>
+            </div>
+
+          </div>
+        </div>
+
+        <!--Ultima fila-->
+        <div class="row my-2 text-left ml-4 ml-lg-5">
+          <div class="col">
+
+            <div class="form-check">
+              <input name="testigos" class="form-check-input" type="checkbox" value="13. Aviso Freno de Mano Accionado" id="ep5">
+              <label class="form-check-label pull-right" for="ep5">
+                <img src="{% static 'tracker_pro_mazda_col/img/entrevista_profesional/5.svg' %}"  height="20"> </label>
+            </div>
+
+          </div>
+          <div class="col">
+
+            <div class="form-check">
+              <input name="testigos" class="form-check-input" type="checkbox" value="14. Aviso Detección de Llave" id="ep10">
+              <label class="form-check-label pull-right" for="ep10">
+                <img src="{% static 'tracker_pro_mazda_col/img/entrevista_profesional/10.svg' %}"  height="20"> </label>
+            </div>
+
+          </div>
+          <div class="col">
+
+          </div>
+        </div>
+
+        <div class="btn-group-toggle flex-wrap mt-3 px-3 py-3 mx-auto text-center">
+          {% for testigo in testigos %}
+          <div class="form-check">
+            <input id="testigo_{{ testigo.id }}" name="testigos" class="form-check-input" type="checkbox"
+              value="{{ testigo.nombre }}">
+            <label for="testigo_{{ testigo.id }}" class="form-check-label">
+              {{ testigo.nombre }}
+            </label>
+          </div>
+          {% endfor %}
+        </div>
+
+        <div class="form-group row my-3">
+          <label for="otro_testigo" class="col-sm-3 col-form-label">Otro testigo:</label>
+          <div class="col-sm-9">
+            <input id="otro_testigo" name="otro_testigo" class="form-control" type="text">
+          </div>
+        </div>
+
+        <h6>Es evidente la novedad en la recepción?</h6>
+        <div class="row mb-5">
+          <div class="col">
+            <div class="form-check form-check-inline custom-control custom-radio">
+              <input id="novedad_recepcion_si" name="es_evidente_en_recepcion" class="custom-control-input mazda-radio" type="radio"
+                value="si">
+              <label class="custom-control-label mazda-radio red" for="novedad_recepcion_si"></label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check form-check-inline custom-control custom-radio">
+              <input id="novedad_recepcion_no" name="es_evidente_en_recepcion" class="custom-control-input mazda-radio" type="radio"
+                value="no">
+              <label class="custom-control-label mazda-radio gray" for="novedad_recepcion_no"></label>
+            </div>
+          </div>
+        </div>
+        <h6>Requiere prueba de carretera?</h6>
+        <div class="row mb-5">
+          <div class="col">
+            <div class="form-check form-check-inline custom-control custom-radio">
+              <input id="prueba_carretera_si" name="requiere_prueba_de_carretera" class="custom-control-input mazda-radio" type="radio"
+                value="si">
+              <label class="custom-control-label mazda-radio red" for="prueba_carretera_si"></label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check form-check-inline custom-control custom-radio">
+              <input id="prueba_carretera_no" name="requiere_prueba_de_carretera" class="custom-control-input mazda-radio" type="radio"
+                value="no">
+              <label class="custom-control-label mazda-radio gray" for="prueba_carretera_no"></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-3">
+          <div class="form-check d-inline">
+            <input class="form-check-input" type="checkbox" value="" id="datos_confirmados">
+            <label class="form-check-label" for="#datos_confirmados">
+              Datos confirmados
+            </label>
+          </div>
+          <button type="button" id="guardar_entrevista_profesional" class="btn btn-primary shadow ml-3 d-inline">
+            Actualizar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  $("#guardar_entrevista_profesional").click(function () {
+    let parsed_data = $("form").serializeArray();
+
+    $.ajax({
+      type: "post",
+      data: parsed_data,
+      cache: false,
+      headers: {
+        "X-CSRFToken": Cookies.get("csrftoken"),
+      },
+      success: function () {
+        alert("Cambios guardados");
+        window.location.href = "{% url 'tracker_pro' %}";
+      },
+      error: function () {
+        alert("error");
+      },
+    });
+
+  })
+</script>
+{% endblock %}

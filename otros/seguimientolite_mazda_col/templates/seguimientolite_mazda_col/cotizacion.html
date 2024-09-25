@@ -1,0 +1,98 @@
+{% extends 'seguimientolite_mazda_col/base.html' %}
+{% block content %}
+{% load static %}
+<div class="container-fluid mx-auto">
+  <div class="row mb-3">
+    <div class="col-md-5">
+      <div class="input-group mb-3 shadow">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Buscar:</span>
+        </div>
+        <input type="text" placeholder="Buscar por Placas, Orden o VIN" id="buscadorRefacciones"
+          class="form-control buscador" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+    </div>
+  </div>
+  <div class="card mb-3 mx-auto shadow">
+    <h5 class="card-header">
+      Listado de Ordenes
+    </h5>
+    <table id="tablaOrdenes" class="table table-hover mx-auto mt-0">
+      <thead class="bg-dark text-center">
+        <tr>
+          <th scope="col" class="all">Placas</th>
+          <th scope="col" class="all">Orden</th>
+          <th scope="col" class="desktop">VIN</th>
+          <th scope="col" class="all">Vehículo</th>
+          <th scope="col" class="desktop">Asesor</th>
+          <th scope="col" class="desktop">Técnico</th>
+          <th scope="col" class="desktop">Fecha Ingreso</th>
+          <th scope="col" class="desktop">Fecha Elaboración Técnica</th>
+          <th scope="col" class="desktop">Ultima Modificación</th>
+          <th scope="col" class="desktop">Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for fila in filas %}
+        <tr>
+          <td>
+            <a role="button" href="{% url 'cotizaciones_detalle' fila.no_orden %}" class="btn btn-link">
+              {{fila.placas}}
+            </a>
+          </td>
+          <td>{{fila.no_orden}}</td>
+          <td>{{fila.vin}}</td>
+          <td>{{fila.vehiculo}}</td>
+          <td>{{fila.asesor}}</td>
+          <td>{{fila.tecnico}}</td>
+          <td>{{fila.fecha_ingreso}}</td>
+          <td>{{fila.fin_tecnico}}</td>
+          <td>{{fila.modificacion}}</td>
+          <td>
+            <div class="text-center">
+              <span class="badge badge-pill badge-warning text-white">Recomendados: {{fila.recomendados}}</span>
+            </div>
+            <div class="text-center">
+              <span class="badge badge-pill badge-danger">Inmediatos: {{fila.inmediatos}}</span>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+
+  <script>
+    $(".buscador").keyup(function () {
+      let filtro = $(this).val().toUpperCase();
+      let columnas = $("#tablaOrdenes").find("tr,.list-group-item");
+
+      console.log(filtro);
+
+      $(columnas).each(function (index, columna) {
+        let value = $(columna).text();
+        console.log(value);
+        if (value.toUpperCase().indexOf(filtro) > -1) {
+          $(columna).fadeIn(200);
+        } else {
+          $(columna).fadeOut(200);
+        }
+      })
+    })
+
+    $('#tablaOrdenes').DataTable( {
+      "order": [[ 0, "desc" ]],
+      responsive: true,
+      "searching": false,
+      "lengthChange": false,
+      "info": false,
+      language: {
+        paginate: {
+            previous: 'Anterior',
+            next:     'Siguiente'
+        },
+      }
+    });
+  </script>
+  {% endblock %}

@@ -1,0 +1,523 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CALENDARIO CRM</title>
+    
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fullcalendar/main.min.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet"/>
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'fullcalendar/main.min.js' %}"></script>    
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <script src="/bundles/modernizr?v=wBEWDufH_8Md-Pbioxomt90vm6tJN2Pyy9u9zHtWsPo1"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="/bundles/bootstrap?v=QtxRrbVxHAK-b5ZowWqv6Wt7oUOJAggG80vl1X-EGBM1"></script>
+
+    <script src="/bundles/timepicker?v=SNA17wI1rMl4CP8ayG1ydmEu0eLQfZiFCqPl0hXZpd01"></script>
+
+    <script src="/bundles/sweet?v=ZMOC4FpxSbszBSzdHGvkc9O_scCReJoQ_PgxKeHWirk1"></script>
+
+    <script src="https://use.fontawesome.com/877bbc2081.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+
+    <link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/export/bootstrap-table-export.min.js"></script>
+
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.20.2/dist/extensions/defer-url/bootstrap-table-defer-url.min.js"></script>
+
+    <script src="/bundles/jqueryval?v=hEGG8cMxk9p0ncdRUOJ-CnKN7NezhnPnWIvn6REucZo1"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+      integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+</head>
+
+<body class="bg-light">
+    {% include 'nav.html' %}
+
+    <div id="page-container" style="width: 90vw; margin: 0 auto;">
+        <div class="row">
+            <h3 style="float: center; margin-left: 570px;">{{adviser.nombre}}</h3>
+            <div id="div1" class="col-md-2 card-body p-4" style="float: left">
+                <form>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mb-4">
+                                <label for="exampleInputPassword1" class="form-label fw-semibold">Eventos hoy</label>
+                                <input type="int" class="form-control" id="evento_hoy" style="background-color: white;" placeholder="" readonly value="{{cantidad_hoy}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mb-4">
+                                <label for="exampleInputPassword1" class="form-label fw-semibold">Leads sin eventos</label>
+                                <input type="int" class="form-control" id="exampleInputtext" style="background-color: white;" placeholder="" readonly value="{{cantidad_sin_eventos}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mb-4">
+                                <label for="exampleInputPassword1" class="form-label fw-semibold">Eventos vencidos</label>
+                                <input type="int" class="form-control" id="exampleInputtext" style="background-color: white;" placeholder="" readonly value="{{cantidad_vencidos}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mb-4">
+                                <label for="exampleInputPassword1" class="form-label fw-semibold">Eventos pendientes</label>
+                                <input type="int" class="form-control" id="evento_pendiente" style="background-color: white;" placeholder="" readonly value="{{cantidad_pendientes}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mb-4">
+                                <label for="exampleInputPassword1" class="form-label fw-semibold">Eventos cumplidos</label>
+                                <input type="int" class="form-control" id="evento_pendiente" style="background-color: white;" placeholder="" readonly value="{{cantidad_cumplidos}}">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id="div2" class="col-md-7">
+                <div id="calendar"></div>
+            </div>
+            <div id="div3" class="col-md-3">
+                {% if mostrar_evento %}
+                <div class="cardt rounded-0 shadow">
+                    <div class="card-header bg-gradient bg-primary text-light">
+                        <h5 class="card-title">Crear Evento</h5>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" id="schedule-form">
+                            {% csrf_token %}
+                            <div class="container-fluid">
+                                <input type="hidden" name="id" value="">
+                                <div class="form-group mb-2">
+                                    <label for="title" class="control-label">Nombre evento</label>
+                                    <input type="text" class="form-control form-control-sm rounded-0" name="nombre_evento" id="nombre_evento" list="listaEventos" required>
+                                    <datalist id="listaEventos">
+                                        {% for evento in eventos %}
+                                        <option class="li_evento filtro">{{evento.nombre}}</option>
+                                        {% endfor %}
+                                    </datalist>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="description" class="control-label">Tipo de evento</label>
+                                    <select class="form-control" id="tipo" name="tipo"><option selected="selected" value="0">-- Tipo de evento --</option>
+                                        <option value="Testdrive">Testdrive</option>
+                                        <option value="Peritaje">Peritaje</option>
+                                        <option value="Whatsapp">Whatsapp</option>
+                                        <option value="Whatsapp">Llamada</option>
+                                        <option value="Whatsapp">Cita Vitrina</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="start_datetime" class="control-label">Telefono del Cliente</label>
+                                    <select class="form-control" id="telefono_cliente" name="telefono_cliente"><option selected="selected" value="0">-- Telefono del Cliente --</option>
+                                        {% for prospecto in prospectos %}
+                                            <option value="{{prospecto.prospecto.celular}}" selected>{{prospecto.prospecto.celular}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="end_datetime" class="control-label">Observaciones</label>
+                                    <textarea rows="3" class="form-control form-control-sm rounded-0" name="observaciones" id="observaciones" required></textarea>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="start_datetime" class="control-label">Asesor</label>
+                                    <select class="form-control" id="asesor" name="asesor"><option selected="selected" value="0">-- Asesor --</option>
+                                        {% for asesor in asesores %}
+                                            {% if asesor.nombre == asesor_actual.nombre or is_admin %}
+                                            <option value="{{asesor.nombre}}" selected>{{asesor.nombre}}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="fecha_hora" class="control-label">Fecha y hora</label>
+                                    <input type="datetime-local" class="form-control form-control-sm rounded-0" name="fecha_hora" id="fecha_hora" required>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="title" class="control-label">Tiempo evento</label>
+                                    <select class="form-control" id="tiempo" name="tiempo"><option selected="selected" value="0">-- Tiempo --</option>
+                                        <option value="00:15">00:15</option>
+                                        <option value="00:30">00:30</option>
+                                        <option value="00:45">00:45</option>
+                                        <option value="01:00">01:00</option>
+                                        <option value="01:15">01:15</option>
+                                        <option value="01:30">01:30</option>
+                                        <option value="01:45">01:45</option>
+                                        <option value="02:00">02:00</option>
+                                        <option value="02:15">02:15</option>
+                                        <option value="02:30">02:30</option>
+                                        <option value="02:45">02:45</option>
+                                        <option value="03:00">03:00</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="text-center">
+                                <button class="btn btn-primary btn-sm rounded-0" type="submit" form="schedule-form"><i class="fa fa-save"></i> Guardar</button>
+                                <button class="btn btn-default border btn-sm rounded-0" type="reset" form="schedule-form"><i class="fa fa-reset"></i> Cancelar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- Event Details Modal -->
+<div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="event-details-modal">
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-0">
+        <div class="modal-header rounded-0">
+            <h5 class="modal-title">Detalles de evento</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body rounded-0">
+            <div class="container-fluid">
+                <dl>
+                    <dd id="id_evento" class="fw-bold fs-4" style="display: none;"></dd>
+                    <dt class="text-muted">Nombre</dt>
+                    <dd id="title" class="fw-bold fs-4"></dd>
+                    <dt class="text-muted">Cliente</dt>
+                    <dd id="cliente" class=""></dd>
+                    <dd id="asesor" class="fw-bold fs-4" style="display: none;"></dd>
+                    <dt class="text-muted">Telefono</dt>
+                    <dd id="telefono" class=""></dd>
+                    <dt class="text-muted">Estado</dt>
+                    <dd id="estado" class=""></dd>
+                    <dt class="text-muted">Observaciones</dt>
+                    <dd id="description" class=""></dd>
+                    <dt class="text-muted">Fecha y hora</dt>
+                    <dd id="start" class=""></dd>
+                    <dt class="text-muted">Tipo de evento</dt>
+                    <dd id="tipo_evento" class=""></dd>
+                    <dt class="text-muted">Tiempo de evento</dt>
+                    <dd id="tiempo_evento" class=""></dd>
+                    <dt class="text-muted">Cumplido</dt>
+                    <dd id="cumplido" class=""></dd>
+                    <dt class="text-muted" id="fechahoracumplido">Fecha y hora cumplido</dt>
+                    <dd id="fecha_hora_cumplido" class=""></dd>
+                </dl>
+            </div>
+        </div>
+        <div class="modal-footer rounded-0">
+            <div class="text-end">
+                <button type="button" class="btn btn-warning btn-sm rounded-0" data-id="" onclick="ir_detalle()">Detalle</button>
+                <button type="button" class="btn btn-success btn-sm rounded-0" id="btn_cumplir_evento" onclick="cumplir_evento()">Cumplido</button>
+                <button type="button" class="btn btn-primary btn-sm rounded-0" id="btn_editar_evento" data-toggle="modal" data-target="#ModalEvento" onclick="editar_evento()">Editar</button>
+                <button type="button" class="btn btn-danger btn-sm rounded-0" id="btn_eliminar_evento" onclick="eliminar_evento()">Eliminar</button>
+                <button type="button" class="btn btn-secondary btn-sm rounded-0" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+        <div class="modal fade bd-example-modal-lg" id="ModalEvento" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5>Editar Evento</h5>
+                        <button class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body small">
+                        <div class="form-row">
+                            <div class="col-lg-6">
+                                <div class="mb-4">
+                                    <input type="hidden" class="form-control" id="EventoId">
+                                    <label for="EventoNombre" class="col-form-label">Nombre evento:</label>
+                                    <input type="text" class="form-control" id="EventoNombre">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="mb-4">
+                                    <label for="EventoTipo" class="col-form-label">Tipo evento:</label>
+                                    <select class="form-control" id="EventoTipo" name="EventoTipo"><option selected="selected" value="0">-- Tipo de evento --</option>
+                                        <option value="Testdrive">Testdrive</option>
+                                        <option value="Peritaje">Peritaje</option>
+                                        <option value="Whatsapp">Whatsapp</option>
+                                    </select>
+                                </div>
+                            </div>                   
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-6">
+                                <div class="mb-4">
+                                    <label for="EventoCliente" class="col-form-label">Cliente:</label>
+                                    <input type="text" class="form-control" id="EventoCliente">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="mb-4">
+                                    <label for="EventoObservaciones" class="col-form-label">Observaciones:</label>
+                                    <input type="text" class="form-control" id="EventoObservaciones">
+                                </div>
+                            </div>         
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-6">
+                                <div class="mb-4">
+                                    <label for="EventoAsesor" class="col-form-label">Asesor:</label>
+                                    <select class="form-control" id="EventoAsesor" name="EventoAsesor"><option selected="selected" value="0">-- Asesor --</option>
+                                    {% for asesor in asesores %}
+                                        {% if is_admin %}
+                                        <option value="{{asesor.nombre}}" selected>{{asesor.nombre}}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="mb-4">
+                                    <label for="EventoFechaHora" class="col-form-label">Fecha y hora:</label>
+                                    <input type="datetime-local" class="form-control" id="EventoFechaHora">
+                                </div>
+                            </div>         
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="subir_editar_evento();">Confirmar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    
+    <!-- Event Details Modal -->
+
+</body>
+
+<script src="{% static 'js/es.js' %}"></script> <!--Idioma español Fullcalendar-->
+<script>
+
+    document.addEventListener("keyup", e=>{
+
+        if (e.target.matches("#nombre_evento")){
+
+            console.log(e.target.value)
+      
+            if (e.key ==="Escape")e.target.value = ""
+      
+            document.querySelectorAll(".li_evento").forEach(evento =>{
+      
+                evento.textContent.toLowerCase().includes(e.target.value.toLowerCase())
+                  ?evento.classList.remove("filtro")
+                  :evento.classList.add("filtro")
+            })
+      
+            if (e.target.value == ""){
+                console.log("hola aver")
+                document.querySelectorAll(".li_evento").forEach(evento =>{
+      
+                    evento.classList.add("filtro")
+                })
+            }
+
+        }
+      
+      
+      })
+
+    function subir_editar_evento(){
+        var EventoId=$("#EventoId").val();
+        var EventoNombre=$("#EventoNombre").val();
+        var EventoTipo=$("#EventoTipo").val();
+        var EventoObservaciones=$("#EventoObservaciones").val();
+        var EventoAsesor = $("#EventoAsesor").val();
+        var EventoFechaHora = $("#EventoFechaHora").val();
+
+        data = {}
+        data.EventoId = EventoId
+        data.EventoNombre = EventoNombre
+        data.EventoTipo = EventoTipo
+        data.EventoObservaciones = EventoObservaciones
+        data.EventoAsesor = EventoAsesor
+        data.EventoFechaHora = EventoFechaHora
+
+        console.log("hola")
+        console.log(data)
+
+        $.ajax({
+              type: "post", // "post" "get" "delete" "put"
+              data: data, // PREFERIBLEMENTE JSON
+              cache: false,
+              headers: {
+                "X-CSRFToken": Cookies.get("csrftoken")
+              },
+              success: function (response) {
+                location.reload()
+                }
+            })
+    }
+
+
+    function editar_evento(){
+        var id_evento= document.getElementById("id_evento").innerHTML;
+        var EventoId= document.getElementById("EventoId");
+        EventoId.value = id_evento;
+
+        var title= document.getElementById("title").innerHTML;
+        var EventoNombre= document.getElementById("EventoNombre");
+        EventoNombre.value = title;
+
+        var tipo= document.getElementById("tipo_evento").innerHTML;
+        var EventoTipo= document.getElementById("EventoTipo");
+        EventoTipo.value = tipo;
+
+        var cliente= document.getElementById("cliente").innerHTML;
+        var EventoCliente= document.getElementById("EventoCliente");
+        EventoCliente.value = cliente;
+
+        var asesor= document.getElementById("asesor").value;
+        var EventoAsesor= document.getElementById("EventoAsesor");
+
+        while (EventoAsesor.options.length > 0) {
+            EventoAsesor.remove(0);
+            }
+
+        {% if is_admin %}
+            {% for asesor in asesores %}
+                var newOption = document.createElement("option");
+                newOption.value = "{{asesor}}"; 
+                newOption.text = "{{asesor}}";
+                newOption.selected = true;
+                EventoAsesor.add(newOption);
+            {% endfor %}
+        {% else %}
+            var newOption = document.createElement("option");
+            newOption.value = asesor; 
+            newOption.text = asesor;
+            newOption.selected = true;
+            EventoAsesor.add(newOption);
+        {% endif %}
+
+        var fecha_hora= document.getElementById("start").innerHTML;
+        var EventoFechaHora= document.getElementById("EventoFechaHora");
+        EventoFechaHora.value = fecha_hora;
+    }
+
+    function cumplir_evento(){
+        var id_evento= document.getElementById("id_evento").innerHTML;
+
+        data = {}
+        data.id_evento_cumplido = id_evento
+        
+        console.log("hola")
+        console.log(data)
+        $.ajax({
+            type: "post", // "post" "get" "delete" "put"
+            data: data, // PREFERIBLEMENTE JSON
+            cache: false,
+            headers: {
+              "X-CSRFToken": Cookies.get("csrftoken")
+            },
+            success: function (response) {
+              location.reload()
+              }
+          })
+    }
+
+    function eliminar_evento(){
+        var id_evento= document.getElementById("id_evento").innerHTML;
+
+        data = {}
+        data.id_evento = id_evento
+        
+        console.log("hola")
+        console.log(data)
+
+        $.ajax({
+              type: "post", // "post" "get" "delete" "put"
+              data: data, // PREFERIBLEMENTE JSON
+              cache: false,
+              headers: {
+                "X-CSRFToken": Cookies.get("csrftoken")
+              },
+              success: function (response) {
+                location.reload()
+                }
+            })
+    }
+
+    function ir_detalle(){
+        var id_evento2= document.getElementById("id_evento").innerHTML;
+        var telefono= document.getElementById("telefono").innerHTML;
+
+        data = {}
+        data.id_evento2 = id_evento2
+        data.telefono = telefono
+        
+        console.log("hola")
+        console.log(data)
+
+        $.ajax({
+              type: "post", // "post" "get" "delete" "put"
+              data: data, // PREFERIBLEMENTE JSON
+              cache: false,
+              headers: {
+                "X-CSRFToken": Cookies.get("csrftoken")
+              },
+              success: function (response) {
+                console.log(response)
+                window.location.href = "{% url 'dashboards:detallenuevo' 1234 %}".replace(/1234/, response.toString());
+                }
+            })
+    }
+
+
+
+
+
+    if ($('#evento_hoy').val() == '') {
+        document.getElementById("evento_hoy").value = 0;
+    }
+    if ($('#evento_pendiente').val() == '') {
+        document.getElementById("evento_pendiente").value = 0;
+    }
+        
+    var scheds = $.parseJSON('{ {% for evento in eventos %}"{{evento.id}}":{"id":"{{evento.id}}", "id_evento":"{{evento.id}}","title":"{{evento.nombre}}","cliente":"{{evento.cliente}}","asesor":"{{evento.asesor}}", "cumplido":{% if evento.cumplido %}"Si"{% else %}"No"{% endif %},"fecha_hora_cumplido":"{{evento.fecha_hora_cumplido}}","estado":"{{evento.lead.estado}}","tipo_evento":"{{evento.tipo}}","tiempo_evento":"{{evento.tiempo_evento}}","description":"{{evento.observaciones}}", "telefono":"{{evento.lead.prospecto.celular}}", "start_datetime":"{{evento.fecha_hora|date:"Y-m-d"}} {{evento.fecha_hora|time:"H:i"}}:00","end_datetime":"{{evento.fecha_hora|date:"Y-m-d"}} {{evento.fecha_hora|time:"H:i"}}:00","sdate":"{{evento.fecha_hora|date:"F d, Y"}} {{evento.fecha_hora|time:"H:i A"}}","edate":"{{evento.fecha_hora|date:"F d, Y"}} {{evento.fecha_hora|time:"H:i A"}}"}{% if not forloop.last %},{% endif %} {% endfor %}}')
+    
+</script>
+<script src="{% static 'js/script.js' %}"></script>
+
+</html>

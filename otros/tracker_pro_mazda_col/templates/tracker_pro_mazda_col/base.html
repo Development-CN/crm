@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %}
+  <head>
+    <!-- Etiquetas Requeridas -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- BOOTSTRAP CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+
+    <!-- PROGRESS WIZARD CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'tracker_pro_mazda_col/css/progress_wizard.css' %}" />
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+    <!-- FILEPOND CSS -->
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/filepond/dist/filepond.css" />
+
+    <!-- PROGRESS WIZARD CUSTOM CSS-->
+    <style>
+      .barra {
+        border-radius: 10px;
+      }
+
+      .progress-indicator.custom-complex > li .bubble {
+        height: 18px;
+        width: 95%;
+        border-radius: 10px;
+        /*box-shadow: inset -5px 0 12px rgba(0, 0, 0, 0.2); */
+      }
+
+      .progress-indicator.custom-complex > li .bubble:before,
+      .progress-indicator.custom-complex > li .bubble:after {
+        display: none;
+      }
+
+      .active {
+        color: #3689e6 !important;
+      }
+
+      .completed {
+        color: #68b723 !important;
+      }
+
+      .inactive {
+        color: #d4d4d4 !important;
+      }
+    </style>
+
+    <!-- NEUTRON CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'tracker_pro_mazda_col/css/neutron.css' %}" />
+
+    <!-- LIGHT GALLERY CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.2.1/css/lightgallery-bundle.min.css" integrity="sha512-rYeyP/7l5e89ap2He13nzhq2ksCEvohMZOdbMVTodaAkkQjDKXd4PVgkHy4AOLlFoJarfc8F2H854DjOQa5qdg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+    <!--COOKIE JS-->
+    <script src="//cdn.jsdelivr.net/npm/js-cookie@rc"></script>
+
+    <!-- FILEPOND JS -->
+    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+    <script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
+
+    <title>Tracking</title>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-light bg-white border-bottom shadow-sm sticky-top mb-4">
+      <a class="navbar-brand"> {{agencia_nombre}} </a>
+      {% comment %}
+      <img src="{% static 'tracker_pro_mazda_col/img/mazda.png' %} " height="40" class="d-inline-block align-top mx-auto" />
+      {% endcomment %}
+    </nav>
+    <div class="container-fluid mb-5">
+      <div class="text-center">
+        <h4>Seguimiento en Línea</h4>
+      </div>
+      {% block content %} {% endblock %}
+    </div>
+
+    <!-- Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <!-- Bootstrap.js -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <!-- LightGallery.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.2.1/lightgallery.min.js" integrity="sha512-DHzj0Pb74Okp1KYj1vRYZ2kZKQtScr+ilk0w8lEjHgU4OvRKOGecRAEkejpBPlzmY1L2pU7m9o1DAk6Tmex/Eg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!--SIGNATUREPAD.JS-->
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+
+    <!--LIGHT GALLERY-->
+    <script>
+      $('#evidencias').on('click', function () {
+        $(this).lightGallery({
+          share: false,
+          dynamic: true,
+          dynamicEl: [
+
+            {% for ev in ev_recepcion %}
+              {
+                {% if ev in videos %}
+                'html': '<video class="lg-video-object lg-html5" controls preload="none"><source src="/media/{{ev}}"></video>',
+        'thumb': '/media/{{ev}}',
+        'subHtml': '<h4>Evidencia de Recepción</h4>'
+                {% else %}
+        "src": '/media/{{ev}}',
+        'thumb': '/media/{{ev}}',
+        'subHtml': '<h4>Evidencia de Recepción</h4>'
+                {% endif %}
+              },
+        {% endfor %}
+
+        {% for ev in evidencias %}
+      {
+        {% if ev.evidencia in videos %}
+        'html': '<video class="lg-video-object lg-html5" controls preload="none"><source src="/media/{{ev.evidencia}}"></video>',
+          'thumb': '/media/{{ev.evidencia}}',
+            'subHtml': '<h4>{{ev.item}}</h4>'
+        {% else %}
+        "src": '/media/{{ev.evidencia}}',
+          'thumb': '/media/{{ev.evidencia}}',
+            'subHtml': '<h4>{{ev.item}}</h4>'
+        {% endif %}
+      },
+      {% endfor %}
+            ]
+        })
+      });
+    </script>
+
+    <!-- FILEPOND SERVER CONFIG-->
+    <script>
+      // PLUGINS
+      FilePond.setOptions({
+        //STYLE
+        className: "shadow",
+        //TRANSLATIONS
+        labelIdle: "<i class='fas fa-plus'></i> Añadir Evidencia",
+        labelFileLoadError: "Error de Red",
+        labelFileProcessing: "Cargando Archivo",
+        labelFileProcessingComplete: "Carga Completada",
+        labelFileProcessingAborted: "Carga Cancelada",
+        labelFileProcessingError: "Error de Red",
+        labelTapToCancel: "Cancelar",
+        labelTapToUndo: "Borrar",
+        labelTapToRetry: "Volver a Intentar",
+
+        // OPTIONS
+        allowMultiple: false,
+        maxFiles: 1,
+        chunkUploads: true,
+        chunkSize: 500000,
+        server: {
+          url: "/fp",
+          process: "/process/",
+          patch: "/patch/",
+          revert: "/revert/",
+          load: "/load/",
+          fetch: "/fetch/",
+          restore: "/restore/",
+        },
+      });
+    </script>
+
+    <!--ENABLE TOOLTIPS-->
+    <script type="text/javascript">
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip({ container: "body", trigger: "hover", placement: "bottom" });
+      });
+    </script>
+
+    <!--ELEMENT BLINKING-->
+    <script>
+      function blink_text() {
+        $(".blink").fadeOut(500);
+        $(".blink").fadeIn(500);
+      }
+      setInterval(blink_text, 1000);
+    </script>
+
+    <!--BUBBLE BLINKING-->
+    <script src="{% static 'tracker_pro_mazda_col/js/pruebablink.js' %}"></script>
+  </body>
+</html>

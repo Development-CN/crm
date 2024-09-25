@@ -1,0 +1,3508 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes Compras - Prospectos Madiautos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet"/>
+
+    <script src="/bundles/modernizr?v=wBEWDufH_8Md-Pbioxomt90vm6tJN2Pyy9u9zHtWsPo1"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="/bundles/bootstrap?v=QtxRrbVxHAK-b5ZowWqv6Wt7oUOJAggG80vl1X-EGBM1"></script>
+
+    <script src="/bundles/timepicker?v=SNA17wI1rMl4CP8ayG1ydmEu0eLQfZiFCqPl0hXZpd01"></script>
+
+    <script src="/bundles/sweet?v=ZMOC4FpxSbszBSzdHGvkc9O_scCReJoQ_PgxKeHWirk1"></script>
+
+    <script src="https://use.fontawesome.com/877bbc2081.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+
+    <link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/export/bootstrap-table-export.min.js"></script>
+
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.20.2/dist/extensions/defer-url/bootstrap-table-defer-url.min.js"></script>
+
+    
+
+</head>
+<body style="overflow-x: hidden;">
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+        <a class="navbar-brand">Reportes Compras</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navbarSupportedContent" class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Captura prospectos</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/Leads/Captura">Venta</a>
+                        <a class="dropdown-item" href="/Compras/CompraCaptura">Compra</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Operativo Anfitrion</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/Leads/OperativoAnfitrion">Venta</a>
+                        <a class="dropdown-item" href="/Compras/OperativoAnfitrionCompras">Compra</a>
+                        <a class="dropdown-item" href="/SolicitudPeritaje/SeguimientoAnfitrion">Solicitudes de Peritaje</a>
+                    </div>
+                </li>
+
+                    <li><a class="nav-link" href="/Leads/OperativoAsesor">Operativo Asesor</a></li>
+
+                    <li><a class="nav-link" href="/Compras/OperativoComprador">Operativo Comprador</a></li>
+                                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reportes</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/Leads/Reports">Venta</a>
+                            <a class="dropdown-item" href="/Compras/ReportesCompras">Compra</a>
+                            <a class="dropdown-item" href="/SolicitudPeritaje/ReportesSolicitudesPeritaje">Solicitudes Peritaje</a>
+                        </div>
+                    </li>
+                                    <li><a class="nav-link" href="/Compras/OperativoPerito">Operativo Perito</a></li>
+                    <li><a class="nav-link" href="/Compras/OperativoTaller">Operativo Taller</a></li>
+                                    <li><a class="nav-link" href="http://capnet3.ddns.net:5007/" target="_blank">KPI's</a></li>
+            </ul>
+            <div class="form-inline">
+                <button type="button" style="margin-right: 30px; border: none transparent; background-color:transparent; color:white;" onClick="history.back();"><i class="material-icons">reply</i>Atras</button>
+<form action="/Account/CerrarSesion" method="post">                    <button type="submit" value="CerrarSesion" style="border: none transparent; background-color:transparent; color:white;"><i class="material-icons">exit_to_app</i>Salir</button>
+</form>            </div>
+            
+        </div>
+    </nav>
+    
+    <div class="body-content">
+        
+
+
+<form action="/Compras/WriteDataToExcel" method="post"><input name="__RequestVerificationToken" type="hidden" value="1jF7tyehfqICga4FXHr4WtI5HmdsnWosgPZLRSxQYUIVOIAV58nakA6rU3RTIx4CEslaDfRhMur_Rb0iSL6UOCTZ3_rvVUmzwGcy0zUZoZw1" />    <!--container principal-->
+    <div class="main-panel">
+        <div class="main-content">
+            <div class="content-wrapper">
+                <div class="container-fluid">
+                    <form>
+                        <h4 style="margin:20px;">Compra - Reportes</h4>
+                        <div style="box-shadow:none;">
+                            <div class="card-header border-0" style="background-color: #eee;">
+                                <!--<p class="card-category">Recientes</p>-->
+                                <div class="row">
+                                    <div class="col" style="padding: 1px;">
+                                        <div class="card-counter blue">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <i class="material-icons">announcement</i>
+                                                    <span class="count-numbers">
+                                                        8807
+                                                        
+                                                    </span>
+                                                    <a href="#Capturados" style="color: #ffffff;"><span class="count-name">Capturados</span></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col" style="padding: 1px;">
+                                        <div class="card-counter success">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <i class="material-icons">announcement</i>
+                                                    <span class="count-numbers">
+                                                        
+                                                        888
+                                                    </span>
+                                                    <a href="#SF" style="color: #ffffff;"><span class="count-name">Inventario</span></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col" style="padding: 1px;">
+                                        <div class="card-counter morado">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <i class="material-icons">announcement</i>
+                                                    <span class="count-numbers">
+                                                        
+                                                        7594
+                                                    </span>
+                                                    <a href="#Desistidas" style="color: #ffffff;"><span class="count-name">Desistido</span></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col" style="padding: 1px;">
+                                        <div class="card-counter bg-warning">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <i class="material-icons">announcement</i>
+                                                    <span class="count-numbers">
+                                                        
+                                                        891
+                                                    </span>
+                                                    <a href="#Concretadas" style="color: #ffffff;"><span class="count-name">Compras Concretadas</span></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body border-0" style="background-color: #eee;">
+                                <div class="widget-list" id="Capturados">
+                                    <div id="toolbar">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-2">
+                                                <select class="form-control form-control-sm" id="Capturados_OrigenIngreso" name="Capturados_OrigenIngreso"><option selected="selected" value="0">-- Origen Lead --</option>
+<option value="LLAMADA CONMUTADOR">LLAMADA CONMUTADOR</option>
+<option value="LLAMADA CELULAR">LLAMADA CELULAR</option>
+<option value="LLAMADA/CARROYA">LLAMADA/CARROYA</option>
+<option value="LLAMADA/TUCARRO">LLAMADA/TUCARRO</option>
+<option value="LLAMADA/OLX">LLAMADA/OLX</option>
+<option value="CARROYA">CARROYA</option>
+<option value="TUCARRO">TUCARRO</option>
+<option value="ESTRENAR CARRO">ESTRENAR CARRO</option>
+<option value="OLX">OLX</option>
+<option value="PÁGINA WEB">P&#193;GINA WEB</option>
+<option value="CAMPAÑA PAGA FACEBOOK">CAMPA&#209;A PAGA FACEBOOK</option>
+<option value="CAMPAÑA ORGÁNICA FACEBOOK">CAMPA&#209;A ORG&#193;NICA FACEBOOK</option>
+<option value="INSTAGRAM">INSTAGRAM</option>
+<option value="CAMPAÑA FINANCIERA">CAMPA&#209;A FINANCIERA</option>
+<option value="CONVENIO">CONVENIO</option>
+<option value="WHATSAPP MAZDA">WHATSAPP MAZDA</option>
+<option value="WHATSAPP DIRECTO USADOS">WHATSAPP DIRECTO USADOS</option>
+<option value="WHATSAPP HYUNDAI">WHATSAPP HYUNDAI</option>
+<option value="Google Search">Google Search</option>
+<option value="WHATSAPP COMPRAS USADO">WHATSAPP COMPRAS USADO</option>
+<option value="TU USADO FINANDINA">TU USADO FINANDINA</option>
+<option value="CORREO">CORREO</option>
+<option value="Retoma mazda">Retoma mazda</option>
+<option value="Retoma hyundai">Retoma hyundai</option>
+<option value="Olx">Olx</option>
+<option value="Retoma usados">Retoma usados</option>
+<option value="Compra Morato">Compra Morato</option>
+<option value="Usados 127">Usados 127</option>
+<option value="Compra 127">Compra 127</option>
+<option value="Renting Colombia">Renting Colombia</option>
+<option value="Consignado">Consignado</option>
+<option value="Referido">Referido</option>
+<option value="Rebold">Rebold</option>
+<option value="PÁGINA WEB FORMULARIO">P&#193;GINA WEB FORMULARIO</option>
+<option value="Finanzauto">Finanzauto</option>
+</select>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <select class="form-control form-control-sm" id="Capturados_Respuesta" name="Capturados_Respuesta"><option selected="selected" value="0">-- Respuesta --</option>
+<option value="Agendar Cita">Agendar Cita</option>
+<option value="Hacer nueva llamada/cita - fecha">Hacer nueva llamada/cita - fecha</option>
+<option value="En otra ciudad posibilidad traslado">En otra ciudad posibilidad traslado</option>
+<option value="No contesta/Volver a llamar">No contesta/Volver a llamar</option>
+<option value="Llamada realizada">Llamada realizada</option>
+<option value="Mensaje enviado a whatsapp">Mensaje enviado a whatsapp</option>
+<option value="Solo deses informacion">Solo deses informacion</option>
+<option value="Se deja mensaje de voz">Se deja mensaje de voz</option>
+<option value="Acepta peritaje">Acepta peritaje</option>
+<option value="En proceso de peritaje">En proceso de peritaje</option>
+<option value="En espera de respuesta">En espera de respuesta</option>
+<option value="Proceso Documentacion">Proceso Documentacion</option>
+<option value="Compra Madiautos">Compra Madiautos</option>
+<option value="Compra Tercero">Compra Tercero</option>
+<option value="Retoma N Hyundai">Retoma N Hyundai</option>
+<option value="Retoma N Mazda">Retoma N Mazda</option>
+<option value="Retoma Usado">Retoma Usado</option>
+<option value="No contesta/Fuera de servicio">No contesta/Fuera de servicio</option>
+<option value="No acepta peritaje/Fin proceso">No acepta peritaje/Fin proceso</option>
+<option value="Niega Solicitud">Niega Solicitud</option>
+<option value="Ya vendio vehiculo">Ya vendio vehiculo</option>
+<option value="No acepta oferta">No acepta oferta</option>
+<option value="No interesado">No interesado</option>
+<option value="Interesado en la venta">Interesado en la venta</option>
+<option value="Datos de contacto incompletos">Datos de contacto incompletos</option>
+<option value="Otra ciudad inviable">Otra ciudad inviable</option>
+<option value="Vehiculo fuera de estandar">Vehiculo fuera de estandar</option>
+</select>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <select class="form-control form-control-sm" id="Capturados_Estado" name="Capturados_Estado"><option selected="selected" value="0">-- Estado --</option>
+<option value="Compra Finalizada">Compra Finalizada</option>
+<option value="Desistido">Desistido</option>
+<option value="Peritaje">Peritaje</option>
+<option value="Seguimiento Compra">Seguimiento Compra</option>
+<option value="Sigue Proceso">Sigue Proceso</option>
+</select>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <select class="form-control form-control-sm" id="Capturados_Anfitrion" name="Capturados_Anfitrion"><option selected="selected" value="0">-- Anfitrion --</option>
+<option value="Daniela Quijano">Daniela Quijano</option>
+<option value="Sharon Diaz">Sharon Diaz</option>
+<option value="Cristian Guzman">Cristian Guzman</option>
+<option value="Brenda Milena Martinez Martinez">Brenda Milena Martinez Martinez</option>
+<option value="Mayerly Andrea Gutierrez Garcia">Mayerly Andrea Gutierrez Garcia</option>
+<option value="Camilo Andres Salazar Campos">Camilo Andres Salazar Campos</option>
+<option value="Auditoria">Auditoria</option>
+</select>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <select class="form-control form-control-sm" id="Capturados_Comprador" name="Capturados_Comprador"><option selected="selected" value="0">-- Comprador --</option>
+<option value="Carlos Peña">Carlos Pe&#241;a</option>
+<option value="Elkin Solano">Elkin Solano</option>
+<option value="German Caro">German Caro</option>
+<option value="William Rosas">William Rosas</option>
+<option value="Oscar Ospina">Oscar Ospina</option>
+<option value="Mario Ramírez">Mario Ram&#237;rez</option>
+<option value="Felipe Carrillo">Felipe Carrillo</option>
+<option value="Sanly Rojas">Sanly Rojas</option>
+<option value="CARLOS MORENO">CARLOS MORENO</option>
+<option value="Heidy Medina">Heidy Medina</option>
+</select>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <select id="Capturados_Verificado" class="form-control form-control-sm">
+                                                    <option value="0" selected>--Verificado--</option>
+                                                    <option value="SI">SI</option>
+                                                    <option value="NO">NO</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-3">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="basic-addon1">De:</span>
+                                                    </div>
+                                                    <input name="CapturaDesde" id="CapturaDesde" class="form-control" type="text" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="basic-addon1">a:</span>
+                                                    </div>
+                                                    <input name="CapturaHasta" id="CapturaHasta" class="form-control" type="text" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md3">
+                                                <button id="ok" type="button" class="btn btn-primary" onclick="FiltrarCapturados();">Buscar</button>
+                                                <button id="rCaptura" class="btn btn-secondary"><i class="material-icons">cached</i></button>
+                                                <button type="submit" value="Capturados" name="tabla" id="exportCapturados" class="btn btn-secondary"><i class="material-icons">description</i></button>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control" placeholder="Search" id="Capturados_Cadena" name="Capturados_Cadena">
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-outline-secondary" type="button" onclick="FiltrarCapturados();"><i class="tiny material-icons">search</i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                                     
+                                    </div>
+                                        <table id="tableCapturados"
+                                               data-toolbar="#toolbar"
+                                               data-toggle="table"
+                                               data-height="800"
+                                               data-pagination="true"
+                                               data-side-pagination="server"
+                                               data-sort-class="table-active"
+                                               data-sortable="true"
+                                               data-show-columns="true"
+                                               data-show-columns-search="true"
+                                               data-filter-control="true">
+                                            <thead class="table100-head table100 ver3 blue">
+                                                <tr>
+                                                        <th data-field="Borrar" data-sortable="false">Borrar</th>
+                                                    <th data-field="Detalle">Detalle</th>
+                                                    <th data-field="FechaIngreso" data-sortable="true">Fecha Captura</th>
+                                                    <th data-field="Origen" data-sortable="true">Origen Ingreso</th>
+                                                    <th data-field="Cliente" data-sortable="true">Cliente</th>
+                                                    <th data-field="Placas" data-sortable="true">Placas</th>
+                                                    <th data-field="Telefono" data-sortable="true">Telefono</th>
+                                                    <th data-field="Correo" data-visible="false">Correo</th>
+                                                    <th data-field="TipoDocumento">Tipo Documento</th>
+                                                    <th data-field="Documento">Documento</th>
+                                                    <th data-field="Campania">Campaña</th>
+                                                    <th data-field="Marca" data-visible="false">Marca</th>
+                                                    <th data-field="Modelo" data-visible="false">Modelo</th>
+                                                    <th data-field="Respuesta" data-sortable="true">Respuesta</th>
+                                                    <th data-field="Estado" data-sortable="true">Estado</th>
+                                                    <th data-field="Anfitrion" data-sortable="true">Anfitrión</th>
+                                                    <th data-field="Comprador" data-sortable="true">Comprador</th>
+                                                    <th data-field="Verificado"> Verificado </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody style="background-color:white;"></tbody>
+                                        </table>
+                                </div>
+
+                                <div class="widget-list" id="SF">
+                                    <div id="toolbar2">
+                                        
+                                        <div class="form-row">
+                                            <div class="form-group col-md-2">
+                                                <select class="form-control form-control-sm" id="SF_Respuesta" name="SF_Respuesta"><option selected="selected" value="0">-- Respuesta --</option>
+<option value="Compra Madiautos">Compra Madiautos</option>
+<option value="Retoma N Mazda">Retoma N Mazda</option>
+<option value="Retoma Usado">Retoma Usado</option>
+</select>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <select class="form-control form-control-sm" id="SF_Marca" name="SF_Marca"><option selected="selected" value="0">-- Marca --</option>
+<option value=" MAZDA 3 TOURING"> MAZDA 3 TOURING</option>
+<option value="0">0</option>
+<option value="AUDI">AUDI</option>
+<option value="BAIC X35 ELITE">BAIC X35 ELITE</option>
+<option value="BMW">BMW</option>
+<option value="Changan">Changan</option>
+<option value="Changan CS15 LUXURY">Changan CS15 LUXURY</option>
+<option value="CHEVROLET">CHEVROLET</option>
+<option value="CHEVROLET CAPTIVA LS">CHEVROLET CAPTIVA LS</option>
+<option value="CHEVROLET CAPTIVA LT">CHEVROLET CAPTIVA LT</option>
+<option value="CHEVROLET CAPTIVA SPORT ">CHEVROLET CAPTIVA SPORT </option>
+<option value="CHEVROLET COBALT LTZ">CHEVROLET COBALT LTZ</option>
+<option value="CHEVROLET CRUZE LT">CHEVROLET CRUZE LT</option>
+<option value="CHEVROLET EQUINOX PRMEIR">CHEVROLET EQUINOX PRMEIR</option>
+<option value="CHEVROLET JOY">CHEVROLET JOY</option>
+<option value="CHEVROLET JOY SD">CHEVROLET JOY SD</option>
+<option value="CHEVROLET LS A/A">CHEVROLET LS A/A</option>
+<option value="CHEVROLET LTZ">CHEVROLET LTZ</option>
+<option value="CHEVROLET ONIX LT">CHEVROLET ONIX LT</option>
+<option value="CHEVROLET ONIX LTZ">CHEVROLET ONIX LTZ</option>
+<option value="CHEVROLET ONIX LTZ 1.0 T AT">CHEVROLET ONIX LTZ 1.0 T AT</option>
+<option value="CHEVROLET ONIX PREMIER">CHEVROLET ONIX PREMIER</option>
+<option value="CHEVROLET PREMIER ">CHEVROLET PREMIER </option>
+<option value="CHEVROLET SAIL">CHEVROLET SAIL</option>
+<option value="CHEVROLET SAIL LS">CHEVROLET SAIL LS</option>
+<option value="CHEVROLET SAIL LS A/A">CHEVROLET SAIL LS A/A</option>
+<option value="CHEVROLET SAIL LS S/A">CHEVROLET SAIL LS S/A</option>
+<option value="CHEVROLET SAIL LTZ">CHEVROLET SAIL LTZ</option>
+<option value="CHEVROLET SAIL LTZ SPORT">CHEVROLET SAIL LTZ SPORT</option>
+<option value="CHEVROLET SAIL SPORT LTZ">CHEVROLET SAIL SPORT LTZ</option>
+<option value="CHEVROLET SONIC LT">CHEVROLET SONIC LT</option>
+<option value="CHEVROLET SONIC LT MT SD">CHEVROLET SONIC LT MT SD</option>
+<option value="CHEVROLET SPARK GT">CHEVROLET SPARK GT</option>
+<option value="CHEVROLET SPARK GT LT">CHEVROLET SPARK GT LT</option>
+<option value="CHEVROLET SPARK GT LTZ">CHEVROLET SPARK GT LTZ</option>
+<option value="CHEVROLET spark life ">CHEVROLET spark life </option>
+<option value="CHEVROLET SPARK LIFE AA">CHEVROLET SPARK LIFE AA</option>
+<option value="CHEVROLET TRACKER LS MT T">CHEVROLET TRACKER LS MT T</option>
+<option value="CHEVROLET TRACKER LT">CHEVROLET TRACKER LT</option>
+<option value="CHEVROLET TRACKER PREMIER">CHEVROLET TRACKER PREMIER</option>
+<option value="CITROEN">CITROEN</option>
+<option value="CITROEN C4 CACTUS FEEL">CITROEN C4 CACTUS FEEL</option>
+<option value="CITROEN C4 FEEL PLUS ">CITROEN C4 FEEL PLUS </option>
+<option value="CITROEN C5 AIRCROSS UNIQUE">CITROEN C5 AIRCROSS UNIQUE</option>
+<option value="CITROEN CA CACTUS SHINE">CITROEN CA CACTUS SHINE</option>
+<option value="Dodge">Dodge</option>
+<option value="Dodge JOURNEY 7 PTOS">Dodge JOURNEY 7 PTOS</option>
+<option value="Dodge JOURNEY EXPRESS">Dodge JOURNEY EXPRESS</option>
+<option value="Dodge JOURNEY EXPRESS 5 PUESTOS">Dodge JOURNEY EXPRESS 5 PUESTOS</option>
+<option value="FIAT">FIAT</option>
+<option value="FIAT UNO WAY">FIAT UNO WAY</option>
+<option value="FORD">FORD</option>
+<option value="FORD ECOSPORT FREESTYLE ">FORD ECOSPORT FREESTYLE </option>
+<option value="FORD ECOSPORT SE">FORD ECOSPORT SE</option>
+<option value="FORD ECOSPORT SE AT 1.5">FORD ECOSPORT SE AT 1.5</option>
+<option value="FORD ECOSPORT TITAMIUM">FORD ECOSPORT TITAMIUM</option>
+<option value="FORD ECOSPORT TITANIUM">FORD ECOSPORT TITANIUM</option>
+<option value="FORD EDGE SEL">FORD EDGE SEL</option>
+<option value="FORD EDGE TITANIUM">FORD EDGE TITANIUM</option>
+<option value="FORD ESCAPE SE ">FORD ESCAPE SE </option>
+<option value="FORD ESCAPE TITANIUM">FORD ESCAPE TITANIUM</option>
+<option value="FORD ESCAPE TUTANIUM ">FORD ESCAPE TUTANIUM </option>
+<option value="FORD EXPLORER LIMITED">FORD EXPLORER LIMITED</option>
+<option value="FORD FIESTA SE">FORD FIESTA SE</option>
+<option value="FORD fiesta se at">FORD fiesta se at</option>
+<option value="FORD FIESTA TITANIUM">FORD FIESTA TITANIUM</option>
+<option value="FORD FIESTA TITANIUM AT ">FORD FIESTA TITANIUM AT </option>
+<option value="FORD FUSION TITANIUM PLUS">FORD FUSION TITANIUM PLUS</option>
+<option value="HONDA">HONDA</option>
+<option value="HONDA CRV  CITY PLUS">HONDA CRV  CITY PLUS</option>
+<option value="HONDA CRV EXL">HONDA CRV EXL</option>
+<option value="HYUNDAI">HYUNDAI</option>
+<option value="HYUNDAI advance at">HYUNDAI advance at</option>
+<option value="HYUNDAI CRETA PREMIUM">HYUNDAI CRETA PREMIUM</option>
+<option value="Hyundai elantra gls">Hyundai elantra gls</option>
+<option value="HYUNDAI GRAVITI ADVANCE">HYUNDAI GRAVITI ADVANCE</option>
+<option value="HYUNDAI I25 1.4">HYUNDAI I25 1.4</option>
+<option value="HYUNDAI i25 ACCENT">HYUNDAI i25 ACCENT</option>
+<option value="HYUNDAI IONIQ HEV">HYUNDAI IONIQ HEV</option>
+<option value="HYUNDAI TUCSON ADVANCE MEC">HYUNDAI TUCSON ADVANCE MEC</option>
+<option value="JAC S2 MINI URBAN">JAC S2 MINI URBAN</option>
+<option value="JEEP">JEEP</option>
+<option value="JEEP CHEROKEE LIMITED">JEEP CHEROKEE LIMITED</option>
+<option value="JEEP COMPASS LONGITUD">JEEP COMPASS LONGITUD</option>
+<option value="JEEP RENEGADE SPORT">JEEP RENEGADE SPORT</option>
+<option value="JEEP RENEGADE SPORT PLUS ">JEEP RENEGADE SPORT PLUS </option>
+<option value="JMC">JMC</option>
+<option value="KIA">KIA</option>
+<option value="KIA CERATO PRO ">KIA CERATO PRO </option>
+<option value="KIA CERATO PRO SX">KIA CERATO PRO SX</option>
+<option value="KIA CERATO VIVRO">KIA CERATO VIVRO</option>
+<option value="KIA NEW SPORTADGE VIBRANT">KIA NEW SPORTADGE VIBRANT</option>
+<option value="KIA NIRO ZENITH ">KIA NIRO ZENITH </option>
+<option value="KIA PIACANTO R SUMMA">KIA PIACANTO R SUMMA</option>
+<option value="KIA RIO ION XTREME">KIA RIO ION XTREME</option>
+<option value="KIA RIO SPICE ">KIA RIO SPICE </option>
+<option value="KIA RIO UB EX FE 1.2 MT">KIA RIO UB EX FE 1.2 MT</option>
+<option value="KIA RIO ZENTH">KIA RIO ZENTH</option>
+<option value="KIA STONIC VIBRANT">KIA STONIC VIBRANT</option>
+<option value="KIA ZENITH">KIA ZENITH</option>
+<option value="MAZDA">MAZDA</option>
+<option value="MAZDA  3 PRIME">MAZDA  3 PRIME</option>
+<option value="MAZDA 2 ">MAZDA 2 </option>
+<option value="MAZDA 2 GRAND TOURING LX">MAZDA 2 GRAND TOURING LX</option>
+<option value="MAZDA 2 PRIME">MAZDA 2 PRIME</option>
+<option value="MAZDA 2 TOURING">MAZDA 2 TOURING</option>
+<option value="MAZDA 2 TOURING AT">MAZDA 2 TOURING AT</option>
+<option value="MAZDA 3 grand touring">MAZDA 3 grand touring</option>
+<option value="MAZDA 3 grand touring lx">MAZDA 3 grand touring lx</option>
+<option value="MAZDA 3 GRAND TOURING SPORT">MAZDA 3 GRAND TOURING SPORT</option>
+<option value="MAZDA 3 PRIME">MAZDA 3 PRIME</option>
+<option value="MAZDA 3 SPORT GRAND TOURING">MAZDA 3 SPORT GRAND TOURING</option>
+<option value="MAZDA 3 SPORT TOURING">MAZDA 3 SPORT TOURING</option>
+<option value="MAZDA 3 TOURING ">MAZDA 3 TOURING </option>
+<option value="MAZDA 3 TOURING AT">MAZDA 3 TOURING AT</option>
+<option value="MAZDA CX 30  TOURING">MAZDA CX 30  TOURING</option>
+<option value="MAZDA CX 30 GRAND TOURING">MAZDA CX 30 GRAND TOURING</option>
+<option value="MAZDA CX 30 TOURING">MAZDA CX 30 TOURING</option>
+<option value="MAZDA CX 5 GRAND TOURING">MAZDA CX 5 GRAND TOURING</option>
+<option value="MAZDA CX 5 TOURING">MAZDA CX 5 TOURING</option>
+<option value="MAZDA CX 9 GRAND TOURING LX">MAZDA CX 9 GRAND TOURING LX</option>
+<option value="MAZDA CX30 GRAND TOURING">MAZDA CX30 GRAND TOURING</option>
+<option value="MAZDA CX-30 GRAND TOURING">MAZDA CX-30 GRAND TOURING</option>
+<option value="MAZDA CX30 GRAND TOURING LX">MAZDA CX30 GRAND TOURING LX</option>
+<option value="MAZDA CX30 GT HIBRIDA">MAZDA CX30 GT HIBRIDA</option>
+<option value="MAZDA CX30 PRIME">MAZDA CX30 PRIME</option>
+<option value="MAZDA CX30 TOURING ">MAZDA CX30 TOURING </option>
+<option value="MAZDA CX-30 TOURING">MAZDA CX-30 TOURING</option>
+<option value="MAZDA CX5 GRAND TOURING">MAZDA CX5 GRAND TOURING</option>
+<option value="MAZDA CX5 GRAND TOURING 2.5">MAZDA CX5 GRAND TOURING 2.5</option>
+<option value="MAZDA CX5 TOURING">MAZDA CX5 TOURING</option>
+<option value="MAZDA CX-5 TOURING">MAZDA CX-5 TOURING</option>
+<option value="Mazda Nuevos">Mazda Nuevos</option>
+<option value="MERCEDES BENZ">MERCEDES BENZ</option>
+<option value="MG">MG</option>
+<option value="MITSUBISHI">MITSUBISHI</option>
+<option value="MITSUBISHI MONTERO SPORT ">MITSUBISHI MONTERO SPORT </option>
+<option value="NEW CHEVROLET TRACKER LS">NEW CHEVROLET TRACKER LS</option>
+<option value="NEW FORD ECOSPORT SE">NEW FORD ECOSPORT SE</option>
+<option value="NISSAN">NISSAN</option>
+<option value="NISSAN ENTRA  EXCLUSIVE">NISSAN ENTRA  EXCLUSIVE</option>
+<option value="NISSAN KICKS ADVANCE">NISSAN KICKS ADVANCE</option>
+<option value="NISSAN MARCG ADVANCE">NISSAN MARCG ADVANCE</option>
+<option value="NISSAN MARCH ADVANCE">NISSAN MARCH ADVANCE</option>
+<option value="NISSAN MARCH SENSE">NISSAN MARCH SENSE</option>
+<option value="NISSAN NEW QASHQAI EXCLUSIVE CONNECT">NISSAN NEW QASHQAI EXCLUSIVE CONNECT</option>
+<option value="NISSAN NP3000 FRONTIER">NISSAN NP3000 FRONTIER</option>
+<option value="NISSAN QASHQAI">NISSAN QASHQAI</option>
+<option value="NISSAN QASHQAI EXCLUCIVE">NISSAN QASHQAI EXCLUCIVE</option>
+<option value="NISSAN QASHQAI EXCLUSIVE AT">NISSAN QASHQAI EXCLUSIVE AT</option>
+<option value="NISSAN QASHQAI SENSE">NISSAN QASHQAI SENSE</option>
+<option value="NISSAN TIIDA MIIO">NISSAN TIIDA MIIO</option>
+<option value="NISSAN VERSA ADVANCE">NISSAN VERSA ADVANCE</option>
+<option value="NISSAN VERSA ADVANCE 1.6 AT">NISSAN VERSA ADVANCE 1.6 AT</option>
+<option value="NISSAN VERSA ADVANCE MT">NISSAN VERSA ADVANCE MT</option>
+<option value="NISSAN VERSA EXCLUSIVE">NISSAN VERSA EXCLUSIVE</option>
+<option value="NISSAN VERSA SENSE">NISSAN VERSA SENSE</option>
+<option value="NISSAN XTRAIL EXCLUSIVE">NISSAN XTRAIL EXCLUSIVE</option>
+<option value="NISSAN X-TRAIL T32 EXCLUCIVE">NISSAN X-TRAIL T32 EXCLUCIVE</option>
+<option value="PEUGEOT">PEUGEOT</option>
+<option value="PEUGEOT 2008 GL LINE">PEUGEOT 2008 GL LINE</option>
+<option value="PEUGEOT 3008 ALLURE ">PEUGEOT 3008 ALLURE </option>
+<option value="RENAULT">RENAULT</option>
+<option value="RENAULT ALASKAN INTENS">RENAULT ALASKAN INTENS</option>
+<option value="RENAULT CAPTUR INTENS">RENAULT CAPTUR INTENS</option>
+<option value="RENAULT CAPTUR INTES">RENAULT CAPTUR INTES</option>
+<option value="RENAULT CAPTUR ZEN">RENAULT CAPTUR ZEN</option>
+<option value="RENAULT DUSTER EXPRESION 1.6">RENAULT DUSTER EXPRESION 1.6</option>
+<option value="RENAULT DUSTER INTENS">RENAULT DUSTER INTENS</option>
+<option value="RENAULT DUSTER OROCH">RENAULT DUSTER OROCH</option>
+<option value="RENAULT DUSTER OROCH ZEN">RENAULT DUSTER OROCH ZEN</option>
+<option value="RENAULT DUSTER ZE">RENAULT DUSTER ZE</option>
+<option value="RENAULT DUSTER ZEN">RENAULT DUSTER ZEN</option>
+<option value="RENAULT EXPRESION AT">RENAULT EXPRESION AT</option>
+<option value="RENAULT KOLEOS DYNAMIQUE">RENAULT KOLEOS DYNAMIQUE</option>
+<option value="RENAULT KWID">RENAULT KWID</option>
+<option value="RENAULT KWID ODSAIDER">RENAULT KWID ODSAIDER</option>
+<option value="RENAULT KWID OUDSIDER">RENAULT KWID OUDSIDER</option>
+<option value="RENAULT KWID OUSIDER">RENAULT KWID OUSIDER</option>
+<option value="RENAULT KWID OUTSAIDER">RENAULT KWID OUTSAIDER</option>
+<option value="RENAULT KWID OUTSIDER">RENAULT KWID OUTSIDER</option>
+<option value="RENAULT KWID ZEN">RENAULT KWID ZEN</option>
+<option value="RENAULT LIFE">RENAULT LIFE</option>
+<option value="RENAULT LOGAN EXPRESION">RENAULT LOGAN EXPRESION</option>
+<option value="RENAULT LOGAN LIFE">RENAULT LOGAN LIFE</option>
+<option value="RENAULT LOGAN PRIVILEGE AT">RENAULT LOGAN PRIVILEGE AT</option>
+<option value="RENAULT NEW DUSTER INTENS">RENAULT NEW DUSTER INTENS</option>
+<option value="RENAULT NEW KOLEOS ZEN">RENAULT NEW KOLEOS ZEN</option>
+<option value="RENAULT NEW LOGAN LIFE">RENAULT NEW LOGAN LIFE</option>
+<option value="RENAULT SANDERO DYNAMIQUE">RENAULT SANDERO DYNAMIQUE</option>
+<option value="RENAULT SANDERO EXCLUSIVE">RENAULT SANDERO EXCLUSIVE</option>
+<option value="RENAULT SANDERO EXPRESSION">RENAULT SANDERO EXPRESSION</option>
+<option value="RENAULT SANDERO INTENS">RENAULT SANDERO INTENS</option>
+<option value="RENAULT SANDERO LIFE POLAR">RENAULT SANDERO LIFE POLAR</option>
+<option value="RENAULT SANDERO ZEN">RENAULT SANDERO ZEN</option>
+<option value="RENAULT STEPWAY AT">RENAULT STEPWAY AT</option>
+<option value="RENAULT STEPWAY DYNAMIQUE">RENAULT STEPWAY DYNAMIQUE</option>
+<option value="RENAULT STEPWAY FE">RENAULT STEPWAY FE</option>
+<option value="RENAULT STEPWAY INTENS">RENAULT STEPWAY INTENS</option>
+<option value="RENAULT STEPWAY POLAR">RENAULT STEPWAY POLAR</option>
+<option value="RENAULT TWIZY TECHNIC">RENAULT TWIZY TECHNIC</option>
+<option value="SEAT">SEAT</option>
+<option value="SEAT ARONA FR">SEAT ARONA FR</option>
+<option value="SSANG YONG">SSANG YONG</option>
+<option value="SUBARU">SUBARU</option>
+<option value="Suzuki">Suzuki</option>
+<option value="Suzuki  SWIFT DZIRE">Suzuki  SWIFT DZIRE</option>
+<option value="Suzuki scross">Suzuki scross</option>
+<option value="SUZUKI SWIFT DEZIRE">SUZUKI SWIFT DEZIRE</option>
+<option value="SUZUKI SWIFT DZIRE">SUZUKI SWIFT DZIRE</option>
+<option value="suzuki vitara all grip">suzuki vitara all grip</option>
+<option value="TOYOTA">TOYOTA</option>
+<option value="TOYOTA PRADO TXL">TOYOTA PRADO TXL</option>
+<option value="VOLKSWAGEN">VOLKSWAGEN</option>
+<option value="VOLKSWAGEN  GOL TRENDLINE">VOLKSWAGEN  GOL TRENDLINE</option>
+<option value="VOLKSWAGEN AMAROK COMFORTILNE">VOLKSWAGEN AMAROK COMFORTILNE</option>
+<option value="VOLKSWAGEN CROSS FOX">VOLKSWAGEN CROSS FOX</option>
+<option value="VOLKSWAGEN CROSS FOX WILD">VOLKSWAGEN CROSS FOX WILD</option>
+<option value="VOLKSWAGEN FOX XTREM">VOLKSWAGEN FOX XTREM</option>
+<option value="VOLKSWAGEN FOX XTREME">VOLKSWAGEN FOX XTREME</option>
+<option value="VOLKSWAGEN GOL COMFORTLINE">VOLKSWAGEN GOL COMFORTLINE</option>
+<option value="VOLKSWAGEN GOL TRENDLINE">VOLKSWAGEN GOL TRENDLINE</option>
+<option value="VOLKSWAGEN GOL VOYAGE">VOLKSWAGEN GOL VOYAGE</option>
+<option value="VOLKSWAGEN JETTA SPORTLINE">VOLKSWAGEN JETTA SPORTLINE</option>
+<option value="VOLKSWAGEN NIVUS CONFORTLINE">VOLKSWAGEN NIVUS CONFORTLINE</option>
+<option value="VOLKSWAGEN POLO HIGLINE">VOLKSWAGEN POLO HIGLINE</option>
+<option value="VOLKSWAGEN SAVEIRO AA">VOLKSWAGEN SAVEIRO AA</option>
+<option value="VOLKSWAGEN TCROSS TRENDLINE">VOLKSWAGEN TCROSS TRENDLINE</option>
+<option value="VOLKSWAGEN T-CROSS TRENDLINE">VOLKSWAGEN T-CROSS TRENDLINE</option>
+<option value="VOLKSWAGEN VOTAGE HIGHLINE">VOLKSWAGEN VOTAGE HIGHLINE</option>
+<option value="VOLKSWAGEN VOYAGE COMFORTLINE">VOLKSWAGEN VOYAGE COMFORTLINE</option>
+<option value="VOLKSWAGEN VOYAGE TRENDLINE">VOLKSWAGEN VOYAGE TRENDLINE</option>
+<option value="VOLVO">VOLVO</option>
+</select>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <select class="form-control form-control-sm" id="SF_Modelo" name="SF_Modelo"><option selected="selected" value="0">-- Modelo --</option>
+<option value=""></option>
+<option value=" 2 TOURING "> 2 TOURING </option>
+<option value=" 3 "> 3 </option>
+<option value=" 3 hibrido"> 3 hibrido</option>
+<option value=" Beat premier"> Beat premier</option>
+<option value=" BRONCO"> BRONCO</option>
+<option value=" C3 shine"> C3 shine</option>
+<option value=" cx30"> cx30</option>
+<option value=" CX9"> CX9</option>
+<option value=" Kia Picanto Vibrant "> Kia Picanto Vibrant </option>
+<option value=" L200 GLX "> L200 GLX </option>
+<option value=" Logan "> Logan </option>
+<option value=" MONTERO "> MONTERO </option>
+<option value=" NEW TRACKER"> NEW TRACKER</option>
+<option value=" New Versa "> New Versa </option>
+<option value=" Onix sedan LTZ"> Onix sedan LTZ</option>
+<option value=" QASHQA"> QASHQA</option>
+<option value=" Spark gt "> Spark gt </option>
+<option value="	Spark gt">	Spark gt</option>
+<option value="2">2</option>
+<option value="2 hach back">2 hach back</option>
+<option value="2 MECANICO">2 MECANICO</option>
+<option value="2 SEDAN">2 SEDAN</option>
+<option value="2008">2008</option>
+<option value="2008 Allure ">2008 Allure </option>
+<option value="2012">2012</option>
+<option value="2013">2013</option>
+<option value="2014">2014</option>
+<option value="2015">2015</option>
+<option value="2016">2016</option>
+<option value="2017">2017</option>
+<option value="2018">2018</option>
+<option value="2019">2019</option>
+<option value="2020">2020</option>
+<option value="2021">2021</option>
+<option value="2022">2022</option>
+<option value="218I ">218I </option>
+<option value="3">3</option>
+<option value="3 PRIME ">3 PRIME </option>
+<option value="3 sport GT">3 sport GT</option>
+<option value="3 TOURING AUT ">3 TOURING AUT </option>
+<option value="3008 ">3008 </option>
+<option value="3008 ALLURE">3008 ALLURE</option>
+<option value="301 ">301 </option>
+<option value="A200">A200</option>
+<option value="A4 ">A4 </option>
+<option value="accent ">accent </option>
+<option value="ACCENT GL">ACCENT GL</option>
+<option value="ALASKAN ">ALASKAN </option>
+<option value="AMAROK ">AMAROK </option>
+<option value="ARGO">ARGO</option>
+<option value="ARGOS">ARGOS</option>
+<option value="Arona ">Arona </option>
+<option value="Asx">Asx</option>
+<option value="Baic ">Baic </option>
+<option value="BALENO AT">BALENO AT</option>
+<option value="beat ">beat </option>
+<option value="Beat ltz">Beat ltz</option>
+<option value="BLAZER ">BLAZER </option>
+<option value="C3 ">C3 </option>
+<option value="c4">c4</option>
+<option value="C4	">C4	</option>
+<option value="C5 Air cross UNIQUE">C5 Air cross UNIQUE</option>
+<option value="C5 AIRCROSS">C5 AIRCROSS</option>
+<option value="CAPTIVA">CAPTIVA</option>
+<option value="CAPTUR">CAPTUR</option>
+<option value="CARENS ">CARENS </option>
+<option value="carens suv">carens suv</option>
+<option value="CERATO">CERATO</option>
+<option value="Cerato pro">Cerato pro</option>
+<option value="cerato segunda generacion">cerato segunda generacion</option>
+<option value="CHEROKEE">CHEROKEE</option>
+<option value="CHEVROLET">CHEVROLET</option>
+<option value="Chevrolet Sail HB LTZ  ">Chevrolet Sail HB LTZ  </option>
+<option value="Chevrolet sail ls AA">Chevrolet sail ls AA</option>
+<option value="Chevrolet spark life">Chevrolet spark life</option>
+<option value="Citroen CACTUS ">Citroen CACTUS </option>
+<option value="CITROEN FELL">CITROEN FELL</option>
+<option value="Citroen Shain 1.6 turbo ">Citroen Shain 1.6 turbo </option>
+<option value="CLIO">CLIO</option>
+<option value="COBALT ">COBALT </option>
+<option value="COMPASS">COMPASS</option>
+<option value="Corolla ">Corolla </option>
+<option value="CORROLLA ">CORROLLA </option>
+<option value="Creta ">Creta </option>
+<option value="Cross ">Cross </option>
+<option value="CROSS 	">CROSS 	</option>
+<option value="CROSS FOX">CROSS FOX</option>
+<option value="Crossfox">Crossfox</option>
+<option value="CRUZE ">CRUZE </option>
+<option value="CRV">CRV</option>
+<option value="CX 30">CX 30</option>
+<option value="CX 5">CX 5</option>
+<option value="cx3">cx3</option>
+<option value="cx30 ">cx30 </option>
+<option value="CX-30">CX-30</option>
+<option value="CX-30  	">CX-30  	</option>
+<option value="CX5 ">CX5 </option>
+<option value="CX-5">CX-5</option>
+<option value="duster ">duster </option>
+<option value="DUSTER 4X2">DUSTER 4X2</option>
+<option value="DUSTER OROCH">DUSTER OROCH</option>
+<option value="Duster				">Duster				</option>
+<option value="ECOSPORT ">ECOSPORT </option>
+<option value="ECOSPORT TITANIUM">ECOSPORT TITANIUM</option>
+<option value="EDGE">EDGE</option>
+<option value="equinox">equinox</option>
+<option value="ESCAPE ">ESCAPE </option>
+<option value="EXPEDITION">EXPEDITION</option>
+<option value="EXPLORER">EXPLORER</option>
+<option value="Expresión Night polar">Expresi&#243;n Night polar</option>
+<option value="Fiat cronos">Fiat cronos</option>
+<option value="FIESTA">FIESTA</option>
+<option value="fiesta HATCHBACK FULL EQUIPO">fiesta HATCHBACK FULL EQUIPO</option>
+<option value="FOX">FOX</option>
+<option value="Frontier ">Frontier </option>
+<option value="FUSION">FUSION</option>
+<option value="Gla 200">Gla 200</option>
+<option value="Gol">Gol</option>
+<option value="Golf">Golf</option>
+<option value="GOLF comfortline">GOLF comfortline</option>
+<option value="gravity">gravity</option>
+<option value="Hb20 Getz Advance rin bitono">Hb20 Getz Advance rin bitono</option>
+<option value="HB20S">HB20S</option>
+<option value="HB20S 	">HB20S 	</option>
+<option value="Honda CRV">Honda CRV</option>
+<option value="Honda CRV 1.5 Turbo 4x4 ">Honda CRV 1.5 Turbo 4x4 </option>
+<option value="HRV ">HRV </option>
+<option value="i10">i10</option>
+<option value="i35">i35</option>
+<option value="IBIZA STYLUS">IBIZA STYLUS</option>
+<option value="IONIQ">IONIQ</option>
+<option value="jetta">jetta</option>
+<option value="JETTA HIGHLINE">JETTA HIGHLINE</option>
+<option value="Jetta TSI  ">Jetta TSI  </option>
+<option value="Journey ">Journey </option>
+<option value="JOY ">JOY </option>
+<option value="Kangoo Express  5 puertas ">Kangoo Express  5 puertas </option>
+<option value="Kia Cerato pro 2 generación">Kia Cerato pro 2 generaci&#243;n</option>
+<option value="Kicks">Kicks</option>
+<option value="KIKCS">KIKCS</option>
+<option value="kiwd">kiwd</option>
+<option value="kizashi">kizashi</option>
+<option value="KOLEOS">KOLEOS</option>
+<option value="KONA ">KONA </option>
+<option value="KWID">KWID</option>
+<option value="Kwid  	">Kwid  	</option>
+<option value="KWID OUTSIDER">KWID OUTSIDER</option>
+<option value="Life">Life</option>
+<option value="LOGAN">LOGAN</option>
+<option value="March ">March </option>
+<option value="MAZDA 2 ">MAZDA 2 </option>
+<option value="MAZDA 2 PRIME HBCK ">MAZDA 2 PRIME HBCK </option>
+<option value="Mazda 3 Grand Touring LX ">Mazda 3 Grand Touring LX </option>
+<option value="MAZDA 3 Touring AT">MAZDA 3 Touring AT</option>
+<option value="Mazda 3-sedan Touring ">Mazda 3-sedan Touring </option>
+<option value="Mazda CX30 Grand Touring 4*2 2.0 AT">Mazda CX30 Grand Touring 4*2 2.0 AT</option>
+<option value="MINI VAN">MINI VAN</option>
+<option value="MOBI">MOBI</option>
+<option value="MURANO">MURANO</option>
+<option value="N300">N300</option>
+<option value="N400">N400</option>
+<option value="New ">New </option>
+<option value="NEW ALL PICANTO">NEW ALL PICANTO</option>
+<option value="NEW CX5">NEW CX5</option>
+<option value="NEW DUSTER">NEW DUSTER</option>
+<option value="NEW ECOSPOT">NEW ECOSPOT</option>
+<option value="NEW JETTA">NEW JETTA</option>
+<option value="New Jetta 2.0 ">New Jetta 2.0 </option>
+<option value="NEW KOLEOS">NEW KOLEOS</option>
+<option value="NEW LOGAN">NEW LOGAN</option>
+<option value="NEW QASHQAI ">NEW QASHQAI </option>
+<option value="NEW RANGER">NEW RANGER</option>
+<option value="NEW SANDERO">NEW SANDERO</option>
+<option value="NEW SCROSS">NEW SCROSS</option>
+<option value="NEW SPORTADGE ">NEW SPORTADGE </option>
+<option value="NEW TRACKER">NEW TRACKER</option>
+<option value="New Versa">New Versa</option>
+<option value="Niro  ">Niro  </option>
+<option value="Nissan March Avance">Nissan March Avance</option>
+<option value="Nivus">Nivus</option>
+<option value="ONIX ">ONIX </option>
+<option value="Ónix ">&#211;nix </option>
+<option value="ONIX 		">ONIX 		</option>
+<option value="onix HB">onix HB</option>
+<option value="onix ltz full equipo">onix ltz full equipo</option>
+<option value="Onix Turbo">Onix Turbo</option>
+<option value="ÓNIX TURBO PREMIER HB">&#211;NIX TURBO PREMIER HB</option>
+<option value="ORLANDO">ORLANDO</option>
+<option value="OROCH">OROCH</option>
+<option value="picanto">picanto</option>
+<option value="PICANTO  Summa ">PICANTO  Summa </option>
+<option value="picanto 	">picanto 	</option>
+<option value="PICANTO EX">PICANTO EX</option>
+<option value="Picanto Ion Extreme">Picanto Ion Extreme</option>
+<option value="POLO ">POLO </option>
+<option value="PRADO ">PRADO </option>
+<option value="PRIME">PRIME</option>
+<option value="PRIME SEDAN">PRIME SEDAN</option>
+<option value="Q2">Q2</option>
+<option value="QASHQAI">QASHQAI</option>
+<option value="Qashqai  Sense">Qashqai  Sense</option>
+<option value="RANGER ">RANGER </option>
+<option value="RENAULT">RENAULT</option>
+<option value="RENAULT DUSTER">RENAULT DUSTER</option>
+<option value="RENAULT KWID ">RENAULT KWID </option>
+<option value="Renault Stepway dynamique ">Renault Stepway dynamique </option>
+<option value="Renegade ">Renegade </option>
+<option value="renegade Plus automática">renegade Plus autom&#225;tica</option>
+<option value="Rio ">Rio </option>
+<option value="RIO UB EX">RIO UB EX</option>
+<option value="S2 ">S2 </option>
+<option value="SA">SA</option>
+<option value="SAIL">SAIL</option>
+<option value="Sail LS">Sail LS</option>
+<option value="sail ls aa">sail ls aa</option>
+<option value="sail ltz sedan">sail ltz sedan</option>
+<option value="Sail Sport LTZ">Sail Sport LTZ</option>
+<option value="SANDER LIFE">SANDER LIFE</option>
+<option value="SANDERO">SANDERO</option>
+<option value="SANDERO LIFE">SANDERO LIFE</option>
+<option value="SANDERO POLAR">SANDERO POLAR</option>
+<option value="Sandero	">Sandero	</option>
+<option value="SANDERO		">SANDERO		</option>
+<option value="saveiro">saveiro</option>
+<option value="Scape">Scape</option>
+<option value="Scross ">Scross </option>
+<option value="SCROSS 2WD MT">SCROSS 2WD MT</option>
+<option value="SEDAN">SEDAN</option>
+<option value="SENTRA">SENTRA</option>
+<option value="soluto">soluto</option>
+<option value="Sonic">Sonic</option>
+<option value="SONIC  hb">SONIC  hb</option>
+<option value="SONIC LT">SONIC LT</option>
+<option value="Sonic lt mec">Sonic lt mec</option>
+<option value="Soul ">Soul </option>
+<option value="SPARK ">SPARK </option>
+<option value="SPARK GT">SPARK GT</option>
+<option value="Spark GT LTZ F.E ">Spark GT LTZ F.E </option>
+<option value="Spark life">Spark life</option>
+<option value="sportage">sportage</option>
+<option value="SPRESSO">SPRESSO</option>
+<option value="Ssanyong Rodius ">Ssanyong Rodius </option>
+<option value="stepway ">stepway </option>
+<option value="Stepway intens">Stepway intens</option>
+<option value="STONIC ">STONIC </option>
+<option value="Suzuki Scross GL AT">Suzuki Scross GL AT</option>
+<option value="swif ">swif </option>
+<option value="swift ">swift </option>
+<option value="T CROSS">T CROSS</option>
+<option value="TAOS ">TAOS </option>
+<option value="T-cross">T-cross</option>
+<option value="TIGUAN">TIGUAN</option>
+<option value="TIVOLI">TIVOLI</option>
+<option value="tivoli elite">tivoli elite</option>
+<option value="TONIC ">TONIC </option>
+<option value="Tracker ">Tracker </option>
+<option value="TRACKER LS">TRACKER LS</option>
+<option value="TRACKER LT ">TRACKER LT </option>
+<option value="Traker ">Traker </option>
+<option value="traverse">traverse</option>
+<option value="Tucson ">Tucson </option>
+<option value="TWIZY">TWIZY</option>
+<option value="UNO">UNO</option>
+<option value="Uno Way">Uno Way</option>
+<option value="VENTO ">VENTO </option>
+<option value="VERSA">VERSA</option>
+<option value="Versa advance ">Versa advance </option>
+<option value="Versa Automática">Versa Autom&#225;tica</option>
+<option value="Vford Ecosport ">Vford Ecosport </option>
+<option value="vibro">vibro</option>
+<option value="Vitara">Vitara</option>
+<option value="Vitara boosterjet ">Vitara boosterjet </option>
+<option value="VITARA GL">VITARA GL</option>
+<option value="Volkswagen Amarok Trendline Doble Cabina 4x2 ">Volkswagen Amarok Trendline Doble Cabina 4x2 </option>
+<option value="Volkswagen Voyage higline ">Volkswagen Voyage higline </option>
+<option value="Volskwagen New Jetta ">Volskwagen New Jetta </option>
+<option value="volswagen boyage conforline full">volswagen boyage conforline full</option>
+<option value="voyage">voyage</option>
+<option value="voyage TRENDLINE">voyage TRENDLINE</option>
+<option value="WRANGLER">WRANGLER</option>
+<option value="WRV ">WRV </option>
+<option value="XC60">XC60</option>
+<option value="XTRAIL T32">XTRAIL T32</option>
+<option value="XV">XV</option>
+<option value="ZS">ZS</option>
+</select>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <select class="form-control form-control-sm" id="SF_Anio" name="SF_Anio"><option selected="selected" value="0">-- A&#241;o Veh&#237;culo --</option>
+<option value="2010">2010</option>
+<option value="2011">2011</option>
+<option value="2012">2012</option>
+<option value="2013">2013</option>
+<option value="2014">2014</option>
+<option value="2015">2015</option>
+<option value="2016">2016</option>
+<option value="2017">2017</option>
+<option value="2018">2018</option>
+<option value="2019">2019</option>
+<option value="2020">2020</option>
+<option value="2021">2021</option>
+<option value="2022">2022</option>
+<option value="2009">2009</option>
+<option value="2008">2008</option>
+<option value="2007">2007</option>
+<option value="2006">2006</option>
+<option value="2005">2005</option>
+<option value="2004">2004</option>
+<option value="2003">2003</option>
+<option value="2002">2002</option>
+<option value="2001">2001</option>
+<option value="2000">2000</option>
+<option value="1999">1999</option>
+<option value="1998">1998</option>
+<option value="1997">1997</option>
+<option value="1996">1996</option>
+<option value="1995">1995</option>
+<option value="1994">1994</option>
+<option value="1993">1993</option>
+<option value="1992">1992</option>
+<option value="1991">1991</option>
+<option value="1990">1990</option>
+<option value="1989">1989</option>
+<option value="1988">1988</option>
+<option value="1987">1987</option>
+<option value="1986">1986</option>
+<option value="1985">1985</option>
+<option value="1984">1984</option>
+<option value="1983">1983</option>
+<option value="1982">1982</option>
+<option value="1981">1981</option>
+<option value="1980">1980</option>
+<option value="2023">2023</option>
+<option value="2024">2024</option>
+<option value="2025">2025</option>
+</select>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <select class="form-control form-control-sm" id="SF_Color" name="SF_Color"><option selected="selected" value="0">-- Color --</option>
+<option value=""></option>
+<option value=""></option>
+<option value="ACERO">ACERO</option>
+<option value="ALUMINIO">ALUMINIO</option>
+<option value="ALUMINIO METALICO">ALUMINIO METALICO</option>
+<option value="AZUL">AZUL</option>
+<option value="Azul berlin">Azul berlin</option>
+<option value="azul mediterraneo">azul mediterraneo</option>
+<option value="AZUL METALIZADO">AZUL METALIZADO</option>
+<option value="azul noruega">azul noruega</option>
+<option value="Azul perlado">Azul perlado</option>
+<option value="Azul turqueza">Azul turqueza</option>
+<option value="AZUL43889">AZUL43889</option>
+<option value="beige">beige</option>
+<option value="blanco">blanco</option>
+<option value="Blanco glacial">Blanco glacial</option>
+<option value="BLANCO MARFIL">BLANCO MARFIL</option>
+<option value="Blanco nacarado">Blanco nacarado</option>
+<option value="BLANCO NEGRO">BLANCO NEGRO</option>
+<option value="blanco puro">blanco puro</option>
+<option value="BLANCO/NEGRO">BLANCO/NEGRO</option>
+<option value="BRONCE">BRONCE</option>
+<option value="Cafe">Cafe</option>
+<option value="COBRE">COBRE</option>
+<option value="DUNA">DUNA</option>
+<option value="GEX068">GEX068</option>
+<option value="griis">griis</option>
+<option value="GRIS">GRIS</option>
+<option value="Gris cassiope">Gris cassiope</option>
+<option value="GRIS CASSIOPEE">GRIS CASSIOPEE</option>
+<option value="GRIS COMET">GRIS COMET</option>
+<option value="GRIS ESTRELLA">GRIS ESTRELLA</option>
+<option value="GRIS GALAPAGO">GRIS GALAPAGO</option>
+<option value="Gris granito ">Gris granito </option>
+<option value="GRIS MAGNETICO">GRIS MAGNETICO</option>
+<option value="GRIS METAL">GRIS METAL</option>
+<option value="GRIS METALICO">GRIS METALICO</option>
+<option value="Gris metálico ">Gris met&#225;lico </option>
+<option value="Gris metalizado ">Gris metalizado </option>
+<option value="GRIS NEGRO">GRIS NEGRO</option>
+<option value="GRIS OCASO">GRIS OCASO</option>
+<option value="GRIS OSCURO ">GRIS OSCURO </option>
+<option value="gris plata ">gris plata </option>
+<option value="Gris platino">Gris platino</option>
+<option value="Gris platino metalico">Gris platino metalico</option>
+<option value="gris54737">gris54737</option>
+<option value="MACHINE">MACHINE</option>
+<option value="MACHINE GRAY">MACHINE GRAY</option>
+<option value="MARRON">MARRON</option>
+<option value="METALICO">METALICO</option>
+<option value="naranja">naranja</option>
+<option value="NARANJA ATOMICO">NARANJA ATOMICO</option>
+<option value="NARANJA OCRE">NARANJA OCRE</option>
+<option value="NEGRO">NEGRO</option>
+<option value="negro ebano">negro ebano</option>
+<option value="ORANGE OCRE">ORANGE OCRE</option>
+<option value="PLATA">PLATA</option>
+<option value="Plata aurora">Plata aurora</option>
+<option value="PLATA BARI">PLATA BARI</option>
+<option value="Plata brillante ">Plata brillante </option>
+<option value="PLATA PURO">PLATA PURO</option>
+<option value="Plata reflex">Plata reflex</option>
+<option value="PLATA SABLE">PLATA SABLE</option>
+<option value="PLATA SEDA">PLATA SEDA</option>
+<option value="Platino">Platino</option>
+<option value="ROJO">ROJO</option>
+<option value="ROJO AÑEJO">ROJO A&#209;EJO</option>
+<option value="ROJO ARDIENTE">ROJO ARDIENTE</option>
+<option value="Rojo barroco">Rojo barroco</option>
+<option value="ROJO CARBERNET">ROJO CARBERNET</option>
+<option value="ROJO DIAMANTE">ROJO DIAMANTE</option>
+<option value="Rojo fuego">Rojo fuego</option>
+<option value="rojo metalizado">rojo metalizado</option>
+<option value="rojo mistico">rojo mistico</option>
+<option value="rojo negro">rojo negro</option>
+<option value="ROJO PAVOT">ROJO PAVOT</option>
+<option value="ROJO RUBI">ROJO RUBI</option>
+<option value="rojo safari">rojo safari</option>
+<option value="ROJO TORNADO">ROJO TORNADO</option>
+<option value="Rojo ultímate ">Rojo ult&#237;mate </option>
+<option value="ROJO VELVET">ROJO VELVET</option>
+<option value="TITANIO">TITANIO</option>
+<option value="VERDE">VERDE</option>
+<option value="XBlanco">XBlanco</option>
+</select>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-3">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="basic-addon1">De:</span>
+                                                    </div>
+                                                    <input name="SFDesde" id="SFDesde" class="form-control" type="text" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="basic-addon1">a:</span>
+                                                    </div>
+                                                    <input name="SFHasta" id="SFHasta" class="form-control" type="text" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md3">
+                                                <button id="ok" type="button" class="btn btn-primary" onclick="FiltrarSF();">Buscar</button>
+                                                <button id="rSF" class="btn btn-secondary"><i class="material-icons">cached</i></button>
+                                                <button type="submit" value="Inventario" name="tabla" id="exportInventario" class="btn btn-secondary"><i class="material-icons">description</i></button>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control" placeholder="Search" id="SF_Cadena" name="SF_Cadena">
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-outline-secondary" type="button" onclick="FiltrarSF();"><i class="tiny material-icons">search</i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                        <table id="tableSF"
+                                               data-toolbar="#toolbar2"
+                                               data-toggle="table"
+                                               data-height="800"
+                                               data-pagination="true"
+                                               data-side-pagination="server"
+                                               data-sort-class="table-active"
+                                               data-sortable="true"
+                                               data-show-columns="true"
+                                               data-show-columns-search="true"
+                                               data-filter-control="true">
+                                            <thead class="table100-head table100 ver3 success">
+                                                <tr>
+                                                    <th data-field="FechaApertura" data-sortable="true">Fecha Captura</th>
+                                                    <th data-field="FechaCompra" data-sortable="true">Fecha Compra</th>
+                                                    <th data-field="Respuesta" data-filter-control="select">Respuesta</th>
+                                                    <th data-field="Marca" data-sortable="true" >Marca</th>
+                                                    <th data-field="Modelo" data-sortable="true" >Modelo</th>
+                                                    <th data-field="Anio" data-sortable="true" >Año</th>
+                                                    <th data-field="Version" data-sortable="true">Version</th>
+                                                    <th data-field="Placa" data-sortable="true">Placa</th>
+                                                    <th data-field="Kilometraje" data-sortable="true">Kilometraje</th>
+                                                    <th data-field="Color" data-sortable="true" >Color</th>
+                                                    <th data-field="ValorFinal" data-sortable="true">Valor Final</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody style="background-color:white;"></tbody>
+                                        </table>
+                                </div>
+
+                                <div class="widget-list" id="Desistidas">
+                                    <div id="toolbar3">
+                                        
+                                        <div class="form-row">
+                                            <div class="form-group col-md-4">
+                                                <select class="form-control form-control-sm" id="Desistidas_Marca" name="Desistidas_Marca"><option selected="selected" value="0">-- Marca --</option>
+<option value="HONDA">HONDA</option>
+<option value="JEEP">JEEP</option>
+<option value="VOLVO">VOLVO</option>
+<option value="SUBARU">SUBARU</option>
+<option value="SsangYong">SsangYong</option>
+<option value="Mazda Nuevos">Mazda Nuevos</option>
+<option value="Suzuki">Suzuki</option>
+<option value="CHERY">CHERY</option>
+<option value="Great Wall">Great Wall</option>
+<option value="Hyundai Nuevos">Hyundai Nuevos</option>
+<option value="RENAULT">RENAULT</option>
+<option value="Dodge">Dodge</option>
+<option value="MERCEDES BENZ">MERCEDES BENZ</option>
+<option value="Changan">Changan</option>
+<option value="SEAT">SEAT</option>
+<option value="JMC">JMC</option>
+<option value="MITSUBISHI">MITSUBISHI</option>
+<option value="VOLKSWAGEN">VOLKSWAGEN</option>
+<option value=""></option>
+<option value="FORD FIESTA SE">FORD FIESTA SE</option>
+<option value="BMW">BMW</option>
+<option value="SSANG YONG">SSANG YONG</option>
+<option value="KIA">KIA</option>
+<option value="NISSAN">NISSAN</option>
+<option value="DFSK">DFSK</option>
+<option value="Otro">Otro</option>
+<option value="MERCEDES BENZ CLA 180">MERCEDES BENZ CLA 180</option>
+<option value="CHEVROLET">CHEVROLET</option>
+<option value="Brilliance">Brilliance</option>
+<option value="PORSCHE">PORSCHE</option>
+<option value="CITROEN">CITROEN</option>
+<option value="TOYOTA">TOYOTA</option>
+<option value="HAVAL">HAVAL</option>
+<option value="MAZDA">MAZDA</option>
+<option value="KIA CERTO PRO">KIA CERTO PRO</option>
+<option value="JAGUAR">JAGUAR</option>
+<option value="FIAT">FIAT</option>
+<option value="DAIHATSU">DAIHATSU</option>
+<option value="OPEL">OPEL</option>
+<option value="MG">MG</option>
+<option value="Skoda">Skoda</option>
+<option value="HYUNDAI">HYUNDAI</option>
+<option value="JAC">JAC</option>
+<option value="VOLKSWAGEN VOYAGE TRENDLINE">VOLKSWAGEN VOYAGE TRENDLINE</option>
+<option value="PEUGEOT 3008 ALLURE">PEUGEOT 3008 ALLURE</option>
+<option value="0">0</option>
+<option value="FORD">FORD</option>
+<option value="RAM">RAM</option>
+<option value="DS">DS</option>
+<option value="AUDI">AUDI</option>
+<option value="PEUGEOT">PEUGEOT</option>
+</select>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <select class="form-control form-control-sm" id="Desistidas_Modelo" name="Desistidas_Modelo"><option selected="selected" value="0">-- Modelo --</option>
+<option value="Chevrolet beat">Chevrolet beat</option>
+<option value="l Hyundai i25 Accent GL Advance ">l Hyundai i25 Accent GL Advance </option>
+<option value="Ford fusion TITANIUM  ">Ford fusion TITANIUM  </option>
+<option value="c4 shine ">c4 shine </option>
+<option value="fabia ">fabia </option>
+<option value="GLB200">GLB200</option>
+<option value="Sandero Steway">Sandero Steway</option>
+<option value="SAIL 	">SAIL 	</option>
+<option value="Kia Cerato Pro ">Kia Cerato Pro </option>
+<option value="Sonic HB">Sonic HB</option>
+<option value="pulse ">pulse </option>
+<option value="2018">2018</option>
+<option value="Onix NB Turbo LTZ">Onix NB Turbo LTZ</option>
+<option value="Moby ">Moby </option>
+<option value="Rio Zenith ">Rio Zenith </option>
+<option value="2 hach back">2 hach back</option>
+<option value="SPRESSO">SPRESSO</option>
+<option value="S-PRESSO">S-PRESSO</option>
+<option value="Wingke 7">Wingke 7</option>
+<option value=" xDrive 35i X6"> xDrive 35i X6</option>
+<option value="Tracker ls">Tracker ls</option>
+<option value="jetta ftrendline ">jetta ftrendline </option>
+<option value="Ford ecosport">Ford ecosport</option>
+<option value="kia picanto all new ">kia picanto all new </option>
+<option value="Kia Picanto ion xtreme ">Kia Picanto ion xtreme </option>
+<option value=" Onix "> Onix </option>
+<option value="Renault Sandero Life 2021">Renault Sandero Life 2021</option>
+<option value=" Beat "> Beat </option>
+<option value="NP 300 FRONTIER">NP 300 FRONTIER</option>
+<option value="swif ">swif </option>
+<option value="Chevrolet tracker">Chevrolet tracker</option>
+<option value="Volkswagen Golf">Volkswagen Golf</option>
+<option value="Ateca Style">Ateca Style</option>
+<option value="Renault Logan 1.4 Familie ">Renault Logan 1.4 Familie </option>
+<option value="Subaru Legacy 3.6 Ltd Navi">Subaru Legacy 3.6 Ltd Navi</option>
+<option value="cx-5 grand touring">cx-5 grand touring</option>
+<option value=" sportage "> sportage </option>
+<option value="Volkswagen Voyage highline ">Volkswagen Voyage highline </option>
+<option value=" T cross "> T cross </option>
+<option value="i25 premium ">i25 premium </option>
+<option value="Audi Q3 ">Audi Q3 </option>
+<option value=" X-Trail clásica"> X-Trail cl&#225;sica</option>
+<option value="3 Prime">3 Prime</option>
+<option value="New versa">New versa</option>
+<option value="NP 300 ">NP 300 </option>
+<option value="FIT">FIT</option>
+<option value="cx 30">cx 30</option>
+<option value="XC40 T4 FWD ">XC40 T4 FWD </option>
+<option value=" twingo  2"> twingo  2</option>
+<option value="spark 1.0 LC Mecanico Aire Acondicionado">spark 1.0 LC Mecanico Aire Acondicionado</option>
+<option value="New Jetta highline ">New Jetta highline </option>
+<option value="Fiat Mobi Easy ">Fiat Mobi Easy </option>
+<option value="Mazda 2 Turing ">Mazda 2 Turing </option>
+<option value="SPARK  GT ACTIV">SPARK  GT ACTIV</option>
+<option value="RIO  all new">RIO  all new</option>
+<option value="sscros ">sscros </option>
+<option value="Esteem ">Esteem </option>
+<option value="cerato 		46000">cerato 		46000</option>
+<option value="C ELYSEE">C ELYSEE</option>
+<option value="MAZDA 3 GT ">MAZDA 3 GT </option>
+<option value="Cx5 touring aut">Cx5 touring aut</option>
+<option value="Chevrolet Captiva sport ">Chevrolet Captiva sport </option>
+<option value="Volkswaguen  Allspace comforline 4 emotion ">Volkswaguen  Allspace comforline 4 emotion </option>
+<option value="Volkswagen Voyage Trendline 1.6 Sedan Manual">Volkswagen Voyage Trendline 1.6 Sedan Manual</option>
+<option value="Gol		">Gol		</option>
+<option value="A3">A3</option>
+<option value="strada ">strada </option>
+<option value="NEW KOLEOS ZEN">NEW KOLEOS ZEN</option>
+<option value="3 grand turing lx">3 grand turing lx</option>
+<option value="Kia picanto ion">Kia picanto ion</option>
+<option value="Nissan,Kicks, 2018, exclusive, 38000">Nissan,Kicks, 2018, exclusive, 38000</option>
+<option value="Volkswagen Golf SPORTWAGEN">Volkswagen Golf SPORTWAGEN</option>
+<option value="Granland x edition ">Granland x edition </option>
+<option value="Chevrolet Aveo Sedan">Chevrolet Aveo Sedan</option>
+<option value="2008">2008</option>
+<option value="Saill">Saill</option>
+<option value=" KICKS "> KICKS </option>
+<option value="Jetta 1.4tsi">Jetta 1.4tsi</option>
+<option value="SAIL Ltz ">SAIL Ltz </option>
+<option value="I10 hackback">I10 hackback</option>
+<option value="JUKE 4WD MCVT">JUKE 4WD MCVT</option>
+<option value="Ecosport 4x2 titanium">Ecosport 4x2 titanium</option>
+<option value="Onix">Onix</option>
+<option value="DS3 CROSSBACK ">DS3 CROSSBACK </option>
+<option value="Explorer	">Explorer	</option>
+<option value="ónix ">&#243;nix </option>
+<option value=" Uno way "> Uno way </option>
+<option value=" Fusión"> Fusi&#243;n</option>
+<option value="cerato pro Rin 16 2 airbags ">cerato pro Rin 16 2 airbags </option>
+<option value="Montero Sport ">Montero Sport </option>
+<option value="CHEVROLET SAIL con aire">CHEVROLET SAIL con aire</option>
+<option value="j3 ">j3 </option>
+<option value="New Jetta ">New Jetta </option>
+<option value="JOY 		">JOY 		</option>
+<option value="sail  ls ">sail  ls </option>
+<option value="Chevrolet Captiva 2.4 LS ">Chevrolet Captiva 2.4 LS </option>
+<option value="GRAVITY ">GRAVITY </option>
+<option value="CX-5 AWD FULL">CX-5 AWD FULL</option>
+<option value="Ibiza Reference">Ibiza Reference</option>
+<option value="Renault Sandero 1.6 Dynamique ">Renault Sandero 1.6 Dynamique </option>
+<option value="Ford Escape se">Ford Escape se</option>
+<option value="2">2</option>
+<option value="cs15 sky New">cs15 sky New</option>
+<option value="  Leon ">  Leon </option>
+<option value="MURANO ">MURANO </option>
+<option value="XV">XV</option>
+<option value="BEAT 	">BEAT 	</option>
+<option value="VENUE		">VENUE		</option>
+<option value="T cross Trendline ST 200 TSI 6AT">T cross Trendline ST 200 TSI 6AT</option>
+<option value="KIA New Rio">KIA New Rio</option>
+<option value="T-CROSS triline A.T">T-CROSS triline A.T</option>
+<option value="Chevrolet. Traker ">Chevrolet. Traker </option>
+<option value="2 touring AT sedan">2 touring AT sedan</option>
+<option value="Ecosport automatica 4*2 1.5">Ecosport automatica 4*2 1.5</option>
+<option value="Sande">Sande</option>
+<option value="Bt50 profesional">Bt50 profesional</option>
+<option value=" fabia"> fabia</option>
+<option value="GLC 250 4Matic">GLC 250 4Matic</option>
+<option value="Duster Tripadvisor">Duster Tripadvisor</option>
+<option value="Renolt kwid outsaider ">Renolt kwid outsaider </option>
+<option value="Honda CR-V 2.4 City Plus 2WD ">Honda CR-V 2.4 City Plus 2WD </option>
+<option value="ACTYON ">ACTYON </option>
+<option value="Trasverse">Trasverse</option>
+<option value=" I20 getz "> I20 getz </option>
+<option value="SONIC LT ">SONIC LT </option>
+<option value="beat  ltz">beat  ltz</option>
+<option value="KIA CERATO FORTE ">KIA CERATO FORTE </option>
+<option value="Uno WAY">Uno WAY</option>
+<option value="XV Hibrida">XV Hibrida</option>
+<option value="l Chevrolet Sail1.4 LS Mecanico">l Chevrolet Sail1.4 LS Mecanico</option>
+<option value="tonic ">tonic </option>
+<option value=" CX3"> CX3</option>
+<option value="Tónic ">T&#243;nic </option>
+<option value=" Arona "> Arona </option>
+<option value="FIESTA	">FIESTA	</option>
+<option value="X Trail Advance">X Trail Advance</option>
+<option value="RIO SDN 1.2 VX">RIO SDN 1.2 VX</option>
+<option value="Nissan X-Trail 2.5 XMT 4x4 Full Equipo">Nissan X-Trail 2.5 XMT 4x4 Full Equipo</option>
+<option value="C4 Cactus ">C4 Cactus </option>
+<option value="Accent i25 ">Accent i25 </option>
+<option value=" 6 "> 6 </option>
+<option value="S-presso,">S-presso,</option>
+<option value=" ESCAPE "> ESCAPE </option>
+<option value="&quot;march ">&quot;march </option>
+<option value=" Stepway "> Stepway </option>
+<option value="2008		">2008		</option>
+<option value="Clio">Clio</option>
+<option value="Cerato forte Geo lx">Cerato forte Geo lx</option>
+<option value="Baleno Cross">Baleno Cross</option>
+<option value="Mazda CX-5">Mazda CX-5</option>
+<option value="Ford fusion tiranium">Ford fusion tiranium</option>
+<option value="Kia Soluto Desire ">Kia Soluto Desire </option>
+<option value="Picanto zenith">Picanto zenith</option>
+<option value=" alaskan "> alaskan </option>
+<option value=" qashqai  "> qashqai  </option>
+<option value="GOL 	">GOL 	</option>
+<option value="Mazda 3 touring ">Mazda 3 touring </option>
+<option value="Nissan Sentra Sense ">Nissan Sentra Sense </option>
+<option value="zs ">zs </option>
+<option value="Kia Sportage revolution LX">Kia Sportage revolution LX</option>
+<option value="2008 Allure">2008 Allure</option>
+<option value="PICKUP DOBLE CAB 4x2">PICKUP DOBLE CAB 4x2</option>
+<option value="Renault Symbol II CONFORT">Renault Symbol II CONFORT</option>
+<option value="DUSTER OROCH ">DUSTER OROCH </option>
+<option value="vivro">vivro</option>
+<option value="sandero Life sedan ">sandero Life sedan </option>
+<option value="JOY">JOY</option>
+<option value="Nissan Tiida 1.8 HB Mecanico ">Nissan Tiida 1.8 HB Mecanico </option>
+<option value="Nissan X-trail I 4x4 Mcvt Lujo Sunroof Cuero ">Nissan X-trail I 4x4 Mcvt Lujo Sunroof Cuero </option>
+<option value="Kwid Zen Electroasistida">Kwid Zen Electroasistida</option>
+<option value="C5 ">C5 </option>
+<option value="Sportage">Sportage</option>
+<option value="Jeep Compass sport ">Jeep Compass sport </option>
+<option value="Chevrolet Spark 1.2 GT Mecanico Full Equipo ">Chevrolet Spark 1.2 GT Mecanico Full Equipo </option>
+<option value="Peugeot 207 compac ">Peugeot 207 compac </option>
+<option value="Renault Duster 2.0 4x2 Trip Advisor ">Renault Duster 2.0 4x2 Trip Advisor </option>
+<option value="Chevrolet sail hatchback">Chevrolet sail hatchback</option>
+<option value="suzuki vitara gl ">suzuki vitara gl </option>
+<option value="Renault kwid ">Renault kwid </option>
+<option value=" Ioniq "> Ioniq </option>
+<option value="NewXtrail ">NewXtrail </option>
+<option value="cx30 grand turing">cx30 grand turing</option>
+<option value="Pikanto ">Pikanto </option>
+<option value="Civic ">Civic </option>
+<option value="cruze platnium">cruze platnium</option>
+<option value="Ranault KWUI">Ranault KWUI</option>
+<option value="208 active">208 active</option>
+<option value=" 2"> 2</option>
+<option value="Voyage tredline">Voyage tredline</option>
+<option value=" journey, 5"> journey, 5</option>
+<option value="SOUL RISE">SOUL RISE</option>
+<option value="520i">520i</option>
+<option value="optima ">optima </option>
+<option value=" 2 Grand "> 2 Grand </option>
+<option value="Tracker Ls 	">Tracker Ls 	</option>
+<option value="sandero automatico triptonico">sandero automatico triptonico</option>
+<option value="3 TOURING AUT">3 TOURING AUT</option>
+<option value=" New Ertiga"> New Ertiga</option>
+<option value="Duster 1.6 expression">Duster 1.6 expression</option>
+<option value="Picanto  	">Picanto  	</option>
+<option value="X1 Sdrive20i ">X1 Sdrive20i </option>
+<option value="NEW LOGAN 	30500	">NEW LOGAN 	30500	</option>
+<option value="CAPTIVA 	">CAPTIVA 	</option>
+<option value="ONIX TURBO RS">ONIX TURBO RS</option>
+<option value="Spark Gt PREMIER">Spark Gt PREMIER</option>
+<option value="duster intense ">duster intense </option>
+<option value="Dynamique">Dynamique</option>
+<option value="2015 sedan lt">2015 sedan lt</option>
+<option value="cerato pro sport">cerato pro sport</option>
+<option value="Mazda 6		">Mazda 6		</option>
+<option value=" Acent I25"> Acent I25</option>
+<option value="3	">3	</option>
+<option value="All New">All New</option>
+<option value="picanto ">picanto </option>
+<option value="Ford fusion titanium plus">Ford fusion titanium plus</option>
+<option value="Honda CR-V 2.4 EX Mecanica ">Honda CR-V 2.4 EX Mecanica </option>
+<option value="Cactus C4">Cactus C4</option>
+<option value="Ds3 sport chic">Ds3 sport chic</option>
+<option value="SEAT Arona Reference ">SEAT Arona Reference </option>
+<option value="Mazda CX-30 Grand Touring">Mazda CX-30 Grand Touring</option>
+<option value="Seat iBIZA STYLE">Seat iBIZA STYLE</option>
+<option value="C 200">C 200</option>
+<option value=" Nissan Qasqai  2014"> Nissan Qasqai  2014</option>
+<option value="Renault Duster INTENSE 4x2">Renault Duster INTENSE 4x2</option>
+<option value="FIESTA  SPORTBACK ">FIESTA  SPORTBACK </option>
+<option value="500x">500x</option>
+<option value="CX3 TOURING 4*2 ">CX3 TOURING 4*2 </option>
+<option value="suzuki">suzuki</option>
+<option value="Mazda 2 Sport Touring 1.5 Hatchback Manual ">Mazda 2 Sport Touring 1.5 Hatchback Manual </option>
+<option value="320">320</option>
+<option value="New beetle ">New beetle </option>
+<option value="S-Cross">S-Cross</option>
+<option value="Volkswagen Voyage Comfortline">Volkswagen Voyage Comfortline</option>
+<option value="Chevrolet Onix turbo 2021 automático">Chevrolet Onix turbo 2021 autom&#225;tico</option>
+<option value=" Logan"> Logan</option>
+<option value="Chevrolet Sail LTZ SPORT">Chevrolet Sail LTZ SPORT</option>
+<option value="Scross">Scross</option>
+<option value="ASX">ASX</option>
+<option value="cx 30 mild hibrid">cx 30 mild hibrid</option>
+<option value="X2">X2</option>
+<option value="Wangler sport 3 puertas Mecanico 3.6">Wangler sport 3 puertas Mecanico 3.6</option>
+<option value="KIA Picanto Vibrant 1.2 Hatchback Manua">KIA Picanto Vibrant 1.2 Hatchback Manua</option>
+<option value="Escape Se 4x4 modelo 2017">Escape Se 4x4 modelo 2017</option>
+<option value=" fiesta"> fiesta</option>
+<option value="tucson full equipo techo en cristal ">tucson full equipo techo en cristal </option>
+<option value="sail LS sedan ">sail LS sedan </option>
+<option value="Kia picanto xline">Kia picanto xline</option>
+<option value="Optra">Optra</option>
+<option value="Renault Logan Dynamique ">Renault Logan Dynamique </option>
+<option value="Journey RT AWD 3.6">Journey RT AWD 3.6</option>
+<option value="Ford Escape 2.0 4X2 ">Ford Escape 2.0 4X2 </option>
+<option value="vayage ">vayage </option>
+<option value="Sandero autentique">Sandero autentique</option>
+<option value="Forester ">Forester </option>
+<option value=" I25 "> I25 </option>
+<option value="np300">np300</option>
+<option value="Versa Advance full equipo">Versa Advance full equipo</option>
+<option value="Chevrolet Sail">Chevrolet Sail</option>
+<option value="Ford eco sport freestyle">Ford eco sport freestyle</option>
+<option value="sandero autenti">sandero autenti</option>
+<option value="SONATA ">SONATA </option>
+<option value="Onix turbo">Onix turbo</option>
+<option value="Fiat Mobi     ">Fiat Mobi     </option>
+<option value="Kia Sportage new sport emotion">Kia Sportage new sport emotion</option>
+<option value="KIA Rio 1.25 NB Full Equipo ">KIA Rio 1.25 NB Full Equipo </option>
+<option value="Mazda 3 prime mecánico sedan ">Mazda 3 prime mec&#225;nico sedan </option>
+<option value="renault duster dynamique  ">renault duster dynamique  </option>
+<option value=" 3"> 3</option>
+<option value="Cherokee">Cherokee</option>
+<option value="MOBI ">MOBI </option>
+<option value="Ríos ">R&#237;os </option>
+<option value="RIO ">RIO </option>
+<option value="2019">2019</option>
+<option value="Chevrolet Sonic LT  hb">Chevrolet Sonic LT  hb</option>
+<option value="Río ">R&#237;o </option>
+<option value="GOL COMFORLINE MET">GOL COMFORLINE MET</option>
+<option value="CX9 ">CX9 </option>
+<option value="Cx-9">Cx-9</option>
+<option value="Grand virtara ">Grand virtara </option>
+<option value="traker ls">traker ls</option>
+<option value="Volkswagen jetta europa ">Volkswagen jetta europa </option>
+<option value="Sandero Stepway">Sandero Stepway</option>
+<option value="Vibrant	">Vibrant	</option>
+<option value="3 prime automatico">3 prime automatico</option>
+<option value="CX5 TOURING">CX5 TOURING</option>
+<option value="elysee">elysee</option>
+<option value="2 SEDAN	">2 SEDAN	</option>
+<option value="New piccanto	">New piccanto	</option>
+<option value="700 ">700 </option>
+<option value="SENTRA B13">SENTRA B13</option>
+<option value="Chevrolet Captiva 2.4 LS Sport Automatica ">Chevrolet Captiva 2.4 LS Sport Automatica </option>
+<option value="Sentra">Sentra</option>
+<option value="Chevrolet Sailt Ltz Full Equipo ">Chevrolet Sailt Ltz Full Equipo </option>
+<option value="Tiigo2 ">Tiigo2 </option>
+<option value="T-CROSS 	">T-CROSS 	</option>
+<option value="Chevrolet Spark 1.0 Life">Chevrolet Spark 1.0 Life</option>
+<option value="Note	">Note	</option>
+<option value="beetel ">beetel </option>
+<option value="Vento GP">Vento GP</option>
+<option value="TUCSON">TUCSON</option>
+<option value="Chevrolet Sonic LT sedan">Chevrolet Sonic LT sedan</option>
+<option value="Captiva turbo 1.5 lt">Captiva turbo 1.5 lt</option>
+<option value="Cerato pro">Cerato pro</option>
+<option value="Kia Río zebith ">Kia R&#237;o zebith </option>
+<option value="Suzuki S-cross ">Suzuki S-cross </option>
+<option value="HRV ">HRV </option>
+<option value="HR-V  ">HR-V  </option>
+<option value="sedam ">sedam </option>
+<option value="2016">2016</option>
+<option value=" Duster"> Duster</option>
+<option value="Dodge Jouney se 7 puestos ">Dodge Jouney se 7 puestos </option>
+<option value=" Scape  "> Scape  </option>
+<option value="Gol Confortline">Gol Confortline</option>
+<option value="SAIL 		">SAIL 		</option>
+<option value="Qashqai Exclusive">Qashqai Exclusive</option>
+<option value="3 Touring cuero">3 Touring cuero</option>
+<option value=" Polo Trendline 1.6 "> Polo Trendline 1.6 </option>
+<option value="QASHQA">QASHQA</option>
+<option value="n300">n300</option>
+<option value="RAV 4	">RAV 4	</option>
+<option value="touring ">touring </option>
+<option value="1.6 Expression">1.6 Expression</option>
+<option value="VOYAGE 1.6">VOYAGE 1.6</option>
+<option value="Chevrolet Sail Ls A.A ">Chevrolet Sail Ls A.A </option>
+<option value="Stewey dinamic mt">Stewey dinamic mt</option>
+<option value=" kwid "> kwid </option>
+<option value=" cx30"> cx30</option>
+<option value="DUSTER 4x4">DUSTER 4x4</option>
+<option value="Rio. ">Rio. </option>
+<option value="KICKS	">KICKS	</option>
+<option value="Dodge Journey 2.4 SE 5 Puestos">Dodge Journey 2.4 SE 5 Puestos</option>
+<option value="COMFORT 350 ESTANDAR">COMFORT 350 ESTANDAR</option>
+<option value="CX30 ">CX30 </option>
+<option value="2023">2023</option>
+<option value="2 Sedan ">2 Sedan </option>
+<option value="TIGGO ">TIGGO </option>
+<option value="picanto full 6 airb">picanto full 6 airb</option>
+<option value="CX-30 ">CX-30 </option>
+<option value="ECOSPORT ">ECOSPORT </option>
+<option value="Tiguan All Space Trendline ">Tiguan All Space Trendline </option>
+<option value="4Runner ">4Runner </option>
+<option value="SONIC TL ">SONIC TL </option>
+<option value="Chevrolet Spark Gt">Chevrolet Spark Gt</option>
+<option value="Sail sedan ">Sail sedan </option>
+<option value="Hyundai  Tucson   GLS premium 4wd ">Hyundai  Tucson   GLS premium 4wd </option>
+<option value="hybrid premium">hybrid premium</option>
+<option value="700 express">700 express</option>
+<option value="I25">I25</option>
+<option value="Koleos">Koleos</option>
+<option value="mazda 2 GT ">mazda 2 GT </option>
+<option value="Exploer limited">Exploer limited</option>
+<option value="Tucson ix35 4x2 164 hp 2 AB">Tucson ix35 4x2 164 hp 2 AB</option>
+<option value="Renault new logan EXPRESSION ">Renault new logan EXPRESSION </option>
+<option value="G180 ">G180 </option>
+<option value="XTRAIL 	AUTOMATICA ">XTRAIL 	AUTOMATICA </option>
+<option value="i25 full equipo ">i25 full equipo </option>
+<option value="2 touring">2 touring</option>
+<option value="sail ltz HATCHBACK ">sail ltz HATCHBACK </option>
+<option value="Chevrolet/Aveo famili/">Chevrolet/Aveo famili/</option>
+<option value="350S">350S</option>
+<option value="V40 T4 	">V40 T4 	</option>
+<option value="Renault Duster ">Renault Duster </option>
+<option value="X3 ">X3 </option>
+<option value="EVOLTIS ">EVOLTIS </option>
+<option value="Camioneta ">Camioneta </option>
+<option value="3 			">3 			</option>
+<option value="FUSION TITANIUM ">FUSION TITANIUM </option>
+<option value="Alto 800">Alto 800</option>
+<option value="Ford Ecosport Freestyle 4x4 Mecánica">Ford Ecosport Freestyle 4x4 Mec&#225;nica</option>
+<option value="New logan ">New logan </option>
+<option value="RÍO 		">R&#205;O 		</option>
+<option value="3008 Active ">3008 Active </option>
+<option value="NEW CX 5">NEW CX 5</option>
+<option value="1.4TSI Comfortline Tiguan">1.4TSI Comfortline Tiguan</option>
+<option value="Renault Logan        ">Renault Logan        </option>
+<option value="civic ex">civic ex</option>
+<option value="gran tourer 218i">gran tourer 218i</option>
+<option value="Chevrolet Beat LS ">Chevrolet Beat LS </option>
+<option value="tonic vibrant aut">tonic vibrant aut</option>
+<option value="Chevrolet tracker ls">Chevrolet tracker ls</option>
+<option value="FIESTA SEDAN ">FIESTA SEDAN </option>
+<option value="ALASKAN ">ALASKAN </option>
+<option value="onix rs	">onix rs	</option>
+<option value="FOX EXTREME">FOX EXTREME</option>
+<option value="Cx5 prime mecanica ">Cx5 prime mecanica </option>
+<option value="Qashqai">Qashqai</option>
+<option value="Gol power">Gol power</option>
+<option value="GT ">GT </option>
+<option value=" sail"> sail</option>
+<option value="LOGAN DYNAMIQUE ">LOGAN DYNAMIQUE </option>
+<option value="2 Grand touring">2 Grand touring</option>
+<option value="LUV D MAX 4*4 DC">LUV D MAX 4*4 DC</option>
+<option value="Escape  4x4 full equipo ">Escape  4x4 full equipo </option>
+<option value="VIRTUS ">VIRTUS </option>
+<option value="Jetta">Jetta</option>
+<option value="Chevrolet DMAX 4*4">Chevrolet DMAX 4*4</option>
+<option value="A4">A4</option>
+<option value="Cx5 lx signature 2.5 turbo">Cx5 lx signature 2.5 turbo</option>
+<option value="Hiunday i10 2012">Hiunday i10 2012</option>
+<option value="Equinox">Equinox</option>
+<option value="3 all new tp">3 all new tp</option>
+<option value="CX-30 GT LX ">CX-30 GT LX </option>
+<option value="Renault Captur 2.0 intens edicion Bose Aut">Renault Captur 2.0 intens edicion Bose Aut</option>
+<option value="mazda 2  GRAND T LX ">mazda 2  GRAND T LX </option>
+<option value="Creta Premium">Creta Premium</option>
+<option value="i10">i10</option>
+<option value="Fourtuner ">Fourtuner </option>
+<option value="3 sport ">3 sport </option>
+<option value=" 3  Sport"> 3  Sport</option>
+<option value="cerato lx">cerato lx</option>
+<option value="Hyundai Elantra i35 ">Hyundai Elantra i35 </option>
+<option value="Volkswagen gol triedline 1.6">Volkswagen gol triedline 1.6</option>
+<option value="Chevrolet Onix Turbo ">Chevrolet Onix Turbo </option>
+<option value="New Sandero ">New Sandero </option>
+<option value="3008">3008</option>
+<option value="Focus titanium ">Focus titanium </option>
+<option value="Volkswagen Gol Trendline">Volkswagen Gol Trendline</option>
+<option value="ELANTRA">ELANTRA</option>
+<option value="i35 ">i35 </option>
+<option value="cx30	">cx30	</option>
+<option value="KIA Rio Spice">KIA Rio Spice</option>
+<option value="AMG 180">AMG 180</option>
+<option value="Renaul sandero GT LINE">Renaul sandero GT LINE</option>
+<option value="Chevrolet sonic">Chevrolet sonic</option>
+<option value="Mazda 2 ">Mazda 2 </option>
+<option value="Montero ">Montero </option>
+<option value="CX30PRIME">CX30PRIME</option>
+<option value="prime">prime</option>
+<option value="KIA Rio 1.3 NB RS ">KIA Rio 1.3 NB RS </option>
+<option value="Stepway Trek">Stepway Trek</option>
+<option value="KIA Picanto 1.1 EX Mecanico Aire Aconcicionado ">KIA Picanto 1.1 EX Mecanico Aire Aconcicionado </option>
+<option value="Traker  LT">Traker  LT</option>
+<option value=" C4 CACTUS "> C4 CACTUS </option>
+<option value=" 3, ,"> 3, ,</option>
+<option value="Tiguan Allspace 1.4 ">Tiguan Allspace 1.4 </option>
+<option value="Journey">Journey</option>
+<option value="Ford Ecosport 1.5 SE AUT 4x2 ">Ford Ecosport 1.5 SE AUT 4x2 </option>
+<option value="Sail ls AA Sedan">Sail ls AA Sedan</option>
+<option value="FORD EDGE TITANIUM">FORD EDGE TITANIUM</option>
+<option value="S2">S2</option>
+<option value="VERSA  	">VERSA  	</option>
+<option value="CX-5 PRIME ">CX-5 PRIME </option>
+<option value="EDGE">EDGE</option>
+<option value="Ónix active">&#211;nix active</option>
+<option value="Renault Sandero Life 1.6 Hatchback Manua ">Renault Sandero Life 1.6 Hatchback Manua </option>
+<option value="Chevrolet Spark 1.2 GT LTZ Mecanico Full Equip ">Chevrolet Spark 1.2 GT LTZ Mecanico Full Equip </option>
+<option value="Chevrolet onix version ltz">Chevrolet onix version ltz</option>
+<option value="KWID">KWID</option>
+<option value="Spark GT LTZ F.E ">Spark GT LTZ F.E </option>
+<option value="Mazda 3 gt lx ">Mazda 3 gt lx </option>
+<option value="fiesta  sedan titanuim">fiesta  sedan titanuim</option>
+<option value="Kia Cerato Pro 2da Gen">Kia Cerato Pro 2da Gen</option>
+<option value="mg zs FULL EQUIPO  ">mg zs FULL EQUIPO  </option>
+<option value=" 20-08 "> 20-08 </option>
+<option value="a 3 grand touring lx">a 3 grand touring lx</option>
+<option value="Yaris xs ">Yaris xs </option>
+<option value="voyage">voyage</option>
+<option value="Captur ">Captur </option>
+<option value="Renault	Duater ">Renault	Duater </option>
+<option value="Nero ">Nero </option>
+<option value="KICKS		">KICKS		</option>
+<option value="CLA180">CLA180</option>
+<option value="Renault Duster 4*4">Renault Duster 4*4</option>
+<option value="Volkswagen Golf Trendline 1.6L ">Volkswagen Golf Trendline 1.6L </option>
+<option value="Cheroke">Cheroke</option>
+<option value="XC90">XC90</option>
+<option value=" Clio style"> Clio style</option>
+<option value="MG ZS">MG ZS</option>
+<option value="TRAILBLAZER ">TRAILBLAZER </option>
+<option value=" tiida. "> tiida. </option>
+<option value="PICANTO ION">PICANTO ION</option>
+<option value=" vibrant sonet "> vibrant sonet </option>
+<option value="CX5">CX5</option>
+<option value="CX-5 ">CX-5 </option>
+<option value="MazdaCX 3 TOURING AT">MazdaCX 3 TOURING AT</option>
+<option value="Sentra s">Sentra s</option>
+<option value="March versión ">March versi&#243;n </option>
+<option value=" Amarok: "> Amarok: </option>
+<option value="Captiva ltz">Captiva ltz</option>
+<option value="2017">2017</option>
+<option value="2011">2011</option>
+<option value="I 10 GL">I 10 GL</option>
+<option value="Sedan SE Automatico">Sedan SE Automatico</option>
+<option value="Mazda 3 Touring Automatico">Mazda 3 Touring Automatico</option>
+<option value="DUSTER  4X2">DUSTER  4X2</option>
+<option value="Nissan March ACTIVE ">Nissan March ACTIVE </option>
+<option value="CX-3 	">CX-3 	</option>
+<option value="Sx4">Sx4</option>
+<option value="q5">q5</option>
+<option value="escape Line ST">escape Line ST</option>
+<option value="Cherokee Longitude Plus">Cherokee Longitude Plus</option>
+<option value="KIA Rio Zenith 1.4 Hatchback Automatico ">KIA Rio Zenith 1.4 Hatchback Automatico </option>
+<option value="Logan 	">Logan 	</option>
+<option value="SPARK  gt ">SPARK  gt </option>
+<option value="rio		">rio		</option>
+<option value="	T-Cross">	T-Cross</option>
+<option value="Cherokee longitude">Cherokee longitude</option>
+<option value="3 ">3 </option>
+<option value="Versan Sense AT">Versan Sense AT</option>
+<option value="Steepway">Steepway</option>
+<option value="Nissan March Hachback ">Nissan March Hachback </option>
+<option value=" RIO"> RIO</option>
+<option value="Duster 4x4 	">Duster 4x4 	</option>
+<option value="Rio Vibrant ">Rio Vibrant </option>
+<option value=" Jetta europa"> Jetta europa</option>
+<option value="A200">A200</option>
+<option value="CX-5 touring 4*2">CX-5 touring 4*2</option>
+<option value="Ford Fiesta sedan Aut Titanium">Ford Fiesta sedan Aut Titanium</option>
+<option value="Explorer XLT">Explorer XLT</option>
+<option value=" Gol "> Gol </option>
+<option value="Versa  		">Versa  		</option>
+<option value=".Cx-3">.Cx-3</option>
+<option value="Voyague ">Voyague </option>
+<option value="Cx50 ">Cx50 </option>
+<option value="JOY SEDAN">JOY SEDAN</option>
+<option value="Sportage revolution XL">Sportage revolution XL</option>
+<option value="Volvo XC 60">Volvo XC 60</option>
+<option value="Zen">Zen</option>
+<option value="2004">2004</option>
+<option value="Joy Sedán">Joy Sed&#225;n</option>
+<option value="Kia sportage Ex">Kia sportage Ex</option>
+<option value=" all natural"> all natural</option>
+<option value="Rexton ">Rexton </option>
+<option value="Tacker ">Tacker </option>
+<option value="Hyundai EON limited">Hyundai EON limited</option>
+<option value="Chevrolet Dmax">Chevrolet Dmax</option>
+<option value="202">202</option>
+<option value="SORENTO ">SORENTO </option>
+<option value="Asx 4x4  	">Asx 4x4  	</option>
+<option value="sentra 		">sentra 		</option>
+<option value="Automóvil KIA Picanto iON">Autom&#243;vil KIA Picanto iON</option>
+<option value="Renault Duster intense ">Renault Duster intense </option>
+<option value="Fiat Palio Attractive 1.4 ">Fiat Palio Attractive 1.4 </option>
+<option value="Chevrolet Onix Turbo Sedan ">Chevrolet Onix Turbo Sedan </option>
+<option value="Duster Full ">Duster Full </option>
+<option value="cruze platinum ">cruze platinum </option>
+<option value="Jeep Cherokee limited ">Jeep Cherokee limited </option>
+<option value="Sail sedan LTZ">Sail sedan LTZ</option>
+<option value="alto ">alto </option>
+<option value="beet ">beet </option>
+<option value="ECOSPORT SE AUT">ECOSPORT SE AUT</option>
+<option value="Crosland ">Crosland </option>
+<option value="Sandero	">Sandero	</option>
+<option value="Spark GT LTZ Mecanico Full Equipo">Spark GT LTZ Mecanico Full Equipo</option>
+<option value="Hyundai i25 Accent">Hyundai i25 Accent</option>
+<option value="I20 ACTIVE 1.4">I20 ACTIVE 1.4</option>
+<option value="Renault Sandero Expression AA">Renault Sandero Expression AA</option>
+<option value=" Cruze "> Cruze </option>
+<option value="all new			">all new			</option>
+<option value=" 2 sedan"> 2 sedan</option>
+<option value="MORNING	">MORNING	</option>
+<option value="2014">2014</option>
+<option value="Chevrolet Onix 1.0 Turbo Rs Hatchback">Chevrolet Onix 1.0 Turbo Rs Hatchback</option>
+<option value="Suzuki S cross Gl">Suzuki S cross Gl</option>
+<option value=" i25 ACCENT "> i25 ACCENT </option>
+<option value="KWID Outsider">KWID Outsider</option>
+<option value="Accord">Accord</option>
+<option value="2.0 4x4 Trip Advisor">2.0 4x4 Trip Advisor</option>
+<option value="Cerato pro L">Cerato pro L</option>
+<option value="Renault kwit outsider">Renault kwit outsider</option>
+<option value="comfortline">comfortline</option>
+<option value="kwid ICONIC.">kwid ICONIC.</option>
+<option value=" advance"> advance</option>
+<option value="Quaskai ">Quaskai </option>
+<option value="EXPLORER AWD ">EXPLORER AWD </option>
+<option value="Renault Stepway">Renault Stepway</option>
+<option value="Virtus Comfortline">Virtus Comfortline</option>
+<option value="Ford Bronco 1.5 Big Bend 4x4 ">Ford Bronco 1.5 Big Bend 4x4 </option>
+<option value="Clio campus">Clio campus</option>
+<option value="S3 ">S3 </option>
+<option value="Nativa ">Nativa </option>
+<option value="Swift hb">Swift hb</option>
+<option value="Renault duster desde 4x4 itens">Renault duster desde 4x4 itens</option>
+<option value="Way full esquipo ">Way full esquipo </option>
+<option value="jimmy ">jimmy </option>
+<option value="Santafe ">Santafe </option>
+<option value=" CX 5"> CX 5</option>
+<option value=" cx 30 "> cx 30 </option>
+<option value="BLAZER RS">BLAZER RS</option>
+<option value="renault New Koleos ZEN ">renault New Koleos ZEN </option>
+<option value="3 Grand Touring Sedan">3 Grand Touring Sedan</option>
+<option value="Kia Summa revolution sportage ">Kia Summa revolution sportage </option>
+<option value="320i ">320i </option>
+<option value="Jav veloce	Hasbart">Jav veloce	Hasbart</option>
+<option value="Mazda 3 2.0 Sedan Prime Automatic ">Mazda 3 2.0 Sedan Prime Automatic </option>
+<option value="outlander ">outlander </option>
+<option value="CLIO  III ">CLIO  III </option>
+<option value="Beat Premier">Beat Premier</option>
+<option value="RIO 	">RIO 	</option>
+<option value="ONIX 	">ONIX 	</option>
+<option value="Hyundai Veloster">Hyundai Veloster</option>
+<option value="escape hibrida ">escape hibrida </option>
+<option value="GRAND ">GRAND </option>
+<option value="CRV">CRV</option>
+<option value="6">6</option>
+<option value="CR-V ">CR-V </option>
+<option value=" 3 sport "> 3 sport </option>
+<option value="SANDERO ">SANDERO </option>
+<option value="Sandero Night and Day">Sandero Night and Day</option>
+<option value="Crossfox ">Crossfox </option>
+<option value="Picanto vibrant 1.25">Picanto vibrant 1.25</option>
+<option value="Sportage gt line 4x4 AT gasolina">Sportage gt line 4x4 AT gasolina</option>
+<option value="Mazda CX 30">Mazda CX 30</option>
+<option value="FORD F150 Lariat">FORD F150 Lariat</option>
+<option value="Duster 	">Duster 	</option>
+<option value="PALIO ">PALIO </option>
+<option value="RENEGADE	">RENEGADE	</option>
+<option value="ONIX LT ">ONIX LT </option>
+<option value="volkswagen Jetta SPORTLINE  ">volkswagen Jetta SPORTLINE  </option>
+<option value="V3">V3</option>
+<option value="Renault Koleos ">Renault Koleos </option>
+<option value="hb20 ">hb20 </option>
+<option value="ónix LT">&#243;nix LT</option>
+<option value=""></option>
+<option value="CX5 touring 2.0at ">CX5 touring 2.0at </option>
+<option value="Chevrolet SPARK Ls con aire">Chevrolet SPARK Ls con aire</option>
+<option value=" Spark"> Spark</option>
+<option value="HB20S ">HB20S </option>
+<option value="Sail Hachback Sport LTZ">Sail Hachback Sport LTZ</option>
+<option value="Captiva Sport">Captiva Sport</option>
+<option value=" CX-5 "> CX-5 </option>
+<option value=" cx5 "> cx5 </option>
+<option value="Sandero expression aire ">Sandero expression aire </option>
+<option value="Chevrolet Aveo 1.4 Emotion 4 Puertas Mecanico ">Chevrolet Aveo 1.4 Emotion 4 Puertas Mecanico </option>
+<option value=", cruze   ">, cruze   </option>
+<option value="Juke">Juke</option>
+<option value="Gt	">Gt	</option>
+<option value="Rav">Rav</option>
+<option value="Tracker ">Tracker </option>
+<option value="SAIL Ls Sin Aire Acondicionado 2 Airbags ABS">SAIL Ls Sin Aire Acondicionado 2 Airbags ABS</option>
+<option value="Vitara live">Vitara live</option>
+<option value="Hyundai Tucson ix35 2.4 automática 4x4 gasolina ">Hyundai Tucson ix35 2.4 autom&#225;tica 4x4 gasolina </option>
+<option value="Hiunday I35 ">Hiunday I35 </option>
+<option value="fiesta ">fiesta </option>
+<option value="Logan privilige ">Logan privilige </option>
+<option value="Ford fiesta se">Ford fiesta se</option>
+<option value="Sportage revolution lx">Sportage revolution lx</option>
+<option value="Renault stepway Dinamique">Renault stepway Dinamique</option>
+<option value="2 HB">2 HB</option>
+<option value="Cx5 Lx">Cx5 Lx</option>
+<option value="2 Sport">2 Sport</option>
+<option value="Twingo Acce">Twingo Acce</option>
+<option value="Ix35 ">Ix35 </option>
+<option value="	fiesta ">	fiesta </option>
+<option value="Logan  familiar ">Logan  familiar </option>
+<option value="Chevrolet beat premier 2022">Chevrolet beat premier 2022</option>
+<option value="Onix turbo lt">Onix turbo lt</option>
+<option value=" Sonic "> Sonic </option>
+<option value=" Tucson"> Tucson</option>
+<option value="3008 allure ">3008 allure </option>
+<option value="Renault Stepway Dynamique ">Renault Stepway Dynamique </option>
+<option value="Volkswagen Gol ">Volkswagen Gol </option>
+<option value="New Sportage ">New Sportage </option>
+<option value="Volkswagen Gol Trendline 1.6 Hatchback Manual">Volkswagen Gol Trendline 1.6 Hatchback Manual</option>
+<option value="Uno 		">Uno 		</option>
+<option value="SONIC	">SONIC	</option>
+<option value=" cx30 lx 4x4 "> cx30 lx 4x4 </option>
+<option value="Jetta Clásico Trendline">Jetta Cl&#225;sico Trendline</option>
+<option value="CAPTUR Intens">CAPTUR Intens</option>
+<option value="TAOS ">TAOS </option>
+<option value="C5 Aircross">C5 Aircross</option>
+<option value="gol trend">gol trend</option>
+<option value="Renault Logan intens ">Renault Logan intens </option>
+<option value="Expression">Expression</option>
+<option value="sail lt">sail lt</option>
+<option value="volkwagen beetle ">volkwagen beetle </option>
+<option value="PicantoEx ">PicantoEx </option>
+<option value="	2">	2</option>
+<option value="ion ">ion </option>
+<option value="voyaje ">voyaje </option>
+<option value="Mazda 3 Grand Touring 2.0 Sedan Automatico">Mazda 3 Grand Touring 2.0 Sedan Automatico</option>
+<option value="Amarok ">Amarok </option>
+<option value="X4">X4</option>
+<option value=" New versa "> New versa </option>
+<option value="rio all nex">rio all nex</option>
+<option value="ford Ranger">ford Ranger</option>
+<option value="Cla 180 límited plus">Cla 180 l&#237;mited plus</option>
+<option value="Nissan Versa Advance Aut ">Nissan Versa Advance Aut </option>
+<option value="V700 ">V700 </option>
+<option value="sonet">sonet</option>
+<option value="Mazda 3 2017 prime">Mazda 3 2017 prime</option>
+<option value="Carens ">Carens </option>
+<option value="VO">VO</option>
+<option value="scross GL MT ">scross GL MT </option>
+<option value="Chevrolet Spark 1.2 GT LTZ Mecanico Full Equipo ">Chevrolet Spark 1.2 GT LTZ Mecanico Full Equipo </option>
+<option value="2 hb mt">2 hb mt</option>
+<option value="Suzuki Vitara live ">Suzuki Vitara live </option>
+<option value="Suzuki Swift 1.4 GL Automatico Aire Acondicionado ">Suzuki Swift 1.4 GL Automatico Aire Acondicionado </option>
+<option value="Symbol II">Symbol II</option>
+<option value=" CX-30	"> CX-30	</option>
+<option value="Escape 4x2">Escape 4x2</option>
+<option value="Chevrolet Captiva turbo">Chevrolet Captiva turbo</option>
+<option value="IBIZA ">IBIZA </option>
+<option value="feell ">feell </option>
+<option value="rush">rush</option>
+<option value="Ioniq">Ioniq</option>
+<option value="Xline">Xline</option>
+<option value="NEW AUTOMATICA ">NEW AUTOMATICA </option>
+<option value="Tiguan Allspace confortline">Tiguan Allspace confortline</option>
+<option value="118i">118i</option>
+<option value="Rexton g4">Rexton g4</option>
+<option value="KICKS 	">KICKS 	</option>
+<option value=", chevrolet, blazer rs,">, chevrolet, blazer rs,</option>
+<option value="Ibiza style ">Ibiza style </option>
+<option value="Fiesta se ">Fiesta se </option>
+<option value="COMPASS LONGITUDE">COMPASS LONGITUDE</option>
+<option value="Hyundai Veloster 1.6 ">Hyundai Veloster 1.6 </option>
+<option value="Vitara allgrip">Vitara allgrip</option>
+<option value="Virtus confortline ">Virtus confortline </option>
+<option value="GETZ">GETZ</option>
+<option value="kona ">kona </option>
+<option value="Outsider">Outsider</option>
+<option value="Grand Touring Automático">Grand Touring Autom&#225;tico</option>
+<option value="Mazda 3 Grand Touring">Mazda 3 Grand Touring</option>
+<option value="Renault Duster Zen ">Renault Duster Zen </option>
+<option value="CX30 TOURING ">CX30 TOURING </option>
+<option value="XTRAIL ">XTRAIL </option>
+<option value="X-TRAIL">X-TRAIL</option>
+<option value="Renault Expresive">Renault Expresive</option>
+<option value="Hyundai Creta Premium 4x2 Aut ">Hyundai Creta Premium 4x2 Aut </option>
+<option value="Chevrolet ONIX">Chevrolet ONIX</option>
+<option value="Kicks sense">Kicks sense</option>
+<option value="X TRAIL ">X TRAIL </option>
+<option value="RAV 4">RAV 4</option>
+<option value="peugeot 2008">peugeot 2008</option>
+<option value="Chevrolet Aveo family">Chevrolet Aveo family</option>
+<option value="IBIZA STYLE 1.6">IBIZA STYLE 1.6</option>
+<option value="Renault sandero gt line">Renault sandero gt line</option>
+<option value="Cerato pro ex">Cerato pro ex</option>
+<option value="Escape 4x4">Escape 4x4</option>
+<option value="Logan ">Logan </option>
+<option value="MAZDA 2 GT LX ">MAZDA 2 GT LX </option>
+<option value="Saveiro">Saveiro</option>
+<option value="Volkswagen Jetta Highline ">Volkswagen Jetta Highline </option>
+<option value="Chevrolet Cobalt ltz">Chevrolet Cobalt ltz</option>
+<option value="Mazda 3, 2.0 touring ">Mazda 3, 2.0 touring </option>
+<option value="Korando ">Korando </option>
+<option value="5008	">5008	</option>
+<option value=", Tucson">, Tucson</option>
+<option value="KIA Rio 1.4 Automatico">KIA Rio 1.4 Automatico</option>
+<option value="Classe A">Classe A</option>
+<option value="Stylus ">Stylus </option>
+<option value="Grand touring">Grand touring</option>
+<option value="family 1.400 A.A">family 1.400 A.A</option>
+<option value="Allure">Allure</option>
+<option value="Mazda Cx5 TOURING ">Mazda Cx5 TOURING </option>
+<option value="Celerio aa">Celerio aa</option>
+<option value="Prado ">Prado </option>
+<option value="CERATO FORTE SPORT SX ">CERATO FORTE SPORT SX </option>
+<option value="Renault Campus ">Renault Campus </option>
+<option value="500 ">500 </option>
+<option value="Mazda 2 	">Mazda 2 	</option>
+<option value="rápid ">r&#225;pid </option>
+<option value="City ">City </option>
+<option value="sandero life ph2 ">sandero life ph2 </option>
+<option value="Volswagen Gol Confortline">Volswagen Gol Confortline</option>
+<option value="COBALT CO">COBALT CO</option>
+<option value="DURANGO ">DURANGO </option>
+<option value=" cx30 grand "> cx30 grand </option>
+<option value="New sportageLX">New sportageLX</option>
+<option value="Chevrolet Equinox Premier ">Chevrolet Equinox Premier </option>
+<option value="tracker	">tracker	</option>
+<option value="Ertiga">Ertiga</option>
+<option value="Suzuki SWIFT DEZIRE ">Suzuki SWIFT DEZIRE </option>
+<option value="SUBARU Forester híbrida Cvt">SUBARU Forester h&#237;brida Cvt</option>
+<option value="Suzuki Grand Vitara 2.4 GLX Sport 4x4 5p Mecanica ">Suzuki Grand Vitara 2.4 GLX Sport 4x4 5p Mecanica </option>
+<option value="Mazda 3 2.0 Sport grand touring hatchback">Mazda 3 2.0 Sport grand touring hatchback</option>
+<option value="Peugeot 5008 gt line ">Peugeot 5008 gt line </option>
+<option value="Fiesta Hatchback">Fiesta Hatchback</option>
+<option value="Cx3">Cx3</option>
+<option value="Aveo emotion automatico">Aveo emotion automatico</option>
+<option value="Chevrolet Sonic lt Hatcback">Chevrolet Sonic lt Hatcback</option>
+<option value="captiva sport 2.4 full equipo">captiva sport 2.4 full equipo</option>
+<option value="CX-3">CX-3</option>
+<option value="NISSAN SENTRA ">NISSAN SENTRA </option>
+<option value="ATECA ">ATECA </option>
+<option value="Logan life ">Logan life </option>
+<option value="Exclusive KIKS">Exclusive KIKS</option>
+<option value="Versa sense ">Versa sense </option>
+<option value="Audi A4 ">Audi A4 </option>
+<option value="Volex C30">Volex C30</option>
+<option value="Kia Cerato Vivro">Kia Cerato Vivro</option>
+<option value="FORD ESCAPE TITANIUM ">FORD ESCAPE TITANIUM </option>
+<option value="MAZDA	 3 Touring">MAZDA	 3 Touring</option>
+<option value="SPARK 	">SPARK 	</option>
+<option value="Compass Sport 4x2">Compass Sport 4x2</option>
+<option value="Chevrolet Onix 1.4 LTZ Automatico ">Chevrolet Onix 1.4 LTZ Automatico </option>
+<option value="Honda WRV EX">Honda WRV EX</option>
+<option value="Chevrole t sail sport ltz">Chevrole t sail sport ltz</option>
+<option value="Dakar ">Dakar </option>
+<option value="Aveo Family Manual">Aveo Family Manual</option>
+<option value="Renault Logan 1.6 Expression Aire Acondicionado ">Renault Logan 1.6 Expression Aire Acondicionado </option>
+<option value="VwClásico 2013">VwCl&#225;sico 2013</option>
+<option value="Chevrolet Sail ltz sedan">Chevrolet Sail ltz sedan</option>
+<option value="E200 ">E200 </option>
+<option value=" bronco sport"> bronco sport</option>
+<option value="2020">2020</option>
+<option value="Nissan Qashqai">Nissan Qashqai</option>
+<option value="Volkswagen Nuevo Jetta 2.0 GLI TSI 6DSG ">Volkswagen Nuevo Jetta 2.0 GLI TSI 6DSG </option>
+<option value="Nissan Versa Advance Automatico ">Nissan Versa Advance Automatico </option>
+<option value="Subaru XV Hibrida ">Subaru XV Hibrida </option>
+<option value="traker  ">traker  </option>
+<option value="Sdrive">Sdrive</option>
+<option value="MARCH	">MARCH	</option>
+<option value="Fusión">Fusi&#243;n</option>
+<option value="GOLF">GOLF</option>
+<option value="Fusion ">Fusion </option>
+<option value="KIA Rio 1. Vibrant HB ">KIA Rio 1. Vibrant HB </option>
+<option value=" Ónix 	"> &#211;nix 	</option>
+<option value="2 	">2 	</option>
+<option value="207 premium">207 premium</option>
+<option value="megane 3">megane 3</option>
+<option value="Chevrolet Sonic 1.6">Chevrolet Sonic 1.6</option>
+<option value="CLA45">CLA45</option>
+<option value="Sandero Life">Sandero Life</option>
+<option value="HIGLINE">HIGLINE</option>
+<option value="Onix turbo 1.0">Onix turbo 1.0</option>
+<option value="TIVOLI ">TIVOLI </option>
+<option value="tucson new">tucson new</option>
+<option value="Mazda cx5 Turing ">Mazda cx5 Turing </option>
+<option value=" s2"> s2</option>
+<option value="6grand turing ">6grand turing </option>
+<option value="Kia Rio Rio UB EX HATCH BACK">Kia Rio Rio UB EX HATCH BACK</option>
+<option value="Tracker premier full">Tracker premier full</option>
+<option value="Grand Vitara">Grand Vitara</option>
+<option value="Lancer ">Lancer </option>
+<option value="sport ">sport </option>
+<option value="NOTE">NOTE</option>
+<option value="Cactus ">Cactus </option>
+<option value="CHEVROLET		">CHEVROLET		</option>
+<option value="Vitara Live automático all grip">Vitara Live autom&#225;tico all grip</option>
+<option value="Renault Sandero Life 1.6 Hatchback ">Renault Sandero Life 1.6 Hatchback </option>
+<option value="&quot;Ecosport SE AUT 4x2	H &quot;">&quot;Ecosport SE AUT 4x2	H &quot;</option>
+<option value="Kia picanto xtream">Kia picanto xtream</option>
+<option value=" spark gt"> spark gt</option>
+<option value="    glory 580 ">    glory 580 </option>
+<option value="FIESTA SEDAN MT">FIESTA SEDAN MT</option>
+<option value="Stepway expression ">Stepway expression </option>
+<option value="Picanto Summa 1.2 ">Picanto Summa 1.2 </option>
+<option value="Chevrlote aveo famili 1500 c.c.">Chevrlote aveo famili 1500 c.c.</option>
+<option value="Seat Ateca Style Plus ">Seat Ateca Style Plus </option>
+<option value="Twizy ">Twizy </option>
+<option value="3 SPORT PRIME">3 SPORT PRIME</option>
+<option value=" Kids "> Kids </option>
+<option value=" Golf GTI Mk7 "> Golf GTI Mk7 </option>
+<option value="CX30 GRAND TOURING ">CX30 GRAND TOURING </option>
+<option value="CITROEN C5">CITROEN C5</option>
+<option value="Cx30 GT">Cx30 GT</option>
+<option value="Logan	">Logan	</option>
+<option value="308">308</option>
+<option value="Impreza">Impreza</option>
+<option value=" 3 grand "> 3 grand </option>
+<option value="sail ltz hachtback full equipo">sail ltz hachtback full equipo</option>
+<option value="Chevrolet Sonic Sedan LT Aut ">Chevrolet Sonic Sedan LT Aut </option>
+<option value=" jetta clásico "> jetta cl&#225;sico </option>
+<option value="stepway intens">stepway intens</option>
+<option value="FOX  ">FOX  </option>
+<option value=""></option>
+<option value="420i grand coupe">420i grand coupe</option>
+<option value="sail hatchback AA ">sail hatchback AA </option>
+<option value="Hyundai EON Active ">Hyundai EON Active </option>
+<option value="JEEP Renegade Sport 1.8 Aut ">JEEP Renegade Sport 1.8 Aut </option>
+<option value="Tracker Turbo ">Tracker Turbo </option>
+<option value="Voyage  	">Voyage  	</option>
+<option value="RAV 4 	">RAV 4 	</option>
+<option value="X3 DRIVE 30I ">X3 DRIVE 30I </option>
+<option value="Legend. 5 puertas">Legend. 5 puertas</option>
+<option value="CX-30 Touring AT 4X2">CX-30 Touring AT 4X2</option>
+<option value="2 Hasback">2 Hasback</option>
+<option value="Ion ex ">Ion ex </option>
+<option value="CX5  4x4">CX5  4x4</option>
+<option value="Kia Picanto ">Kia Picanto </option>
+<option value="RANGER 3.2 4x4 Diesel">RANGER 3.2 4x4 Diesel</option>
+<option value="PICANTO  ALL  NEW ">PICANTO  ALL  NEW </option>
+<option value=" crosfox 	"> crosfox 	</option>
+<option value="Stepwey ">Stepwey </option>
+<option value="ESCAPE TITANIUM ">ESCAPE TITANIUM </option>
+<option value="3 Gran tourning lx ">3 Gran tourning lx </option>
+<option value="graviti">graviti</option>
+<option value="GRAND i10">GRAND i10</option>
+<option value="VERSA [FL] ">VERSA [FL] </option>
+<option value="Tribeca">Tribeca</option>
+<option value="ECOSPORT SE 1.5 MT">ECOSPORT SE 1.5 MT</option>
+<option value="steway ">steway </option>
+<option value="dob 4x4">dob 4x4</option>
+<option value="stonic híbrido">stonic h&#237;brido</option>
+<option value="Ranger	">Ranger	</option>
+<option value="Baleno">Baleno</option>
+<option value="Quasqai ">Quasqai </option>
+<option value="Ford Ecosport SE 4x2 ">Ford Ecosport SE 4x2 </option>
+<option value="traverse ">traverse </option>
+<option value=" s.presso"> s.presso</option>
+<option value="Sandero Expression">Sandero Expression</option>
+<option value="3  grand touring ">3  grand touring </option>
+<option value="Honda Crv ">Honda Crv </option>
+<option value="Renault Kwid Outsider ">Renault Kwid Outsider </option>
+<option value="Volkswagen Voyage.">Volkswagen Voyage.</option>
+<option value="ERTIGA MPV">ERTIGA MPV</option>
+<option value="Logan  Sedan ">Logan  Sedan </option>
+<option value=" versa "> versa </option>
+<option value="C3 ">C3 </option>
+<option value=" t-cross "> t-cross </option>
+<option value=" 5"> 5</option>
+<option value="1000">1000</option>
+<option value=" t 6 "> t 6 </option>
+<option value=" 3008 "> 3008 </option>
+<option value=" Sporting "> Sporting </option>
+<option value=" S-cross"> S-cross</option>
+<option value="veloster premium ">veloster premium </option>
+<option value="Nissan Sentra advance mecánico ">Nissan Sentra advance mec&#225;nico </option>
+<option value=" Ford Titanium Plus "> Ford Titanium Plus </option>
+<option value="c-élysée">c-&#233;lys&#233;e</option>
+<option value="c-elysee">c-elysee</option>
+<option value="Tiida Hachback">Tiida Hachback</option>
+<option value="Fiat atractive 2015">Fiat atractive 2015</option>
+<option value=" T-CROOS "> T-CROOS </option>
+<option value="Jetta Clasico">Jetta Clasico</option>
+<option value="PICANTO GT Line 1.25 Hatchback ">PICANTO GT Line 1.25 Hatchback </option>
+<option value="KIA RÍO STYLUS LS">KIA R&#205;O STYLUS LS</option>
+<option value="aveo">aveo</option>
+<option value="Volkswagen Gol 1.0 16v 5 Puertas Full Equipo ">Volkswagen Gol 1.0 16v 5 Puertas Full Equipo </option>
+<option value="Chevrolet Spark gr ltz ">Chevrolet Spark gr ltz </option>
+<option value="3 	">3 	</option>
+<option value="Captiva		">Captiva		</option>
+<option value="DUSTER  OROCH ">DUSTER  OROCH </option>
+<option value="3 		">3 		</option>
+<option value="cerato pro segunda generación ">cerato pro segunda generaci&#243;n </option>
+<option value="6 Grand ">6 Grand </option>
+<option value="C3 Aircross ">C3 Aircross </option>
+<option value="DUSTER 	MECA">DUSTER 	MECA</option>
+<option value="Jimny ">Jimny </option>
+<option value="SONIC">SONIC</option>
+<option value="3 grand touring ">3 grand touring </option>
+<option value="Tiida, SD Premium">Tiida, SD Premium</option>
+<option value="Yeti ambition 1.8 TSI 4X4">Yeti ambition 1.8 TSI 4X4</option>
+<option value="Wrv ">Wrv </option>
+<option value="Carens suv">Carens suv</option>
+<option value=" nuevo LOGAN "> nuevo LOGAN </option>
+<option value="New KOLEOS">New KOLEOS</option>
+<option value="WR-V">WR-V</option>
+<option value="New Koleos	">New Koleos	</option>
+<option value="MAZDA2, grand touring 2016,">MAZDA2, grand touring 2016,</option>
+<option value="Stepway expression AA">Stepway expression AA</option>
+<option value="3 nueva generación">3 nueva generaci&#243;n</option>
+<option value="Chevrolet Spark 1.0 LC Mecanico Aire Acondicionado">Chevrolet Spark 1.0 LC Mecanico Aire Acondicionado</option>
+<option value="Hyundai Accent I25 Hatchback">Hyundai Accent I25 Hatchback</option>
+<option value="Mazda 2 sport prime  ">Mazda 2 sport prime  </option>
+<option value="SOLUTO ">SOLUTO </option>
+<option value="Peugeot 3008 1.6 Active">Peugeot 3008 1.6 Active</option>
+<option value="C-elycee ">C-elycee </option>
+<option value="a-cross">a-cross</option>
+<option value="Renault Koleos Intens 4x4">Renault Koleos Intens 4x4</option>
+<option value="Logan familia Renault">Logan familia Renault</option>
+<option value="GOLF GL">GOLF GL</option>
+<option value="Kia PICANTO ION EXTREM AIRE">Kia PICANTO ION EXTREM AIRE</option>
+<option value="hyundai i35 ">hyundai i35 </option>
+<option value="TIIDA SD">TIIDA SD</option>
+<option value="Chevrolet Cruze LT">Chevrolet Cruze LT</option>
+<option value="3  	">3  	</option>
+<option value="Eon">Eon</option>
+<option value="KIA RIO ">KIA RIO </option>
+<option value="Gla 45">Gla 45</option>
+<option value="Crossland Edition">Crossland Edition</option>
+<option value="MAZDA 2 Grand touring lx">MAZDA 2 Grand touring lx</option>
+<option value="Beat ltz">Beat ltz</option>
+<option value="Gol comfortline">Gol comfortline</option>
+<option value="CLIO II F.IV">CLIO II F.IV</option>
+<option value="Explorer/	">Explorer/	</option>
+<option value="i20 active">i20 active</option>
+<option value="Nissan March ">Nissan March </option>
+<option value="Jac S2 ">Jac S2 </option>
+<option value="Sportage ex">Sportage ex</option>
+<option value="Captiva LT ">Captiva LT </option>
+<option value="MAZDA 3 SPORT TOURING">MAZDA 3 SPORT TOURING</option>
+<option value="Swift dzire sedab">Swift dzire sedab</option>
+<option value="3,tourin">3,tourin</option>
+<option value="Dodgue journey">Dodgue journey</option>
+<option value="Swift glx 1.4 mecánico ">Swift glx 1.4 mec&#225;nico </option>
+<option value="CX-5 GT LX ">CX-5 GT LX </option>
+<option value="Dzire ">Dzire </option>
+<option value="ZS STD">ZS STD</option>
+<option value="sandero aunthentique SA">sandero aunthentique SA</option>
+<option value="KIA RIO sedan vibra ">KIA RIO sedan vibra </option>
+<option value="Chevrolet Spark Life Mecanico Aire Acondicionado ">Chevrolet Spark Life Mecanico Aire Acondicionado </option>
+<option value="TIIDA">TIIDA</option>
+<option value="Chevrolet">Chevrolet</option>
+<option value="Logan 2023	">Logan 2023	</option>
+<option value="2021">2021</option>
+<option value="march active ">march active </option>
+<option value="CRETA">CRETA</option>
+<option value="Versa">Versa</option>
+<option value="Chevrolet Tracker 1.8 LS Mecanica ">Chevrolet Tracker 1.8 LS Mecanica </option>
+<option value="Ford Explorer limited">Ford Explorer limited</option>
+<option value="Kia Picanto ion 1.0 ">Kia Picanto ion 1.0 </option>
+<option value="Mazda CX30">Mazda CX30</option>
+<option value="ford ecosport ecosport titanium">ford ecosport ecosport titanium</option>
+<option value=" New logan "> New logan </option>
+<option value="picanto versión ión ">picanto versi&#243;n i&#243;n </option>
+<option value=" np300 "> np300 </option>
+<option value="Sandero life +">Sandero life +</option>
+<option value="Volkswaguen Tiguan ">Volkswaguen Tiguan </option>
+<option value="Logan polar life">Logan polar life</option>
+<option value="Sentra 	">Sentra 	</option>
+<option value="expresó ">expres&#243; </option>
+<option value="Chevrilet onix">Chevrilet onix</option>
+<option value="Ford Fiesta ST ">Ford Fiesta ST </option>
+<option value="mitsubishi outalnder ">mitsubishi outalnder </option>
+<option value="chevrolet CRUZE LTZ  ">chevrolet CRUZE LTZ  </option>
+<option value="c180">c180</option>
+<option value="Kiwd">Kiwd</option>
+<option value="Argo ">Argo </option>
+<option value="Sail ">Sail </option>
+<option value="KICKS">KICKS</option>
+<option value="Tiida HB">Tiida HB</option>
+<option value="Uno">Uno</option>
+<option value="i 10">i 10</option>
+<option value="Renault Sandero life ">Renault Sandero life </option>
+<option value="BEETLE ">BEETLE </option>
+<option value="TRAVERSE 	">TRAVERSE 	</option>
+<option value="KIA Niro Zenith 1.6 Suv Automatico ">KIA Niro Zenith 1.6 Suv Automatico </option>
+<option value="Duster Expresión">Duster Expresi&#243;n</option>
+<option value="Premium">Premium</option>
+<option value=" Mazda 3 nueva generación Touring 2.0"> Mazda 3 nueva generaci&#243;n Touring 2.0</option>
+<option value="Mazda 3 GT sedan lx">Mazda 3 GT sedan lx</option>
+<option value="S cross">S cross</option>
+<option value="S- cross ">S- cross </option>
+<option value="Voyage trendline ">Voyage trendline </option>
+<option value="Yaris">Yaris</option>
+<option value="renault sandero stepway">renault sandero stepway</option>
+<option value="Partner ">Partner </option>
+<option value="new attraction">new attraction</option>
+<option value="Chevrolet sonic lt">Chevrolet sonic lt</option>
+<option value="Picanto all new">Picanto all new</option>
+<option value="Renault Logan Privilege ">Renault Logan Privilege </option>
+<option value="Fluence CONFORD">Fluence CONFORD</option>
+<option value="Renault Stepway Zen ">Renault Stepway Zen </option>
+<option value="Nissan frontier  doble cabina">Nissan frontier  doble cabina</option>
+<option value="Kia STYLUS  ">Kia STYLUS  </option>
+<option value="Rodius">Rodius</option>
+<option value="2	sedan">2	sedan</option>
+<option value="B200 Sport.">B200 Sport.</option>
+<option value="creta premier">creta premier</option>
+<option value="Spark 1.2 GT LT Mecanico Aire Acondicionado">Spark 1.2 GT LT Mecanico Aire Acondicionado</option>
+<option value="Traverse version LT">Traverse version LT</option>
+<option value="Chevrolet Life 1.0 ">Chevrolet Life 1.0 </option>
+<option value="Chevrolet Sail ltz ">Chevrolet Sail ltz </option>
+<option value="Corolla sedan ">Corolla sedan </option>
+<option value=" March "> March </option>
+<option value="Punto  ">Punto  </option>
+<option value=" c elysee "> c elysee </option>
+<option value="Jetta clásico modelo ">Jetta cl&#225;sico modelo </option>
+<option value="Toledo">Toledo</option>
+<option value="Duster intense 4x2">Duster intense 4x2</option>
+<option value="Chevrolet Sail 1.4 LTZ Hatchback ">Chevrolet Sail 1.4 LTZ Hatchback </option>
+<option value="2	">2	</option>
+<option value="PICANTO 	">PICANTO 	</option>
+<option value="2015">2015</option>
+<option value="LT">LT</option>
+<option value="Logan Zen  16v 111Hp">Logan Zen  16v 111Hp</option>
+<option value="KIA Rio R 1.25 NB A.A ">KIA Rio R 1.25 NB A.A </option>
+<option value="2010">2010</option>
+<option value="Gol">Gol</option>
+<option value="LOGAN  ENTRY ">LOGAN  ENTRY </option>
+<option value="Logan privilege">Logan privilege</option>
+<option value="Chevrolet Sonic sedan ">Chevrolet Sonic sedan </option>
+<option value="sspreso ">sspreso </option>
+<option value="Vitara Live 4x4 glx  allgrip">Vitara Live 4x4 glx  allgrip</option>
+<option value="MG3">MG3</option>
+<option value="Nissan Frontier NP300">Nissan Frontier NP300</option>
+<option value="GLA200 ">GLA200 </option>
+<option value="AUTHENTIQUE ">AUTHENTIQUE </option>
+<option value=" 208 GTI"> 208 GTI</option>
+<option value="sail ls">sail ls</option>
+<option value="Cx 9">Cx 9</option>
+<option value="MARCH 	">MARCH 	</option>
+<option value="nuevo logan">nuevo logan</option>
+<option value="Chevrolet Captiva 1.5 Turbo LT Automatica">Chevrolet Captiva 1.5 Turbo LT Automatica</option>
+<option value="Cerato ">Cerato </option>
+<option value="CX5 4x2">CX5 4x2</option>
+<option value="beat">beat</option>
+<option value="Susuky Scroos. Automática">Susuky Scroos. Autom&#225;tica</option>
+<option value="Frontier">Frontier</option>
+<option value="Hyundai I20 advance">Hyundai I20 advance</option>
+<option value="chery tiggo">chery tiggo</option>
+<option value="Way ">Way </option>
+<option value="Clio Sport ">Clio Sport </option>
+<option value="Picanto vibrant ">Picanto vibrant </option>
+<option value=" Fiat atractive "> Fiat atractive </option>
+<option value="2 grandtouring ">2 grandtouring </option>
+<option value="Sail ltz sedan">Sail ltz sedan</option>
+<option value="IGNIS ">IGNIS </option>
+<option value=" 3 Touring "> 3 Touring </option>
+<option value="Renault Sandero Life Plus Polar ">Renault Sandero Life Plus Polar </option>
+<option value="Kicks advance">Kicks advance</option>
+<option value="gol Trendline">gol Trendline</option>
+<option value="Aveo gti 1.6 coupe">Aveo gti 1.6 coupe</option>
+<option value="chevrolet sail ls ">chevrolet sail ls </option>
+<option value="Volkswagen voyage ">Volkswagen voyage </option>
+<option value="Accent ">Accent </option>
+<option value="FIESTA  HATCHBACK ">FIESTA  HATCHBACK </option>
+<option value="xl">xl</option>
+<option value="TIIDA Premium ">TIIDA Premium </option>
+<option value="Chevrolet Onix 1.0 turbo Premium">Chevrolet Onix 1.0 turbo Premium</option>
+<option value="capture ">capture </option>
+<option value="blazer ">blazer </option>
+<option value="Sandero rs">Sandero rs</option>
+<option value="Suzuki Vitara all grip TECHO 4*4  ">Suzuki Vitara all grip TECHO 4*4  </option>
+<option value="JOY Versión Standart ">JOY Versi&#243;n Standart </option>
+<option value="GOL Hatchback ">GOL Hatchback </option>
+<option value="familier sin aire ">familier sin aire </option>
+<option value="Spark go ">Spark go </option>
+<option value="sail Sedan 4p ls con aire ">sail Sedan 4p ls con aire </option>
+<option value="Kia Sportage Revolución LX ">Kia Sportage Revoluci&#243;n LX </option>
+<option value="X2 Drive 20i M Sport">X2 Drive 20i M Sport</option>
+<option value="COROLLA ">COROLLA </option>
+<option value="5008 ">5008 </option>
+<option value="EXPLORER LIMITED ">EXPLORER LIMITED </option>
+<option value="Mazda 3 automatico touring">Mazda 3 automatico touring</option>
+<option value="versa dirve conect at">versa dirve conect at</option>
+<option value="Volkswagen Saveiro ">Volkswagen Saveiro </option>
+<option value=" Explorer "> Explorer </option>
+<option value="Niro">Niro</option>
+<option value="C3 SEDAN ">C3 SEDAN </option>
+<option value="Eco SPORT ">Eco SPORT </option>
+<option value="PICANTO 		">PICANTO 		</option>
+<option value="Kia picanto Vibrant ">Kia picanto Vibrant </option>
+<option value="Skoda Fabia Combi Classic 1.2 Aire Acondicionado ">Skoda Fabia Combi Classic 1.2 Aire Acondicionado </option>
+<option value="Xpander , ">Xpander , </option>
+<option value="Cruze">Cruze</option>
+<option value="Cruze turbo ">Cruze turbo </option>
+<option value="Chevrolet Onix sedan">Chevrolet Onix sedan</option>
+<option value="QASQAI ">QASQAI </option>
+<option value="scape ">scape </option>
+<option value="Grand Vitara 3P">Grand Vitara 3P</option>
+<option value="CRETA  4X2  ">CRETA  4X2  </option>
+<option value="T-CROSS	">T-CROSS	</option>
+<option value="Volksvagen VOYAGE AIRE ACONDICIONADO  ">Volksvagen VOYAGE AIRE ACONDICIONADO  </option>
+<option value="Peugeot 208 ">Peugeot 208 </option>
+<option value="RENAULD SANDERO LIFE ">RENAULD SANDERO LIFE </option>
+<option value="Pathfinder ">Pathfinder </option>
+<option value="sandero Life hatchback">sandero Life hatchback</option>
+<option value="Suzuki gran vitara">Suzuki gran vitara</option>
+<option value="Cruz lt at 1.8">Cruz lt at 1.8</option>
+<option value="l Ford Fiesta SE">l Ford Fiesta SE</option>
+<option value="Renault Sandero Life 1.6 Hatchback Manual ">Renault Sandero Life 1.6 Hatchback Manual </option>
+<option value="Renault Kwid Iconic ">Renault Kwid Iconic </option>
+<option value="S3	">S3	</option>
+<option value="KIA Cerato Koup">KIA Cerato Koup</option>
+<option value="renegade">renegade</option>
+<option value="Cerato Pro SX">Cerato Pro SX</option>
+<option value="Voyage Comfortline 1.6 sedan">Voyage Comfortline 1.6 sedan</option>
+<option value="Rav4 ">Rav4 </option>
+<option value=" Swift "> Swift </option>
+<option value=" cx3 touring"> cx3 touring</option>
+<option value="s-cross/">s-cross/</option>
+<option value="New Soul ">New Soul </option>
+<option value="|Logan">|Logan</option>
+<option value="Cronos Drive 1.3">Cronos Drive 1.3</option>
+<option value="FORD Ecosport FreeStyle 4X4">FORD Ecosport FreeStyle 4X4</option>
+<option value="picanto	">picanto	</option>
+<option value="LOGAN F.II">LOGAN F.II</option>
+<option value=" corolla"> corolla</option>
+<option value="kiks">kiks</option>
+<option value="CLA ">CLA </option>
+<option value="CUPRA">CUPRA</option>
+<option value="TAHOE		">TAHOE		</option>
+<option value="JETTA 			">JETTA 			</option>
+<option value="ORLANDO ">ORLANDO </option>
+<option value="Onix sedan">Onix sedan</option>
+<option value="2012">2012</option>
+<option value="Impreza HB Sport">Impreza HB Sport</option>
+<option value="longitud">longitud</option>
+<option value="Onix LTZ">Onix LTZ</option>
+<option value="Mazda Cx3 touring ">Mazda Cx3 touring </option>
+<option value="Renault Kiwd outsider">Renault Kiwd outsider</option>
+<option value="KIA Sportage">KIA Sportage</option>
+<option value="Chevrolet ónix LTZ">Chevrolet &#243;nix LTZ</option>
+<option value="megane  III ">megane  III </option>
+<option value="Cross fox basic ">Cross fox basic </option>
+<option value="mazda 3">mazda 3</option>
+<option value="DUSTER">DUSTER</option>
+<option value="Q3 ">Q3 </option>
+<option value="Nissan March Sense Mecanico ">Nissan March Sense Mecanico </option>
+<option value="Journey SE">Journey SE</option>
+<option value="Q5 ambition hibrida">Q5 ambition hibrida</option>
+<option value="Gla 200">Gla 200</option>
+<option value="Gol/">Gol/</option>
+<option value="Spark gt ">Spark gt </option>
+<option value="Aut LT tiene gas">Aut LT tiene gas</option>
+<option value="Nissan Versa ACTIVE  ">Nissan Versa ACTIVE  </option>
+<option value="N300 pasajeros Move">N300 pasajeros Move</option>
+<option value="Logan life +">Logan life +</option>
+<option value="Suzuki S-Cross 1.6 2WD Mecanica ">Suzuki S-Cross 1.6 2WD Mecanica </option>
+<option value="Volkswagen Golf 1.4 TSI trendline">Volkswagen Golf 1.4 TSI trendline</option>
+<option value="Renault Sandero zen ">Renault Sandero zen </option>
+<option value="CERATO 	 ">CERATO 	 </option>
+<option value="Xtrail exclusive 4x4">Xtrail exclusive 4x4</option>
+<option value=" Sandero "> Sandero </option>
+<option value="KIA Sorento Natura 4X4 ">KIA Sorento Natura 4X4 </option>
+<option value="Ford Ranger XLS  ">Ford Ranger XLS  </option>
+<option value="HVR 			">HVR 			</option>
+<option value="KIA Rio Emotion  ">KIA Rio Emotion  </option>
+<option value="Renault sendero">Renault sendero</option>
+<option value="Tiguan Allspace TRENDLINE 4X4">Tiguan Allspace TRENDLINE 4X4</option>
+<option value="Cla 180">Cla 180</option>
+<option value="TCross ">TCross </option>
+<option value="NIVUS ">NIVUS </option>
+<option value="T-CROSS ">T-CROSS </option>
+<option value="León ">Le&#243;n </option>
+<option value="leon ">leon </option>
+<option value="hillux ">hillux </option>
+<option value=" Sandero Life"> Sandero Life</option>
+<option value="Fiesta titanium">Fiesta titanium</option>
+<option value="Mercedes Benz Clase CLA 200">Mercedes Benz Clase CLA 200</option>
+<option value=" Ford Edge Titanium"> Ford Edge Titanium</option>
+<option value="Río sedan Vibrant">R&#237;o sedan Vibrant</option>
+<option value="Kia Rio Ub Ex ">Kia Rio Ub Ex </option>
+<option value="SCALA ">SCALA </option>
+<option value="3 hatchback touring 2.0 AT">3 hatchback touring 2.0 AT</option>
+<option value="C200 ">C200 </option>
+<option value="Korando		">Korando		</option>
+<option value="B180">B180</option>
+<option value=" Picanto "> Picanto </option>
+<option value="Onix turno">Onix turno</option>
+<option value=" xtrail, advance"> xtrail, advance</option>
+<option value="sandero gt line ">sandero gt line </option>
+<option value="Onix Turbo LTZ	">Onix Turbo LTZ	</option>
+<option value="Jeep Compass Longitude">Jeep Compass Longitude</option>
+<option value="AUDI A3 Sedán TFSI S-Tronic Ambition">AUDI A3 Sed&#225;n TFSI S-Tronic Ambition</option>
+<option value="A3 Sedan">A3 Sedan</option>
+<option value="Arona">Arona</option>
+<option value="Kia Picanto zenith">Kia Picanto zenith</option>
+<option value="Renault Logan 2022">Renault Logan 2022</option>
+<option value="Hashback lt mt">Hashback lt mt</option>
+<option value="Chevrolet Beat 1.2 LT ">Chevrolet Beat 1.2 LT </option>
+<option value=" joy "> joy </option>
+<option value="A1 ">A1 </option>
+<option value="2  	">2  	</option>
+<option value="Cx-30 	">Cx-30 	</option>
+<option value="Nissan Qashqai Exclusive Aut ">Nissan Qashqai Exclusive Aut </option>
+<option value="cherokee Limited ">cherokee Limited </option>
+<option value="renault sandero ">renault sandero </option>
+<option value="i20  ">i20  </option>
+<option value="TIGUAN 7 PUESTOS">TIGUAN 7 PUESTOS</option>
+<option value="Beattle ">Beattle </option>
+<option value=" Cruze  Ls"> Cruze  Ls</option>
+<option value="VENTO ">VENTO </option>
+<option value="3 hibrido">3 hibrido</option>
+<option value="Kicsk 	">Kicsk 	</option>
+<option value="CX5 grand ">CX5 grand </option>
+<option value="SONIC 	">SONIC 	</option>
+<option value="Chevrolet aveo Puertas Aire Acondicionado">Chevrolet aveo Puertas Aire Acondicionado</option>
+<option value="Citroen C4 Cactus ">Citroen C4 Cactus </option>
+<option value="picanto XLINE">picanto XLINE</option>
+<option value="Megane">Megane</option>
+<option value="Río Spice">R&#237;o Spice</option>
+<option value="PICANTO X-LINE">PICANTO X-LINE</option>
+<option value="Corolla Cross">Corolla Cross</option>
+<option value="EXPLORER 	">EXPLORER 	</option>
+<option value="Spark gt full equipo">Spark gt full equipo</option>
+<option value="HYUNDAI ">HYUNDAI </option>
+<option value="CLIO II">CLIO II</option>
+<option value="BT50">BT50</option>
+<option value="VERSA EXCLUSIVE">VERSA EXCLUSIVE</option>
+<option value="Chevrolet Sail 1.4 LTZ Sport ">Chevrolet Sail 1.4 LTZ Sport </option>
+<option value="Chevrolet Onix lt turbo ">Chevrolet Onix lt turbo </option>
+<option value="Colorado ">Colorado </option>
+<option value="TWINGO ">TWINGO </option>
+<option value="Seltos">Seltos</option>
+<option value="-Logan Expresion">-Logan Expresion</option>
+<option value="spark gt	">spark gt	</option>
+<option value="Volkswagen voyage trendline">Volkswagen voyage trendline</option>
+<option value="Allá new Tucson">All&#225; new Tucson</option>
+<option value="FORTUNER">FORTUNER</option>
+<option value="Fiesta Titanium hatchback">Fiesta Titanium hatchback</option>
+<option value=" TRACKER"> TRACKER</option>
+<option value="Baleno	">Baleno	</option>
+<option value="Ecospor ">Ecospor </option>
+<option value="PICANTO EMOTION">PICANTO EMOTION</option>
+<option value="Ranger">Ranger</option>
+<option value=" NEW JETTA "> NEW JETTA </option>
+<option value="Polar ">Polar </option>
+<option value="Veloster">Veloster</option>
+<option value="Jetta highline">Jetta highline</option>
+<option value="120i">120i</option>
+<option value="320i F30 standard">320i F30 standard</option>
+<option value="Vogage ">Vogage </option>
+<option value="ECOSPORT	">ECOSPORT	</option>
+<option value="SWIFT 	 ">SWIFT 	 </option>
+<option value="120 i hb full - 2.000 cc doble turbo">120 i hb full - 2.000 cc doble turbo</option>
+<option value="208">208</option>
+<option value="Hyundai Creta ">Hyundai Creta </option>
+<option value="Renault Kwid Icónico">Renault Kwid Ic&#243;nico</option>
+<option value="Citroen C4 Cactus Shine">Citroen C4 Cactus Shine</option>
+<option value="stonic ">stonic </option>
+<option value="New Korando C">New Korando C</option>
+<option value="Logan zen ">Logan zen </option>
+<option value="Stepway Zen 1.6 ">Stepway Zen 1.6 </option>
+<option value="Sonic sedan">Sonic sedan</option>
+<option value="New Sandero Expression">New Sandero Expression</option>
+<option value="201">201</option>
+<option value="Publico">Publico</option>
+<option value="4x4 Diesel">4x4 Diesel</option>
+<option value="Renault Duster 1.3T Intens 4x4">Renault Duster 1.3T Intens 4x4</option>
+<option value="Logan life plus">Logan life plus</option>
+<option value="PICKUP DOBLE CAB DUSTER  4X2">PICKUP DOBLE CAB DUSTER  4X2</option>
+<option value="voyage gol//trenkline">voyage gol//trenkline</option>
+<option value=" Sail Ls"> Sail Ls</option>
+<option value="C-Elisee">C-Elisee</option>
+<option value="Renault Clio Campus 1.2 aa">Renault Clio Campus 1.2 aa</option>
+<option value="Hyunday Santafe">Hyunday Santafe</option>
+<option value="SPARK GT LTZ ">SPARK GT LTZ </option>
+<option value="Ltz sport">Ltz sport</option>
+<option value="Jetta TSI version Highline">Jetta TSI version Highline</option>
+<option value=" jetta "> jetta </option>
+<option value="Escape titanium 4x4">Escape titanium 4x4</option>
+<option value="Gran vitara">Gran vitara</option>
+<option value="Mazda 3 touring mecanico ">Mazda 3 touring mecanico </option>
+<option value="A4 B9">A4 B9</option>
+<option value="SOUL">SOUL</option>
+<option value=" Xtrail"> Xtrail</option>
+<option value="Gran Cherokee SRT 8">Gran Cherokee SRT 8</option>
+<option value="Chevrolet Spark life">Chevrolet Spark life</option>
+<option value="Nissan Kicks Advance Aut ">Nissan Kicks Advance Aut </option>
+<option value="Ford Ecosport Se 1.5L">Ford Ecosport Se 1.5L</option>
+<option value="EXPLORER ">EXPLORER </option>
+<option value="Volkswagen Polo trendline">Volkswagen Polo trendline</option>
+<option value="2013">2013</option>
+<option value="Fiesta HB">Fiesta HB</option>
+<option value="Sportage desire">Sportage desire</option>
+<option value="TIGUAN ">TIGUAN </option>
+<option value="C4 ">C4 </option>
+<option value="Qasqui ">Qasqui </option>
+<option value="VIRTUS 	">VIRTUS 	</option>
+<option value="FIESTA 		 ">FIESTA 		 </option>
+<option value="swift ">swift </option>
+<option value="3 HB grand touring">3 HB grand touring</option>
+<option value="Clio style ">Clio style </option>
+<option value="Street ">Street </option>
+<option value="Honda crv 2.4">Honda crv 2.4</option>
+<option value="DS3">DS3</option>
+<option value="T cross ">T cross </option>
+<option value="Onix 		">Onix 		</option>
+<option value="Compass">Compass</option>
+<option value="Nissan Versa">Nissan Versa</option>
+<option value="Renault Duster, Dakar II,">Renault Duster, Dakar II,</option>
+<option value="Zenith 1.25 Hatchback Manual">Zenith 1.25 Hatchback Manual</option>
+<option value="KIA Soluto Desire 1.4 Sedan Manual">KIA Soluto Desire 1.4 Sedan Manual</option>
+<option value="new tucson">new tucson</option>
+<option value="X1	">X1	</option>
+<option value="JOY	">JOY	</option>
+<option value="BEAT LT">BEAT LT</option>
+<option value="Ssangyong Korando">Ssangyong Korando</option>
+<option value="Chevrolet Sonic Corto Manual">Chevrolet Sonic Corto Manual</option>
+<option value="Tiger ">Tiger </option>
+<option value="Eclipse ">Eclipse </option>
+<option value="cx5 Gran touring">cx5 Gran touring</option>
+<option value="Aveo emotion">Aveo emotion</option>
+<option value="eco spor">eco spor</option>
+<option value="BRONCO SPORT ">BRONCO SPORT </option>
+<option value="Mobi	">Mobi	</option>
+<option value="Clio style Hachback">Clio style Hachback</option>
+<option value="Dynamique 2.0 4x2 Aut Dakar">Dynamique 2.0 4x2 Aut Dakar</option>
+<option value="captiva">captiva</option>
+<option value="Renault Logan Intens Aut ">Renault Logan Intens Aut </option>
+<option value="Nissan versa Ad">Nissan versa Ad</option>
+<option value="HB20X">HB20X</option>
+<option value="LOGAN  FULL ">LOGAN  FULL </option>
+<option value="Q3 1.4TFSI SPORTLINE ">Q3 1.4TFSI SPORTLINE </option>
+<option value="volkswagen Tredline AT">volkswagen Tredline AT</option>
+<option value="5">5</option>
+<option value="2022">2022</option>
+<option value="Audi A3 1.8 tfsi s-tronic sedan">Audi A3 1.8 tfsi s-tronic sedan</option>
+<option value="Kia sportage lx Mecánica 4x2">Kia sportage lx Mec&#225;nica 4x2</option>
+<option value="tracker 	">tracker 	</option>
+<option value="CAPTIVA LS FWD ">CAPTIVA LS FWD </option>
+<option value=" picanto xline "> picanto xline </option>
+<option value="Suzuki Celerio">Suzuki Celerio</option>
+<option value=" 2 Prime Hatchback"> 2 Prime Hatchback</option>
+<option value=" Sailt "> Sailt </option>
+<option value="1 ">1 </option>
+<option value="Swift Hibrido 	">Swift Hibrido 	</option>
+<option value=" Voyage "> Voyage </option>
+<option value="Sail Ltz Full Equipo">Sail Ltz Full Equipo</option>
+<option value="Kwid- zed">Kwid- zed</option>
+<option value="New Gol">New Gol</option>
+<option value="Fiesta Sportback ">Fiesta Sportback </option>
+<option value="FIESTA TITANIUM SEDAN">FIESTA TITANIUM SEDAN</option>
+<option value="Chevrolet Spark">Chevrolet Spark</option>
+<option value="Mazda 3 2.0 Sedan Touring Aut ">Mazda 3 2.0 Sedan Touring Aut </option>
+<option value="KIA Picanto iON Xtrem 1.25 Automatico ">KIA Picanto iON Xtrem 1.25 Automatico </option>
+<option value="captiva LT 2021">captiva LT 2021</option>
+<option value="WRANGLER ">WRANGLER </option>
+<option value="ESCAPE SE ">ESCAPE SE </option>
+<option value="Ecospot">Ecospot</option>
+<option value="tida">tida</option>
+<option value="Logan Life 1.6 Sedan Manual">Logan Life 1.6 Sedan Manual</option>
+<option value="sedan">sedan</option>
+<option value="rio hatchback">rio hatchback</option>
+<option value="ACTIVE">ACTIVE</option>
+<option value="2 sedan Grand Touring Mecanico 6 air bags">2 sedan Grand Touring Mecanico 6 air bags</option>
+<option value="Volkswagen virtus Confortline">Volkswagen virtus Confortline</option>
+<option value="Escape ">Escape </option>
+<option value="1.8 Desing Mecanico OPTRA">1.8 Desing Mecanico OPTRA</option>
+<option value="Nissan New Versa 1.6 Aut F.E ">Nissan New Versa 1.6 Aut F.E </option>
+<option value="Versa advance">Versa advance</option>
+<option value="Renault Logan Life 1.6  ">Renault Logan Life 1.6  </option>
+<option value="gt5">gt5</option>
+<option value="New CX5">New CX5</option>
+<option value="Golf tsi">Golf tsi</option>
+<option value=" Nivus "> Nivus </option>
+<option value="  CX9 ">  CX9 </option>
+<option value="SPARK LIFE ">SPARK LIFE </option>
+<option value="3 hatchback">3 hatchback</option>
+<option value="Logan expressio">Logan expressio</option>
+<option value="Kia Rio sedan">Kia Rio sedan</option>
+<option value="Sportage  4x2">Sportage  4x2</option>
+<option value="Travers">Travers</option>
+<option value=" aveo "> aveo </option>
+<option value="TIIDA 	">TIIDA 	</option>
+<option value="SANDERO 	">SANDERO 	</option>
+<option value="HAVAL H6 ALL NEW SUPREME">HAVAL H6 ALL NEW SUPREME</option>
+<option value="Logan expresión life+">Logan expresi&#243;n life+</option>
+<option value="Optra 1.6 mecanico ">Optra 1.6 mecanico </option>
+<option value="Nissan Versa Advance">Nissan Versa Advance</option>
+<option value="Sail ls aire">Sail ls aire</option>
+<option value="3 SEDAN">3 SEDAN</option>
+<option value="3 GT LX">3 GT LX</option>
+<option value="style ">style </option>
+<option value="FLUENCE ">FLUENCE </option>
+<option value="Renault Sandero 1.6 Expression Aire Acondicionado ">Renault Sandero 1.6 Expression Aire Acondicionado </option>
+<option value="Chevrolet Aveo 1.4 Emotion 4 Puertas Automatic ">Chevrolet Aveo 1.4 Emotion 4 Puertas Automatic </option>
+<option value="Polo">Polo</option>
+<option value="VITARA ">VITARA </option>
+<option value="Q3 AMBITION ">Q3 AMBITION </option>
+<option value="Duster 		">Duster 		</option>
+<option value="MEGANEE 2 ">MEGANEE 2 </option>
+<option value="Sandero expresión">Sandero expresi&#243;n</option>
+<option value="Aveo Family 1.5 sin AA">Aveo Family 1.5 sin AA</option>
+<option value="q2 ">q2 </option>
+<option value="SPARK LIFE hatchback">SPARK LIFE hatchback</option>
+<option value="Gt Full Eqp SPARK">Gt Full Eqp SPARK</option>
+<option value="Kia Soluto">Kia Soluto</option>
+<option value="Renault Duster Dynamique 2.0 4x2 Mecanica ">Renault Duster Dynamique 2.0 4x2 Mecanica </option>
+<option value=" Volkswagen Tiguan Higline DSG "> Volkswagen Tiguan Higline DSG </option>
+<option value="celerio ">celerio </option>
+<option value="Volkswagen Fox Xtreme ">Volkswagen Fox Xtreme </option>
+<option value="STEPWAY ">STEPWAY </option>
+<option value="Mazda 3 Grand touring lx">Mazda 3 Grand touring lx</option>
+<option value="Sail Ls AA">Sail Ls AA</option>
+<option value="Compass 2.4 Sport">Compass 2.4 Sport</option>
+<option value="chevrolet equinox LT ">chevrolet equinox LT </option>
+<option value=" Sail LTZ "> Sail LTZ </option>
+<option value="Volkswagen Tcross confortline ">Volkswagen Tcross confortline </option>
+<option value="C 180 ">C 180 </option>
+<option value="Grand Cherokee ">Grand Cherokee </option>
+<option value=" duster Dakar II"> duster Dakar II</option>
+<option value="cross ">cross </option>
+<option value="Mazda 3 Prime Mecánico">Mazda 3 Prime Mec&#225;nico</option>
+<option value="kwid zen ">kwid zen </option>
+<option value="Nissan New Versa Advance Aut">Nissan New Versa Advance Aut</option>
+<option value="Mazda CX9 ">Mazda CX9 </option>
+<option value="KANGOO">KANGOO</option>
+<option value="RAM 700 ">RAM 700 </option>
+<option value="Cx 5">Cx 5</option>
+<option value="ESCAPE SE FULL EQUIPO ">ESCAPE SE FULL EQUIPO </option>
+<option value="Volkswagen Nivus Highline">Volkswagen Nivus Highline</option>
+<option value="Kia Sportage vibrant ">Kia Sportage vibrant </option>
+<option value="Kia Cerato forte HB ">Kia Cerato forte HB </option>
+<option value="Chevrolet Sail 1.4 LS Mecanico ">Chevrolet Sail 1.4 LS Mecanico </option>
+<option value="Creta premium mecanico">Creta premium mecanico</option>
+<option value="Qasqhai  ">Qasqhai  </option>
+<option value="Bronco ">Bronco </option>
+<option value="ONIX	">ONIX	</option>
+<option value=" S-cross GL	"> S-cross GL	</option>
+<option value="CX-5   TOURING ">CX-5   TOURING </option>
+<option value="sonic sedan lt">sonic sedan lt</option>
+<option value="KIA Picanto Emotion  HB ">KIA Picanto Emotion  HB </option>
+<option value="Captiva 		">Captiva 		</option>
+<option value="Logan 1.6 Dynamique">Logan 1.6 Dynamique</option>
+<option value="alfa romeo">alfa romeo</option>
+<option value="Renault Sandero exclusive">Renault Sandero exclusive</option>
+<option value="Ford fiesta titanium hatchback">Ford fiesta titanium hatchback</option>
+<option value="F150 ">F150 </option>
+<option value="Cruze LT ">Cruze LT </option>
+<option value="Suzuki Swift 1.2 sedan GL ">Suzuki Swift 1.2 sedan GL </option>
+<option value="XL7 ">XL7 </option>
+<option value=" GOL ,"> GOL ,</option>
+<option value="scroos">scroos</option>
+<option value="fiat uno way">fiat uno way</option>
+<option value="Ram ">Ram </option>
+<option value="santa fe ">santa fe </option>
+<option value="X1 ">X1 </option>
+<option value="March">March</option>
+<option value="Kia Rio R">Kia Rio R</option>
+<option value="Glory ">Glory </option>
+<option value="VERSA 	">VERSA 	</option>
+<option value="Swfit ">Swfit </option>
+<option value="Tripavision">Tripavision</option>
+<option value="oroch ">oroch </option>
+<option value="Cobalt">Cobalt</option>
+<option value="Renault logan autentique ">Renault logan autentique </option>
+<option value="KIA Picanto 1.2 Mecanico Aire Acondicionado ">KIA Picanto 1.2 Mecanico Aire Acondicionado </option>
+<option value="Nissan March Sense Aut ">Nissan March Sense Aut </option>
+<option value="Sail ls sin aire">Sail ls sin aire</option>
+<option value="PICANTO ION EXTREM">PICANTO ION EXTREM</option>
+<option value="spart GT">spart GT</option>
+<option value="DUSTER dinamique ">DUSTER dinamique </option>
+<option value="accent advance ">accent advance </option>
+<option value="HILUX ">HILUX </option>
+<option value="kiwd iconi">kiwd iconi</option>
+<option value=" cx5, "> cx5, </option>
+<option value="Spark ">Spark </option>
+<option value="Volkswagen Jetta RLine ">Volkswagen Jetta RLine </option>
+</select>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <select class="form-control form-control-sm" id="Desistidas_Color" name="Desistidas_Color"><option selected="selected" value="0">-- Color --</option>
+<option value="Valor estimado para su vehículo? 42.000.000">Valor estimado para su veh&#237;culo? 42.000.000</option>
+<option value="aluminio">aluminio</option>
+<option value="gris plata">gris plata</option>
+<option value="vino tinto">vino tinto</option>
+<option value="ROJO DIAMANTE">ROJO DIAMANTE</option>
+<option value="gris comet">gris comet</option>
+<option value="BLANCO">BLANCO</option>
+<option value="negro">negro</option>
+<option value="NARANJA">NARANJA</option>
+<option value="PLATEADO">PLATEADO</option>
+<option value="negra ">negra </option>
+<option value="ROJO FUEGO ">ROJO FUEGO </option>
+<option value="morado">morado</option>
+<option value="19400">19400</option>
+<option value="Gris platino metalico">Gris platino metalico</option>
+<option value="blaanca">blaanca</option>
+<option value="azul">azul</option>
+<option value="Plata">Plata</option>
+<option value="	">	</option>
+<option value="VINOTINTO">VINOTINTO</option>
+<option value="grey ">grey </option>
+<option value=""></option>
+<option value="blanco negro">blanco negro</option>
+<option value="gris plata negro">gris plata negro</option>
+<option value=""></option>
+<option value="gris perla ">gris perla </option>
+<option value="gris quartz">gris quartz</option>
+<option value="Grand Touring LX ">Grand Touring LX </option>
+<option value="beige">beige</option>
+<option value="blanco y negro">blanco y negro</option>
+<option value="blanca">blanca</option>
+<option value="Rojo ">Rojo </option>
+<option value="gris cassiope">gris cassiope</option>
+<option value="gris oscuro">gris oscuro</option>
+<option value="gris uscuro">gris uscuro</option>
+<option value="verde">verde</option>
+<option value="1">1</option>
+<option value="gris raton">gris raton</option>
+<option value="gris">gris</option>
+<option value="2019	">2019	</option>
+<option value="gris estrella">gris estrella</option>
+<option value="roja ">roja </option>
+<option value="machine gray">machine gray</option>
+</select>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-3">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="basic-addon1">De:</span>
+                                                    </div>
+                                                    <input name="DesistidaDesde" id="DesistidaDesde" class="form-control" type="text" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="basic-addon1">a:</span>
+                                                    </div>
+                                                    <input name="DesistidaHasta" id="DesistidaHasta" class="form-control" type="text" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md3">
+                                                <button id="ok" type="button" class="btn btn-primary" onclick="FiltrarDesistidas();">Buscar</button>
+                                                <button id="rDesistidas" class="btn btn-secondary"><i class="material-icons">cached</i></button>
+                                                <button type="submit" value="Desistidas" name="tabla" id="exportDesistidas" class="btn btn-secondary"><i class="material-icons">description</i></button>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control" placeholder="Search" id="Desistida_Cadena" name="Desistida_Cadena">
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-outline-secondary" type="button" onclick="FiltrarDesistidas();"><i class="tiny material-icons">search</i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <table id="tableDesistidas"
+                                               data-toolbar="#toolbar3"
+                                               data-toggle="table"
+                                               data-height="800"
+                                               data-pagination="true"
+                                               data-side-pagination="server"
+                                               data-sort-class="table-active"
+                                               data-sortable="true"
+                                               data-show-columns="true"
+                                               data-show-columns-search="true">
+                                            <thead class="table100-head table100 ver3 morado">
+                                                <tr>
+                                                    <th data-field="Detalle" data-sortable="true">Detalle</th>
+                                                    <th data-field="FechaIngreso" data-sortable="true">Fecha Captura</th>
+                                                    <th data-field="Marca" data-sortable="true">Marca</th>
+                                                    <th data-field="Modelo" data-sortable="true">Modelo</th>
+                                                    <th data-field="Version" data-sortable="true">Version</th>
+                                                    <th data-field="Placa" data-sortable="true">Placa</th>
+                                                    <th data-field="Kilometraje" data-sortable="true">Kilometraje</th>
+                                                    <th data-field="Color" data-sortable="true">Color</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody style="background-color:white;"></tbody>
+                                        </table>
+                                </div>
+
+                                <div class="widget-list" id="Concretadas">
+                                    <div id="toolbar4">
+                                        
+                                        <div class="form-row">
+                                            <div class="form-group col-md-3">
+                                                <select class="form-control form-control-sm" id="Concretadas_OrigenIngreso" name="Concretadas_OrigenIngreso"><option selected="selected" value="0">-- Origen Lead --</option>
+<option value="LLAMADA CONMUTADOR">LLAMADA CONMUTADOR</option>
+<option value="LLAMADA CELULAR">LLAMADA CELULAR</option>
+<option value="LLAMADA/CARROYA">LLAMADA/CARROYA</option>
+<option value="LLAMADA/TUCARRO">LLAMADA/TUCARRO</option>
+<option value="LLAMADA/OLX">LLAMADA/OLX</option>
+<option value="CARROYA">CARROYA</option>
+<option value="TUCARRO">TUCARRO</option>
+<option value="ESTRENAR CARRO">ESTRENAR CARRO</option>
+<option value="OLX">OLX</option>
+<option value="PÁGINA WEB">P&#193;GINA WEB</option>
+<option value="CAMPAÑA PAGA FACEBOOK">CAMPA&#209;A PAGA FACEBOOK</option>
+<option value="CAMPAÑA ORGÁNICA FACEBOOK">CAMPA&#209;A ORG&#193;NICA FACEBOOK</option>
+<option value="INSTAGRAM">INSTAGRAM</option>
+<option value="CAMPAÑA FINANCIERA">CAMPA&#209;A FINANCIERA</option>
+<option value="CONVENIO">CONVENIO</option>
+<option value="WHATSAPP MAZDA">WHATSAPP MAZDA</option>
+<option value="WHATSAPP DIRECTO USADOS">WHATSAPP DIRECTO USADOS</option>
+<option value="WHATSAPP HYUNDAI">WHATSAPP HYUNDAI</option>
+<option value="Google Search">Google Search</option>
+<option value="WHATSAPP COMPRAS USADO">WHATSAPP COMPRAS USADO</option>
+<option value="TU USADO FINANDINA">TU USADO FINANDINA</option>
+<option value="CORREO">CORREO</option>
+<option value="Retoma mazda">Retoma mazda</option>
+<option value="Retoma hyundai">Retoma hyundai</option>
+<option value="Olx">Olx</option>
+<option value="Retoma usados">Retoma usados</option>
+<option value="Compra Morato">Compra Morato</option>
+<option value="Usados 127">Usados 127</option>
+<option value="Compra 127">Compra 127</option>
+<option value="Renting Colombia">Renting Colombia</option>
+<option value="Consignado">Consignado</option>
+<option value="Referido">Referido</option>
+<option value="Rebold">Rebold</option>
+<option value="PÁGINA WEB FORMULARIO">P&#193;GINA WEB FORMULARIO</option>
+<option value="Finanzauto">Finanzauto</option>
+</select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <select class="form-control form-control-sm" id="Concretadas_Comprador" name="Concretadas_Comprador"><option selected="selected" value="0">-- Comprador --</option>
+<option value="Carlos Peña">Carlos Pe&#241;a</option>
+<option value="Elkin Solano">Elkin Solano</option>
+<option value="German Caro">German Caro</option>
+<option value="William Rosas">William Rosas</option>
+<option value="Oscar Ospina">Oscar Ospina</option>
+<option value="Mario Ramírez">Mario Ram&#237;rez</option>
+<option value="Felipe Carrillo">Felipe Carrillo</option>
+<option value="Sanly Rojas">Sanly Rojas</option>
+<option value="CARLOS MORENO">CARLOS MORENO</option>
+<option value="Heidy Medina">Heidy Medina</option>
+</select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <select class="form-control form-control-sm" id="Concretadas_Respuesta" name="Concretadas_Respuesta"><option selected="selected" value="0">-- Respuesta --</option>
+<option value="Compra Madiautos">Compra Madiautos</option>
+<option value="Compra Tercero">Compra Tercero</option>
+<option value="Retoma N Mazda">Retoma N Mazda</option>
+<option value="Retoma Usado">Retoma Usado</option>
+</select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <select class="form-control form-control-sm" id="Concretadas_Estado" name="Concretadas_Estado"><option selected="selected" value="0">-- Estado --</option>
+<option value="Compra Finalizada">Compra Finalizada</option>
+<option value="Desistido">Desistido</option>
+<option value="Peritaje">Peritaje</option>
+<option value="Seguimiento Compra">Seguimiento Compra</option>
+<option value="Sigue Proceso">Sigue Proceso</option>
+</select>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-3">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="basic-addon1">De:</span>
+                                                    </div>
+                                                    <input name="ConcretadaDesde" id="ConcretadaDesde" class="form-control" type="text" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="basic-addon1">a:</span>
+                                                    </div>
+                                                    <input name="ConcretadaHasta" id="ConcretadaHasta" class="form-control" type="text" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md3">
+                                                <button id="ok" type="button" class="btn btn-primary" onclick="FiltrarConcretadas();">Buscar</button>
+                                                <button id="rConcretadas" class="btn btn-secondary"><i class="material-icons">cached</i></button>
+                                                <button type="submit" value="Concretadas" name="tabla" id="exportConcretadas" class="btn btn-secondary"><i class="material-icons">description</i></button>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control" placeholder="Search" id="Concretada_Cadena" name="Concretada_Cadena">
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-outline-secondary" type="button" onclick="FiltrarConcretadas();"><i class="tiny material-icons">search</i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <table id="tableConcretadas"
+                                               data-toolbar="#toolbar4"
+                                               data-toggle="table"
+                                               data-height="800"
+                                               data-pagination="true"
+                                               data-side-pagination="server"
+                                               data-sort-class="table-active"
+                                               data-sortable="true"
+                                               data-show-columns="true"
+                                               data-show-columns-search="true">
+                                            <thead class="table100-head table100 ver3 bg-warning">
+                                                <tr>
+                                                    <th data-field="Detalle">Detalle</th>
+                                                    <th data-field="FechaIngreso" data-sortable="true">Fecha Ingreso</th>
+                                                    <th data-field="OrigenIngreso" data-sortable="true">Origen Ingreso</th>
+                                                    <th data-field="FechaCompra" data-sortable="true">Fecha Compra</th>
+                                                    <th data-field="Cliente" data-sortable="true">Cliente</th>
+                                                    <th data-field="Documento" data-sortable="true">Documento</th>
+                                                    <th data-field="Telefono">Telefono</th>
+                                                    <th data-field="Comprador" data-sortable="true">Comprador</th>
+                                                    <th data-field="Respuesta" data-sortable="true">Respuesta</th>
+                                                    <th data-field="Estado" data-sortable="true">Estado</th>
+
+                                                    <th data-field="OfertaMadiautos" data-sortable="true">Oferta Madiautos</th>
+                                                    <th data-field="OfertaRevista" data-sortable="true">Oferta Revista</th>
+                                                    <th data-field="PretensionCliente" data-sortable="true">Pretension Cliente</th>
+                                                    <th data-field="ValorFinal" data-sortable="true">Valor Final</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody style="background-color:white;"></tbody>
+                                        </table>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>    <script>
+        var baseUrl = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+        var $tableCap = $('#tableCapturados')
+        var $tableSF = $('#tableSF')
+        var $tableDes = $('#tableDesistidas')
+        var $tableCon = $('#tableConcretadas')
+
+
+        $("#Capturados_OrigenIngreso").change(function () {
+            getData(1, 10);
+        });
+
+        $("#Capturados_Respuesta").change(function () {
+            getData(1, 10);
+        });
+
+        $("#Capturados_Estado").change(function () {
+            getData(1, 10);
+        });
+
+        $("#Capturados_Anfitrion").change(function () {
+            getData(1, 10);
+        });
+
+        $("#Capturados_Comprador").change(function () {
+            getData(1, 10);
+        });
+
+        $("#Capturados_Verificado").change(function () {
+            getData(1, 10);
+        });
+                
+        function getData(number, size) {
+            var fechaIni1 = $("#CapturaDesde").val();
+            var fechaIni= '';
+            if (fechaIni1 != '' && fechaIni1!=null)
+            {
+                var fechaIniS = fechaIni1.split("/");
+                fechaIni = fechaIniS[2] + '-' + fechaIniS[1] + '-' + fechaIniS[0];
+            }
+            
+            var fechaFin1 = $("#CapturaHasta").val();
+            var fechaFin = '';
+            if (fechaFin1 != '' && fechaFin1 != null) {
+                var fechaFinS = fechaFin1.split("/");
+                fechaFin = fechaFinS[2] + '-' + fechaFinS[1] + '-' + fechaFinS[0];
+            }
+
+            $.get(baseUrl + '/Compras/getCapturados2/?off=' + number + '&size=' + size + '&Origen=' + $("#Capturados_OrigenIngreso").val()
+                + '&Respuesta=' + $("#Capturados_Respuesta").val()
+                + '&Estado=' + $("#Capturados_Estado").val()
+                + '&Anfitrion=' + $("#Capturados_Anfitrion").val()
+                + '&Comprador=' + $("#Capturados_Comprador").val()
+                + '&Verificado=' + $("#Capturados_Verificado").val()
+                + '&FechaIni=' + fechaIni
+                + '&FechaFin=' + fechaFin
+                + '&Cadena=' + $("#Capturados_Cadena").val()
+                , {
+                offset: (number - 1) * size,
+                limit: size
+            }, function (res) {
+                $tableCap.bootstrapTable('load', res)
+            })
+        }
+
+        $("#SF_Respuesta").change(function () {
+            getDataSF(1, 10);
+        });
+
+        $("#SF_Marca").change(function () {
+            getDataSF(1, 10);
+        });
+
+        $("#SF_Modelo").change(function () {
+            getDataSF(1, 10);
+        });
+
+        $("#SF_Anio").change(function () {
+            getDataSF(1, 10);
+        });
+
+        $("#SF_Color").change(function () {
+            getDataSF(1, 10);
+        });
+
+        function getDataSF(number, size) {
+            var fechaIni1 = $("#SFDesde").val();
+            var fechaIni = '';
+            if (fechaIni1 != '' && fechaIni1 != null) {
+                var fechaIniS = fechaIni1.split("/");
+                fechaIni = fechaIniS[2] + '-' + fechaIniS[1] + '-' + fechaIniS[0];
+            }
+
+            var fechaFin1 = $("#SFHasta").val();
+            var fechaFin = '';
+            if (fechaFin1 != '' && fechaFin1 != null) {
+                var fechaFinS = fechaFin1.split("/");
+                fechaFin = fechaFinS[2] + '-' + fechaFinS[1] + '-' + fechaFinS[0];
+            }
+
+            $.get(baseUrl + '/Compras/getInventario2/?off=' + number + '&size=' + size + '&Respuesta=' + $("#SF_Respuesta").val() + '&Marca=' + $("#SF_Marca").val()
+                + '&Modelo=' + $("#SF_Modelo").val()
+                + '&Anio=' + $("#SF_Anio").val()
+                + '&Color=' + $("#SF_Color").val()
+                + '&FechaIni=' + fechaIni
+                + '&FechaFin=' + fechaFin
+                + '&Cadena=' + $("#SF_Cadena").val()
+                , {
+                offset: (number - 1) * size,
+                limit: size
+            }, function (res) {
+                $tableSF.bootstrapTable('load', res)
+            })
+        }
+
+        $("#Desistidas_Marca").change(function () {
+            getDataDes(1, 10);
+        });
+
+        $("#Desistidas_Modelo").change(function () {
+            getDataDes(1, 10);
+        });
+
+        $("#Desistidas_Color").change(function () {
+            getDataDes(1, 10);
+        });
+
+        function getDataDes(number, size) {
+            var fechaIni1 = $("#DesistidaDesde").val();
+            var fechaIni = '';
+            if (fechaIni1 != '' && fechaIni1 != null) {
+                var fechaIniS = fechaIni1.split("/");
+                fechaIni = fechaIniS[2] + '-' + fechaIniS[1] + '-' + fechaIniS[0];
+            }
+
+            var fechaFin1 = $("#DesistidaHasta").val();
+            var fechaFin = '';
+            if (fechaFin1 != '' && fechaFin1 != null) {
+                var fechaFinS = fechaFin1.split("/");
+                fechaFin = fechaFinS[2] + '-' + fechaFinS[1] + '-' + fechaFinS[0];
+            }
+
+            $.get(baseUrl + '/Compras/getDesistidas2/?off=' + number + '&size='+ size + '&Marca=' + $("#Desistidas_Marca").val()
+                + '&Modelo=' + $("#Desistidas_Modelo").val()
+                + '&Color=' + $("#Desistidas_Color").val()
+                + '&FechaIni=' + fechaIni
+                + '&FechaFin=' + fechaFin
+                + '&Cadena=' + $("#Desistida_Cadena").val()
+                , {
+                offset: (number - 1) * size,
+                limit: size
+            }, function (res) {
+                $tableDes.bootstrapTable('load', res)
+            })
+        }
+
+        $("#Concretadas_OrigenIngreso").change(function () {
+            getDataCon(1, 10);
+        });
+
+        $("#Concretadas_Comprador").change(function () {
+            getDataCon(1, 10);
+        });
+
+        $("#Concretadas_Respuesta").change(function () {
+            getDataCon(1, 10);
+        });
+
+        $("#Concretadas_Estado").change(function () {
+            getDataCon(1, 10);
+        });
+
+        function getDataCon(number, size) {
+            var fechaIni1 = $("#ConcretadaDesde").val();
+            var fechaIni = '';
+            if (fechaIni1 != '' && fechaIni1 != null) {
+                var fechaIniS = fechaIni1.split("/");
+                fechaIni = fechaIniS[2] + '-' + fechaIniS[1] + '-' + fechaIniS[0];
+            }
+
+            var fechaFin1 = $("#ConcretadaHasta").val();
+            var fechaFin = '';
+            if (fechaFin1 != '' && fechaFin1 != null) {
+                var fechaFinS = fechaFin1.split("/");
+                fechaFin = fechaFinS[2] + '-' + fechaFinS[1] + '-' + fechaFinS[0];
+            }
+
+            $.get(baseUrl + '/Compras/getConcretadas2/?off=' + number + '&size=' + size +'&Origen='+ $("#Concretadas_OrigenIngreso").val()
+                +'&Comprador=' +$("#Concretadas_Comprador").val()
+                +'&Respuesta=' +$("#Concretadas_Respuesta").val()
+                + '&Estado=' + $("#Concretadas_Estado").val()
+                + '&FechaIni=' + fechaIni
+                + '&FechaFin=' + fechaFin
+                + '&Cadena=' + $("#Concretada_Cadena").val()
+                , {
+                offset: (number - 1) * size,
+                limit: size
+            }, function (res) {
+                $tableCon.bootstrapTable('load', res)
+            })
+        }
+
+        $(function () {
+            $tableCap.on('page-change.bs.table', function (e, number, size) {
+                getData(number, size)
+            })
+            var options = $tableCap.bootstrapTable('getOptions')
+            getData(options.pageNumber, options.pageSize)
+        })
+
+        $(function () {
+            $tableSF.on('page-change.bs.table', function (e, number, size) {
+                getDataSF(number, size)
+            })
+            var options = $tableSF.bootstrapTable('getOptions')
+            getDataSF(options.pageNumber, options.pageSize)
+        })
+
+        $(function () {
+            $tableDes.on('page-change.bs.table', function (e, number, size) {
+                getDataDes(number, size)
+            })
+            var options = $tableDes.bootstrapTable('getOptions')
+            getDataDes(options.pageNumber, options.pageSize)
+        })
+
+        $(function () {
+            $tableCon.on('page-change.bs.table', function (e, number, size) {
+                getDataCon(number, size)
+            })
+            var options = $tableCon.bootstrapTable('getOptions')
+            getDataCon(options.pageNumber, options.pageSize)
+        })
+    </script>
+    
+<script>
+  $(document).ready(function() {
+      $('#dtBasicExample').DataTable( {
+          "scrollY":        "300px",
+          "scrollCollapse": true,
+          "paging":         false
+      });
+
+      $.datetimepicker.setLocale('es');
+
+      //$(".rangos").datetimepicker({
+      //    format: 'd/m/Y',
+      //    timepicker: false,
+      //});
+
+      $('#CapturaDesde').datetimepicker({
+          format: 'd/m/Y',
+          timepicker: false
+      });
+      $('#CapturaHasta').datetimepicker({
+          format: 'd/m/Y',
+          timepicker: false
+      });
+
+      $('#SFDesde').datetimepicker({
+          format: 'd/m/Y',
+          timepicker: false
+      });
+      $('#SFHasta').datetimepicker({
+          format: 'd/m/Y',
+          timepicker: false
+      });
+
+      $('#DesistidaDesde').datetimepicker({
+          format: 'd/m/Y',
+          timepicker: false
+      });
+      $('#DesistidaHasta').datetimepicker({
+          format: 'd/m/Y',
+          timepicker: false
+      });
+
+      $('#ConcretadaDesde').datetimepicker({
+          format: 'd/m/Y',
+          timepicker: false
+      });
+      $('#ConcretadaHasta').datetimepicker({
+          format: 'd/m/Y',
+          timepicker: false
+      });
+
+      $('#HistorialDesde').datetimepicker({
+          format: 'd/m/Y',
+          timepicker: false
+      });
+      $('#HistorialHasta').datetimepicker({
+          format: 'd/m/Y',
+          timepicker: false
+      });
+
+      $("#rCaptura").click(function (event) {
+          //$('#tableCapturados').bootstrapTable('refresh');
+          $('#CapturaDesde').val('');
+          $('#CapturaHasta').val('');
+      })
+
+      $("#rSF").click(function (event) {
+          $('#SFDesde').val('');
+          $('#SFHasta').val('');
+      })
+
+      $("#rDesistidas").click(function (event) {
+          $('#DesistidaDesde').val('');
+          $('#DesistidaHasta').val('');
+      })
+
+      $("#rConcretadas").click(function (event) {
+          $('#ConcretadaDesde').val('');
+          $('#ConcretadaHasta').val('');
+      })
+
+      $("#rHistorial").click(function (event) {
+          $('#HistorialDesde').val('');
+          $('#HistorialHasta').val('');
+      })
+  } );
+</script>
+<script>
+
+    //function exportar(tabla) {
+    //    var baseUrl = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+    //    console.log(tabla);
+    //    window.location = baseUrl + "/Compras/WriteDataToExcel/" + tabla;
+    //}
+
+    //function BorrarProspecto(idProspecto) {
+    //    var data = {
+    //        "IdProspecto": idProspecto,
+    //    };
+    //    var baseUrl = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+    //    var bandera = $.ajax({
+    //        type: "POST",
+    //        url: baseUrl + "/Compras/GetLeads",
+    //        data: data,
+    //        cache: false,
+    //        success: function (response) {
+    //            if (response != "1" && response != 1) {
+
+    //                swal({
+    //                    title: "¡Atención! Esta información no podra ser recuperada.",
+    //                    text: response,
+    //                    type: "warning",
+    //                    showCancelButton: true,
+    //                    confirmButtonClass: "btn-danger",
+    //                    confirmButtonText: "¡Eliminar!",
+    //                    closeOnConfirm: false
+    //                },
+    //                    function () {
+    //                        $.ajax({
+    //                            type: "POST",
+    //                            url: baseUrl + "/Compras/EliminarProspecto",
+    //                            data: data,
+    //                            cache: false,
+    //                            success: function (response) {
+    //                                swal({
+    //                                    title: "OK!",
+    //                                    text: "Toda la información del prospecto ha sido eliminada.",
+    //                                    type: "success",
+    //                                    showCancelButton: true,
+    //                                    confirmButtonClass: "btn-success",
+    //                                    confirmButtonText: "OK!",
+    //                                    closeOnConfirm: false
+    //                                },
+    //                                    function () {
+    //                                        //swal("OK!", "Toda la información del prospecto ha sido eliminada.", "success");
+    //                                        location.reload();
+    //                                    });
+    //                            },
+    //                            error: function (response) {
+    //                                swal("Oh no!", "Tuvimos un problema, por favor intente de nuevo.", "warning");
+    //                            }
+    //                        });
+    //                    });
+    //            }
+    //        },
+    //        error: function (response) {
+    //            swal("Oh no!", "Tuvimos un problema al verificar la información, por favor intente de nuevo.", "warning");
+    //        }
+    //    });
+    //}
+
+
+    function BorrarCompra(idCompra)
+    {
+        var data = {
+            "IdCompra": idCompra,
+        };
+        var baseUrl = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+        swal({
+            title: "¡Atención!",
+            text: "Esta información no podra ser recuperada.",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "¡Eliminar!",
+            closeOnConfirm: false
+        },
+            function () {
+                $.ajax({
+                    type: "POST",
+                    url: baseUrl + "/Compras/EliminarCompra",
+                    data: data,
+                    cache: false,
+                    success: function (response) {
+                        swal({
+                            title: "OK!",
+                            text: "Toda la información del prospecto ha sido eliminada.",
+                            type: "success",
+                            showCancelButton: true,
+                            confirmButtonClass: "btn-success",
+                            confirmButtonText: "OK!",
+                            closeOnConfirm: false
+                        },
+                            function () {
+                                //swal("OK!", "Toda la información del prospecto ha sido eliminada.", "success");
+                                location.reload();
+                            });
+                    },
+                    error: function (response) {
+                        swal("Oh no!", "Tuvimos un problema, por favor intente de nuevo.", "warning");
+                    }
+                });
+            });
+    }
+
+    function exportCapturados(params) {
+        var options = $('#tableCapturados').bootstrapTable('getOptions')
+        if (!options.pagination) {
+            params.limit = options.totalRows
+        }
+        return params
+    }
+
+    function exportSF(params) {
+        var options = $('#tableSF').bootstrapTable('getOptions')
+        if (!options.pagination) {
+            params.limit = options.totalRows
+        }
+        return params
+    }
+
+    function exportDesistidas(params) {
+        var options = $('#tableDesistidas').bootstrapTable('getOptions')
+        if (!options.pagination) {
+            params.limit = options.totalRows
+        }
+        return params
+    }
+
+    function exportConcretadas(params) {
+        var options = $('#tableConcretadas').bootstrapTable('getOptions')
+        if (!options.pagination) {
+            params.limit = options.totalRows
+        }
+        return params
+    }
+
+    function exportHistorial(params) {
+        var options = $('#tableHistorial').bootstrapTable('getOptions')
+        if (!options.pagination) {
+            params.limit = options.totalRows
+        }
+        return params
+    }
+
+    function FiltrarCapturados() {
+        //var ini=$('#CapturaDesde').val();
+        //var fin = $('#CapturaHasta').val();
+
+        //var results = rango(ini, fin);
+        //var array = new Array(results);
+        //$('#tableCapturados').bootstrapTable('filterBy', {
+        //    FechaIngreso: results
+        //})
+        getData(1, 10);
+    }
+
+    function FiltrarSF() {
+        //var ini = $('#SFDesde').val();
+        //var fin = $('#SFHasta').val();
+
+        //var results = rango(ini, fin);
+        ////console.log("SF:");
+        ////console.log(results);
+        //var array = new Array(results);
+        //$('#tableSF').bootstrapTable('filterBy', {
+        //    FechaIngreso: results
+        //})
+        getDataSF(1, 10);
+    }
+
+    function FiltrarDesistidas() {
+        //var ini = $('#DesistidaDesde').val();
+        //var fin = $('#DesistidaHasta').val();
+
+        //var results = rango(ini, fin);
+        ////console.log("Desistidas:");
+        ////console.log(results);
+        //var array = new Array(results);
+        //$('#tableDesistidas').bootstrapTable('filterBy', {
+        //    FechaIngreso: results
+        //})
+        getDataDes(1,10);
+    }
+
+    function FiltrarConcretadas() {
+        //var ini = $('#ConcretadaDesde').val();
+        //var fin = $('#ConcretadaHasta').val();
+
+        //var results = rango(ini, fin);
+        ////console.log("Concretadas:");
+        ////console.log(results);
+        //var array = new Array(results);
+
+        //$('#tableConcretadas').bootstrapTable('filterBy', {
+        //    FechaIngreso: results
+        //})
+        getDataCon(1,10);
+    }
+
+    function FiltrarHistorial() {
+        var ini = $('#HistorialDesde').val();
+        var fin = $('#HistorialHasta').val();
+
+        var results = rango(ini, fin);
+        //console.log("Historial:");
+        //console.log(results);
+        var array = new Array(results);
+        $('#tableHistorial').bootstrapTable('filterBy', {
+            FechaIngreso: results
+        })
+    }
+
+    function rango(ini, fin) {
+        var splitIni = ini.split('/');
+        var fInicio = splitIni[1] + '/' + splitIni[0] + '/' + splitIni[2];
+
+        var splitFin = fin.split('/');
+        var fFin = splitFin[1] + '/' + splitFin[0] + '/' + splitFin[2];
+
+        var fechaInicio = new Date(fInicio);
+        var fechaFin = new Date(fFin);
+        var fechas = [];
+
+        while (fechaFin.getTime() >= fechaInicio.getTime()) {
+            var dia = fechaInicio.getDate();
+            var mes = (fechaInicio.getMonth() + 1);
+
+            var d;
+            var m;
+            if (dia<10)
+            { d = "0" + dia; }
+            else { d = dia;}
+
+            if(mes<10)
+            {m = "0" + mes;}
+            else { m = mes;}
+            fechas.push(d+ '/' + m + '/' + fechaInicio.getFullYear());
+            fechaInicio.setDate(fechaInicio.getDate() + 1);
+        }
+
+        console.log(fechas)
+        //var arreglo = fechas.join(',')
+        //arreglo = "[" + arreglo + "]"
+        //console.log(arreglo);
+        return fechas;
+    }
+</script>
+
+
+
+        <hr />
+        <footer>
+            <p>&copy; 2023 - Capital Network</p>
+        </footer>
+    </div>
+
+    
+    
+    <script src="/bundles/jqueryval?v=hEGG8cMxk9p0ncdRUOJ-CnKN7NezhnPnWIvn6REucZo1"></script>
+
+
+</body>
+</html>

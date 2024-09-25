@@ -1,0 +1,38 @@
+<!-- Title -->
+<nav class="navbar navbar-light border-bottom pt-4">
+  <div class="container-fluid">
+    <span class="navbar-brand mb-0 h1">
+      {% block slide_title %}
+      {% endblock %}
+    </span>
+  </div>
+</nav>
+
+<!-- Body -->
+<sbody class="position-absolute top-50 start-50 translate-middle container w-100 text-center">
+  <div class="row">
+    <div class="col-12 {% block slide-class %} col-lg-5 {% endblock %} mx-auto">
+
+      <!-- Subtitle -->
+      <h6 class="slide-subtitle">
+        {% block slide_subtitle %}
+        {% endblock %}
+      </h6>
+
+      <hr>
+
+      <!-- Message -->
+      <p class="slide-message">
+        {% block slide_message %}
+        {% endblock %}
+      </p>
+
+      <!-- Content -->
+      <div class="slide-content {% block slide_content_css %} text-start {% endblock %}">
+        {% block slide_content %}
+        {% endblock %}
+      </div>
+
+    </div>
+  </div>
+</sbody>

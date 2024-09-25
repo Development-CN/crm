@@ -1,0 +1,88 @@
+<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+    <a class="navbar-brand">Lead</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="navbarSupportedContent" class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+                {% if user.groups.get|stringformat:"s" == "Asesor" or user.groups.get|stringformat:"s" == "Anfitrion" or user.groups.get|stringformat:"s" == "Admin" %}
+                <a class="nav-link" href="{% url 'dashboards:captura' %}" role="button" aria-haspopup="true" aria-expanded="false">Captura prospectos</a>
+                {% else %}
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Captura prospectos</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'dashboards:captura' %}">Venta</a>
+                    <a class="dropdown-item" href="/Compras/CompraCaptura">Compra</a>
+                </div>
+                {% endif %}
+            </li>
+            {% if user.groups.get|stringformat:"s" != "Asesor" %}
+                {% if user.groups.get|stringformat:"s" == "Anfitrion" or user.groups.get|stringformat:"s" == "Admin" %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Operativo Anfitrion</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'dashboards:operativo_anfitrion' %}">Venta</a>
+                    </div>
+                </li>
+                {% else %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Operativo Anfitrion</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'dashboards:operativo_anfitrion' %}">Venta</a>
+                        <a class="dropdown-item" href="/Compras/OperativoAnfitrionCompras">Compra</a>
+                        <a class="dropdown-item" href="/SolicitudPeritaje/SeguimientoAnfitrion">Solicitudes de Peritaje</a>
+                    </div>
+                </li>
+                {% endif %}
+            {% endif %}
+
+                <li><a class="nav-link" href="{% url 'dashboards:operativo_asesor' %}">Operativo Asesor</a></li>
+
+            {% if user.groups.get|stringformat:"s" != "Asesor" and user.groups.get|stringformat:"s" != "Anfitrion" and user.groups.get|stringformat:"s" != "Admin" %}
+                <li><a class="nav-link" href="/Compras/OperativoComprador">Operativo Comprador</a></li>
+            {% endif %}
+            {% if user.groups.get|stringformat:"s" != "Asesor" and user.groups.get|stringformat:"s" != "Anfitrion" %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reportes</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'dashboards:reportes' %}">Venta</a>
+                        {% if user.groups.get|stringformat:"s" != "Admin" %}
+                        <a class="dropdown-item" href="/Compras/ReportesCompras">Compra</a>
+                        <a class="dropdown-item" href="/SolicitudPeritaje/ReportesSolicitudesPeritaje">Solicitudes Peritaje</a>
+                        {% endif %}
+                        <a class="dropdown-item" href="{% url 'dashboards:tiempos' %}">Tiempos</a>
+                        <a class="dropdown-item" href="{% url 'dashboards:anulados' %}">Anulados</a>
+                        <a class="dropdown-item" href="{% url 'dashboards:reportes_eventos' %}">Eventos</a>
+                    </div>
+                </li>
+            {% elif user.groups.get|stringformat:"s" == "Anfitrion" %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reportes</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'dashboards:reportes' %}">Venta</a>
+                    </div>
+                </li>
+            {% endif %}
+            {% if user.groups.get|stringformat:"s" != "Anfitrion" %}
+            <li><a class="nav-link" href="{% if calendario_general %}{% url 'dashboards:calendar' %}{% else %}{% url 'dashboards:calendar_detail' asesor_actual.pk %}{% endif %}">Calendario</a></li>
+            {% endif %}
+            {% if user.groups.get|stringformat:"s" != "Asesor" and user.groups.get|stringformat:"s" != "Anfitrion" and user.groups.get|stringformat:"s" != "Admin" %}
+            <li><a class="nav-link" href="/Compras/OperativoPerito">Operativo Perito</a></li>
+            {% endif %}
+            {% if user.groups.get|stringformat:"s" != "Asesor" and user.groups.get|stringformat:"s" != "Anfitrion" and user.groups.get|stringformat:"s" != "Admin" %}
+            <li><a class="nav-link" href="/Compras/OperativoTaller">Operativo Taller</a></li>
+            {% endif %}
+            {% if user.groups.get|stringformat:"s" != "Asesor" and user.groups.get|stringformat:"s" != "Anfitrion" %}
+            <li><a class="nav-link" href="http://capnet2.ddns.net:5007/" target="_blank">KPI's</a></li>
+            {% endif %}
+        </ul>
+        <div class="form-inline">
+            <button type="button" style="margin-right: 30px; border: none transparent; background-color:transparent; color:white;" onClick="history.back();"><i class="material-icons">reply</i>Atras</button>
+        <form action="{% url 'dashboards:logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" value="CerrarSesion" style="border: none transparent; background-color:transparent; color:white;"><i class="material-icons">exit_to_app</i>Salir</button>
+        </form>    
+        </div>
+        
+    </div>
+</nav>

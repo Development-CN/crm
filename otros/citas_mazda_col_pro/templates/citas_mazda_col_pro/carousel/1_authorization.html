@@ -1,0 +1,28 @@
+{% extends "citas_mazda_col_pro/carousel/slide.html" %}
+
+{% block slide_title %}
+AUTORIZACIÓN DE DATOS
+{% endblock %}
+
+{% block slide_subtitle %}
+BIENVENIDO
+{% endblock %}
+
+{% block slide_message %}
+CONTINUE PARA AGENDAR UNA CITA PARA SU VEHÍCULO EN NUESTRO TALLER DE SERVICIO
+{% endblock %}
+
+{% block slide_content_css %} text-center {% endblock %}
+{% block slide_content %}
+
+<a href="{{ settings.AVISO_PRIVACIDAD }}" target="_blank" class="btn btn-primary mt-5">
+  POLÍTICA DE PROTECCIÓN DE DATOS
+</a>
+
+<div class="form-check mt-4">
+  <input name="terms" id="terms" type="checkbox" required class="form-check-input" data-name="términos">
+  <label class="form-check-label" for="terms">
+    HE LEÍDO Y ACEPTO LOS TÉRMINOS
+  </label>
+</div>
+{% endblock %}

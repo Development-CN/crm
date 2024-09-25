@@ -1,0 +1,263 @@
+{% extends 'citas_mazda_col/base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="text-center">
+  <h4 class="">Citas de Servicio</h4>
+</div>
+
+<div class="row">
+  <div class="col-lg-7 col-md-6 col-sm mx-auto">
+    <div class="card bg-white mt-1 mx-auto shadow">
+      <form id="form">
+
+        <!-- Inicio -->
+        <div id="0" class="card-body mt-3 px-lg-5 text-center">
+          <h4 class="text-center mb-3"><i class="fas fa-poll-h fa-lg"></i></h4>
+          <h4 class="text-center mb-3">Reagendar Cita</h4>
+          <p class="lead text-center">Está seguro que desea cambiar su cita?</p>
+
+          <label for="cita-actual">Cita actual:</label>
+          <button id="cita-actual" type="button" class="btn btn-link border shadow-sm">
+            <i class="far fa-calendar-alt fa-lg"></i>
+            {{fecha_hora_cita}}
+          </button>
+        </div>
+
+        <!-- Disponibilidad -->
+        <div id="1" class="card-body mt-2 px-lg-5" style="display: none">
+          <h4 class="text-center mb-2"><i class="fas fa-calendar-alt fa-lg"></i></h4>
+          <h4 class="text-center mb-2">Programación de Cita</h4>
+          <p class="lead text-center">Seleccione la fecha y el horario de su cita.</p>
+          <div class="row">
+            <div class="col-lg text-center">
+              <p class="mt-3">1. Elegir Dia</p>
+              <div id="datepicker-container mx-auto">
+                <div id="datepicker-center">
+                  <div id="datepicker" class="text-center"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col text-center">
+
+              <p class="mt-3">2. Elija al asesor de servicio de su preferencia</p>
+              <div class="list-group">
+                {% for asesor in lista_asesores %}
+                <a data-id-asesor="{{asesor.cveasesor}}" type="button"
+                  class="list-group-item list-group-item-asesor list-group-item-action my-2 shadow {% if forloop.first %}active{% endif %}">
+                  <div class="row">
+                    <div class="col-2 text-left">
+                      <img src="{% static 'citas_mazda_col/img/asesores/'|add:asesor.cveasesor|add:'.jpg' %}"
+                        height="50px" class="rounded-circle shadow">
+                    </div>
+                    <div class="col text-center">
+                      <h6>{{asesor.nombre}}</h6>
+                    </div>
+                  </div>
+                </a>
+                {% endfor %}
+              </div>
+
+              <p class="mt-3">3. Horarios Disponibles</p>
+              <div id="toolbar" class="btn-group-toggle flex-wrap mt-3 px-3 py-3 mx-auto text-center" role="group"
+                data-toggle="buttons"></div>
+            </div>
+          </div>
+        </div>
+
+      </form>
+
+      <!-- SUBMIT -->
+      <div class="card-footer">
+        <button id="back" type="button" class="btn btn-light border float-left shadow"
+          style="display: none">Atrás</button>
+        <button id="finish" data-toggle="modal" data-target="#modal_review" type="button"
+          class="btn btn-primary border float-right shadow confirm" style="display: none">Terminar</button>
+        <button id="next" type="button" class="btn btn-primary border float-right shadow">Continuar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--MODAL DE CONFIRMACION-->
+<div class="modal fade" id="modal_review" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body bg-light">
+        <h4 class="text-center"></h4>
+        <p class="lead"></p>
+
+        <div class="spinner text-center my-auto">
+          <div class="spinner-border text-info" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+
+        <div class="ready text-center my-auto" style="display: none">
+          <h4 class="text-center my-2">
+            <i class="fas fa-check-circle fa-lg"></i>
+          </h4>
+          <h4 class="text-center my-2">Todo Listo!</h4>
+          <p class="lead text-center my-2">Verifique su correo para encontrar los detalles de su cita y su enlace al
+            seguimiento de su vehículo.</p>
+
+          <a href="{% url 'tracker_pro_login' %}" class="btn text-info border shadow-sm my-2">
+            <i class="fas fa-poll-h fa-lg"></i>
+            Ir a {{ marca }} Tracker
+          </a>
+        </div>
+
+        <div class="error-post text-center my-auto" style="display: none">
+          <h4 class="text-center my-2">
+            <i class="fas fa-check-circle fa-lg"></i>
+          </h4>
+          <h4 class="text-center my-2">Oh No!</h4>
+          <p class="lead text-center my-2">Estamos teniendo problemas para agendar su cita, por favor vuelva a
+            intertarlo más tarde</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light border ml-auto mr-3 shadow" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
+  NAVEGATION
+-->
+<script>
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+
+  var current_form = 0;
+  var last_form = $(".card-body").length - 1;
+
+  $("#next").click(function () {
+    if (current_form < last_form) {
+      // VALIDAR DATA DE LA TARJETA ACTUAL
+      data_is_valid = current_card_data($("#" + current_form));
+      if (data_is_valid) {
+        // DESVANECER TARJETA ACTUAL Y  MOSTRAR EL PASO SIGUIENTE SI NO SE ENCUENTRA EN LA ULTIMA
+        $("#" + current_form).fadeOut("fast", function () {
+          current_form = current_form + 1;
+          $("#" + current_form).fadeIn("fast");
+
+          // SI LA TARJETA ACTUAL NO ES LA PRIMERA MOSTRAR EL BOTON "REGRESAR"
+          if (current_form > 0) {
+            $("#back").fadeIn("fast");
+          }
+
+          // SI LA TARJETA ACTUAL ES LA ULTIMA OCULTAR EL BOTON "SIGUIENTE" MOSTRAR EL BOTON DE CONFIRMACION
+          if (current_form == last_form) {
+            $("#next").fadeOut("fast", function () {
+              $("#finish").fadeIn("fast");
+            });
+          }
+        });
+      }
+    }
+  });
+
+  $("#back").click(function () {
+    if (current_form > 0) {
+      $("#" + current_form).fadeOut("fast", function () {
+        current_form = current_form - 1;
+        $("#" + current_form).fadeIn("fast");
+        if (current_form <= 0) {
+          $("#back").fadeOut("fast");
+        }
+        if (current_form != last_form) {
+          $("#finish").fadeOut("fast", function () {
+            $("#next").fadeIn("fast");
+          });
+        }
+      });
+    }
+  });
+</script>
+
+<!--
+  VERIFICATIONS
+-->
+<script>
+  function current_card_data(current_card_body) {
+    let inputs = $(current_card_body).find(".form-control");
+    let checks = $(current_card_body).find(".custom-control-input:required");
+    let horas = $(current_card_body).find("input:radio[name=hora]");
+    let valid = true;
+
+    $(inputs).each(function () {
+      if (!$(this).val()) {
+        $(this).invalid = true;
+        let item_nombre = $(this).data("nombre");
+        valid = false;
+        alert(`El campo "${item_nombre}" es obligatorio`);
+      }
+    });
+
+    $(checks).each(function () {
+      if (!this.checked) {
+        $(this).invalid = true;
+        valid = false;
+      }
+    });
+
+    if (horas.length > 0) {
+      let horas_de_citas = $(horas).filter(":checked");
+      if (horas_de_citas.length == 0) {
+        valid = false;
+        alert(`Por favor, seleccione una hora para su cita`);
+      }
+    }
+
+    return valid;
+  }
+</script>
+
+<script>
+  $('.list-group-item').on('click', function () {
+    let target = this
+    let previous = $(target).closest(".list-group").children(".active");
+
+    previous.removeClass('active');
+    $(target).addClass('active');
+  });
+</script>
+
+<!--
+  GUARDAR
+-->
+<script>
+  $(".confirm").click(function name(params) {
+    $("#modal_review").modal("show");
+    let data = {};
+    data.hora = $("input:radio[name=hora]:checked").first().val();
+    data.fecha = $("#datepicker").val();
+    data.id_asesor = $(".list-group-item-asesor.active").data("id-asesor");
+
+    console.log(data);
+
+    $.ajax({
+      type: "post", // "post" "get" "delete" "put"
+      data: data, // PREFERIBLEMENTE JSON
+      cache: false,
+      headers: {
+        "X-CSRFToken": Cookies.get("csrftoken"),
+      },
+      success: function () {
+        $(".spinner").fadeOut(function () {
+          $(".ready").fadeIn();
+        });
+      },
+      error: function () {
+        $(".spinner").fadeOut(function () {
+          $(".error-post").fadeIn();
+        });
+      },
+    });
+  });
+</script>
+{% endblock %}

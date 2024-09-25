@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#1B1B21">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'tracker_pro_mazda_col/css/progress-wizard.min.css' %}" >
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    
+    {% load static %}
+    <link rel="shortcut icon" href="{% static 'tracker_pro_mazda_col/img/ford.png'%}">
+    
+    <title>Prueba Vertical</title>
+
+    <style>
+        /* Demo for vertical bars */
+
+        .progress-indicator.stepped.stacked {
+            width: 48%;
+            display: inline-block;
+        }
+        .progress-indicator.stepped.stacked > li {
+            height: 150px;
+        }
+        .progress-indicator.stepped.stacked > li .bubble {
+            padding: 0.1em;
+        }
+        .progress-indicator.stepped.stacked > li:first-of-type .bubble {
+            padding: 0.5em;
+        }
+        .progress-indicator.stepped.stacked > li:last-of-type .bubble {
+            padding: 0em;
+        }
+
+        /* Nocenter */
+
+        .progress-indicator.nocenter.stacked > li {
+            min-height: 100px;
+        }
+        .progress-indicator.nocenter.stacked > li span {
+            display: block;
+        }
+        #timeline-speaker-example .stacked-text {
+            top: -37px;
+            left: -50px;
+        }
+        li {
+            padding-left: 0.5em;
+            line-height: 2.4em;
+        }
+        .subdued {
+        font-size: 80%;
+        opacity: 0.6;
+        }
+        @media handheld, screen and (max-width: 400px) {
+            .container {
+                margin: 0;
+                width: 100%;
+            }
+            .progress-indicator.stacked {
+                display: block;
+                width: 100%;
+            }
+            .progress-indicator.stacked > li {
+                height: 80px;
+            }
+        }
+
+    </style>
+
+</head>
+<body>
+    <ul class="progress-indicator nocenter stacked">
+        <li class="completed info">
+            <a href="#">
+                <span class="bubble"></span>
+                <span class="stacked-text">
+                     June 3rd, 2014
+                    <span class="subdued">/ Added a thing. <em>Pssst... I'm a link!</em></span>
+                </span>
+            </a>
+        </li>
+        <li class="completed">
+            <span class="bubble"></span>
+            <span class="stacked-text">
+                 May 21st, 2014
+                <span class="subdued">/ Some stuff happened. It was amazing.</span>
+            </span>
+        </li>
+        <li class="completed">
+            <span class="bubble"></span>
+            <span class="stacked-text">
+                 April 11th, 2014
+                <span class="subdued">/ What a wild day!</span>
+            </span>
+        </li>
+    </ul>
+</body>
+</html>

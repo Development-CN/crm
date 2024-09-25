@@ -1,0 +1,25 @@
+{% extends "citas_mazda_col_pro/carousel/slide.html" %}
+
+{% block slide_title %}
+SERVICIO REQUERIDO
+{% endblock %}
+
+{% block slide_subtitle %}
+SELECCIONE EL SERVICIO QUE NECESITE, LE ASIGNAREMOS EL MEJOR EXPERTO TÉCNICO PARA SUS NECESIDADES.
+{% endblock %}
+
+{% block slide_content %}
+<div class="mb-4">
+  ¿Tiene alguna novedad/condición en el vehículo que desee sea revisada en la visita? Por ejemplo: sonidos, fallos, condiciones especiales, etc.
+  <div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input si" type="radio" name="car_condition" id="car_condition_radio_1" value="1" data-cancellation_reason="2" required>
+      <label class="form-check-label" for="car_condition_radio_1"></label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input no" type="radio" name="car_condition" id="car_condition_radio_2" value="" data-cancellation_reason="2" required>
+      <label class="form-check-label" for="car_condition_radio_2"></label>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "citas_mazda_col_pro/carousel/slide.html" %}
+
+{% block slide_title %}
+SERVICIO REQUERIDO
+{% endblock %}
+
+{% block slide_subtitle %}
+SELECCIONE EL SERVICIO QUE NECESITE, LE ASIGNAREMOS EL MEJOR EXPERTO TÉCNICO PARA SUS NECESIDADES.
+{% endblock %}
+
+{% block slide_content %}
+<div class="mb-4">
+  <p>
+    Te invitamos a esperar cómodamente en nuestra sala del concesionario mientras realizamos el servicio inmediato para tu vehículo en
+    {{ settings.AGENCIA }}
+    <span id="service_waiting_time"></span>.
+  </p>
+  <p>
+    ¿Deseas esperar tu vehículo en la sala de clientes?
+  </p>
+  <div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input si" type="radio" name="wait" id="wait_radio_1" value="1">
+      <label class="form-check-label" for="wait_radio_1"></label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input no" type="radio" id="wait_radio_2" value="">
+      <label class="form-check-label" for="wait_radio_2"></label>
+    </div>
+  </div>
+</div>
+{% endblock %}
