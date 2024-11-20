@@ -348,8 +348,8 @@ class Prospecto(models.Model):
     # Modelo del Prospecto
 
     nombre = models.CharField(max_length=50)
-    apellido_paterno = models.CharField(max_length=50)
-    apellido_materno = models.CharField(max_length=50)
+    apellido_paterno = models.CharField(max_length=50, null=True, blank=True)
+    apellido_materno = models.CharField(max_length=50, null=True, blank=True)
     celular = models.CharField(max_length=15, null=True, blank=True)
     correo = models.CharField(max_length=100)
     fecha_nacimiento = models.DateField(null=True, blank=True)

@@ -3320,3 +3320,272 @@ class CalendarDetailView(LoginRequiredMixin, DetailView):
                                     operacion=f"Se editó un evento. Nombre: {nombre}. Tipo: {tipo}. Observaciones: {observaciones}",
                                     )
             return JsonResponse(evento.pk, safe=False)
+
+
+class CreateLeadView(View):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        try:
+            data = json.loads(request.body)
+
+            # Extraer los datos del request
+            nombre = data.get("NombreProspecto", None)
+            celular = data.get("Celular", None)
+            correo = data.get("Correo", None)
+            asunto = data.get("Asunto", None)
+            tipo_documento = data.get("TipoDocumento", None)
+            documento = data.get("NumeroDocumento", None)
+            comentario = data.get("ComentarioApertura", None)
+
+            # Crear o actualizar Prospecto
+            try:
+                prospecto = Prospecto.objects.get(celular=celular)
+                prospecto.save()
+            except Prospecto.DoesNotExist:
+                prospecto = Prospecto.objects.create(
+                    nombre=nombre,
+                    celular=celular,
+                    correo=correo,
+                    fecha_captura=make_aware(datetime.now()),
+                    fecha_hora_asignacion_asesor=make_aware(datetime.now()),
+                    politica_privacidad=True
+                )
+
+            # Crear Lead
+            sala = None
+            nombre_asesor = None
+            if prospecto.nombre_asesor:
+                try:
+                    asesor = Asesor.objects.get(nombre=prospecto.nombre_asesor)
+                    nombre_asesor = asesor.nombre
+                    sala = asesor.sala
+                except:
+                    pass
+            
+            if asunto == "Venta":
+                lead = Lead.objects.create(
+                    prospecto=prospecto,
+                    origen_lead="PÁGINA WEB",
+                    etapa="No contactado",
+                    respuesta="Sin contactar",
+                    estado="No contactado",
+                    status="Frío",
+                    interes="Venta",
+                    activo=True,
+                    fecha_apertura=make_aware(datetime.now()),
+                    comentario=comentario,
+                    tipo_documento=tipo_documento,
+                    documento=documento,
+                    nombre_asesor=nombre_asesor,
+                    nombre_asesor_original=nombre_asesor,
+                    sala=sala,
+                    fecha_hora_asignacion_asesor=make_aware(datetime.now()),
+                    test_drive=False
+                )
+
+                # Crear Historial
+                Historial.objects.create(
+                    lead=lead,
+                    fecha=date.today(),
+                    hora=datetime.now().time(),
+                    responsable=request.user,
+                    operacion="Creación Lead",
+                    comentarios=comentario
+                )
+
+            # Devolver respuesta de éxito
+            return JsonResponse({"status": "success", "message": "Lead creado exitosamente"}, status=201)
+
+        except Exception as e:
+            # En caso de error
+            return JsonResponse({"status": "error", "message": str(e)}, status=400)
+
+
+class SimulacionCreditoView(View):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        try:
+            data = json.loads(request.body)
+
+            # Extraer los datos del request
+            nombre = data.get("Nombre", None)
+            apellidos = data.get("Apellidos", None)
+            celular = data.get("Celular", None)
+            correo = data.get("Correo", None)
+            comentario = data.get("ComentarioApertura", None)
+            monto_financiar = data.get("MontoFinanciar", None)
+            tasa_interes = data.get("TasaInteres", None)
+            tipo_documento = data.get("TipoDocumento", None)
+            documento = data.get("NumeroDocumento", None)
+
+            comentario = comentario + ". Solicitan Simulacion de Credito. Monto a Financiar: " + monto_financiar +". Tasa Interes: " + tasa_interes
+
+            # Crear o actualizar Prospecto
+            try:
+                prospecto = Prospecto.objects.get(celular=celular)
+                prospecto.save()
+            except Prospecto.DoesNotExist:
+                prospecto = Prospecto.objects.create(
+                    nombre=nombre,
+                    apellido_paterno=apellidos,
+                    celular=celular,
+                    correo=correo,
+                    fecha_captura=make_aware(datetime.now()),
+                    fecha_hora_asignacion_asesor=make_aware(datetime.now()),
+                    politica_privacidad=True
+                )
+
+            # Crear Lead
+            sala = None
+            nombre_asesor = None
+            if prospecto.nombre_asesor:
+                try:
+                    asesor = Asesor.objects.get(nombre=prospecto.nombre_asesor)
+                    nombre_asesor = asesor.nombre
+                    sala = asesor.sala
+                except:
+                    pass
+            
+            lead = Lead.objects.create(
+                prospecto=prospecto,
+                origen_lead="PÁGINA WEB",
+                etapa="No contactado",
+                respuesta="Sin contactar",
+                estado="No contactado",
+                status="Frío",
+                interes="Venta",
+                activo=True,
+                fecha_apertura=make_aware(datetime.now()),
+                comentario=comentario,
+                tipo_documento=tipo_documento,
+                documento=documento,
+                nombre_asesor=nombre_asesor,
+                nombre_asesor_original=nombre_asesor,
+                sala=sala,
+                fecha_hora_asignacion_asesor=make_aware(datetime.now()),
+                test_drive=False
+            )
+
+            # Crear Historial
+            Historial.objects.create(
+                lead=lead,
+                fecha=date.today(),
+                hora=datetime.now().time(),
+                responsable=request.user,
+                operacion="Creación Lead",
+                comentarios=comentario
+            )
+
+            # Devolver respuesta de éxito
+            return JsonResponse({"status": "success", "message": "Lead creado exitosamente"}, status=201)
+
+        except Exception as e:
+            # En caso de error
+            return JsonResponse({"status": "error", "message": str(e)}, status=400)
+
+
+class CompraVehiculoView(View):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        try:
+            data = json.loads(request.body)
+
+            # Extraer los datos del request
+            nombre = data.get("Nombre", None)
+            apellidos = data.get("Apellidos", None)
+            celular = data.get("Celular", None)
+            correo = data.get("Correo", None)
+            comentario = data.get("ComentarioApertura", None)
+            tipo_documento = data.get("TipoDocumento", None)
+            documento = data.get("NumeroDocumento", None)
+            marca = data.get("Marca", None)
+            modelo = data.get("Modelo", None)
+            color = data.get("Color", None)
+
+            # Crear o actualizar Prospecto
+            try:
+                prospecto = Prospecto.objects.get(celular=celular)
+                prospecto.save()
+            except Prospecto.DoesNotExist:
+                prospecto = Prospecto.objects.create(
+                    nombre=nombre,
+                    apellido_paterno=apellidos,
+                    celular=celular,
+                    correo=correo,
+                    fecha_captura=make_aware(datetime.now()),
+                    fecha_hora_asignacion_asesor=make_aware(datetime.now()),
+                    politica_privacidad=True
+                )
+
+            # Crear Lead
+            sala = None
+            nombre_asesor = None
+            if prospecto.nombre_asesor:
+                try:
+                    asesor = Asesor.objects.get(nombre=prospecto.nombre_asesor)
+                    nombre_asesor = asesor.nombre
+                    sala = asesor.sala
+                except:
+                    pass
+            
+            lead = Lead.objects.create(
+                prospecto=prospecto,
+                origen_lead="PÁGINA WEB",
+                etapa="No contactado",
+                respuesta="Sin contactar",
+                estado="No contactado",
+                status="Frío",
+                interes="Venta",
+                activo=True,
+                fecha_apertura=make_aware(datetime.now()),
+                comentario=comentario,
+                tipo_documento=tipo_documento,
+                documento=documento,
+                nombre_asesor=nombre_asesor,
+                nombre_asesor_original=nombre_asesor,
+                sala=sala,
+                fecha_hora_asignacion_asesor=make_aware(datetime.now()),
+                test_drive=False
+            )
+
+            # Crear Vehiculo Interes
+            VehiculosInteresLead.objects.create(
+                lead=lead,
+                marca=marca,
+                modelo=modelo,
+                color=color,
+                cotizar=True,
+                aprobacion=False,
+                facturado=False,
+                peritaje=False,
+                separado=False,
+                mostrado=False,
+                comentario=comentario,
+                fecha=date.today(),
+            )
+
+            # Crear Historial
+            Historial.objects.create(
+                lead=lead,
+                fecha=date.today(),
+                hora=datetime.now().time(),
+                responsable=request.user,
+                operacion="Creación Lead",
+                comentarios=comentario
+            )
+
+            # Devolver respuesta de éxito
+            return JsonResponse({"status": "success", "message": "Lead creado exitosamente"}, status=201)
+
+        except Exception as e:
+            # En caso de error
+            return JsonResponse({"status": "error", "message": str(e)}, status=400)

@@ -86,4 +86,19 @@ urlpatterns = [
         view=views.CalendarDetailView.as_view(),
         name="calendar_detail"
     ),
+    path(
+        route="api/Contacto",
+        view=views.CreateLeadView.as_view(),
+        name='create_lead'
+    ),
+    path(
+        route="api/Venta/SimulacionCredito",
+        view=views.SimulacionCreditoView.as_view(),
+        name='simulacion_credito'
+    ),
+    path(
+        route="api/CompraVehiculo",
+        view=views.CompraVehiculoView.as_view(),
+        name='compra_vehiculo'
+    ),
 ]
